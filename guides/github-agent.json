@@ -1,0 +1,798 @@
+{
+  "schema_version": "1.0",
+  "provider": {
+    "name": "GitHub",
+    "website": "https://github.com",
+    "docs_urls": [
+      "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app",
+      "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+      "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps",
+      "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/set-up-copilot/install-copilot-extension"
+    ]
+  },
+  "generated_at": "2026-10-30",
+  "generated_by": {
+    "mode": "agent",
+    "model": "gemini-3.1-flash-lite"
+  },
+  "summary": "GitHub provides a structured process for registering OAuth apps and publishing them to the Marketplace. Developers must adhere to strict security practices, such as protecting client secrets, and meet specific requirements regarding user counts and listing documentation for public access.",
+  "difficulty": {
+    "start": {
+      "level": "easy",
+      "reason": {
+        "text": "The registration process involves a straightforward sequence of navigating to developer settings and filling out a form for the application.",
+        "label": "inferred",
+        "source_type": "none",
+        "note": "Model judgement from the verified claims in this guide; not tested.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    "public": {
+      "level": "medium",
+      "reason": {
+        "text": "Publishing requires meeting multiple specific criteria, including a minimum user count of 200 and providing comprehensive documentation like privacy policies and support methods.",
+        "label": "inferred",
+        "source_type": "none",
+        "note": "Model judgement from the verified claims in this guide; not tested.",
+        "checked_at": "2026-10-30"
+      }
+    }
+  },
+  "time": {
+    "to_start": {
+      "display": "Unknown",
+      "claim": {
+        "text": "Setup time was not stated in the pages read.",
+        "label": "unknown",
+        "source_type": "none",
+        "note": "Only a hands-on attempt shows how long registration takes.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    "to_approval": {
+      "display": "Not found",
+      "stages": [],
+      "claim": {
+        "text": "No review or approval timeline was found.",
+        "label": "unknown",
+        "source_type": "none",
+        "note": "9 pages read: https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app, https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api, https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps, https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/set-up-copilot/install-copilot-extension, https://docs.github.com/en/apps/oauth-apps, https://docs.github.com/en/apps/github-marketplace/creating-apps-for-github-marketplace/requirements-for-listing-an-app …",
+        "checked_at": "2026-10-30"
+      }
+    }
+  },
+  "access_ladder": [
+    {
+      "tier": 1,
+      "name": "Verification Review",
+      "allows": "The developer submits their organization details for official validation by the provider.",
+      "gate": "Submit publisher verification details",
+      "prerequisites": [],
+      "claims": [
+        {
+          "text": "GitHub will review the publisher verification details.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.github.com/en/apps/github-marketplace/github-marketplace-overview/applying-for-publisher-verification-for-your-organization",
+          "evidence_quote": "GitHub will review your details and let you know once your publisher verification is complete.",
+          "checked_at": "2026-10-30"
+        }
+      ]
+    },
+    {
+      "tier": 2,
+      "name": "Marketplace Listing Review",
+      "allows": "The developer submits their app listing for expert evaluation to ensure quality standards.",
+      "gate": "Submit app listing for review",
+      "prerequisites": [],
+      "claims": [
+        {
+          "text": "An onboarding expert will review the app listing submission.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.github.com/en/apps/github-marketplace/listing-an-app-on-github-marketplace/submitting-your-listing-for-publication",
+          "evidence_quote": "An onboarding expert will reach out to you with additional information.",
+          "checked_at": "2026-10-30"
+        }
+      ]
+    },
+    {
+      "tier": 3,
+      "name": "Public Marketplace",
+      "allows": "The developer can offer paid plans and display a marketplace badge on their app listing.",
+      "gate": "Complete publisher verification and listing approval",
+      "prerequisites": [],
+      "claims": [
+        {
+          "text": "To offer paid plans for your app or to include a marketplace badge in your app listing, you must complete the publisher verification process for your organization.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.github.com/en/apps/github-marketplace/github-marketplace-overview/applying-for-publisher-verification-for-your-organization",
+          "evidence_quote": "To offer paid plans for your app or to include a marketplace badge in your app listing, you must complete the publisher verification process for your organization.",
+          "checked_at": "2026-10-30"
+        }
+      ]
+    }
+  ],
+  "requirements": {
+    "register": [
+      {
+        "item": "A signed-in account on github.com",
+        "status": "required",
+        "claim": {
+          "text": "Opening https://github.com/settings/applications/new without an account ended on a sign-in page (github.com/login).",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://github.com/settings/applications/new",
+          "note": "Automated read-only probe by the agent on 2026-10-30: GET https://github.com/settings/applications/new without an account (redirects followed). Creating the app needs your own account, so the agent stopped here and left it to you.",
+          "checked_at": "2026-10-30",
+          "evidence_quote": "Sign in to GitHub · GitHub Skip to content You signed in with another tab or window. Reload to refresh your session. You signed out in another tab or window. Re"
+        }
+      },
+      {
+        "item": "Organization ownership (only in some cases)",
+        "status": "optional",
+        "claim": {
+          "text": "To offer paid plans for your app, the app must be owned by an organization.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.github.com/en/apps/github-marketplace/github-marketplace-overview/applying-for-publisher-verification-for-your-organization",
+          "evidence_quote": "To offer paid plans for your app, the app must be owned by an organization and you must have owner permissions in the organization.",
+          "checked_at": "2026-10-30"
+        }
+      }
+    ],
+    "go_public": [
+      {
+        "item": "You must accept the GitHub Marketplace Developer Agreement to submit a listing.",
+        "status": "required",
+        "claim": {
+          "text": "You must accept the GitHub Marketplace Developer Agreement to submit a listing.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.github.com/en/apps/github-marketplace/creating-apps-for-github-marketplace/requirements-for-listing-an-app",
+          "evidence_quote": "When you submit your listing for publication, you must read and accept the terms of the GitHub Marketplace Developer Agreement.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "Listings must include valid contact information for the publisher.",
+        "status": "required",
+        "claim": {
+          "text": "Listings must include valid contact information for the publisher.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.github.com/en/apps/github-marketplace/creating-apps-for-github-marketplace/requirements-for-listing-an-app",
+          "evidence_quote": "Listings must include valid contact information for the publisher.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "Listings must have a relevant description of the application.",
+        "status": "required",
+        "claim": {
+          "text": "Listings must have a relevant description of the application.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.github.com/en/apps/github-marketplace/creating-apps-for-github-marketplace/requirements-for-listing-an-app",
+          "evidence_quote": "Listings must have a relevant description of the application.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "Listings must specify a pricing plan.",
+        "status": "required",
+        "claim": {
+          "text": "Listings must specify a pricing plan.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.github.com/en/apps/github-marketplace/creating-apps-for-github-marketplace/requirements-for-listing-an-app",
+          "evidence_quote": "Listings must specify a pricing plan.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "Listings must have a valid link to a privacy policy.",
+        "status": "required",
+        "claim": {
+          "text": "Listings must have a valid link to a privacy policy.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.github.com/en/apps/github-marketplace/creating-apps-for-github-marketplace/requirements-for-listing-an-app",
+          "evidence_quote": "Listings must have a valid link to a privacy policy.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "Listings must provide a method to receive support.",
+        "status": "required",
+        "claim": {
+          "text": "Listings must provide a method to receive support.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.github.com/en/apps/github-marketplace/creating-apps-for-github-marketplace/requirements-for-listing-an-app",
+          "evidence_quote": "Listings must provide a method to receive support through a valid support link and/or a support email address.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "Apps must be publicly available and not in public preview or invite only.",
+        "status": "required",
+        "claim": {
+          "text": "Apps must be publicly available and not in public preview or invite only.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.github.com/en/apps/github-marketplace/creating-apps-for-github-marketplace/requirements-for-listing-an-app",
+          "evidence_quote": "Apps must be publicly available in GitHub Marketplace and cannot be in public preview or available by invite only.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "To publish a paid plan for your app on the GitHub Marketplace, your app must be owned by…",
+        "status": "required",
+        "claim": {
+          "text": "To publish a paid plan for your app on the GitHub Marketplace, your app must be owned by an organization that is a verified publisher.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.github.com/en/apps/github-marketplace/creating-apps-for-github-marketplace/requirements-for-listing-an-app",
+          "evidence_quote": "To publish a paid plan for your app on the GitHub Marketplace, your app must be owned by an organization that is a verified publisher.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "Two-factor authentication",
+        "status": "required",
+        "claim": {
+          "text": "You must enable two-factor authentication for your organization to get publisher verification.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.github.com/en/apps/github-marketplace/github-marketplace-overview/applying-for-publisher-verification-for-your-organization",
+          "evidence_quote": "Ensure that Two-factor authentication is enabled for your organization. For more information, see Requiring two-factor authentication in your organization.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "Verified domain",
+        "status": "required",
+        "claim": {
+          "text": "You must verify your organization's domain to get publisher verification.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.github.com/en/apps/github-marketplace/github-marketplace-overview/applying-for-publisher-verification-for-your-organization",
+          "evidence_quote": "Submit a verified domain and ensure that a \"Verified\" badge displays on your organization's profile page. For related information, see Verifying or approving a domain for your organization.",
+          "checked_at": "2026-10-30"
+        }
+      }
+    ]
+  },
+  "limits": [
+    {
+      "item": "Token creation rate limit",
+      "value": "10 per hour",
+      "claim": {
+        "text": "There is a rate limit of ten tokens created per hour.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps",
+        "evidence_quote": "There is a limit of ten tokens that are issued per user/application/scope combination, and a rate limit of ten tokens created per hour.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "item": "Access token lifetime",
+      "value": "8 hours",
+      "claim": {
+        "text": "Access tokens expire after eight hours.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps",
+        "evidence_quote": "The access token expires after eight hours, and the refresh token expires after six months without use.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "item": "Refresh token lifetime",
+      "value": "6 months",
+      "claim": {
+        "text": "Refresh tokens expire after six months without use.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps",
+        "evidence_quote": "The access token expires after eight hours, and the refresh token expires after six months without use.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "item": "Temporary code expiry",
+      "value": "10 minutes",
+      "claim": {
+        "text": "The temporary code for the web application flow expires after 10 minutes.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps",
+        "evidence_quote": "The temporary code will expire after 10 minutes.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "item": "Device flow code expiry",
+      "value": "15 minutes",
+      "claim": {
+        "text": "The device flow user code expires after 15 minutes.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps",
+        "evidence_quote": "The user must enter a valid code within 15 minutes (or 900 seconds). After 15 minutes, you will need to request a new device authorization code with POST https://github.com/login/device/code.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "item": "Access token requests",
+      "value": "2,000 per hour",
+      "claim": {
+        "text": "OAuth apps are limited to 2,000 access token requests per hour.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/rate-limits-for-oauth-apps",
+        "evidence_quote": "OAuth apps are subject to a rate limit of 2,000 access token requests per hour. If your application exceeds this limit, further requests to generate new access tokens will be temporarily blocked, and you may receive error responses.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "item": "OAuth app client ID/secret",
+      "value": "5,000 requests per hour",
+      "claim": {
+        "text": "The rate limit for an OAuth app using its client ID and secret is 5,000 requests per hour.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+        "evidence_quote": "For these requests, the rate limit is 5,000 requests per hour per OAuth app.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "item": "OAuth token requests",
+      "value": "2,000 per hour",
+      "claim": {
+        "text": "No more than 2,000 OAuth access token requests per hour are allowed for GitHub Apps and OAuth apps.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+        "evidence_quote": "Make too many OAuth access token requests in a short period of time. No more than 2,000 OAuth access token requests per hour are allowed for GitHub Apps and OAuth apps.",
+        "checked_at": "2026-10-30"
+      }
+    }
+  ],
+  "blockers": [
+    {
+      "issue": "Do not use sensitive data such as internal URLs in your OAuth app.",
+      "fix": "Only use information you consider public.",
+      "claim": {
+        "text": "Do not use sensitive data such as internal URLs in your OAuth app.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app",
+        "evidence_quote": "Avoid using sensitive data, such as internal URLs, when creating an OAuth app.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "Never include your app's client secret in client-side code or in code that runs on a user…",
+      "fix": "Keep the client secret secure.",
+      "claim": {
+        "text": "Never include your app's client secret in client-side code or in code that runs on a user device.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+        "evidence_quote": "Never include your app's client secret in client-side code or in code that runs on a user device. The client secret can be used to generate OAuth access tokens for users who have authorized your app, so you should always keep the client secret secure.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "CORS pre-flight requests are not supported.",
+      "fix": "Do not use CORS pre-flight requests.",
+      "claim": {
+        "text": "CORS pre-flight requests are not supported.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps",
+        "evidence_quote": "CORS pre-flight requests (OPTIONS) are not supported at this time.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "The plain code challenge method is not supported for PKCE.",
+      "fix": "Use S256 for the code_challenge_method.",
+      "claim": {
+        "text": "The plain code challenge method is not supported for PKCE.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps",
+        "evidence_quote": "Must be S256 - the plain code challenge method is not supported.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "If states do not match during the web flow, the process must be aborted.",
+      "fix": "Abort the process if the state parameter does not match.",
+      "claim": {
+        "text": "If states do not match during the web flow, the process must be aborted.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps",
+        "evidence_quote": "If the states don't match, then a third party created the request, and you should abort the process.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "If a refresh token is invalid or expired, you must send the user through the…",
+      "fix": "Send the user through the web application flow or device flow again.",
+      "claim": {
+        "text": "If a refresh token is invalid or expired, you must send the user through the authorization flow again.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps",
+        "evidence_quote": "If the refresh token that you specified is invalid or expired, you will receive a bad_refresh_token error. To resolve this error, send the user through the web application flow or device flow again to get a new access token and refresh token.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "Listings must not actively persuade users away from GitHub.",
+      "fix": "See the cited page.",
+      "claim": {
+        "text": "Listings must not actively persuade users away from GitHub.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/apps/github-marketplace/creating-apps-for-github-marketplace/requirements-for-listing-an-app",
+        "evidence_quote": "Listings must not actively persuade users away from GitHub.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "Listings must not actively persuade users away from GitHub.",
+      "fix": "See the cited page.",
+      "claim": {
+        "text": "Listings must not actively persuade users away from GitHub.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/apps/github-marketplace/creating-apps-for-github-marketplace/requirements-for-listing-an-app",
+        "evidence_quote": "Listings must not actively persuade users away from GitHub.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "Apps must be publicly available in GitHub Marketplace and cannot be in public preview or…",
+      "fix": "See the cited page.",
+      "claim": {
+        "text": "Apps must be publicly available in GitHub Marketplace and cannot be in public preview or available by invite only.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/apps/github-marketplace/creating-apps-for-github-marketplace/requirements-for-listing-an-app",
+        "evidence_quote": "Apps must be publicly available in GitHub Marketplace and cannot be in public preview or available by invite only.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "You cannot delete a GitHub App if it has an active listing in the GitHub Marketplace.",
+      "fix": "Delete the listing from GitHub Marketplace before deleting the GitHub App.",
+      "claim": {
+        "text": "You cannot delete a GitHub App if it has an active listing in the GitHub Marketplace.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/apps/github-marketplace/listing-an-app-on-github-marketplace/submitting-your-listing-for-publication",
+        "evidence_quote": "If you want to delete your GitHub App, you must first delete the listing from GitHub Marketplace.",
+        "checked_at": "2026-10-30"
+      }
+    }
+  ],
+  "steps": [
+    {
+      "order": 1,
+      "text": "Navigate to your profile settings.",
+      "actor": "human",
+      "claim": {
+        "text": "Navigate to your profile settings.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app",
+        "evidence_quote": "In the upper-right corner of any page on GitHub, click your profile picture, then click Settings.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 2,
+      "text": "Click on Developer settings in the sidebar.",
+      "actor": "human",
+      "claim": {
+        "text": "Click on Developer settings in the sidebar.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app",
+        "evidence_quote": "In the left sidebar, click Developer settings.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 3,
+      "text": "Click on OAuth apps.",
+      "actor": "human",
+      "claim": {
+        "text": "Click on OAuth apps.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app",
+        "evidence_quote": "In the left sidebar, click OAuth apps.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 4,
+      "text": "Click the button to create a new OAuth app.",
+      "actor": "human",
+      "claim": {
+        "text": "Click the button to create a new OAuth app.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app",
+        "evidence_quote": "Click New OAuth App.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 5,
+      "text": "Enter the name of your application.",
+      "actor": "human",
+      "claim": {
+        "text": "Enter the name of your application.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app",
+        "evidence_quote": "In \"Application name\", type the name of your app.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 6,
+      "text": "Enter the homepage URL for your app.",
+      "actor": "human",
+      "claim": {
+        "text": "Enter the homepage URL for your app.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app",
+        "evidence_quote": "In \"Homepage URL\", type the full URL to your app's website.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 7,
+      "text": "Enter the authorization callback URL.",
+      "actor": "human",
+      "claim": {
+        "text": "Enter the authorization callback URL.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app",
+        "evidence_quote": "In \"Authorization callback URL\", type the callback URL of your app.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 8,
+      "text": "Click the button to register the application.",
+      "actor": "human",
+      "claim": {
+        "text": "Click the button to register the application.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app",
+        "evidence_quote": "Click Register application.",
+        "checked_at": "2026-10-30"
+      }
+    }
+  ],
+  "agent_vs_human": {
+    "agent": [
+      {
+        "text": "Look up the provider's live OAuth endpoints and check how they answer an unregistered client (done during this run).",
+        "claim": {
+          "text": "The authorize endpoint sent an unauthenticated request to a sign-in page (github.com/login).",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://github.com/login/oauth/authorize",
+          "note": "Automated read-only probe by the agent on 2026-10-30: GET https://github.com/login/oauth/authorize with a made-up client_id (oauth-guide-agent-probe), no login, redirects not followed. Sign-in comes before any client check here, so the agent could not see how an unregistered client is treated.",
+          "checked_at": "2026-10-30",
+          "evidence_quote": "HTTP 302 Location: github.com/login"
+        }
+      },
+      {
+        "text": "Draft the application description for the listing",
+        "claim": {
+          "text": "Draft the application description for the listing",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "text": "Draft the support documentation content",
+        "claim": {
+          "text": "Draft the support documentation content",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-30"
+        }
+      }
+    ],
+    "human": [
+      {
+        "text": "Sign in to github.com and register the app. The agent was stopped by a sign-in page at github.com/login.",
+        "claim": {
+          "text": "Opening https://github.com/settings/applications/new without an account ended on a sign-in page (github.com/login).",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://github.com/settings/applications/new",
+          "note": "Automated read-only probe by the agent on 2026-10-30: GET https://github.com/settings/applications/new without an account (redirects followed). Creating the app needs your own account, so the agent stopped here and left it to you.",
+          "checked_at": "2026-10-30",
+          "evidence_quote": "Sign in to GitHub · GitHub Skip to content You signed in with another tab or window. Reload to refresh your session. You signed out in another tab or window. Re"
+        }
+      },
+      {
+        "text": "Navigate to your profile settings.",
+        "claim": {
+          "text": "Navigate to your profile settings.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app",
+          "evidence_quote": "In the upper-right corner of any page on GitHub, click your profile picture, then click Settings.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "text": "Click on Developer settings in the sidebar.",
+        "claim": {
+          "text": "Click on Developer settings in the sidebar.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app",
+          "evidence_quote": "In the left sidebar, click Developer settings.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "text": "Click on OAuth apps.",
+        "claim": {
+          "text": "Click on OAuth apps.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app",
+          "evidence_quote": "In the left sidebar, click OAuth apps.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "text": "Click the button to create a new OAuth app.",
+        "claim": {
+          "text": "Click the button to create a new OAuth app.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app",
+          "evidence_quote": "Click New OAuth App.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "text": "Navigate to profile settings to register the application",
+        "claim": {
+          "text": "Navigate to profile settings to register the application",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-30"
+        }
+      }
+    ]
+  },
+  "extras": [
+    {
+      "title": "Tested live by the agent",
+      "why_it_matters": "The agent made read-only requests to the provider (no login, no registration) and recorded what came back. These are observations, not documentation.",
+      "claims": [
+        {
+          "text": "The authorize endpoint sent an unauthenticated request to a sign-in page (github.com/login).",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://github.com/login/oauth/authorize",
+          "note": "Automated read-only probe by the agent on 2026-10-30: GET https://github.com/login/oauth/authorize with a made-up client_id (oauth-guide-agent-probe), no login, redirects not followed. Sign-in comes before any client check here, so the agent could not see how an unregistered client is treated.",
+          "checked_at": "2026-10-30",
+          "evidence_quote": "HTTP 302 Location: github.com/login"
+        },
+        {
+          "text": "Opening https://github.com/settings/applications/new without an account ended on a sign-in page (github.com/login).",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://github.com/settings/applications/new",
+          "note": "Automated read-only probe by the agent on 2026-10-30: GET https://github.com/settings/applications/new without an account (redirects followed). Creating the app needs your own account, so the agent stopped here and left it to you.",
+          "checked_at": "2026-10-30",
+          "evidence_quote": "Sign in to GitHub · GitHub Skip to content You signed in with another tab or window. Reload to refresh your session. You signed out in another tab or window. Re"
+        }
+      ]
+    },
+    {
+      "title": "What the docs recommend",
+      "why_it_matters": "Stated preference",
+      "claims": [
+        {
+          "text": "GitHub recommends building a GitHub App instead of an OAuth app.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app",
+          "evidence_quote": "Consider building a GitHub App instead of an OAuth app.",
+          "checked_at": "2026-10-30"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "not_verified": [
+      {
+        "item": "Registering, installing and submitting an app",
+        "note": "Not attempted. These steps need your account and create real state, so the agent stopped at the sign-in wall. Only the live checks under 'Tested live by the agent' were run."
+      },
+      {
+        "item": "Live check not completed: OAuth server metadata",
+        "note": "none published at github.com, docs.github.com (checked /.well-known/oauth-authorization-server, /.well-known/openid-configuration)"
+      }
+    ],
+    "conflicts": [],
+    "sources": [
+      {
+        "title": "Creating an OAuth app - GitHub Docs",
+        "url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app",
+        "type": "docs"
+      },
+      {
+        "title": "Rate limits for the REST API - GitHub Docs",
+        "url": "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+        "type": "docs"
+      },
+      {
+        "title": "Authorizing OAuth apps - GitHub Docs",
+        "url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps",
+        "type": "docs"
+      },
+      {
+        "title": "Installing the GitHub Copilot extension in your environment - GitHub Docs",
+        "url": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/set-up-copilot/install-copilot-extension",
+        "type": "docs"
+      },
+      {
+        "title": "OAuth apps - GitHub Docs",
+        "url": "https://docs.github.com/en/apps/oauth-apps",
+        "type": "docs"
+      },
+      {
+        "title": "Requirements for listing an app - GitHub Docs",
+        "url": "https://docs.github.com/en/apps/github-marketplace/creating-apps-for-github-marketplace/requirements-for-listing-an-app",
+        "type": "docs"
+      },
+      {
+        "title": "Applying for publisher verification for your organization - GitHub Docs",
+        "url": "https://docs.github.com/en/apps/github-marketplace/github-marketplace-overview/applying-for-publisher-verification-for-your-organization",
+        "type": "docs"
+      },
+      {
+        "title": "Submitting your listing for publication - GitHub Docs",
+        "url": "https://docs.github.com/en/apps/github-marketplace/listing-an-app-on-github-marketplace/submitting-your-listing-for-publication",
+        "type": "docs"
+      },
+      {
+        "title": "Rate limits for OAuth apps - GitHub Docs",
+        "url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/rate-limits-for-oauth-apps",
+        "type": "docs"
+      }
+    ]
+  }
+}

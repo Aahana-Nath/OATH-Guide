@@ -1,0 +1,569 @@
+{
+  "input": "shopify.com",
+  "pages": [
+    {
+      "url": "https://shopify.dev/docs/apps/build/authentication-authorization/authenticate-standalone-apps?lang=node",
+      "chars": 12211,
+      "thin": false
+    },
+    {
+      "url": "https://shopify.dev/docs/apps/build",
+      "chars": 6336,
+      "thin": false
+    },
+    {
+      "url": "https://shopify.dev/docs",
+      "chars": 5768,
+      "thin": false
+    },
+    {
+      "url": "https://shopify.dev/docs/api/usage/limits",
+      "chars": 4225,
+      "thin": false
+    },
+    {
+      "url": "https://shopify.dev/docs/apps/launch/distribution",
+      "chars": 5783,
+      "thin": false
+    },
+    {
+      "url": "https://shopify.dev/docs/apps/launch/shopify-app-store/app-store-requirements",
+      "chars": 62734,
+      "thin": false
+    },
+    {
+      "url": "https://shopify.dev/docs/apps/launch/app-store-review",
+      "chars": 4215,
+      "thin": false
+    },
+    {
+      "url": "https://shopify.dev/docs/apps/launch/app-store-review/review-process",
+      "chars": 3475,
+      "thin": false
+    },
+    {
+      "url": "https://shopify.dev/docs/apps/build/authentication-authorization/cli-app-authentication",
+      "chars": 10047,
+      "thin": false
+    }
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "fetch_page",
+      "arg": "https://shopify.dev/docs/apps/launch/distribution",
+      "thought": "I need to find more steps for app registration and requirements for public distribution. I will start by fetching the distribution page to understand the requirements for public apps.",
+      "result": "auto-read saved 2 verified finding(s).\nPAGE 5\nURL: https://shopify.dev/docs/apps/launch/distribution\nTITLE: \nTEXT:\n---\ntitle: About app distribution\ndescription: >-\n  Learn about how to deploy and publish your app, and the ways that you can\n  distribute your app to merchants.\nsource_url:\n  html: 'ht"
+    },
+    {
+      "step": 2,
+      "action": "fetch_page",
+      "arg": "https://shopify.dev/docs/apps/launch/shopify-app-store/app-store-requirements",
+      "thought": "I have gathered information about distribution methods and access tiers. I need to find more information about the registration steps and public app requirements. I will start by looking at the app st",
+      "result": "auto-read saved 1 verified finding(s).\nPAGE 6\nURL: https://shopify.dev/docs/apps/launch/shopify-app-store/app-store-requirements\nTITLE: \nTEXT:\n---\ntitle: App Store requirements\ndescription: >-\n  Review a listing of all of the requirements that need to be met to be eligible\n  for the Shopify App Stor"
+    },
+    {
+      "step": 3,
+      "action": "record_finding",
+      "arg": "7 finding(s)",
+      "thought": "I have gathered a significant amount of information regarding app store requirements from page 6. I need to record these as findings to fulfill the checklist. I have enough information to start record",
+      "result": "4 finding(s) verified and saved. Not saved: quote not found verbatim on page 6, or a number in the claim is not in the quote: Apps must use Shopify App Pricing or the Shopify Billing API for all c; quote not found verbatim on page 6, or a number in the claim is not in the quote: Apps must use the Gr"
+    },
+    {
+      "step": 4,
+      "action": "fetch_page",
+      "arg": "https://shopify.dev/docs/apps/launch/shopify-app-store/app-store-requirements",
+      "thought": "I need to re-read page 6 to get the exact quotes for the public app requirements, as the previous attempt failed due to quote mismatch. I will then record these findings.",
+      "result": "PAGE 6\nURL: https://shopify.dev/docs/apps/launch/shopify-app-store/app-store-requirements\nTITLE: \nTEXT:\n---\ntitle: App Store requirements\ndescription: >-\n  Review a listing of all of the requirements that need to be met to be eligible\n  for the Shopify App Store.\nsource_url:\n  html: >-\n    https://s"
+    },
+    {
+      "step": 5,
+      "action": "record_finding",
+      "arg": "10 finding(s)",
+      "thought": "I have read the App Store requirements page (page 6) which contains extensive information about requirements for public apps, blockers, and some steps. I can now record these findings to fulfill the c",
+      "result": "3 finding(s) verified and saved. Not saved: already recorded: Apps must use session tokens for authentication and function without t; quote not found verbatim on page 6, or a number in the claim is not in the quote: Apps must use Shopify App Pricing or the Shopify Billing API for all c; quote not fo"
+    },
+    {
+      "step": 6,
+      "action": "list_links",
+      "arg": "2",
+      "thought": "I need to find more steps for the registration process and more information on review stages to complete the checklist. I will list links from the build page to find relevant documentation.",
+      "result": "Links on page 2:\n- https://shopify.dev/docs/apps/build/authentication-authorization - Authentication\n- https://shopify.dev/docs/apps/launch/distribution - Distribution (read)\n- https://shopify.dev/docs/apps/launch/shopify-app-store/app-store-requirements - requirements (read)\n- https://shopify.dev/d"
+    },
+    {
+      "step": 7,
+      "action": "fetch_page",
+      "arg": "https://shopify.dev/docs/apps/launch/app-store-review",
+      "thought": "I need to find more steps for the app registration process and more requirements for public distribution. I will fetch the 'Shopify App Store' review page to gather information on review stages and re",
+      "result": "auto-read saved 1 verified finding(s).\nPAGE 7\nURL: https://shopify.dev/docs/apps/launch/app-store-review\nTITLE: \nTEXT:\n---\ntitle: About the Shopify App Store\ndescription: >-\n  The Shopify App Store gives you everything you need to find customers and run\n  your app business.\nsource_url:\n  html: 'http"
+    },
+    {
+      "step": 8,
+      "action": "fetch_page",
+      "arg": "https://shopify.dev/docs/apps/launch/app-store-review/review-process",
+      "thought": "I need to find information about the review process duration and more steps for app registration. I will fetch the review process page to see if it contains duration information.",
+      "result": "auto-read saved 6 verified finding(s).\nPAGE 8\nURL: https://shopify.dev/docs/apps/launch/app-store-review/review-process\nTITLE: \nTEXT:\n---\ntitle: About the app review process\ndescription: We use these guidelines to ensure a high-quality experience for our merchants.\nsource_url:\n  html: 'https://shopi"
+    },
+    {
+      "step": 9,
+      "action": "fetch_page",
+      "arg": "https://shopify.dev/docs/apps/build",
+      "thought": "I have gathered information about the review process and statuses. I need to document the steps for creating an app to fulfill the 'step' requirement. I will fetch the page about building apps to find",
+      "result": "PAGE 2\nURL: https://shopify.dev/docs/apps/build\nTITLE: Build\nTEXT:\nSkip to main content\n\nBuild apps for Shopify\n\nMerchants run their whole business on Shopify, and they turn to apps for the features they need next. Your app runs inside Shopify's own surfaces, works with Shopify's APIs and store data"
+    },
+    {
+      "step": 10,
+      "action": "fetch_page",
+      "arg": "https://shopify.dev/docs/apps/build/authentication-authorization/cli-app-authentication",
+      "thought": "I have gathered information about the app creation process, distribution, and review requirements. I need to document the specific steps for creating an app using the Shopify CLI as mentioned in the d",
+      "result": "auto-read saved 4 verified finding(s).\nPAGE 9\nURL: https://shopify.dev/docs/apps/build/authentication-authorization/cli-app-authentication\nTITLE: \nTEXT:\n---\ntitle: Authentication for apps built with Shopify CLI\ndescription: >-\n  How an app scaffolded with Shopify CLI authenticates with the GraphQL A"
+    }
+  ],
+  "probes": {
+    "observations": [],
+    "skipped": [
+      {
+        "what": "OAuth server metadata",
+        "why": "none published at shopify.com, shopify.dev (checked /.well-known/oauth-authorization-server, /.well-known/openid-configuration)"
+      },
+      {
+        "what": "Authorize endpoint",
+        "why": "no authorization URL found in the metadata or the docs read"
+      },
+      {
+        "what": "Developer portal",
+        "why": "no 'create an app' or dashboard link found in the pages read"
+      }
+    ],
+    "requests": 4,
+    "login_wall": null
+  },
+  "findings": [
+    {
+      "category": "requirement_register",
+      "text": "You need a client ID and client secret from the Dev Dashboard.",
+      "quote": "You have your app's client ID and client secret from the Dev Dashboard.",
+      "verified": true
+    },
+    {
+      "category": "requirement_register",
+      "text": "You must add your app's redirect URI to your app's settings in the Dev Dashboard or your shopify.app.toml file.",
+      "quote": "You've added your app's redirect URI to your app's settings in the Dev Dashboard, or to the [auth] section of your shopify.app.toml.",
+      "verified": true
+    },
+    {
+      "category": "requirement_register",
+      "text": "You must know which access scopes your app requires.",
+      "quote": "You know which access scopes your app requires.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "The refresh token expires in 90 days.",
+      "quote": "refresh_token_expires_in\n\nSeconds until the refresh token expires (90 days).",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "If the state parameter does not match the stored nonce, reject the request.",
+      "quote": "Compare the state parameter to the nonce you stored in step 1. If they don't match, reject the request.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "If the shop domain does not match the required pattern, the app must not send the authorization code to the host.",
+      "quote": "Confirm the shop parameter matches ^[a-zA-Z0-9][a-zA-Z0-9\\-]*\\.myshopify\\.com$. Anchor the pattern at both ends. Without the trailing $, a value such as exampleshop.myshopify.com.attacker.example passes the check, and your app sends the authorization code to a host you don't control.",
+      "verified": true
+    },
+    {
+      "category": "setup_type",
+      "text": "Use client credentials grant if the app only acts on stores in your own organization.",
+      "quote": "If your app only acts on stores in your own Shopify organization, use the client credentials grant instead. It skips the merchant authorization flow.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Construct the authorization URL and redirect the merchant to it.",
+      "quote": "Construct the authorization URL and redirect the merchant to it. Include a randomly generated state value (nonce) and store it so you can verify it in the next step.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Validate the callback parameters after the merchant approves the app.",
+      "quote": "After the merchant approves your app, Shopify redirects to your redirect_uri with an authorization code and several query parameters. Validate all of them before exchanging the code.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Exchange the authorization code for an offline access token.",
+      "quote": "Exchange the authorization code for one by sending a POST request to Shopify's token endpoint.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Store the access token and refresh token securely.",
+      "quote": "Store the access_token and refresh_token securely on your backend, along with expires_in and refresh_token_expires_in so you know when each token expires.",
+      "verified": true
+    },
+    {
+      "category": "creation_path",
+      "text": "You can use Shopify CLI to generate a new app project.",
+      "quote": "Use Shopify CLI to generate a new app project with everything you need.",
+      "verified": true
+    },
+    {
+      "category": "creation_path",
+      "text": "You can create an app using the Dev Dashboard.",
+      "quote": "Shopify CLI and the Dev Dashboard both work against the same app record, so you can create an app in either one.",
+      "verified": true
+    },
+    {
+      "category": "access_tier",
+      "text": "A custom app is installed directly by one organization without a listing or review.",
+      "quote": "A custom app takes the other path: one organization installs it directly, with no listing and no review.",
+      "verified": true
+    },
+    {
+      "category": "access_tier",
+      "text": "A Shopify App Store app is available to any merchant after passing review.",
+      "quote": "Publish your app in the Shopify App Store and any merchant can install it once it passes review.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "Submitting an app that does not meet requirements will result in a rejection and a lost review cycle.",
+      "quote": "Read the requirements before you submit, because a rejection costs you a full review cycle.",
+      "verified": true
+    },
+    {
+      "category": "requirement_register",
+      "text": "You must have Node.js 18 or higher installed before you install your app.",
+      "quote": "Before you install, make sure you have Node.js 18 or higher.",
+      "verified": true
+    },
+    {
+      "category": "creation_path",
+      "text": "You can initialize a new app using the Shopify CLI.",
+      "quote": "Initialize new apps, themes, and headless storefronts in an instant with the latest Shopify CLI.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Install the Shopify CLI globally on your machine.",
+      "quote": "Install Shopify CLI globally.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Navigate to the directory where you want to create your app.",
+      "quote": "Navigate to the directory where you want to create your app.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Run the shopify app init command to create a new app.",
+      "quote": "Run the second command to create a new app. Your app will be added as a new subdirectory.",
+      "verified": true
+    },
+    {
+      "category": "requirement_public",
+      "text": "You must review the App Store requirements before submitting your app for public listing.",
+      "quote": "Review the App Store requirements and Theme Store requirements before you submit.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "The Customer Account API has a limit of 3,000 requests per minute per customer.",
+      "quote": "Customer Account API\n\nCost points per store and customer, plus 3,000 requests per minute per customer",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "Once a store has 500,000 product variants, no more than 10,000 new variants can be created per day.",
+      "quote": "Once a store has 500,000 product variants, no more than 10,000 new variants can be created per day, on any API.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "Input arguments that accept an array have a maximum size of 250.",
+      "quote": "Input arguments that accept an array have a maximum size of 250, on every Shopify API. Requests return an error if an input array exceeds 250 items.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "Pagination of arrays of objects caps at 25,000 objects.",
+      "quote": "Pagination of arrays of objects caps at 25,000 objects, and the cap applies to count queries too.",
+      "verified": true
+    },
+    {
+      "category": "setup_type",
+      "text": "You must choose between public distribution for many merchants or custom distribution for a specific merchant.",
+      "quote": "The way you choose to distribute your app depends on its purpose and your audience: * Building for a specific merchant: You'll typically use custom distribution. * Building for many merchants: You'll use public distribution.",
+      "verified": false
+    },
+    {
+      "category": "blocker",
+      "text": "You cannot change the distribution method after you have selected it.",
+      "quote": "You can't change the distribution method after you select it.",
+      "verified": true
+    },
+    {
+      "category": "requirement_public",
+      "text": "Public distribution requires registering for the Shopify App Store.",
+      "quote": "Public distribution also requires registering for the Shopify App Store, which has a one-time fee.",
+      "verified": true
+    },
+    {
+      "category": "access_tier",
+      "text": "Public distribution requires approval from Shopify.",
+      "quote": "Public distribution also requires registering for the Shopify App Store, which has a one-time fee. ... Approval required: Yes",
+      "verified": false
+    },
+    {
+      "category": "limit",
+      "text": "Theme app extensions have a 100 KB Liquid size limit.",
+      "quote": "Theme app extensions are subject to file and content size limits. ... you can request an exception to the 100 KB Liquid size limit for a theme app extension.",
+      "verified": false
+    },
+    {
+      "category": "requirement_register",
+      "text": "Apps must use session tokens for authentication.",
+      "quote": "1.1.1Use session tokens for authentication. Your embedded app must function properly without relying on third-party cookies or local storage, including when accessed in incognito mode on Chrome.",
+      "verified": false
+    },
+    {
+      "category": "requirement_register",
+      "text": "Apps must use Shopify App Pricing or the Shopify Billing API for all charges.",
+      "quote": "1.2.1Use Shopify App Pricing or the Shopify Billing API. Apps that use off-platform billing cannot be distributed through the Shopify App store. Your app must use Shopify App Pricing or the Shopify Billing API for any app charges.",
+      "verified": false
+    },
+    {
+      "category": "requirement_register",
+      "text": "Apps must be built using the GraphQL Admin API.",
+      "quote": "2.2.4Use the GraphQL Admin API. As of April 1, 2025 all new public apps must be built exclusively with the GraphQL Admin API. As of October 1, 2024 the REST Admin API is considered a legacy API and should no longer be used.",
+      "verified": false
+    },
+    {
+      "category": "step",
+      "text": "The app must immediately authenticate using OAuth after installation.",
+      "quote": "2.3.2Authenticate immediately after install. Your app must immediately authenticate using OAuth before any other steps occur. Merchants should not be able to interact with the user interface (UI) before OAuth.",
+      "verified": false
+    },
+    {
+      "category": "step",
+      "text": "The app must redirect the merchant to the UI after the OAuth handshake.",
+      "quote": "2.3.3Redirect to the app UI after installation. Your app must redirect merchants to the user interface (UI) after they accept permissions access on the OAuth handshake page.",
+      "verified": false
+    },
+    {
+      "category": "blocker",
+      "text": "Apps that use off-platform billing are prohibited.",
+      "quote": "Apps that use off-platform billing cannot be distributed through the Shopify App store, unless you've been notified otherwise by Shopify.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "Apps must not require a desktop app to function.",
+      "quote": "1.1.12Build web-based apps. Your app must not require a desktop app to function.",
+      "verified": false
+    },
+    {
+      "category": "blocker",
+      "text": "Apps cannot connect to POS systems outside of Shopify.",
+      "quote": "1.1.8Build apps for Shopify POS only, not third-party systems. Shopify is not currently accepting apps that connect to a POS system outside of Shopify. This applies to all apps that connect to a POS system outside of Shopify.",
+      "verified": false
+    },
+    {
+      "category": "limit",
+      "text": "Public apps must use expiring offline access tokens.",
+      "quote": "3.1.2Use expiring offline access tokens. Public apps must use expiring offline access tokens for the GraphQL Admin API and REST Admin API. Non-expiring offline access tokens aren't permitted.",
+      "verified": false
+    },
+    {
+      "category": "requirement_public",
+      "text": "Apps must use session tokens for authentication and function without third-party cookies.",
+      "quote": "Your embedded app must function properly without relying on third-party cookies or local storage, including when accessed in incognito mode on Chrome.",
+      "verified": true
+    },
+    {
+      "category": "requirement_public",
+      "text": "Apps must use Shopify App Pricing or the Shopify Billing API for all charges.",
+      "quote": "Apps that use off-platform billing cannot be distributed through the Shopify App store. Your app must use Shopify App Pricing or the Shopify Billing API for any app charges.",
+      "verified": false
+    },
+    {
+      "category": "requirement_public",
+      "text": "Apps must use the GraphQL Admin API for all new public apps.",
+      "quote": "As of April 1, 2025 all new public apps must be built exclusively with the GraphQL Admin API",
+      "verified": false
+    },
+    {
+      "category": "requirement_public",
+      "text": "Public apps must use expiring offline access tokens.",
+      "quote": "Public apps must use expiring offline access tokens for the GraphQL Admin API and REST Admin API.",
+      "verified": false
+    },
+    {
+      "category": "blocker",
+      "text": "Apps that bypass checkout or payment processing are prohibited.",
+      "quote": "Apps that bypass checkout or payment processing, or register any transactions through the Shopify API in connection with such activity, are prohibited.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "Apps that provide capital funding cannot be distributed through the Shopify App Store.",
+      "quote": "Apps that provide capital funding (including but not limited to loans, cash advances, and purchase of receivables) cannot be distributed through the Shopify App Store.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "Apps that connect merchants to external agencies and developers cannot be distributed through the Shopify App Store.",
+      "quote": "Apps that connect merchants to agencies and freelancers cannot be distributed through the Shopify App Store.",
+      "verified": true
+    },
+    {
+      "category": "requirement_public",
+      "text": "Apps must use Shopify App Pricing or the Shopify Billing API for all charges.",
+      "quote": "Your app must use Shopify App Pricing or the Shopify Billing API for all app charges and be free of billing related errors.",
+      "verified": false
+    },
+    {
+      "category": "requirement_public",
+      "text": "Apps must use the latest version of Shopify App Bridge.",
+      "quote": "As of March 13th, 2024, all apps must use the latest Shopify App Bridge by adding the app-bridge.js script tag before any other script tags.",
+      "verified": false
+    },
+    {
+      "category": "requirement_public",
+      "text": "New public apps must be built exclusively with the GraphQL Admin API.",
+      "quote": "As of April 1, 2025 all new public apps must be built exclusively with the GraphQL Admin API.",
+      "verified": false
+    },
+    {
+      "category": "step",
+      "text": "Initiate installation from a Shopify-owned surface.",
+      "quote": "Apps must be installed and initiated only on Shopify services.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Authenticate immediately after install using OAuth.",
+      "quote": "Your app must immediately authenticate using OAuth before any other steps occur.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Redirect to the app UI after installation.",
+      "quote": "Your app must redirect merchants to the user interface (UI) after they accept permissions access on the OAuth handshake page.",
+      "verified": true
+    },
+    {
+      "category": "requirement_public",
+      "text": "You must submit your app to Shopify’s App Approval team to distribute it on the Shopify App Store.",
+      "quote": "When you’re ready to distribute your app on the Shopify App Store, you need to submit it to Shopify’s App Approval team and make sure it meets all requirements.",
+      "verified": false
+    },
+    {
+      "category": "limit",
+      "text": "Developers pay 0% revenue share on their first $1,000,000 USD in lifetime gross app revenue.",
+      "quote": "Most developers pay 0% revenue share on their first $1,000,000 USD in lifetime gross app revenue and 15% above that.",
+      "verified": true
+    },
+    {
+      "category": "review_stage",
+      "text": "The app review process includes the status Draft.",
+      "quote": "When you create a public app, it starts with the **Draft** status.",
+      "verified": true
+    },
+    {
+      "category": "review_stage",
+      "text": "The app review process includes the status Submitted.",
+      "quote": "After you submit your public app for review, it moves to the **Submitted** status and you receive an email confirming that your submission was received.",
+      "verified": true
+    },
+    {
+      "category": "review_stage",
+      "text": "The app review process includes the status Paused.",
+      "quote": "If your app doesn't meet core requirements that prevent a reviewer from reviewing your app, then your app moves to the **Paused** status and then you’ll receive an email that outlines required changes.",
+      "verified": true
+    },
+    {
+      "category": "review_stage",
+      "text": "The app review process includes the status Reviewed.",
+      "quote": "If your app requires additional fixes that need to be discussed with your reviewer, then it moves to the **Reviewed** status.",
+      "verified": true
+    },
+    {
+      "category": "review_stage",
+      "text": "The app review process includes the status Published.",
+      "quote": "After your app has been approved by the app review team, you'll receive an email confirming that your app has moved to the **Published** status and now displays on the Shopify App Store.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Test the app on a development store before submitting for review.",
+      "quote": "Before you submit your app for review, you need to test it on a development store to check for any bugs or errors.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Declare the required access scopes in the shopify.app.toml file.",
+      "quote": "Declare your scopes in your app's shopify.app.toml:\n\n```toml\n# shopify.app.toml\n[access_scopes]\nscopes = \"read_products,write_orders\"\n```",
+      "verified": false
+    },
+    {
+      "category": "step",
+      "text": "Deploy the app configuration using the Shopify CLI.",
+      "quote": "Then deploy:\n\n```bash\nshopify app deploy\n```",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Add the authenticate.admin(request) call to routes that need store data.",
+      "quote": "Add the same call to any new loader or action you write that needs it.\n\n```typescript\n// app/routes/app._index.tsx\nimport { authenticate } from \"../shopify.server\";\nimport type { LoaderFunctionArgs } from \"react-router\";\n\n\nexport async function loader({ request }: LoaderFunctionArgs) {\n  const { admin } = await authenticate.admin(request);",
+      "verified": true
+    },
+    {
+      "category": "requirement_public",
+      "text": "Public apps that call the GraphQL Admin API must use expiring offline access tokens.",
+      "quote": "Expiring offline access tokens are required for public apps that call the GraphQL Admin API.",
+      "verified": true
+    },
+    {
+      "category": "setup_type",
+      "text": "Online access tokens are tied to the staff member session, while offline tokens persist across sessions.",
+      "quote": "Online access tokens are tied to the staff member who opened your app, and their lifespan is limited to that user's session.",
+      "verified": true
+    },
+    {
+      "category": "setup_type",
+      "text": "Public distribution is for apps built for many merchants.",
+      "quote": "Building for many merchants: You'll use public distribution.",
+      "verified": false
+    },
+    {
+      "category": "setup_type",
+      "text": "Custom distribution is for apps built for a specific merchant.",
+      "quote": "Building for a specific merchant: You'll typically use custom distribution.",
+      "verified": false
+    },
+    {
+      "category": "setup_type",
+      "text": "Apps using App Home UI extensions must use custom distribution.",
+      "quote": "Building with App Home UI extensions: You can use only custom distribution.",
+      "verified": false
+    },
+    {
+      "category": "creation_path",
+      "text": "Use the Shopify CLI to initialize a new app.",
+      "quote": "Initialize new apps, themes, and headless storefronts in an instant with the latest Shopify CLI.",
+      "verified": false
+    },
+    {
+      "category": "creation_path",
+      "text": "Run the shopify app init command to create a new app.",
+      "quote": "Run the second command to create a new app. Your app will be added as a new subdirectory. ... shopify app init",
+      "verified": true
+    }
+  ]
+}

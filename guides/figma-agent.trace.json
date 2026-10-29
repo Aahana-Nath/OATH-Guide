@@ -1,0 +1,710 @@
+{
+  "input": "figma.com",
+  "pages": [
+    {
+      "url": "https://developers.figma.com/docs/code-connect/quickstart-guide",
+      "chars": 8719,
+      "thin": false
+    },
+    {
+      "url": "https://developers.figma.com/docs/rest-api/scopes",
+      "chars": 4457,
+      "thin": false
+    },
+    {
+      "url": "https://developers.figma.com/docs/rest-api",
+      "chars": 3488,
+      "thin": false
+    },
+    {
+      "url": "https://developers.figma.com/docs/rest-api/authentication",
+      "chars": 3785,
+      "thin": false
+    },
+    {
+      "url": "https://developers.figma.com/docs/rest-api/oauth-apps",
+      "chars": 19158,
+      "thin": false
+    },
+    {
+      "url": "https://help.figma.com/hc/en-us/articles/35074258201495-Publish-apps-to-the-Figma-Community",
+      "chars": 4300,
+      "thin": false
+    },
+    {
+      "url": "https://help.figma.com/hc/en-us/articles/34963247780247-App-review-guidelines",
+      "chars": 7657,
+      "thin": false
+    },
+    {
+      "url": "https://www.figma.com/developers/apps",
+      "chars": 0,
+      "thin": true
+    },
+    {
+      "url": "https://developers.figma.com/docs/rest-api/republish-oauth-apps",
+      "chars": 7251,
+      "thin": false
+    }
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "fetch_page",
+      "arg": "https://developers.figma.com/docs/rest-api/oauth-apps",
+      "thought": "I need to explore the OAuth app documentation to fulfill the checklist requirements regarding registration steps, public requirements, review stages, limits, and access tiers.",
+      "result": "auto-read saved 10 verified finding(s).\nPAGE 5\nURL: https://developers.figma.com/docs/rest-api/oauth-apps\nTITLE: OAuth apps | Developer Docs\nTEXT:\nSkip to main content\n\nOn this page\n\nAn OAuth app is used to implement authenticated access from your existing application to the Figma REST API. In this "
+    },
+    {
+      "step": 2,
+      "action": "record_finding",
+      "arg": "9 finding(s)",
+      "thought": "I have gathered significant information from the OAuth apps documentation. I need to record the steps for creating and configuring an app, as well as the limits and blockers identified. I will then lo",
+      "result": "6 finding(s) verified and saved. Not saved: quote not found verbatim on page 5, or a number in the claim is not in the quote: Navigate to the apps page to start the creation process.; quote not found verbatim on page 5, or a number in the claim is not in the quote: Finalize the initial creation of t"
+    },
+    {
+      "step": 3,
+      "action": "fetch_page",
+      "arg": "https://help.figma.com/hc/en-us/articles/35074258201495",
+      "thought": "I need to find more steps for the OAuth app registration process and information on public requirements, review stages, and access tiers. I will fetch the page about publishing an app to the Figma Com",
+      "result": "auto-read saved 8 verified finding(s).\nPAGE 6\nURL: https://help.figma.com/hc/en-us/articles/35074258201495-Publish-apps-to-the-Figma-Community\nTITLE: Publish apps to the Figma Community – Figma Learn - Help Center\nTEXT:\nBefore you start\n\nWho can use this feature\n\nSupported on any plan\n\nThis article "
+    },
+    {
+      "step": 4,
+      "action": "record_finding",
+      "arg": "12 finding(s)",
+      "thought": "I have gathered significant information from page 6 regarding the publishing process. I need to record the steps for publishing and the requirements for public listing. I will then need to find inform",
+      "result": "8 finding(s) verified and saved. Not saved: quote not found verbatim on page 6, or a number in the claim is not in the quote: Fill in the community listing details including author, tagline, descr; quote not found verbatim on page 6, or a number in the claim is not in the quote: Provide testing inst"
+    },
+    {
+      "step": 5,
+      "action": "fetch_page",
+      "arg": "https://help.figma.com/hc/en-us/articles/34963247780247",
+      "thought": "I need to find more information on review stages, access tiers, and blockers to complete the checklist. I will fetch the Figma Community Apps Review Guidelines page to see if it contains details on re",
+      "result": "auto-read saved 7 verified finding(s).\nPAGE 7\nURL: https://help.figma.com/hc/en-us/articles/34963247780247-App-review-guidelines\nTITLE: App review guidelines – Figma Learn - Help Center\nTEXT:\nCaution: This is an evolving document, so its contents may change over time. If you have any questions or co"
+    },
+    {
+      "step": 6,
+      "action": "finish",
+      "arg": "refused",
+      "thought": "I have gathered sufficient information from the documentation to address the checklist. I have identified registration steps, requirements for public apps, blockers, and review guidelines. I have enou",
+      "result": "Not finished: the checklist still has missing items: step, review_stage, access_tier. Search or fetch pages for them. Call finish again only if they are not documented anywhere you can reach."
+    },
+    {
+      "step": 7,
+      "action": "search_pages",
+      "arg": "OAuth app registration review access tiers",
+      "thought": "I need to find more steps for app registration, information on review stages, and access tiers. I will search for pages related to these topics.",
+      "result": "Matches in pages already read:\n- page 5: If necessary for working with your application, provide a free trial URL or login credentials that the OAuth app reviewer can use to access your application.\n- page 5: When the user follows the URL, they’ll have the opportunity to review what scopes your OAut"
+    },
+    {
+      "step": 8,
+      "action": "fetch_page",
+      "arg": "https://www.figma.com/developers/apps",
+      "thought": "I need to find more steps for the registration process and information about access tiers or review stages. I will check the developer apps page to see if it provides a more structured overview of the",
+      "result": "https://www.figma.com/developers/apps returned almost no text (probably rendered with JavaScript). Try another page."
+    },
+    {
+      "step": 9,
+      "action": "fetch_page",
+      "arg": "https://developers.figma.com/docs/rest-api/republish-oauth-apps",
+      "thought": "I need to find more steps for OAuth app registration and information on access tiers and review stages. I will check the 'Re-publish OAuth Apps' page to see if it contains details on the review proces",
+      "result": "auto-read saved 6 verified finding(s).\nPAGE 8\nURL: https://developers.figma.com/docs/rest-api/republish-oauth-apps\nTITLE: Re-publish OAuth Apps | Developer Docs\nTEXT:\nSkip to main content\n\nOn this page\n\nWe recently made some changes to Figma's developer platform to provide a more reliable and consis"
+    },
+    {
+      "step": 10,
+      "action": "record_finding",
+      "arg": "9 finding(s)",
+      "thought": "I have gathered enough information from the documentation to fulfill the checklist requirements. I have identified the registration steps, review stages, access tiers, and other necessary details from",
+      "result": "9 finding(s) verified and saved."
+    }
+  ],
+  "probes": {
+    "observations": [
+      {
+        "kind": "metadata",
+        "text": "The provider publishes OAuth server metadata at https://figma.com/.well-known/oauth-authorization-server.",
+        "url": "https://figma.com/.well-known/oauth-authorization-server",
+        "quote": "issuer: https://api.figma.com",
+        "how": "GET https://figma.com/.well-known/oauth-authorization-server returned HTTP 200 with JSON",
+        "note": "This metadata mentions MCP, so it likely describes the provider's MCP server sign-in, not the standard app OAuth flow in the docs."
+      },
+      {
+        "kind": "metadata",
+        "text": "The metadata lists PKCE code challenge methods: S256.",
+        "url": "https://figma.com/.well-known/oauth-authorization-server",
+        "quote": "code_challenge_methods_supported: ['S256']",
+        "how": "GET https://figma.com/.well-known/oauth-authorization-server returned HTTP 200 with JSON",
+        "note": "This metadata mentions MCP, so it likely describes the provider's MCP server sign-in, not the standard app OAuth flow in the docs."
+      },
+      {
+        "kind": "metadata",
+        "text": "The metadata advertises a client registration endpoint (https://api.figma.com/v1/oauth/mcp/register), so apps may be creatable through an API.",
+        "url": "https://figma.com/.well-known/oauth-authorization-server",
+        "quote": "registration_endpoint: https://api.figma.com/v1/oauth/mcp/register",
+        "how": "GET https://figma.com/.well-known/oauth-authorization-server returned HTTP 200 with JSON",
+        "note": "The agent did not register an app: that would create a real client on your behalf. This metadata mentions MCP, so it likely describes the provider's MCP server sign-in, not the standard app OAuth flow in the docs."
+      },
+      {
+        "kind": "metadata",
+        "text": "Supported grant types: authorization_code, refresh_token, urn:ietf:params:oauth:grant-type:jwt-bearer.",
+        "url": "https://figma.com/.well-known/oauth-authorization-server",
+        "quote": "grant_types_supported: ['authorization_code', 'refresh_token', 'urn:ietf:params:oauth:grant-type:jwt-bearer']",
+        "how": "GET https://figma.com/.well-known/oauth-authorization-server returned HTTP 200 with JSON",
+        "note": "This metadata mentions MCP, so it likely describes the provider's MCP server sign-in, not the standard app OAuth flow in the docs."
+      },
+      {
+        "kind": "metadata",
+        "text": "Client authentication methods at the token endpoint: client_secret_basic, client_secret_post.",
+        "url": "https://figma.com/.well-known/oauth-authorization-server",
+        "quote": "token_endpoint_auth_methods_supported: ['client_secret_basic', 'client_secret_post']",
+        "how": "GET https://figma.com/.well-known/oauth-authorization-server returned HTTP 200 with JSON",
+        "note": "This metadata mentions MCP, so it likely describes the provider's MCP server sign-in, not the standard app OAuth flow in the docs."
+      },
+      {
+        "kind": "metadata",
+        "text": "The metadata lists 1 supported scopes.",
+        "url": "https://figma.com/.well-known/oauth-authorization-server",
+        "quote": "scopes_supported: mcp:connect",
+        "how": "GET https://figma.com/.well-known/oauth-authorization-server returned HTTP 200 with JSON",
+        "note": "This metadata mentions MCP, so it likely describes the provider's MCP server sign-in, not the standard app OAuth flow in the docs."
+      }
+    ],
+    "skipped": [
+      {
+        "what": "Authorize endpoint",
+        "why": "no authorization URL found in the metadata or the docs read"
+      },
+      {
+        "what": "https://www.figma.com/developers/apps",
+        "why": "the page needs JavaScript, so the agent cannot read what is behind it without a browser"
+      }
+    ],
+    "requests": 2,
+    "login_wall": null
+  },
+  "findings": [
+    {
+      "category": "requirement_register",
+      "text": "You must have a design system codebase and a Figma design library.",
+      "quote": "To use this guide, you need a design system codebase that contains components, and a Figma design library (a Figma file that contains your root design system components).",
+      "verified": true
+    },
+    {
+      "category": "requirement_register",
+      "text": "You must install Node.js 18 or newer.",
+      "quote": "Install Node.js 18 or newer",
+      "verified": true
+    },
+    {
+      "category": "requirement_register",
+      "text": "You must generate a personal access token with specific scopes.",
+      "quote": "Generate a personal access token with the Code Connect scope set to Write and the File content scope set to Read.",
+      "verified": true
+    },
+    {
+      "category": "requirement_register",
+      "text": "You must have a Dev or Full seat on a Professional, Organization, or Enterprise plan.",
+      "quote": "A Dev or Full seat on the Professional, Organization, or Enterprise plan.",
+      "verified": true
+    },
+    {
+      "category": "recommendation",
+      "text": "Figma recommends using template files for connecting design components to code.",
+      "quote": "In this guide, we’ll get you set up with Code Connect CLI using template files — the recommended approach for connecting your design components to code.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Install the Code Connect command line tool.",
+      "quote": "Install the Code Connect command line tool",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Create a figma.config.json file in the root of your project.",
+      "quote": "Create a figma.config.json file in the root of your project:",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Create a .figma.ts file for your component.",
+      "quote": "Create a .figma.ts file for your component.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Publish the files using the command line tool.",
+      "quote": "npx figma connect publish --token=PERSONAL_ACCESS_TOKEN",
+      "verified": false
+    },
+    {
+      "category": "recommendation",
+      "text": "Figma recommends using granular scopes instead of the deprecated files:read scope.",
+      "quote": "While this scope will continue to work, it's highly recommended you use the granular scopes Figma provides. Because files:read is extremely permissive, more limited scopes such as file_content:read and file_comments:read provide enhanced security and stability",
+      "verified": true
+    },
+    {
+      "category": "requirement_register",
+      "text": "You must register your app in the My apps section of your Figma account if you are building an app for others to use.",
+      "quote": "If you plan on building a fully-fledged app, that others can share and use, then you can register your app by heading to My apps in your Figma account.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "The first step to using the API is to sign up and create a Figma account.",
+      "quote": "If you’re not already using Figma, the first step is to sign up and create an account.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "After creating an account, you must authenticate using either OAuth2 or access tokens.",
+      "quote": "Once you have a Figma account, the next step is to authenticate with the API. This can be done using either OAuth2 or access tokens.",
+      "verified": true
+    },
+    {
+      "category": "recommendation",
+      "text": "Figma recommends creating an OAuth app to use OAuth 2 for making requests on behalf of users.",
+      "quote": "Recommended: Create an OAuth app to use OAuth 2, which lets you make requests with access tokens that you obtain on behalf of the users of your app.",
+      "verified": true
+    },
+    {
+      "category": "setup_type",
+      "text": "OAuth apps allow acting on behalf of individual users, while plan access tokens are for organization-level automation.",
+      "quote": "Use an OAuth app if your application needs to act on behalf of individual Figma users, and for the Embed API. Use a plan access token for organization-level automation like CI/CD pipelines, logging, and other tasks that shouldn't be tied to a specific user.",
+      "verified": true
+    },
+    {
+      "category": "requirement_register",
+      "text": "An OAuth app must be associated with a team or organization.",
+      "quote": "The OAuth app must be associated with a team or organization.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "Authentication codes expire 30 seconds after being issued.",
+      "quote": "Authentication codes expire 30 seconds after being issued. You must exchange the code for an access token by calling https://api.figma.com/v1/oauth/token within 30 seconds of the user completing the OAuth grant.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "Access tokens expire after 90 days by default.",
+      "quote": "By default, access tokens expire after 90 days.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "WebView access to the Figma OAuth flow is not supported.",
+      "quote": "Important: Regardless of how you provide the URL itself, the user must access the authentication URL using a web browser, not an embedded WebView inside your application. WebView access to the Figma OAuth flow is not supported.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Navigate to the apps page to create a new app.",
+      "quote": "Click My Apps in the top toolbar, or go to figma.com/developers/apps. In the upper-right corner of the page, click Create a new app.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Enter a name and select a team or organization for the app.",
+      "quote": "Enter a name for your OAuth app, and select a team or organization. The OAuth app must be associated with a team or organization.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Click Create to finish the initial app creation.",
+      "quote": "Click Create.",
+      "verified": false
+    },
+    {
+      "category": "step",
+      "text": "Securely store the Client ID and Client Secret.",
+      "quote": "Copy the Client ID and Client Secret for your OAuth app and store them securely. This is the only opportunity you have to obtain the Client Secret.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Add one or more redirect URLs on the OAuth credentials page.",
+      "quote": "On the OAuth credentials page, click Add a redirect URL and add one or more redirect URLs for your OAuth app.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Select the required scopes on the OAuth scopes page.",
+      "quote": "On the OAuth scopes page, select one or more scopes that you want to use for your OAuth app.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Publish the app on the Publish page.",
+      "quote": "On the Publish page, select whether you want your app to be public or private.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Navigate to the apps page to start the creation process.",
+      "quote": "Click My Apps in the top toolbar, or go to figma.com/developers/apps.",
+      "verified": false
+    },
+    {
+      "category": "step",
+      "text": "Initiate the creation of a new OAuth app.",
+      "quote": "In the upper-right corner of the page, click Create a new app.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Provide a name and associate the app with a team or organization.",
+      "quote": "Enter a name for your OAuth app, and select a team or organization. The OAuth app must be associated with a team or organization.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Finalize the initial creation of the app.",
+      "quote": "Click Create.",
+      "verified": false
+    },
+    {
+      "category": "step",
+      "text": "Securely store the provided Client ID and Client Secret.",
+      "quote": "Copy the Client ID and Client Secret for your OAuth app and store them securely. This is the only opportunity you have to obtain the Client Secret.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Complete the initial creation process.",
+      "quote": "Click Done.",
+      "verified": false
+    },
+    {
+      "category": "limit",
+      "text": "Authentication code expiry time.",
+      "quote": "Authentication codes expire 30 seconds after being issued. You must exchange the code for an access token by calling https://api.figma.com/v1/oauth/token within 30 seconds of the user completing the OAuth grant.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "Default access token expiration.",
+      "quote": "By default, access tokens expire after 90 days.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "WebView access is not supported for the OAuth flow.",
+      "quote": "Important: Regardless of how you provide the URL itself, the user must access the authentication URL using a web browser, not an embedded WebView inside your application. WebView access to the Figma OAuth flow is not supported.",
+      "verified": true
+    },
+    {
+      "category": "requirement_public",
+      "text": "To publish an OAuth app to the Figma Community, it must be a public app.",
+      "quote": "To publish your OAuth app to the Figma Community, it must be a public app. You can start with an existing public OAuth app or use a draft OAuth app. For a draft OAuth app, you'll need to make it public during the configuration flow.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Navigate to the OAuth apps list at figma.com/developers/apps and select the app to publish.",
+      "quote": "In the list of your OAuth apps at figma.com/developers/apps, click the OAuth app that you want to publish to the Figma Community.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Click Publish on the left side of the configuration modal.",
+      "quote": "On the left side of the configuration modal, click Publish.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Select Public if publishing a draft app and check the box to list the app on the community.",
+      "quote": "If you're publishing a draft OAuth app, select Public. Select List this app on community.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Provide the author, tagline, description, landing page URL, support contact, and tags on the listing setup page.",
+      "quote": "Select the author that will appear for your app. You can select either yourself, or the team or organization your OAuth app is assigned to. Enter a tagline. Enter a description of your app. Enter a landing page URL for your app. Enter a support contact.",
+      "verified": false
+    },
+    {
+      "category": "step",
+      "text": "Upload a cover image on the images page.",
+      "quote": "Set a cover image for your app.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Provide a justification for each selected OAuth scope.",
+      "quote": "For each scope, describe why your app needs access to that scope.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Enter testing instructions for the app reviewer.",
+      "quote": "Enter all the steps that are required for in order for Figma's OAuth app reviewer to successfully test your application and understand its features.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Certify the submission and click Submit for review.",
+      "quote": "When you’re ready, click the I certify… checkbox, and then Submit for review.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Navigate to the OAuth apps list at figma.com/developers/apps and select the app to publish.",
+      "quote": "In the list of your OAuth apps at figma.com/developers/apps, click the OAuth app that you want to publish to the Figma Community.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Click Publish on the left side of the configuration modal.",
+      "quote": "On the left side of the configuration modal, click Publish.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Select Public and List this app on community, then click Next.",
+      "quote": "If you're publishing a draft OAuth app, select Public. Select List this app on community. Click Next.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Fill in the community listing details including author, tagline, description, landing page, support contact, and tags.",
+      "quote": "Enter a tagline. Enter a description of your app. You can use markdown in the description, and text formatting controls are provided. Enter a landing page URL for your app. Enter a support contact. Select relevant tags for your app.",
+      "verified": false
+    },
+    {
+      "category": "step",
+      "text": "Upload a cover image and optional carousel images.",
+      "quote": "Set a cover image for your app. Optionally, add up to nine images of your app to the carousel for your app's Community page.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Provide justification for each requested OAuth scope.",
+      "quote": "For each scope, describe why your app needs access to that scope.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Provide testing instructions and credentials for the reviewer.",
+      "quote": "Enter all the steps that are required for in order for Figma's OAuth app reviewer to successfully test your application and understand its features. If necessary for working with your application, provide a free trial URL or login credentials that the OAuth app reviewer can use to access your application.",
+      "verified": false
+    },
+    {
+      "category": "requirement_public",
+      "text": "The app must be a public app to be published to the Figma Community.",
+      "quote": "To publish your OAuth app to the Figma Community, it must be a public app.",
+      "verified": true
+    },
+    {
+      "category": "requirement_public",
+      "text": "A logo is required for the community listing.",
+      "quote": "When you publish an app to the Figma Community, you'll need to provide several things: A logo",
+      "verified": false
+    },
+    {
+      "category": "requirement_public",
+      "text": "A tagline of 100 characters or less is required.",
+      "quote": "A tagline (100 characters or less)",
+      "verified": true
+    },
+    {
+      "category": "requirement_public",
+      "text": "A landing page URL is required.",
+      "quote": "A landing page URL",
+      "verified": false
+    },
+    {
+      "category": "requirement_public",
+      "text": "A support contact (email or URL) is required.",
+      "quote": "A support contact (email or URL)",
+      "verified": true
+    },
+    {
+      "category": "requirement_public",
+      "text": "Apps must go through a review process before they can be used outside the team or organization where they were registered.",
+      "quote": "Before a Figma Community App may be used outside of the team or org where it was registered, it needs to go through our review process.",
+      "verified": true
+    },
+    {
+      "category": "requirement_register",
+      "text": "You must register a separate app for each application that calls Figma's APIs.",
+      "quote": "You’ll need to register a separate Figma Community App for each application that’s calling Figma’s APIs.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "Apps that read or modify a Figma file without user awareness and consent may be rejected.",
+      "quote": "In connection with this, we may reject Figma Community Apps that read or modify a Figma file without a user’s explicit awareness and consent",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "Apps cannot require users to install separate packages that manipulate Figma on the Web or the Desktop App.",
+      "quote": "Figma Community Apps can only leverage official APIs provided by Figma and cannot require users to install separate packages that manipulate Figma on the Web or the Desktop App.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "Attempts to exploit the API will result in immediate denial of API access.",
+      "quote": "Any attempts to exploit the API (deceitful manipulation of user files, theft of data) will result in immediate denial of API access.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "Apps are not permitted to index file content available in a customer's account.",
+      "quote": "Figma does not currently permit Figma Community Apps to index file content available in a Figma customer's account.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "Apps are not permitted to perform bulk export of Figma file content.",
+      "quote": "Figma does not currently permit bulk export of Figma file content by Figma Community Apps.",
+      "verified": true
+    },
+    {
+      "category": "setup_type",
+      "text": "You must choose whether your OAuth app is private or public.",
+      "quote": "Decide whether you want your app to be private or public. Private apps are limited to your organization and don't require Figma approval. Public apps can be used by anyone with a Figma account and must be reviewed and approved by Figma.",
+      "verified": true
+    },
+    {
+      "category": "requirement_public",
+      "text": "Public apps require Figma approval.",
+      "quote": "Public apps can be used by anyone with a Figma account and must be reviewed and approved by Figma.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Navigate to the apps page to begin configuration.",
+      "quote": "To configure and publish your OAuth app, you go to figma.com/developers/apps and click an OAuth app to go through the configuration flow.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Add redirect URLs on the OAuth credentials page.",
+      "quote": "On the OAuth credentials page, click Add a redirect URL and add one or more redirect URLs for your OAuth app.",
+      "verified": false
+    },
+    {
+      "category": "step",
+      "text": "Select the required scopes on the OAuth scopes page.",
+      "quote": "On the OAuth scopes page, select one or more scopes that you want to use for your OAuth app.",
+      "verified": false
+    },
+    {
+      "category": "step",
+      "text": "Provide a logo and description on the Describe your app page.",
+      "quote": "On the Describe your app page, add the required logo and description for your OAuth app.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Submit the app for review if it is a public app.",
+      "quote": "When you're ready, click the By submitting my app for review… checkbox, and then Submit for review.",
+      "verified": true
+    },
+    {
+      "category": "requirement_register",
+      "text": "Name, logo, and description are required for all apps.",
+      "quote": "Note: Name, logo, and description are all required. These values are visible on your app's Community page.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Navigate to the My Apps page at figma.com/developers/apps and select the OAuth app to configure.",
+      "quote": "In the list of your OAuth apps at figma.com/developers/apps, click the OAuth app that you want to re-publish.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Configure General settings including name, logo, and app visibility (private or public).",
+      "quote": "On the General page: Optionally, change the name you entered when you created the app. Upload a logo. Select whether you want your app to be private or public.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Add one or more redirect URLs on the OAuth credentials page.",
+      "quote": "On the OAuth credentials page, click Add a redirect URL and add one or more redirect URLs for your OAuth app.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Select the required OAuth scopes on the OAuth scopes page.",
+      "quote": "On the OAuth scopes page, select one or more scopes that you want to use for your OAuth app.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Provide app description and logo on the Describe your app page.",
+      "quote": "On the Describe your app page, add the required logo and description for your OAuth app.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "For public apps, provide testing instructions and optionally a video or credentials.",
+      "quote": "On the Testing instructions page (public OAuth apps only): Enter all the steps that are required for in order for the OAuth app reviewer to successfully test your application and understand its features.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Submit the app for review.",
+      "quote": "When you're ready, click the By submitting my app for review… checkbox, and then Submit for review.",
+      "verified": true
+    },
+    {
+      "category": "access_tier",
+      "text": "Private apps are limited to your organization and do not require Figma approval.",
+      "quote": "Private apps are limited to your organization and don't require Figma approval.",
+      "verified": true
+    },
+    {
+      "category": "access_tier",
+      "text": "Public apps can be used by anyone with a Figma account and must be reviewed and approved by Figma.",
+      "quote": "Public apps can be used by anyone with a Figma account and must be reviewed and approved by Figma.",
+      "verified": true
+    },
+    {
+      "category": "recommendation",
+      "text": "Figma recommends using template files for connecting design components to code.",
+      "quote": "In this guide, we’ll get you set up with Code Connect CLI using template files — the recommended approach for connecting your design components to code.",
+      "verified": true
+    },
+    {
+      "category": "creation_path",
+      "text": "You can write template files using an AI coding agent that supports the Figma MCP server.",
+      "quote": "If you’re using an agent that supports the Figma MCP server, the figma-code-connect skill writes template files for you.",
+      "verified": true
+    },
+    {
+      "category": "creation_path",
+      "text": "You can write template files manually by creating .figma.ts or .figma.js files.",
+      "quote": "Template files connect a Figma component to a code snippet. They use the .figma.ts (or .figma.js) extension and live alongside your code components.",
+      "verified": true
+    },
+    {
+      "category": "setup_type",
+      "text": "You can authenticate with the Figma API using either OAuth2 or access tokens.",
+      "quote": "Once you have a Figma account, the next step is to authenticate with the API. This can be done using either OAuth2 or access tokens.",
+      "verified": false
+    },
+    {
+      "category": "recommendation",
+      "text": "Figma recommends using granular scopes instead of the deprecated files:read scope.",
+      "quote": "While this scope will continue to work, it's highly recommended you use the granular scopes Figma provides.",
+      "verified": true
+    },
+    {
+      "category": "review_stage",
+      "text": "Figma reviews the listing and tests the app's functionality during the review process.",
+      "quote": "When you publish your app, Figma will review the listing and test the app's functionality.",
+      "verified": true
+    },
+    {
+      "category": "review_stage",
+      "text": "Approval times for app reviews vary based on volume and team availability.",
+      "quote": "Approval times vary depending on current volume and the team’s availability.",
+      "verified": true
+    }
+  ]
+}

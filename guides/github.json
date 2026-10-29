@@ -1,0 +1,476 @@
+{
+  "schema_version": "1.0",
+  "provider": {
+    "name": "GitHub",
+    "website": "https://github.com",
+    "docs_urls": [
+      "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app",
+      "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/differences-between-github-apps-and-oauth-apps"
+    ]
+  },
+  "generated_at": "2026-10-28",
+  "generated_by": { "mode": "manual_plus_agent" },
+  "summary": "Self-serve: you can register an OAuth app with no approval step. GitHub's docs prefer a GitHub App for most new projects. Marketplace listing rules, per-app user limits and token lifetime were not found.",
+
+  "difficulty": {
+    "start": {
+      "level": "easy",
+      "reason": {
+        "text": "OAuth app and Client ID existed immediately after submitting the form; no approval, privacy policy, domain or payment was asked.",
+        "label": "tested",
+        "source_type": "manual_test",
+        "note": "Registered a throwaway OAuth app on github.com and observed the form and the resulting settings page.",
+        "checked_at": "2026-10-28"
+      }
+    },
+    "public": {
+      "level": "unknown",
+      "reason": {
+        "text": "Whether other users can authorize the app straight away, and what Marketplace listing requires, were not checked.",
+        "label": "unknown",
+        "source_type": "none",
+        "note": "The settings page shows a user counter and an optional Marketplace button, but neither was explored.",
+        "checked_at": "2026-10-28"
+      }
+    }
+  },
+
+  "time": {
+    "to_start": {
+      "display": "Minutes",
+      "claim": {
+        "text": "No approval step between submitting the form and having a Client ID.",
+        "label": "tested",
+        "source_type": "manual_test",
+        "note": "Not stopwatch-timed; the app existed as soon as Register application was clicked.",
+        "checked_at": "2026-10-28"
+      }
+    },
+    "to_approval": {
+      "display": "None to register",
+      "stages": [],
+      "claim": {
+        "text": "No review stage was shown when registering an OAuth app.",
+        "label": "tested",
+        "source_type": "manual_test",
+        "note": "Marketplace listing is a separate optional step and was not explored.",
+        "checked_at": "2026-10-28"
+      }
+    }
+  },
+
+  "setup_types": {
+    "types": [
+      { "id": "oauth_app", "name": "OAuth app", "one_line": "Acts as the user who connected. Simple, but GitHub steers new projects elsewhere.", "recommended": false },
+      { "id": "github_app", "name": "GitHub App", "one_line": "Fine-grained permissions; can act as a user or on its own.", "recommended": true }
+    ],
+    "rows": [
+      {
+        "label": "Acts as",
+        "cells": [
+          {
+            "type_id": "oauth_app",
+            "value": "The authorizing user",
+            "claim": {
+              "text": "OAuth apps act on behalf of a user only.",
+              "label": "inferred",
+              "source_type": "none",
+              "note": "Implied by the docs contrast that GitHub Apps can ALSO act independently of a user.",
+              "checked_at": "2026-10-28"
+            }
+          },
+          {
+            "type_id": "github_app",
+            "value": "The user, or independently",
+            "claim": {
+              "text": "GitHub Apps can act on behalf of a user or independently of one.",
+              "label": "official_docs",
+              "source_type": "docs",
+              "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/differences-between-github-apps-and-oauth-apps",
+              "evidence_quote": "However, GitHub Apps can also act independently of a user.",
+              "checked_at": "2026-10-28"
+            }
+          }
+        ]
+      },
+      {
+        "label": "Permissions",
+        "cells": [
+          {
+            "type_id": "oauth_app",
+            "value": "Scopes",
+            "claim": {
+              "text": "OAuth apps use scopes rather than fine-grained permissions.",
+              "label": "inferred",
+              "source_type": "none",
+              "note": "Contrast with the docs statement about GitHub Apps; the OAuth scope list was not reviewed.",
+              "checked_at": "2026-10-28"
+            }
+          },
+          {
+            "type_id": "github_app",
+            "value": "Fine-grained; user picks repositories",
+            "claim": {
+              "text": "GitHub Apps use fine-grained permissions and let users choose which repositories the app can access.",
+              "label": "official_docs",
+              "source_type": "docs",
+              "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/differences-between-github-apps-and-oauth-apps",
+              "evidence_quote": "GitHub Apps use fine-grained permissions, give the user more control over which repositories the app can access, and use short-lived tokens.",
+              "checked_at": "2026-10-28"
+            }
+          }
+        ]
+      },
+      {
+        "label": "Tokens",
+        "cells": [
+          {
+            "type_id": "oauth_app",
+            "value": "Expiry option on by default; lifetime unknown",
+            "claim": {
+              "text": "The registration form had 'Expire user access tokens' checked by default.",
+              "label": "tested",
+              "source_type": "manual_test",
+              "note": "Seen on the live form. How long an access token lasts was not found.",
+              "checked_at": "2026-10-28"
+            }
+          },
+          {
+            "type_id": "github_app",
+            "value": "Short-lived",
+            "claim": {
+              "text": "GitHub Apps use short-lived tokens.",
+              "label": "official_docs",
+              "source_type": "docs",
+              "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/differences-between-github-apps-and-oauth-apps",
+              "evidence_quote": "GitHub Apps use fine-grained permissions, give the user more control over which repositories the app can access, and use short-lived tokens.",
+              "checked_at": "2026-10-28"
+            }
+          }
+        ]
+      },
+      {
+        "label": "Webhooks",
+        "cells": [
+          {
+            "type_id": "oauth_app",
+            "value": "Set per repository and organization",
+            "claim": {
+              "text": "OAuth apps must configure webhooks individually for each repository and organization.",
+              "label": "official_docs",
+              "source_type": "docs",
+              "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/differences-between-github-apps-and-oauth-apps",
+              "evidence_quote": "OAuth apps must configure webhooks individually for each repository and organization.",
+              "checked_at": "2026-10-28"
+            }
+          },
+          {
+            "type_id": "github_app",
+            "value": "Centralized",
+            "claim": {
+              "text": "GitHub Apps have built-in, centralized webhooks.",
+              "label": "official_docs",
+              "source_type": "docs",
+              "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/differences-between-github-apps-and-oauth-apps",
+              "evidence_quote": "GitHub Apps have built-in, centralized webhooks.",
+              "checked_at": "2026-10-28"
+            }
+          }
+        ]
+      },
+      {
+        "label": "Rate limits",
+        "cells": [
+          {
+            "type_id": "oauth_app",
+            "value": "Lower, do not scale",
+            "claim": {
+              "text": "OAuth apps have lower rate limits that do not scale.",
+              "label": "official_docs",
+              "source_type": "docs",
+              "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/differences-between-github-apps-and-oauth-apps",
+              "evidence_quote": "OAuth apps have lower rate limits and do not scale.",
+              "checked_at": "2026-10-28"
+            }
+          },
+          {
+            "type_id": "github_app",
+            "value": "Scale with repositories and org users",
+            "claim": {
+              "text": "GitHub App rate limits scale with repositories and organization users.",
+              "label": "official_docs",
+              "source_type": "docs",
+              "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/differences-between-github-apps-and-oauth-apps",
+              "evidence_quote": "The rate limit for GitHub Apps using an installation access token scales with the number of repositories and number of organization users.",
+              "checked_at": "2026-10-28"
+            }
+          }
+        ]
+      },
+      {
+        "label": "Registration tried",
+        "cells": [
+          {
+            "type_id": "oauth_app",
+            "value": "Yes",
+            "claim": {
+              "text": "A test OAuth app was registered end to end.",
+              "label": "tested",
+              "source_type": "manual_test",
+              "note": "Form, settings page, Client ID and secret button observed.",
+              "checked_at": "2026-10-28"
+            }
+          },
+          {
+            "type_id": "github_app",
+            "value": "Not yet",
+            "claim": {
+              "text": "GitHub App registration was not attempted or researched.",
+              "label": "unknown",
+              "source_type": "none",
+              "note": "Only the comparison page was read.",
+              "checked_at": "2026-10-28"
+            }
+          }
+        ]
+      }
+    ],
+    "recommendation": {
+      "type_id": "github_app",
+      "claim": {
+        "text": "GitHub's docs prefer GitHub Apps over OAuth apps in general.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/differences-between-github-apps-and-oauth-apps",
+        "evidence_quote": "In general, GitHub Apps are preferred over OAuth apps.",
+        "checked_at": "2026-10-28"
+      },
+      "exceptions": [
+        {
+          "when": "You need enterprise-level resources such as the enterprise object itself",
+          "use_instead_type_id": "oauth_app",
+          "claim": {
+            "text": "Use an OAuth app for enterprise-level resources because a GitHub App cannot yet be given permissions on an enterprise.",
+            "label": "official_docs",
+            "source_type": "docs",
+            "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/differences-between-github-apps-and-oauth-apps",
+            "evidence_quote": "If your app needs to access enterprise-level resources such as the enterprise object itself, you should use an OAuth app because a GitHub App cannot yet be given permissions against an enterprise.",
+            "checked_at": "2026-10-28"
+          }
+        }
+      ]
+    }
+  },
+
+  "access_ladder": [
+    {
+      "tier": 1,
+      "name": "Registered app",
+      "allows": "Register and configure the app; Client ID available immediately.",
+      "gate": "None (self-serve)",
+      "prerequisites": [],
+      "claims": [
+        {
+          "text": "The app and its Client ID existed immediately after registration.",
+          "label": "tested",
+          "source_type": "manual_test",
+          "note": "No approval, domain, privacy policy or payment step was shown.",
+          "checked_at": "2026-10-28"
+        },
+        {
+          "text": "Whether users other than the owner can authorize the app straight away was not checked.",
+          "label": "unknown",
+          "source_type": "none",
+          "note": "The settings page shows a '0 users' counter but no cap was found.",
+          "checked_at": "2026-10-28"
+        }
+      ]
+    },
+    {
+      "tier": 2,
+      "name": "Marketplace listing (optional)",
+      "allows": "Public listing in GitHub Marketplace.",
+      "gate": "Unknown",
+      "prerequisites": [],
+      "claims": [
+        {
+          "text": "The app settings page has an optional 'List this application in the Marketplace' button.",
+          "label": "tested",
+          "source_type": "manual_test",
+          "note": "Button seen; not clicked.",
+          "checked_at": "2026-10-28"
+        },
+        {
+          "text": "Marketplace listing requirements and review time were not read.",
+          "label": "unknown",
+          "source_type": "none",
+          "note": "Next step: open the Marketplace page without submitting.",
+          "checked_at": "2026-10-28"
+        }
+      ]
+    }
+  ],
+
+  "requirements": {
+    "register": [
+      {
+        "item": "GitHub account",
+        "status": "required",
+        "claim": { "text": "Registration was done while signed in to a github.com account.", "label": "tested", "source_type": "manual_test", "note": "Settings, Developer settings, OAuth Apps.", "checked_at": "2026-10-28" }
+      },
+      {
+        "item": "Application name and homepage URL",
+        "status": "required",
+        "claim": { "text": "Both fields carried a required marker on the form.", "label": "tested", "source_type": "manual_test", "note": "Red asterisks on the registration form.", "checked_at": "2026-10-28" }
+      },
+      {
+        "item": "Redirect URI",
+        "status": "unknown",
+        "claim": { "text": "The form accepts up to 10 redirect URIs; whether at least one is required was not confirmed.", "label": "unknown", "source_type": "none", "note": "Check by submitting with the field empty.", "checked_at": "2026-10-28" }
+      },
+      {
+        "item": "Logo",
+        "status": "optional",
+        "claim": { "text": "A logo was optional.", "label": "tested", "source_type": "manual_test", "note": "App existed without one.", "checked_at": "2026-10-28" }
+      },
+      {
+        "item": "Privacy policy",
+        "status": "not_asked",
+        "claim": { "text": "The form did not ask for a privacy policy.", "label": "tested", "source_type": "manual_test", "note": "Not present on the registration form.", "checked_at": "2026-10-28" }
+      },
+      {
+        "item": "Verified domain",
+        "status": "not_asked",
+        "claim": { "text": "The form did not ask for domain verification.", "label": "tested", "source_type": "manual_test", "note": "Not present on the registration form.", "checked_at": "2026-10-28" }
+      },
+      {
+        "item": "Payment",
+        "status": "not_asked",
+        "claim": { "text": "No payment was requested.", "label": "tested", "source_type": "manual_test", "note": "Not present at any step.", "checked_at": "2026-10-28" }
+      }
+    ],
+    "go_public": [
+      {
+        "item": "Marketplace listing requirements",
+        "status": "unknown",
+        "claim": { "text": "Not read yet.", "label": "unknown", "source_type": "none", "note": "Open the listing page and record fields and review time.", "checked_at": "2026-10-28" }
+      }
+    ]
+  },
+
+  "limits": [
+    {
+      "item": "OAuth apps per account",
+      "value": "Up to 100",
+      "claim": {
+        "text": "A user or organization can own up to 100 OAuth apps.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app",
+        "evidence_quote": "A user or organization can own up to 100 OAuth apps.",
+        "note": "This is apps per account, not users per app.",
+        "checked_at": "2026-10-28"
+      }
+    },
+    {
+      "item": "Redirect URIs per app",
+      "value": "Up to 10",
+      "claim": { "text": "The live form allowed up to 10 redirect URIs.", "label": "tested", "source_type": "manual_test", "note": "Seen on the registration form.", "checked_at": "2026-10-28" }
+    },
+    {
+      "item": "Users per OAuth app",
+      "value": "Unknown",
+      "claim": { "text": "No user cap was found.", "label": "unknown", "source_type": "none", "note": "Do not read this as 'no limit'.", "checked_at": "2026-10-28" }
+    },
+    {
+      "item": "Access token lifetime",
+      "value": "Unknown",
+      "claim": { "text": "How long an access token lasts was not found.", "label": "unknown", "source_type": "none", "note": "Expiry is on by default; duration not stated on the pages read.", "checked_at": "2026-10-28" }
+    }
+  ],
+
+  "blockers": [
+    {
+      "issue": "Reading the wrong docs version",
+      "fix": "Switch the docs version to 'Free, Pro, & Team'. Enterprise Server docs describe a different form.",
+      "claim": { "text": "Enterprise Server docs showed a single callback URL field; the live github.com form has a Redirect URIs section.", "label": "tested", "source_type": "manual_test", "note": "See conflicts.", "checked_at": "2026-10-28" }
+    },
+    {
+      "issue": "Building an OAuth app when a GitHub App fits better",
+      "fix": "Decide the type first using the comparison above.",
+      "claim": {
+        "text": "GitHub prefers GitHub Apps in general.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/differences-between-github-apps-and-oauth-apps",
+        "evidence_quote": "In general, GitHub Apps are preferred over OAuth apps.",
+        "checked_at": "2026-10-28"
+      }
+    },
+    {
+      "issue": "No client secret after registering",
+      "fix": "Click 'Generate a new client secret' on the app settings page and store it server-side.",
+      "claim": { "text": "The secret is not created automatically; a button generates it.", "label": "tested", "source_type": "manual_test", "note": "Secret was not generated or copied during the test.", "checked_at": "2026-10-28" }
+    }
+  ],
+
+  "steps": [
+    { "order": 1, "applies_to": "oauth_app", "actor": "human", "text": "Open Settings, then Developer settings, then OAuth Apps, then New OAuth App." },
+    { "order": 2, "applies_to": "oauth_app", "actor": "both", "text": "Fill in name, homepage URL and redirect URIs (an agent can draft the values)." },
+    { "order": 3, "applies_to": "oauth_app", "actor": "human", "text": "Leave 'Expire user access tokens' on unless you have a reason not to." },
+    { "order": 4, "applies_to": "oauth_app", "actor": "human", "text": "Click Register application and copy the Client ID." },
+    { "order": 5, "applies_to": "oauth_app", "actor": "human", "text": "Click 'Generate a new client secret' and store it server-side only." }
+  ],
+
+  "agent_vs_human": {
+    "agent": [
+      { "text": "Explain OAuth app vs GitHub App for your use case.", "claim": { "text": "Drawn from the docs comparison page.", "label": "inferred", "source_type": "none", "note": "Agent task, not tested.", "checked_at": "2026-10-28" } },
+      { "text": "Draft the app name, description and redirect URIs.", "claim": { "text": "Text fields only; no portal access needed.", "label": "inferred", "source_type": "none", "note": "Agent task, not tested.", "checked_at": "2026-10-28" } },
+      { "text": "Write the authorize, token and refresh code.", "claim": { "text": "Standard OAuth code.", "label": "inferred", "source_type": "none", "note": "Agent task, not tested.", "checked_at": "2026-10-28" } }
+    ],
+    "human": [
+      { "text": "Sign in and submit the registration form.", "claim": { "text": "Needs your account.", "label": "tested", "source_type": "manual_test", "note": "Done by hand during the test.", "checked_at": "2026-10-28" } },
+      { "text": "Generate and store the client secret.", "claim": { "text": "Secret is shown only after you click the button.", "label": "tested", "source_type": "manual_test", "note": "Button observed.", "checked_at": "2026-10-28" } },
+      { "text": "Choose the app type.", "claim": { "text": "A product decision.", "label": "inferred", "source_type": "none", "note": "Depends on your use case.", "checked_at": "2026-10-28" } }
+    ]
+  },
+
+  "extras": [
+    {
+      "title": "GitHub tracks users who authorize the app",
+      "why_it_matters": "You can see adoption and revoke all user tokens from the app settings.",
+      "claims": [
+        { "text": "The settings page shows a user counter and a 'Revoke all user tokens' button.", "label": "tested", "source_type": "manual_test", "note": "Counter showed 0 users for the test app.", "checked_at": "2026-10-28" }
+      ]
+    }
+  ],
+
+  "evidence": {
+    "not_verified": [
+      { "item": "Marketplace listing requirements and review time", "note": "Button seen, page not read." },
+      { "item": "User cap per OAuth app", "note": "None found; do not assume unlimited." },
+      { "item": "Access token lifetime", "note": "Expiry is on by default; duration not found." },
+      { "item": "GitHub App registration steps", "note": "Only the comparison page was read." },
+      { "item": "Whether other users can authorize the app immediately", "note": "Optional login-flow test not run." }
+    ],
+    "conflicts": [
+      {
+        "topic": "Callback URL field",
+        "a": "Enterprise Server docs describe one 'Authorization callback URL' field.",
+        "b": "The live github.com form has a Redirect URIs section allowing up to 10.",
+        "note": "Live form treated as correct for github.com."
+      },
+      {
+        "topic": "OAuth app token lifetime",
+        "a": "Early assumption: OAuth app tokens are long-lived.",
+        "b": "The form shows expiring tokens with refresh tokens on by default; duration unknown.",
+        "note": "Assumption withdrawn."
+      }
+    ],
+    "sources": [
+      { "title": "Creating an OAuth app", "url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app", "type": "docs" },
+      { "title": "Differences between GitHub Apps and OAuth apps", "url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/differences-between-github-apps-and-oauth-apps", "type": "docs" },
+      { "title": "Manual registration of a test OAuth app", "url": "https://github.com/settings/developers", "type": "manual_test" }
+    ]
+  }
+}

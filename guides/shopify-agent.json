@@ -1,0 +1,661 @@
+{
+  "schema_version": "1.0",
+  "provider": {
+    "name": "Shopify",
+    "website": "https://shopify.com",
+    "docs_urls": [
+      "https://shopify.dev/docs/apps/build/authentication-authorization/authenticate-standalone-apps?lang=node",
+      "https://shopify.dev/docs/apps/build",
+      "https://shopify.dev/docs",
+      "https://shopify.dev/docs/api/usage/limits"
+    ]
+  },
+  "generated_at": "2026-10-30",
+  "generated_by": {
+    "mode": "agent",
+    "model": "gemini-3.1-flash-lite"
+  },
+  "summary": "Shopify provides a structured path for app development using the Shopify CLI or Dev Dashboard. Developers must manage OAuth, access scopes, and security requirements. Public apps require a formal review process, while custom apps are installed directly by a single organization.",
+  "difficulty": {
+    "start": {
+      "level": "easy",
+      "reason": {
+        "text": "The claims describe a straightforward initialization process using the Shopify CLI and Dev Dashboard to register an app.",
+        "label": "inferred",
+        "source_type": "none",
+        "note": "Model judgement from the verified claims in this guide; not tested.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    "public": {
+      "level": "hard",
+      "reason": {
+        "text": "The claims outline strict requirements for public distribution, including mandatory review processes, specific authentication standards, and prohibited app categories.",
+        "label": "inferred",
+        "source_type": "none",
+        "note": "Model judgement from the verified claims in this guide; not tested.",
+        "checked_at": "2026-10-30"
+      }
+    }
+  },
+  "time": {
+    "to_start": {
+      "display": "Unknown",
+      "claim": {
+        "text": "Setup time was not stated in the pages read.",
+        "label": "unknown",
+        "source_type": "none",
+        "note": "Only a hands-on attempt shows how long registration takes.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    "to_approval": {
+      "display": "Not found",
+      "stages": [],
+      "claim": {
+        "text": "No review or approval timeline was found.",
+        "label": "unknown",
+        "source_type": "none",
+        "note": "9 pages read: https://shopify.dev/docs/apps/build/authentication-authorization/authenticate-standalone-apps?lang=node, https://shopify.dev/docs/apps/build, https://shopify.dev/docs, https://shopify.dev/docs/api/usage/limits, https://shopify.dev/docs/apps/launch/distribution, https://shopify.dev/docs/apps/launch/shopify-app-store/app-store-requirements …",
+        "checked_at": "2026-10-30"
+      }
+    }
+  },
+  "access_ladder": [
+    {
+      "tier": 1,
+      "name": "Development",
+      "allows": "The developer can build and test the app within their own workspace.",
+      "gate": "Default",
+      "prerequisites": [],
+      "claims": [
+        {
+          "text": "The app review process includes the status Draft.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://shopify.dev/docs/apps/launch/app-store-review/review-process",
+          "evidence_quote": "When you create a public app, it starts with the **Draft** status.",
+          "checked_at": "2026-10-30"
+        }
+      ]
+    },
+    {
+      "tier": 2,
+      "name": "Internal Distribution",
+      "allows": "The app can be installed directly by a single organization without a public listing.",
+      "gate": "App is configured for private installation",
+      "prerequisites": [],
+      "claims": [
+        {
+          "text": "A custom app is installed directly by one organization without a listing or review.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://shopify.dev/docs/apps/build",
+          "evidence_quote": "A custom app takes the other path: one organization installs it directly, with no listing and no review.",
+          "checked_at": "2026-10-30"
+        }
+      ]
+    },
+    {
+      "tier": 3,
+      "name": "Review Pending",
+      "allows": "The app is undergoing evaluation by the provider to ensure compliance.",
+      "gate": "Submission of the app for review",
+      "prerequisites": [],
+      "claims": [
+        {
+          "text": "The app review process includes the status Submitted.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://shopify.dev/docs/apps/launch/app-store-review/review-process",
+          "evidence_quote": "After you submit your public app for review, it moves to the **Submitted** status and you receive an email confirming that your submission was received.",
+          "checked_at": "2026-10-30"
+        },
+        {
+          "text": "The app review process includes the status Paused.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://shopify.dev/docs/apps/launch/app-store-review/review-process",
+          "evidence_quote": "If your app doesn't meet core requirements that prevent a reviewer from reviewing your app, then your app moves to the **Paused** status and then you’ll receive an email that outlines required changes.",
+          "checked_at": "2026-10-30"
+        }
+      ]
+    },
+    {
+      "tier": 4,
+      "name": "Approved",
+      "allows": "The app has passed the review process and is ready for public release.",
+      "gate": "Successful completion of the review process",
+      "prerequisites": [],
+      "claims": [
+        {
+          "text": "The app review process includes the status Reviewed.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://shopify.dev/docs/apps/launch/app-store-review/review-process",
+          "evidence_quote": "If your app requires additional fixes that need to be discussed with your reviewer, then it moves to the **Reviewed** status.",
+          "checked_at": "2026-10-30"
+        }
+      ]
+    },
+    {
+      "tier": 5,
+      "name": "Public Marketplace",
+      "allows": "The app is listed in the store and available to any merchant.",
+      "gate": "Publication in the app store",
+      "prerequisites": [],
+      "claims": [
+        {
+          "text": "A Shopify App Store app is available to any merchant after passing review.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://shopify.dev/docs/apps/build",
+          "evidence_quote": "Publish your app in the Shopify App Store and any merchant can install it once it passes review.",
+          "checked_at": "2026-10-30"
+        },
+        {
+          "text": "The app review process includes the status Published.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://shopify.dev/docs/apps/launch/app-store-review/review-process",
+          "evidence_quote": "After your app has been approved by the app review team, you'll receive an email confirming that your app has moved to the **Published** status and now displays on the Shopify App Store.",
+          "checked_at": "2026-10-30"
+        }
+      ]
+    }
+  ],
+  "requirements": {
+    "register": [
+      {
+        "item": "App credentials",
+        "status": "required",
+        "claim": {
+          "text": "You need a client ID and client secret from the Dev Dashboard.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://shopify.dev/docs/apps/build/authentication-authorization/authenticate-standalone-apps?lang=node",
+          "evidence_quote": "You have your app's client ID and client secret from the Dev Dashboard.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "Redirect URI",
+        "status": "required",
+        "claim": {
+          "text": "You must add your app's redirect URI to your app's settings in the Dev Dashboard or your shopify.app.toml file.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://shopify.dev/docs/apps/build/authentication-authorization/authenticate-standalone-apps?lang=node",
+          "evidence_quote": "You've added your app's redirect URI to your app's settings in the Dev Dashboard, or to the [auth] section of your shopify.app.toml.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "Access scopes",
+        "status": "required",
+        "claim": {
+          "text": "You must know which access scopes your app requires.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://shopify.dev/docs/apps/build/authentication-authorization/authenticate-standalone-apps?lang=node",
+          "evidence_quote": "You know which access scopes your app requires.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "Node.js",
+        "status": "required",
+        "claim": {
+          "text": "You must have Node.js 18 or higher installed before you install your app.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://shopify.dev/docs",
+          "evidence_quote": "Before you install, make sure you have Node.js 18 or higher.",
+          "checked_at": "2026-10-30"
+        }
+      }
+    ],
+    "go_public": [
+      {
+        "item": "App Store requirements",
+        "status": "required",
+        "claim": {
+          "text": "You must review the App Store requirements before submitting your app for public listing.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://shopify.dev/docs",
+          "evidence_quote": "Review the App Store requirements and Theme Store requirements before you submit.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "Shopify App Store registration",
+        "status": "required",
+        "claim": {
+          "text": "Public distribution requires registering for the Shopify App Store.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://shopify.dev/docs/apps/launch/distribution",
+          "evidence_quote": "Public distribution also requires registering for the Shopify App Store, which has a one-time fee.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "Apps must use session tokens for authentication and function without third-party cookies.",
+        "status": "required",
+        "claim": {
+          "text": "Apps must use session tokens for authentication and function without third-party cookies.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://shopify.dev/docs/apps/launch/shopify-app-store/app-store-requirements",
+          "evidence_quote": "Your embedded app must function properly without relying on third-party cookies or local storage, including when accessed in incognito mode on Chrome.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "Public apps that call the GraphQL Admin API must use expiring offline access tokens.",
+        "status": "required",
+        "claim": {
+          "text": "Public apps that call the GraphQL Admin API must use expiring offline access tokens.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://shopify.dev/docs/apps/build/authentication-authorization/cli-app-authentication",
+          "evidence_quote": "Expiring offline access tokens are required for public apps that call the GraphQL Admin API.",
+          "checked_at": "2026-10-30"
+        }
+      }
+    ]
+  },
+  "limits": [
+    {
+      "item": "Refresh token expiry",
+      "value": "90 days",
+      "claim": {
+        "text": "The refresh token expires in 90 days.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://shopify.dev/docs/apps/build/authentication-authorization/authenticate-standalone-apps?lang=node",
+        "evidence_quote": "refresh_token_expires_in\n\nSeconds until the refresh token expires (90 days).",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "item": "Customer Account API requests",
+      "value": "3,000 per minute per customer",
+      "claim": {
+        "text": "The Customer Account API has a limit of 3,000 requests per minute per customer.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://shopify.dev/docs/api/usage/limits",
+        "evidence_quote": "Customer Account API\n\nCost points per store and customer, plus 3,000 requests per minute per customer",
+        "checked_at": "2026-10-30"
+      }
+    }
+  ],
+  "blockers": [
+    {
+      "issue": "CSRF attack",
+      "fix": "Reject the request if the state parameter does not match the stored nonce.",
+      "claim": {
+        "text": "If the state parameter does not match the stored nonce, reject the request.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://shopify.dev/docs/apps/build/authentication-authorization/authenticate-standalone-apps?lang=node",
+        "evidence_quote": "Compare the state parameter to the nonce you stored in step 1. If they don't match, reject the request.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "Invalid shop domain",
+      "fix": "Anchor the shop domain pattern at both ends to prevent sending the authorization code to an uncontrolled host.",
+      "claim": {
+        "text": "If the shop domain does not match the required pattern, the app must not send the authorization code to the host.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://shopify.dev/docs/apps/build/authentication-authorization/authenticate-standalone-apps?lang=node",
+        "evidence_quote": "Confirm the shop parameter matches ^[a-zA-Z0-9][a-zA-Z0-9\\-]*\\.myshopify\\.com$. Anchor the pattern at both ends. Without the trailing $, a value such as exampleshop.myshopify.com.attacker.example passes the check, and your app sends the authorization code to a host you don't control.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "Submitting an app that does not meet requirements will result in a rejection and a lost…",
+      "fix": "Read the requirements before you submit.",
+      "claim": {
+        "text": "Submitting an app that does not meet requirements will result in a rejection and a lost review cycle.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://shopify.dev/docs/apps/build",
+        "evidence_quote": "Read the requirements before you submit, because a rejection costs you a full review cycle.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "You cannot change the distribution method after you have selected it.",
+      "fix": "Compare the capabilities and requirements of each type before choosing.",
+      "claim": {
+        "text": "You cannot change the distribution method after you have selected it.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://shopify.dev/docs/apps/launch/distribution",
+        "evidence_quote": "You can't change the distribution method after you select it.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "Apps that use off-platform billing are prohibited.",
+      "fix": "Use Shopify App Pricing or the Shopify Billing API.",
+      "claim": {
+        "text": "Apps that use off-platform billing are prohibited.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://shopify.dev/docs/apps/launch/shopify-app-store/app-store-requirements",
+        "evidence_quote": "Apps that use off-platform billing cannot be distributed through the Shopify App store, unless you've been notified otherwise by Shopify.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "Apps that bypass checkout or payment processing are prohibited.",
+      "fix": "Use Shopify checkout for all transactions.",
+      "claim": {
+        "text": "Apps that bypass checkout or payment processing are prohibited.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://shopify.dev/docs/apps/launch/shopify-app-store/app-store-requirements",
+        "evidence_quote": "Apps that bypass checkout or payment processing, or register any transactions through the Shopify API in connection with such activity, are prohibited.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "Apps that provide capital funding cannot be distributed through the Shopify App Store.",
+      "fix": "Do not build apps that provide capital lending services.",
+      "claim": {
+        "text": "Apps that provide capital funding cannot be distributed through the Shopify App Store.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://shopify.dev/docs/apps/launch/shopify-app-store/app-store-requirements",
+        "evidence_quote": "Apps that provide capital funding (including but not limited to loans, cash advances, and purchase of receivables) cannot be distributed through the Shopify App Store.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "Apps that connect merchants to external agencies and developers cannot be distributed…",
+      "fix": "Do not build apps that connect merchants to external agencies or freelancers.",
+      "claim": {
+        "text": "Apps that connect merchants to external agencies and developers cannot be distributed through the Shopify App Store.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://shopify.dev/docs/apps/launch/shopify-app-store/app-store-requirements",
+        "evidence_quote": "Apps that connect merchants to agencies and freelancers cannot be distributed through the Shopify App Store.",
+        "checked_at": "2026-10-30"
+      }
+    }
+  ],
+  "steps": [
+    {
+      "order": 1,
+      "text": "Construct the authorization URL and redirect the merchant to it.",
+      "actor": "agent",
+      "claim": {
+        "text": "Construct the authorization URL and redirect the merchant to it.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://shopify.dev/docs/apps/build/authentication-authorization/authenticate-standalone-apps?lang=node",
+        "evidence_quote": "Construct the authorization URL and redirect the merchant to it. Include a randomly generated state value (nonce) and store it so you can verify it in the next step.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 2,
+      "text": "Validate the callback parameters after the merchant approves the app.",
+      "actor": "both",
+      "claim": {
+        "text": "Validate the callback parameters after the merchant approves the app.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://shopify.dev/docs/apps/build/authentication-authorization/authenticate-standalone-apps?lang=node",
+        "evidence_quote": "After the merchant approves your app, Shopify redirects to your redirect_uri with an authorization code and several query parameters. Validate all of them before exchanging the code.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 3,
+      "text": "Exchange the authorization code for an offline access token.",
+      "actor": "agent",
+      "claim": {
+        "text": "Exchange the authorization code for an offline access token.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://shopify.dev/docs/apps/build/authentication-authorization/authenticate-standalone-apps?lang=node",
+        "evidence_quote": "Exchange the authorization code for one by sending a POST request to Shopify's token endpoint.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 4,
+      "text": "Store the access token and refresh token securely.",
+      "actor": "agent",
+      "claim": {
+        "text": "Store the access token and refresh token securely.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://shopify.dev/docs/apps/build/authentication-authorization/authenticate-standalone-apps?lang=node",
+        "evidence_quote": "Store the access_token and refresh_token securely on your backend, along with expires_in and refresh_token_expires_in so you know when each token expires.",
+        "checked_at": "2026-10-30"
+      }
+    }
+  ],
+  "agent_vs_human": {
+    "agent": [
+      {
+        "text": "Construct the authorization URL and redirect the merchant to it.",
+        "claim": {
+          "text": "Construct the authorization URL and redirect the merchant to it.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://shopify.dev/docs/apps/build/authentication-authorization/authenticate-standalone-apps?lang=node",
+          "evidence_quote": "Construct the authorization URL and redirect the merchant to it. Include a randomly generated state value (nonce) and store it so you can verify it in the next step.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "text": "Exchange the authorization code for an offline access token.",
+        "claim": {
+          "text": "Exchange the authorization code for an offline access token.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://shopify.dev/docs/apps/build/authentication-authorization/authenticate-standalone-apps?lang=node",
+          "evidence_quote": "Exchange the authorization code for one by sending a POST request to Shopify's token endpoint.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "text": "Store the access token and refresh token securely.",
+        "claim": {
+          "text": "Store the access token and refresh token securely.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://shopify.dev/docs/apps/build/authentication-authorization/authenticate-standalone-apps?lang=node",
+          "evidence_quote": "Store the access_token and refresh_token securely on your backend, along with expires_in and refresh_token_expires_in so you know when each token expires.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "text": "Generate a new app project structure using the Shopify CLI",
+        "claim": {
+          "text": "Generate a new app project structure using the Shopify CLI",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "text": "Configure the shopify.app.toml file with redirect URIs and access scopes",
+        "claim": {
+          "text": "Configure the shopify.app.toml file with redirect URIs and access scopes",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-30"
+        }
+      }
+    ],
+    "human": [
+      {
+        "text": "Validate the callback parameters after the merchant approves the app.",
+        "claim": {
+          "text": "Validate the callback parameters after the merchant approves the app.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://shopify.dev/docs/apps/build/authentication-authorization/authenticate-standalone-apps?lang=node",
+          "evidence_quote": "After the merchant approves your app, Shopify redirects to your redirect_uri with an authorization code and several query parameters. Validate all of them before exchanging the code.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "text": "Install Node.js 18 or higher and the Shopify CLI globally",
+        "claim": {
+          "text": "Install Node.js 18 or higher and the Shopify CLI globally",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "text": "Register the app and obtain client credentials from the Dev Dashboard",
+        "claim": {
+          "text": "Register the app and obtain client credentials from the Dev Dashboard",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-30"
+        }
+      }
+    ]
+  },
+  "extras": [
+    {
+      "title": "Choices to make before you start (token / app / registration types)",
+      "why_it_matters": "The provider offers more than one way to set up. Compare before you choose.",
+      "claims": [
+        {
+          "text": "Use client credentials grant if the app only acts on stores in your own organization.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://shopify.dev/docs/apps/build/authentication-authorization/authenticate-standalone-apps?lang=node",
+          "evidence_quote": "If your app only acts on stores in your own Shopify organization, use the client credentials grant instead. It skips the merchant authorization flow.",
+          "checked_at": "2026-10-30"
+        },
+        {
+          "text": "Online access tokens are tied to the staff member session, while offline tokens persist across sessions.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://shopify.dev/docs/apps/build/authentication-authorization/cli-app-authentication",
+          "evidence_quote": "Online access tokens are tied to the staff member who opened your app, and their lifespan is limited to that user's session.",
+          "checked_at": "2026-10-30"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "not_verified": [
+      {
+        "item": "Registering, installing and submitting an app",
+        "note": "Not attempted. These steps need your account and create real state, so the agent stopped at the sign-in wall. The live checks found nothing to record."
+      },
+      {
+        "item": "Dropped model claim: You must choose between public distribution for many merchants or custom distribution for a specific merchant.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Dropped model claim: Public distribution requires approval from Shopify.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Dropped model claim: Theme app extensions have a 100 KB Liquid size limit.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Dropped model claim: Apps must use session tokens for authentication.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Dropped model claim: Apps must use Shopify App Pricing or the Shopify Billing API for all charges.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Dropped model claim: Apps must be built using the GraphQL Admin API.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Dropped model claim: The app must immediately authenticate using OAuth after installation.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Dropped model claim: The app must redirect the merchant to the UI after the OAuth handshake.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Live check not completed: OAuth server metadata",
+        "note": "none published at shopify.com, shopify.dev (checked /.well-known/oauth-authorization-server, /.well-known/openid-configuration)"
+      },
+      {
+        "item": "Live check not completed: Authorize endpoint",
+        "note": "no authorization URL found in the metadata or the docs read"
+      },
+      {
+        "item": "Live check not completed: Developer portal",
+        "note": "no 'create an app' or dashboard link found in the pages read"
+      }
+    ],
+    "conflicts": [],
+    "sources": [
+      {
+        "title": "Authenticate a standalone or API-only app",
+        "url": "https://shopify.dev/docs/apps/build/authentication-authorization/authenticate-standalone-apps?lang=node",
+        "type": "docs"
+      },
+      {
+        "title": "Build",
+        "url": "https://shopify.dev/docs/apps/build",
+        "type": "docs"
+      },
+      {
+        "title": "Shopify Dev Docs",
+        "url": "https://shopify.dev/docs",
+        "type": "docs"
+      },
+      {
+        "title": "Shopify API limits",
+        "url": "https://shopify.dev/docs/api/usage/limits",
+        "type": "docs"
+      },
+      {
+        "title": "https://shopify.dev/docs/apps/launch/distribution",
+        "url": "https://shopify.dev/docs/apps/launch/distribution",
+        "type": "docs"
+      },
+      {
+        "title": "https://shopify.dev/docs/apps/launch/shopify-app-store/app-store-requirements",
+        "url": "https://shopify.dev/docs/apps/launch/shopify-app-store/app-store-requirements",
+        "type": "docs"
+      },
+      {
+        "title": "https://shopify.dev/docs/apps/launch/app-store-review",
+        "url": "https://shopify.dev/docs/apps/launch/app-store-review",
+        "type": "docs"
+      },
+      {
+        "title": "https://shopify.dev/docs/apps/launch/app-store-review/review-process",
+        "url": "https://shopify.dev/docs/apps/launch/app-store-review/review-process",
+        "type": "docs"
+      },
+      {
+        "title": "https://shopify.dev/docs/apps/build/authentication-authorization/cli-app-authentication",
+        "url": "https://shopify.dev/docs/apps/build/authentication-authorization/cli-app-authentication",
+        "type": "docs"
+      }
+    ]
+  }
+}

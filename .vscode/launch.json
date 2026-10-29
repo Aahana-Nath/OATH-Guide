@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run agent (prompts for a site)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/agent/guide_agent.py",
+      "args": ["${input:site}", "--out", "${workspaceFolder}/out/${input:site}.json", "--trace", "${workspaceFolder}/out/${input:site}.trace.json"],
+      "envFile": "${workspaceFolder}/.env",
+      "console": "integratedTerminal"
+    }
+  ],
+  "inputs": [{"id": "site", "type": "promptString", "description": "App name or site, e.g. linear.app", "default": "linear.app"}]
+}

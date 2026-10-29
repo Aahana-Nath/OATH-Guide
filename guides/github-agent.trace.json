@@ -1,0 +1,653 @@
+{
+  "input": "github.com",
+  "pages": [
+    {
+      "url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app",
+      "chars": 2218,
+      "thin": false
+    },
+    {
+      "url": "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+      "chars": 11372,
+      "thin": false
+    },
+    {
+      "url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps",
+      "chars": 25420,
+      "thin": false
+    },
+    {
+      "url": "https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/set-up-copilot/install-copilot-extension",
+      "chars": 13248,
+      "thin": false
+    },
+    {
+      "url": "https://docs.github.com/en/apps/oauth-apps",
+      "chars": 1113,
+      "thin": false
+    },
+    {
+      "url": "https://docs.github.com/en/apps/github-marketplace/creating-apps-for-github-marketplace/requirements-for-listing-an-app",
+      "chars": 5437,
+      "thin": false
+    },
+    {
+      "url": "https://docs.github.com/en/apps/github-marketplace/github-marketplace-overview/applying-for-publisher-verification-for-your-organization",
+      "chars": 2489,
+      "thin": false
+    },
+    {
+      "url": "https://docs.github.com/en/apps/github-marketplace/listing-an-app-on-github-marketplace/submitting-your-listing-for-publication",
+      "chars": 1051,
+      "thin": false
+    },
+    {
+      "url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/rate-limits-for-oauth-apps",
+      "chars": 2749,
+      "thin": false
+    }
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "fetch_page",
+      "arg": "https://docs.github.com/en/apps/oauth-apps",
+      "thought": "I need to find information on public app requirements, review stages, and access tiers for GitHub OAuth apps to complete the checklist. I will start by fetching the OAuth apps overview page to find re",
+      "result": "auto-read saved 1 verified finding(s).\nPAGE 5\nURL: https://docs.github.com/en/apps/oauth-apps\nTITLE: OAuth apps - GitHub Docs\nTEXT:\nSkip to main content\n\nSkip to content\n\nCollapse sidebar\n\nExpand sidebar\n\nOAuth apps\n\nLearn how to build and maintain OAuth apps.\n\nUsing OAuth apps, 1 of 3\n\nInstalling a"
+    },
+    {
+      "step": 2,
+      "action": "fetch_page",
+      "arg": "https://docs.github.com/en/apps/github-marketplace/creating-apps-for-github-marketplace/requirements-for-listing-an-app",
+      "thought": "I need to find information about requirements for public apps, review stages, and access tiers. I will start by checking the listing requirements for GitHub Marketplace, as this is a common path for p",
+      "result": "auto-read saved 10 verified finding(s).\nPAGE 6\nURL: https://docs.github.com/en/apps/github-marketplace/creating-apps-for-github-marketplace/requirements-for-listing-an-app\nTITLE: Requirements for listing an app - GitHub Docs\nTEXT:\nSkip to main content\n\nSkip to content\n\nCollapse sidebar\n\nExpand sideb"
+    },
+    {
+      "step": 3,
+      "action": "record_finding",
+      "arg": "4 finding(s)",
+      "thought": "I have gathered significant information about marketplace requirements and blockers. I need to find information about review stages and access tiers to complete the checklist.",
+      "result": "4 finding(s) verified and saved."
+    },
+    {
+      "step": 4,
+      "action": "fetch_page",
+      "arg": "https://docs.github.com/en/apps/github-marketplace/github-marketplace-overview/applying-for-publisher-verification-for-your-organization",
+      "thought": "I need to find more information on OAuth app registration requirements, review stages, and access tiers to complete the checklist. I will fetch the page about applying for publisher verification as it",
+      "result": "auto-read saved 6 verified finding(s).\nPAGE 7\nURL: https://docs.github.com/en/apps/github-marketplace/github-marketplace-overview/applying-for-publisher-verification-for-your-organization\nTITLE: Applying for publisher verification for your organization - GitHub Docs\nTEXT:\nSkip to main content\n\nSkip "
+    },
+    {
+      "step": 5,
+      "action": "fetch_page",
+      "arg": "https://docs.github.com/en/apps/github-marketplace/listing-an-app-on-github-marketplace/submitting-your-listing-for-publication",
+      "thought": "I have gathered information on publisher verification and listing requirements. I still need to find information on review stages, access tiers, and additional registration requirements. I will fetch ",
+      "result": "auto-read saved 3 verified finding(s).\nPAGE 8\nURL: https://docs.github.com/en/apps/github-marketplace/listing-an-app-on-github-marketplace/submitting-your-listing-for-publication\nTITLE: Submitting your listing for publication - GitHub Docs\nTEXT:\nSkip to main content\n\nSkip to content\n\nCollapse sideba"
+    },
+    {
+      "step": 6,
+      "action": "web_search",
+      "arg": "GitHub Marketplace app review process stages and access tiers",
+      "thought": "I need to find information about review stages and access tiers to complete the checklist. I will search for information regarding the review process for Marketplace apps and access levels.",
+      "result": "No results (search unavailable or empty). Try fetch_page on a known docs URL."
+    },
+    {
+      "step": 7,
+      "action": "fetch_page",
+      "arg": "https://docs.github.com/en/apps/github-marketplace/listing-an-app-on-github-marketplace/submitting-your-listing-for-publication",
+      "thought": "I need to find information on review stages and access tiers for GitHub apps to complete the checklist. I will fetch the page about submitting a listing for publication to see if it details the review",
+      "result": "PAGE 8\nURL: https://docs.github.com/en/apps/github-marketplace/listing-an-app-on-github-marketplace/submitting-your-listing-for-publication\nTITLE: Submitting your listing for publication - GitHub Docs\nTEXT:\nSkip to main content\n\nSkip to content\n\nCollapse sidebar\n\nExpand sidebar\n\nSubmitting your list"
+    },
+    {
+      "step": 8,
+      "action": "web_search",
+      "arg": "GitHub Marketplace app review process stages and access tiers",
+      "thought": "I need to find information about review stages and access tiers for GitHub Marketplace apps. The current page mentions an 'onboarding expert' review process. I will search for more details on the revi",
+      "result": "No results (search unavailable or empty). Try fetch_page on a known docs URL."
+    },
+    {
+      "step": 9,
+      "action": "fetch_page",
+      "arg": "https://docs.github.com/en/apps/github-marketplace/listing-an-app-on-github-marketplace/submitting-your-listing-for-publication",
+      "thought": "I need to find information about review stages and access tiers for GitHub Marketplace apps to complete the checklist. I will fetch the page about submitting a listing for publication again to see if ",
+      "result": "PAGE 8\nURL: https://docs.github.com/en/apps/github-marketplace/listing-an-app-on-github-marketplace/submitting-your-listing-for-publication\nTITLE: Submitting your listing for publication - GitHub Docs\nTEXT:\nSkip to main content\n\nSkip to content\n\nCollapse sidebar\n\nExpand sidebar\n\nSubmitting your list"
+    },
+    {
+      "step": 10,
+      "action": "fetch_page",
+      "arg": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/rate-limits-for-oauth-apps",
+      "thought": "I need to find information about access tiers and review stages for GitHub apps. I will fetch the page about OAuth app rate limits to see if it contains any information about access tiers or review st",
+      "result": "auto-read saved 3 verified finding(s).\nPAGE 9\nURL: https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/rate-limits-for-oauth-apps\nTITLE: Rate limits for OAuth apps - GitHub Docs\nTEXT:\nSkip to main content\n\nSkip to content\n\nCollapse sidebar\n\nExpand sidebar\n\nIn this article\n\nRate limits for"
+    }
+  ],
+  "probes": {
+    "observations": [
+      {
+        "kind": "authorize",
+        "text": "The authorize endpoint sent an unauthenticated request to a sign-in page (github.com/login).",
+        "url": "https://github.com/login/oauth/authorize",
+        "quote": "HTTP 302 Location: github.com/login",
+        "how": "GET https://github.com/login/oauth/authorize with a made-up client_id (oauth-guide-agent-probe), no login, redirects not followed",
+        "note": "Sign-in comes before any client check here, so the agent could not see how an unregistered client is treated."
+      },
+      {
+        "kind": "portal",
+        "text": "Opening https://github.com/settings/applications/new without an account ended on a sign-in page (github.com/login).",
+        "url": "https://github.com/settings/applications/new",
+        "quote": "Sign in to GitHub · GitHub Skip to content You signed in with another tab or window. Reload to refresh your session. You signed out in another tab or window. Re",
+        "how": "GET https://github.com/settings/applications/new without an account (redirects followed)",
+        "note": "Creating the app needs your own account, so the agent stopped here and left it to you."
+      }
+    ],
+    "skipped": [
+      {
+        "what": "OAuth server metadata",
+        "why": "none published at github.com, docs.github.com (checked /.well-known/oauth-authorization-server, /.well-known/openid-configuration)"
+      }
+    ],
+    "requests": 6,
+    "login_wall": {
+      "url": "https://github.com/settings/applications/new",
+      "lands_on": "github.com/login"
+    }
+  },
+  "findings": [
+    {
+      "category": "recommendation",
+      "text": "GitHub recommends building a GitHub App instead of an OAuth app.",
+      "quote": "Consider building a GitHub App instead of an OAuth app.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "A user or organization can own a maximum of 100 OAuth apps.",
+      "quote": "A user or organization can own up to 100 OAuth apps.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Navigate to your profile settings.",
+      "quote": "In the upper-right corner of any page on GitHub, click your profile picture, then click Settings.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Click on Developer settings in the sidebar.",
+      "quote": "In the left sidebar, click Developer settings.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Click on OAuth apps.",
+      "quote": "In the left sidebar, click OAuth apps.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Click the button to create a new OAuth app.",
+      "quote": "Click New OAuth App.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Enter the name of your application.",
+      "quote": "In \"Application name\", type the name of your app.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Enter the homepage URL for your app.",
+      "quote": "In \"Homepage URL\", type the full URL to your app's website.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Enter the authorization callback URL.",
+      "quote": "In \"Authorization callback URL\", type the callback URL of your app.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Click the button to register the application.",
+      "quote": "Click Register application.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "You can enter a maximum of 10 callback URLs.",
+      "quote": "You can enter up to 10 callback URLs.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "Do not use sensitive data such as internal URLs in your OAuth app.",
+      "quote": "Avoid using sensitive data, such as internal URLs, when creating an OAuth app.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "The primary rate limit for unauthenticated requests is 60 requests per hour.",
+      "quote": "The primary rate limit for unauthenticated requests is 60 requests per hour.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "The primary rate limit for authenticated users is 5,000 requests per hour.",
+      "quote": "All of these requests count towards your personal rate limit of 5,000 requests per hour.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "OAuth apps owned or approved by a GitHub Enterprise Cloud organization have a rate limit of 15,000 requests per hour.",
+      "quote": "Similarly, requests made on your behalf by a OAuth app that is owned or approved by a GitHub Enterprise Cloud organization have a higher rate limit of 15,000 requests per hour if you are a member of the GitHub Enterprise Cloud organization.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "The rate limit for Git LFS access is 300 requests per minute for unauthenticated requests.",
+      "quote": "These count towards a separate rate limiting bucket with a limit of 300 requests per minute for unauthenticated requests and 3,000 requests per minute for authenticated requests.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "The rate limit for Git LFS access is 3,000 requests per minute for authenticated requests.",
+      "quote": "These count towards a separate rate limiting bucket with a limit of 300 requests per minute for unauthenticated requests and 3,000 requests per minute for authenticated requests.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "The rate limit for GitHub App installations is 5,000 requests per hour.",
+      "quote": "GitHub Apps authenticating with an installation access token use the installation's minimum rate limit of 5,000 requests per hour.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "The rate limit for GitHub App installations on GitHub Enterprise Cloud is 15,000 requests per hour.",
+      "quote": "If the installation is on a GitHub Enterprise Cloud organization, the installation has a rate limit of 15,000 requests per hour.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "The rate limit for an OAuth app using its client ID and secret is 5,000 requests per hour.",
+      "quote": "For these requests, the rate limit is 5,000 requests per hour per OAuth app.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "The rate limit for GITHUB_TOKEN in GitHub Actions is 1,000 requests per hour per repository.",
+      "quote": "The rate limit for GITHUB_TOKEN is 1,000 requests per hour per repository.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "No more than 100 concurrent requests are allowed.",
+      "quote": "Make too many concurrent requests. No more than 100 concurrent requests are allowed.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "No more than 900 points per minute are allowed for REST API endpoints.",
+      "quote": "Make too many requests to a single endpoint per minute. No more than 900 points per minute are allowed for REST API endpoints, and no more than 2,000 points per minute are allowed for the GraphQL API endpoint.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "No more than 2,000 points per minute are allowed for the GraphQL API endpoint.",
+      "quote": "Make too many requests to a single endpoint per minute. No more than 900 points per minute are allowed for REST API endpoints, and no more than 2,000 points per minute are allowed for the GraphQL API endpoint.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "No more than 2,000 OAuth access token requests per hour are allowed for GitHub Apps and OAuth apps.",
+      "quote": "Make too many OAuth access token requests in a short period of time. No more than 2,000 OAuth access token requests per hour are allowed for GitHub Apps and OAuth apps.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "Never include your app's client secret in client-side code or in code that runs on a user device.",
+      "quote": "Never include your app's client secret in client-side code or in code that runs on a user device. The client secret can be used to generate OAuth access tokens for users who have authorized your app, so you should always keep the client secret secure.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "Access tokens expire after eight hours.",
+      "quote": "The access token expires after eight hours, and the refresh token expires after six months without use.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "Refresh tokens expire after six months without use.",
+      "quote": "The access token expires after eight hours, and the refresh token expires after six months without use.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "The temporary code for the web application flow expires after 10 minutes.",
+      "quote": "The temporary code will expire after 10 minutes.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "The device flow user code expires after 15 minutes.",
+      "quote": "The user must enter a valid code within 15 minutes (or 900 seconds). After 15 minutes, you will need to request a new device authorization code with POST https://github.com/login/device/code.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "There is a rate limit of 50 device flow submissions per hour per application.",
+      "quote": "When a user submits the verification code on the browser, there is a rate limit of 50 submissions in an hour per application.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "There is a limit of ten tokens issued per user/application/scope combination.",
+      "quote": "There is a limit of ten tokens that are issued per user/application/scope combination, and a rate limit of ten tokens created per hour.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "There is a rate limit of ten tokens created per hour.",
+      "quote": "There is a limit of ten tokens that are issued per user/application/scope combination, and a rate limit of ten tokens created per hour.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "CORS pre-flight requests are not supported.",
+      "quote": "CORS pre-flight requests (OPTIONS) are not supported at this time.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "The plain code challenge method is not supported for PKCE.",
+      "quote": "Must be S256 - the plain code challenge method is not supported.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "If states do not match during the web flow, the process must be aborted.",
+      "quote": "If the states don't match, then a third party created the request, and you should abort the process.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "If a refresh token is invalid or expired, you must send the user through the authorization flow again.",
+      "quote": "If the refresh token that you specified is invalid or expired, you will receive a bad_refresh_token error. To resolve this error, send the user through the web application flow or device flow again to get a new access token and refresh token.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Request a user's GitHub identity via the authorize endpoint.",
+      "quote": "1. Request a user's GitHub identity\n\nGET https://github.com/login/oauth/authorize",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Exchange the temporary code for an access token.",
+      "quote": "Exchange this code for an access token:\n\nPOST https://github.com/login/oauth/access_token",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Use the access token to access the API.",
+      "quote": "3. Use the access token to access the API\n\nThe access token allows you to make requests to the API on a behalf of a user.",
+      "verified": true
+    },
+    {
+      "category": "requirement_register",
+      "text": "To use Copilot in your IDE, you need either limited access through Copilot Free or a paid Copilot plan for full access.",
+      "quote": "To use Copilot in your IDE, you need either limited access through Copilot Free or a paid Copilot plan for full access. For more information about how to get access and choose the right plan, see About GitHub Copilot.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "In your JetBrains IDE, open the Plugins settings, search the Marketplace for the GitHub Copilot plugin, then click Install.",
+      "quote": "In your JetBrains IDE, open the Plugins settings, search the Marketplace for the GitHub Copilot plugin, then click Install.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "After GitHub Copilot is installed, click Restart IDE.",
+      "quote": "After GitHub Copilot is installed, click Restart IDE.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "After your JetBrains IDE has restarted, click the Tools menu. Click GitHub Copilot, then click Login to GitHub.",
+      "quote": "After your JetBrains IDE has restarted, click the Tools menu. Click GitHub Copilot, then click Login to GitHub.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "In the \"Sign in to GitHub\" dialog box, to copy the device code and open the device activation window, click Copy and Open.",
+      "quote": "In the \"Sign in to GitHub\" dialog box, to copy the device code and open the device activation window, click Copy and Open.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Paste the device code, then click Continue.",
+      "quote": "Paste the device code, then click Continue.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "To approve these permissions, click Authorize GitHub Copilot Plugin.",
+      "quote": "To approve these permissions, click Authorize GitHub Copilot Plugin.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "After the permissions have been approved, your JetBrains IDE will show a confirmation. To begin using GitHub Copilot, click OK.",
+      "quote": "After the permissions have been approved, your JetBrains IDE will show a confirmation. To begin using GitHub Copilot, click OK.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "The first step to creating an OAuth app is to navigate to the creation page.",
+      "quote": "Creating an OAuth app, 3 of 8",
+      "verified": true
+    },
+    {
+      "category": "requirement_public",
+      "text": "You must accept the GitHub Marketplace Developer Agreement to submit a listing.",
+      "quote": "When you submit your listing for publication, you must read and accept the terms of the GitHub Marketplace Developer Agreement.",
+      "verified": true
+    },
+    {
+      "category": "requirement_public",
+      "text": "Listings must include valid contact information for the publisher.",
+      "quote": "Listings must include valid contact information for the publisher.",
+      "verified": true
+    },
+    {
+      "category": "requirement_public",
+      "text": "Listings must have a relevant description of the application.",
+      "quote": "Listings must have a relevant description of the application.",
+      "verified": true
+    },
+    {
+      "category": "requirement_public",
+      "text": "Listings must specify a pricing plan.",
+      "quote": "Listings must specify a pricing plan.",
+      "verified": true
+    },
+    {
+      "category": "requirement_public",
+      "text": "Listings must have a valid link to a privacy policy.",
+      "quote": "Listings must have a valid link to a privacy policy.",
+      "verified": true
+    },
+    {
+      "category": "requirement_public",
+      "text": "Listings must provide a method to receive support.",
+      "quote": "Listings must provide a method to receive support through a valid support link and/or a support email address.",
+      "verified": true
+    },
+    {
+      "category": "requirement_public",
+      "text": "Apps must be publicly available and not in public preview or invite only.",
+      "quote": "Apps must be publicly available in GitHub Marketplace and cannot be in public preview or available by invite only.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "GitHub Apps require a minimum of 100 installations for paid plans.",
+      "quote": "GitHub Apps should have a minimum of 100 installations.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "OAuth apps require a minimum of 200 users for paid plans.",
+      "quote": "OAuth apps should have a minimum of 200 users.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "Listings must not actively persuade users away from GitHub.",
+      "quote": "Listings must not actively persuade users away from GitHub.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "Listings must not actively persuade users away from GitHub.",
+      "quote": "Listings must not actively persuade users away from GitHub.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "Apps must be publicly available in GitHub Marketplace and cannot be in public preview or available by invite only.",
+      "quote": "Apps must be publicly available in GitHub Marketplace and cannot be in public preview or available by invite only.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "OAuth apps should have a minimum of 200 users to publish a paid plan.",
+      "quote": "OAuth apps should have a minimum of 200 users.",
+      "verified": true
+    },
+    {
+      "category": "requirement_public",
+      "text": "To publish a paid plan for your app on the GitHub Marketplace, your app must be owned by an organization that is a verified publisher.",
+      "quote": "To publish a paid plan for your app on the GitHub Marketplace, your app must be owned by an organization that is a verified publisher.",
+      "verified": true
+    },
+    {
+      "category": "requirement_register",
+      "text": "To offer paid plans for your app, the app must be owned by an organization.",
+      "quote": "To offer paid plans for your app, the app must be owned by an organization and you must have owner permissions in the organization.",
+      "verified": true
+    },
+    {
+      "category": "requirement_public",
+      "text": "You must enable two-factor authentication for your organization to get publisher verification.",
+      "quote": "Ensure that Two-factor authentication is enabled for your organization. For more information, see Requiring two-factor authentication in your organization.",
+      "verified": true
+    },
+    {
+      "category": "requirement_public",
+      "text": "You must verify your organization's domain to get publisher verification.",
+      "quote": "Submit a verified domain and ensure that a \"Verified\" badge displays on your organization's profile page. For related information, see Verifying or approving a domain for your organization.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Navigate to your organization settings.",
+      "quote": "In the upper-right corner of GitHub, click your profile picture, then click Organizations. Select an organization by clicking it. Under your organization name, click Settings.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Access the developer settings for the organization.",
+      "quote": "At the bottom of the left sidebar, click Developer settings. Under \"Developer settings\", click Publisher Verification.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Submit the verification request.",
+      "quote": "Click Request Verification. GitHub will review your details and let you know once your publisher verification is complete.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Navigate to the Overview section of your app listing page.",
+      "quote": "In the left sidebar on the app listing page, click Overview.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Click the Request publish button to submit your app listing.",
+      "quote": "To submit your completed app listing, click Request publish.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "You cannot delete a GitHub App if it has an active listing in the GitHub Marketplace.",
+      "quote": "If you want to delete your GitHub App, you must first delete the listing from GitHub Marketplace.",
+      "verified": true
+    },
+    {
+      "category": "recommendation",
+      "text": "GitHub recommends building a GitHub App instead of an OAuth app because GitHub Apps scale with repositories and organization users.",
+      "quote": "Consider building a GitHub App instead of an OAuth app. The rate limit for GitHub Apps using an installation access token scales with the number of repositories and number of organization users. Conversely, OAuth apps have lower rate limits and do not scale.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "OAuth apps are limited to 2,000 access token requests per hour.",
+      "quote": "OAuth apps are subject to a rate limit of 2,000 access token requests per hour. If your application exceeds this limit, further requests to generate new access tokens will be temporarily blocked, and you may receive error responses.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "If an app signs a user in ten times within one hour, the next sign in requires re-authorization.",
+      "quote": "If an app signs the user in ten times within one hour, the next sign in within the same hour will require re-authorization of the application.",
+      "verified": true
+    },
+    {
+      "category": "recommendation",
+      "text": "GitHub recommends building a GitHub App instead of an OAuth app.",
+      "quote": "Consider building a GitHub App instead of an OAuth app.",
+      "verified": true
+    },
+    {
+      "category": "setup_type",
+      "text": "OAuth apps act only on behalf of a user, while GitHub Apps can act on behalf of a user or independently.",
+      "quote": "OAuth apps can only act on behalf of a user while GitHub Apps can either act on behalf of a user or independently of a user.",
+      "verified": true
+    },
+    {
+      "category": "creation_path",
+      "text": "You can create an OAuth app by navigating to Developer settings in your GitHub profile.",
+      "quote": "In the upper-right corner of any page on GitHub, click your profile picture, then click Settings. In the left sidebar, click Developer settings. In the left sidebar, click OAuth apps. Click New OAuth App.",
+      "verified": true
+    },
+    {
+      "category": "review_stage",
+      "text": "An onboarding expert will review the app listing submission.",
+      "quote": "An onboarding expert will reach out to you with additional information.",
+      "verified": true
+    },
+    {
+      "category": "review_stage",
+      "text": "GitHub will review the publisher verification details.",
+      "quote": "GitHub will review your details and let you know once your publisher verification is complete.",
+      "verified": true
+    },
+    {
+      "category": "access_tier",
+      "text": "Apps must be publicly available in GitHub Marketplace and cannot be in public preview or available by invite only.",
+      "quote": "Apps must be publicly available in GitHub Marketplace and cannot be in public preview or available by invite only.",
+      "verified": false
+    },
+    {
+      "category": "access_tier",
+      "text": "To offer paid plans for your app or to include a marketplace badge in your app listing, you must complete the publisher verification process for your organization.",
+      "quote": "To offer paid plans for your app or to include a marketplace badge in your app listing, you must complete the publisher verification process for your organization.",
+      "verified": true
+    },
+    {
+      "category": "requirement_register",
+      "text": "A user or organization can own up to 100 OAuth apps.",
+      "quote": "A user or organization can own up to 100 OAuth apps.",
+      "verified": false
+    }
+  ]
+}

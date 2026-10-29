@@ -1,0 +1,570 @@
+{
+  "schema_version": "1.0",
+  "provider": {
+    "name": "Slack",
+    "website": "https://slack.com",
+    "docs_urls": [
+      "https://docs.slack.dev/authentication/installing-with-oauth/",
+      "https://docs.slack.dev/slack-marketplace/slack-marketplace-review-guide"
+    ]
+  },
+  "generated_at": "2026-10-28",
+  "generated_by": { "mode": "manual_plus_agent" },
+  "summary": "Building and installing on your own workspace takes minutes with no approval. Going public is separate: distribution is a self-serve checklist, but Marketplace listing needs 10 active workspaces and up to about 10 weeks of review.",
+
+  "difficulty": {
+    "start": {
+      "level": "easy",
+      "reason": {
+        "text": "App was created and installed to a test workspace in one flow with no approval step.",
+        "label": "tested",
+        "source_type": "manual_test",
+        "note": "Blank app path: 4 wizard steps, then Create and Install.",
+        "checked_at": "2026-10-28"
+      }
+    },
+    "public": {
+      "level": "hard",
+      "reason": {
+        "text": "Marketplace listing needs 10 active workspaces first, then a two-stage review lasting weeks to months.",
+        "label": "inferred",
+        "source_type": "none",
+        "note": "Judgement from the install prerequisite and the review timeline in the Slack review guide.",
+        "checked_at": "2026-10-28"
+      }
+    }
+  },
+
+  "time": {
+    "to_start": {
+      "display": "Minutes",
+      "claim": {
+        "text": "App created and installed in a single flow with no approval.",
+        "label": "tested",
+        "source_type": "manual_test",
+        "note": "Not stopwatch-timed.",
+        "checked_at": "2026-10-28"
+      }
+    },
+    "to_approval": {
+      "display": "Up to 10 business days, then up to 10 weeks (new app)",
+      "stages": [
+        { "name": "Preliminary review", "duration_text": "up to 10 business days" },
+        { "name": "Functional review", "duration_text": "up to 10 weeks for new apps; 6 weeks for updates to published apps" }
+      ],
+      "claim": {
+        "text": "Slack states the preliminary and functional review timelines.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/slack-marketplace/slack-marketplace-review-guide",
+        "evidence_quote": "the preliminary part of the review takes up to 10 business days to receive feedback, while the functional review takes up to 10 weeks for new submissions and 6 weeks for published apps resubmitting changes.",
+        "checked_at": "2026-10-28"
+      },
+      "total_estimate": {
+        "text": "Roughly 12 weeks end to end for a new app, before any rework.",
+        "label": "inferred",
+        "source_type": "none",
+        "note": "Sum of the two stated maxima. The docs do not say the stages run back to back, and the time to reach 10 active workspaces is not included.",
+        "checked_at": "2026-10-28"
+      }
+    }
+  },
+
+  "setup_types": {
+    "types": [
+      { "id": "bot_token", "name": "Bot token", "one_line": "The app acts with its own identity in the workspace.", "recommended": true },
+      { "id": "user_token", "name": "User token", "one_line": "The app acts on behalf of the installing user.", "recommended": false }
+    ],
+    "rows": [
+      {
+        "label": "Requested with",
+        "cells": [
+          {
+            "type_id": "bot_token",
+            "value": "scope=",
+            "claim": {
+              "text": "Bot scopes go in the scope parameter.",
+              "label": "official_docs",
+              "source_type": "docs",
+              "source_url": "https://docs.slack.dev/authentication/installing-with-oauth/",
+              "evidence_quote": "Bot scopes should be added as scope=<bot_scope>, and user scopes should be added as user_scope=<user_scope>.",
+              "checked_at": "2026-10-28"
+            }
+          },
+          {
+            "type_id": "user_token",
+            "value": "user_scope=",
+            "claim": {
+              "text": "User scopes go in the user_scope parameter.",
+              "label": "official_docs",
+              "source_type": "docs",
+              "source_url": "https://docs.slack.dev/authentication/installing-with-oauth/",
+              "evidence_quote": "Bot scopes should be added as scope=<bot_scope>, and user scopes should be added as user_scope=<user_scope>.",
+              "checked_at": "2026-10-28"
+            }
+          }
+        ]
+      },
+      {
+        "label": "Acts as",
+        "cells": [
+          {
+            "type_id": "bot_token",
+            "value": "The app's own identity",
+            "claim": {
+              "text": "Slack apps can act with their own identity instead of acting on behalf of users.",
+              "label": "official_docs",
+              "source_type": "docs",
+              "source_url": "https://docs.slack.dev/authentication/installing-with-oauth/",
+              "evidence_quote": "Your app can act with its own identity instead of acting on behalf of users",
+              "checked_at": "2026-10-28"
+            }
+          },
+          {
+            "type_id": "user_token",
+            "value": "The installing user",
+            "claim": {
+              "text": "A user token is for acting on behalf of a user.",
+              "label": "official_docs",
+              "source_type": "docs",
+              "source_url": "https://docs.slack.dev/authentication/installing-with-oauth/",
+              "evidence_quote": "so that you can act on behalf of a user",
+              "checked_at": "2026-10-28"
+            }
+          }
+        ]
+      },
+      {
+        "label": "Authorize endpoint",
+        "cells": [
+          {
+            "type_id": "bot_token",
+            "value": "/oauth/v2/authorize",
+            "claim": {
+              "text": "Scopes are requested by redirecting users to the v2 authorize URL.",
+              "label": "official_docs",
+              "source_type": "docs",
+              "source_url": "https://docs.slack.dev/authentication/installing-with-oauth/",
+              "evidence_quote": "To request scopes, redirect Slack users to https://slack.com/oauth/v2/authorize.",
+              "checked_at": "2026-10-28"
+            }
+          },
+          {
+            "type_id": "user_token",
+            "value": "/oauth/v2/authorize, or /oauth/v2_user/authorize for user-only and MCP flows",
+            "claim": {
+              "text": "A dedicated user-only flow exists and suits MCP integrations.",
+              "label": "official_docs",
+              "source_type": "docs",
+              "source_url": "https://docs.slack.dev/authentication/installing-with-oauth/",
+              "evidence_quote": "You only need user tokens, not bot tokens",
+              "checked_at": "2026-10-28"
+            }
+          }
+        ]
+      },
+      {
+        "label": "Token access level shown in portal",
+        "cells": [
+          {
+            "type_id": "bot_token",
+            "value": "Workspace",
+            "claim": {
+              "text": "The bot token page shows access level Workspace.",
+              "label": "official_docs",
+              "source_type": "portal_text",
+              "evidence_quote": "Access Level: Workspace",
+              "checked_at": "2026-10-28"
+            }
+          },
+          {
+            "type_id": "user_token",
+            "value": "Not seen",
+            "claim": {
+              "text": "No user scopes were added in the test, so the user token flow was not tried.",
+              "label": "unknown",
+              "source_type": "none",
+              "note": "Portal showed 'You haven't added any OAuth Scopes for your User token.'",
+              "checked_at": "2026-10-28"
+            }
+          }
+        ]
+      }
+    ],
+    "recommendation": {
+      "type_id": "bot_token",
+      "claim": {
+        "text": "Slack's guidance is to use the bot token unless you must act as a specific user.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/authentication/installing-with-oauth/",
+        "evidence_quote": "use the bot token unless you need to act on behalf of a specific user",
+        "note": "Sentence appears in the section on migrating to granular permissions, but it is stated as general advice.",
+        "checked_at": "2026-10-28"
+      },
+      "exceptions": [
+        {
+          "when": "You need to act on behalf of a specific user",
+          "use_instead_type_id": "user_token",
+          "claim": {
+            "text": "Use a user token when you must act as a specific user.",
+            "label": "official_docs",
+            "source_type": "docs",
+            "source_url": "https://docs.slack.dev/authentication/installing-with-oauth/",
+            "evidence_quote": "use the bot token unless you need to act on behalf of a specific user",
+            "checked_at": "2026-10-28"
+          }
+        }
+      ]
+    }
+  },
+
+  "creation_paths": [
+    {
+      "id": "blank_app",
+      "name": "Blank app",
+      "gives": "Minimal setup: 4 wizard steps and no scopes selected.",
+      "use_when": "You only need plain OAuth registration.",
+      "claim": { "text": "Blank app wizard had 4 steps and started with 0 bot and 0 user scopes.", "label": "tested", "source_type": "manual_test", "note": "Step 2 of 4 showed 'No bot scopes yet'.", "checked_at": "2026-10-28" }
+    },
+    {
+      "id": "ai_agent_template",
+      "name": "AI agent template",
+      "gives": "2-step wizard with 23 permissions and 5 event types preselected.",
+      "use_when": "You are building a Slack agent and want Slack's defaults.",
+      "claim": { "text": "The AI agent template preselected 23 permissions and 5 events and was the default highlighted option.", "label": "tested", "source_type": "manual_test", "note": "Review screen read 'What it can do in Slack (23)' and 'Step 2 of 2'. Compare against the minimum scopes you need.", "checked_at": "2026-10-28" }
+    },
+    {
+      "id": "starter_app",
+      "name": "Starter app",
+      "gives": "Slash commands and event listeners.",
+      "use_when": "You want common bot features scaffolded.",
+      "claim": { "text": "Slack describes the starter app as including slash commands and event listeners.", "label": "official_docs", "source_type": "portal_text", "evidence_quote": "Includes the most common features: slash commands and event listeners.", "checked_at": "2026-10-28" }
+    },
+    {
+      "id": "manifest",
+      "name": "From a manifest",
+      "gives": "Create the app from a JSON or YAML config.",
+      "use_when": "An agent or script drafts the config for you.",
+      "claim": { "text": "Apps can be created from an uploaded JSON or YAML manifest.", "label": "official_docs", "source_type": "portal_text", "evidence_quote": "Upload JSON or YAML config.", "checked_at": "2026-10-28" }
+    },
+    {
+      "id": "slack_cli",
+      "name": "Slack CLI",
+      "gives": "Create, run and deploy apps from the terminal.",
+      "use_when": "You prefer a terminal workflow.",
+      "claim": { "text": "The wizard offers the Slack CLI as an alternative.", "label": "official_docs", "source_type": "portal_text", "evidence_quote": "Create, run, and deploy apps using the Slack CLI", "checked_at": "2026-10-28" }
+    }
+  ],
+
+  "access_ladder": [
+    {
+      "tier": 1,
+      "name": "Development",
+      "allows": "Install on your own test workspace only.",
+      "gate": "None",
+      "prerequisites": [],
+      "claims": [
+        { "text": "Created and installed to the test workspace with no approval.", "label": "tested", "source_type": "manual_test", "note": "Blank app, then Create and Install.", "checked_at": "2026-10-28" },
+        {
+          "text": "An app that is not publicly distributed can only be installed on the workspace that owns it.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.slack.dev/authentication/installing-with-oauth/",
+          "evidence_quote": "Your app can only be installed on the workspace that owns it.",
+          "checked_at": "2026-10-28"
+        }
+      ]
+    },
+    {
+      "tier": 2,
+      "name": "Public distribution",
+      "allows": "Any workspace can install the app via your install link or Add to Slack button.",
+      "gate": "Self-serve checklist: enable features, add redirect URLs, remove hard-coded secrets (self-attested), use HTTPS for features.",
+      "prerequisites": ["At least one redirect URL", "HTTPS for distributed features"],
+      "claims": [
+        {
+          "text": "Activating distribution lets all workspaces install the app and reveals the Marketplace submission steps.",
+          "label": "official_docs",
+          "source_type": "portal_text",
+          "evidence_quote": "Activate this distribution option to allow all workspaces to install your app, and to view the steps to submit your app to the Slack Marketplace.",
+          "checked_at": "2026-10-28"
+        },
+        {
+          "text": "Distributed apps must use HTTPS.",
+          "label": "official_docs",
+          "source_type": "portal_text",
+          "evidence_quote": "We require apps that are distributed to use HTTPS for added security.",
+          "checked_at": "2026-10-28"
+        },
+        {
+          "text": "Whether activating public distribution triggers any review was not tested.",
+          "label": "unknown",
+          "source_type": "none",
+          "note": "No review is mentioned on the Manage Distribution page. Activation was deliberately not clicked.",
+          "checked_at": "2026-10-28"
+        }
+      ]
+    },
+    {
+      "tier": 3,
+      "name": "Slack Marketplace listing",
+      "allows": "Listed and discoverable in the Slack Marketplace.",
+      "gate": "Preliminary review, then functional review by the Slack Marketplace team.",
+      "prerequisites": [
+        "At least 10 installations on active workspaces, held for the whole review",
+        "Tested on a workspace that is not your development workspace, including uninstall",
+        "Test account credentials for reviewers",
+        "Demo video (recommended)",
+        "A reason for each requested scope"
+      ],
+      "claims": [
+        {
+          "text": "Apps with fewer than 10 active installs are blocked from submitting.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.slack.dev/slack-marketplace/slack-marketplace-review-guide",
+          "evidence_quote": "apps that do not meet this requirement will be blocked from submitting to the Marketplace",
+          "checked_at": "2026-10-28"
+        },
+        {
+          "text": "An active workspace is one used in the past 28 days.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.slack.dev/slack-marketplace/slack-marketplace-review-guide",
+          "evidence_quote": "An active workspace is a workspace that has been used in the past 28 days.",
+          "checked_at": "2026-10-28"
+        },
+        {
+          "text": "The 10-install count must hold for the entire review; the threshold replaced a lower temporary one.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.slack.dev/changelog/2026/09/01/slack-marketplace-install-requirement",
+          "evidence_quote": "10 or more installed workspaces throughout the entire duration of the review",
+          "note": "Quote taken from the fetch tool's extraction of the changelog; verify it verbatim before publishing.",
+          "checked_at": "2026-10-28"
+        },
+        {
+          "text": "Slack cannot skip or accelerate review to match a launch date.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.slack.dev/slack-marketplace/slack-marketplace-review-guide",
+          "evidence_quote": "We are unable to skip or accelerate the review process in order to coordinate with your launch.",
+          "checked_at": "2026-10-28"
+        },
+        {
+          "text": "Time needed to reach 10 active workspaces is not documented.",
+          "label": "unknown",
+          "source_type": "none",
+          "note": "Depends on your own adoption, not on Slack.",
+          "checked_at": "2026-10-28"
+        }
+      ]
+    }
+  ],
+
+  "requirements": {
+    "register": [
+      {
+        "item": "Workspace and app name",
+        "status": "required",
+        "claim": { "text": "The wizard asked for an app name and a workspace.", "label": "tested", "source_type": "manual_test", "note": "Test app created as 'testy'.", "checked_at": "2026-10-28" }
+      },
+      {
+        "item": "Redirect URL",
+        "status": "optional",
+        "claim": { "text": "No redirect URL was set by default and the app still installed to the test workspace.", "label": "tested", "source_type": "manual_test", "note": "OAuth & Permissions showed 'You haven't added any Redirect URLs'.", "checked_at": "2026-10-28" }
+      },
+      {
+        "item": "Privacy policy, domain, logo, payment",
+        "status": "not_asked",
+        "claim": { "text": "None appeared in the wizard screens captured.", "label": "inferred", "source_type": "none", "note": "The name/workspace step and final step 4 of the Blank wizard were not captured, so confirm.", "checked_at": "2026-10-28" }
+      }
+    ],
+    "go_public": [
+      {
+        "item": "OAuth redirect URL",
+        "status": "required",
+        "claim": { "text": "Redirect URLs are needed for other workspaces to authorize the app.", "label": "official_docs", "source_type": "portal_text", "evidence_quote": "OAuth redirect URLs allow other workspaces to authorize use of your app.", "checked_at": "2026-10-28" }
+      },
+      {
+        "item": "HTTPS for distributed features",
+        "status": "required",
+        "claim": { "text": "Distributed apps must use HTTPS.", "label": "official_docs", "source_type": "portal_text", "evidence_quote": "We require apps that are distributed to use HTTPS for added security.", "checked_at": "2026-10-28" }
+      },
+      {
+        "item": "No hard-coded tokens or webhook URLs",
+        "status": "required",
+        "claim": { "text": "You must remove hard-coded information and tick a self-attestation box.", "label": "official_docs", "source_type": "portal_text", "evidence_quote": "Before activating public distribution, please remove any hard-coded information from your app", "checked_at": "2026-10-28" }
+      },
+      {
+        "item": "Which features must be enabled before distribution",
+        "status": "unknown",
+        "claim": { "text": "The checklist lists webhooks, interactivity, slash commands, events, bots and permissions; which are mandatory is not stated.", "label": "unknown", "source_type": "none", "note": "Read the checklist wording or test on a throwaway app.", "checked_at": "2026-10-28" }
+      },
+      {
+        "item": "10 active workspaces (Marketplace)",
+        "status": "required",
+        "claim": { "text": "The app must be installed on 10 or more active workspaces to submit.", "label": "official_docs", "source_type": "docs", "source_url": "https://docs.slack.dev/slack-marketplace/slack-marketplace-review-guide", "evidence_quote": "Your app has been installed on 10 or more active workspaces", "checked_at": "2026-10-28" }
+      },
+      {
+        "item": "Test account credentials (Marketplace)",
+        "status": "required",
+        "claim": { "text": "Reviewers need credentials to access your service, and cannot use Slack test workspaces.", "label": "official_docs", "source_type": "docs", "source_url": "https://docs.slack.dev/slack-marketplace/slack-marketplace-review-guide", "evidence_quote": "We cannot access any Slack workspaces (even created for testing)", "checked_at": "2026-10-28" }
+      },
+      {
+        "item": "Demo video (Marketplace)",
+        "status": "optional",
+        "claim": { "text": "A demo video speeds up review; it is recommended, not required.", "label": "official_docs", "source_type": "docs", "source_url": "https://docs.slack.dev/slack-marketplace/slack-marketplace-review-guide", "evidence_quote": "You can help us review your app more quickly by providing us with a short video demo.", "checked_at": "2026-10-28" }
+      },
+      {
+        "item": "Ongoing support commitment (Marketplace)",
+        "status": "required",
+        "claim": { "text": "You must be prepared to maintain and support the app.", "label": "official_docs", "source_type": "docs", "source_url": "https://docs.slack.dev/slack-marketplace/slack-marketplace-review-guide", "evidence_quote": "You are prepared to maintain your app and to provide good levels of support to the customers who choose to install it.", "checked_at": "2026-10-28" }
+      }
+    ]
+  },
+
+  "limits": [
+    {
+      "item": "Redirect URL scheme",
+      "value": "HTTPS only",
+      "claim": { "text": "Redirect URIs must use HTTPS.", "label": "official_docs", "source_type": "docs", "source_url": "https://docs.slack.dev/authentication/installing-with-oauth/", "evidence_quote": "The redirect_uri must use HTTPS.", "note": "Whether http://localhost saves in the portal has not been tested yet.", "checked_at": "2026-10-28" }
+    },
+    {
+      "item": "Authorization code lifetime",
+      "value": "10 minutes",
+      "claim": { "text": "The temporary authorization code expires after ten minutes.", "label": "official_docs", "source_type": "docs", "source_url": "https://docs.slack.dev/authentication/installing-with-oauth/", "evidence_quote": "which expires after ten minutes", "checked_at": "2026-10-28" }
+    },
+    {
+      "item": "Access token expiry",
+      "value": "None by default; optional rotation",
+      "claim": { "text": "OAuth tokens do not expire unless you opt into token rotation.", "label": "official_docs", "source_type": "docs", "source_url": "https://docs.slack.dev/authentication/installing-with-oauth/", "evidence_quote": "OAuth tokens do not expire.", "checked_at": "2026-10-28" }
+    },
+    {
+      "item": "Scope changes",
+      "value": "Additive; cannot be removed without revoking the token",
+      "claim": { "text": "Scopes accumulate across installs.", "label": "official_docs", "source_type": "docs", "source_url": "https://docs.slack.dev/authentication/installing-with-oauth/", "evidence_quote": "There is no way to remove scopes from an existing token without revoking it entirely.", "checked_at": "2026-10-28" }
+    },
+    {
+      "item": "Scopes accepted for Marketplace",
+      "value": "No legacy, restricted or extensive-access scopes",
+      "claim": { "text": "Marketplace review rejects legacy, restricted and broad scopes.", "label": "official_docs", "source_type": "docs", "source_url": "https://docs.slack.dev/slack-marketplace/slack-marketplace-review-guide", "evidence_quote": "does not request legacy/restricted scopes, scopes that provide extensive access to workspace data, or coded workflow scopes", "checked_at": "2026-10-28" }
+    },
+    {
+      "item": "Rate limits for non-Marketplace apps",
+      "value": "Unknown",
+      "claim": { "text": "Not researched.", "label": "unknown", "source_type": "none", "note": "A search result earlier suggested stricter limits; unconfirmed.", "checked_at": "2026-10-28" }
+    }
+  ],
+
+  "blockers": [
+    {
+      "issue": "http://localhost redirect may be rejected",
+      "fix": "Use an HTTPS tunnel or a deployed HTTPS URL.",
+      "claim": { "text": "Slack's docs require HTTPS redirect URLs.", "label": "official_docs", "source_type": "docs", "source_url": "https://docs.slack.dev/authentication/installing-with-oauth/", "evidence_quote": "The redirect_uri must use HTTPS.", "note": "Portal behaviour for http://localhost not yet tested.", "checked_at": "2026-10-28" }
+    },
+    {
+      "issue": "Share link and token rotation locked until a redirect URL exists",
+      "fix": "Add at least one HTTPS redirect URL first.",
+      "claim": { "text": "The portal blocks the shareable install URL until a redirect URL is added.", "label": "official_docs", "source_type": "portal_text", "evidence_quote": "Please add at least one Redirect URL to activate your Slack button or shareable URL.", "checked_at": "2026-10-28" }
+    },
+    {
+      "issue": "Subscribing to events widens your scopes",
+      "fix": "Review the scope list after choosing events; subscribe only to what you need.",
+      "claim": { "text": "The wizard adds the scopes an event requires automatically.", "label": "official_docs", "source_type": "portal_text", "evidence_quote": "automatically add any scopes the event requires", "checked_at": "2026-10-28" }
+    },
+    {
+      "issue": "Needing 10 active workspaces before you can even submit",
+      "fix": "Use public distribution to get early installs, then submit.",
+      "claim": { "text": "Public distribution lets all workspaces install without a listing.", "label": "inferred", "source_type": "none", "note": "Combines the Manage Distribution text with the 10-install prerequisite; activation was not tested.", "checked_at": "2026-10-28" }
+    },
+    {
+      "issue": "Listed apps are locked; later scope or redirect changes need re-review",
+      "fix": "Plan scopes up front and keep a staging app for updates.",
+      "claim": { "text": "After listing, the live app cannot be changed without resubmitting.", "label": "official_docs", "source_type": "docs", "source_url": "https://docs.slack.dev/slack-marketplace/slack-marketplace-review-guide", "evidence_quote": "the live version of your app is locked.", "checked_at": "2026-10-28" }
+    }
+  ],
+
+  "steps": [
+    { "order": 1, "applies_to": "bot_token", "actor": "human", "text": "Open api.slack.com/apps, choose Create New App, then Blank app." },
+    { "order": 2, "applies_to": "bot_token", "actor": "both", "text": "Pick a name and workspace; add only the bot scopes you need (an agent can propose the minimum list)." },
+    { "order": 3, "applies_to": "bot_token", "actor": "human", "text": "Skip event subscriptions unless required, since they add scopes." },
+    { "order": 4, "applies_to": "bot_token", "actor": "human", "text": "Click Create and Install to install on your test workspace." },
+    { "order": 5, "applies_to": "bot_token", "actor": "both", "text": "Add an HTTPS redirect URL (an agent can draft it); this unlocks the share link and token rotation." },
+    { "order": 6, "applies_to": "bot_token", "actor": "human", "text": "Go public: complete the Manage Distribution checklist and activate. Not tested." },
+    { "order": 7, "applies_to": "bot_token", "actor": "human", "text": "Reach 10 active workspaces, prepare test accounts, a demo video and scope reasons, then submit to the Marketplace." }
+  ],
+
+  "agent_vs_human": {
+    "agent": [
+      { "text": "Draft the app manifest (scopes, redirect URLs).", "claim": { "text": "Apps can be created from an uploaded manifest.", "label": "official_docs", "source_type": "portal_text", "evidence_quote": "Upload JSON or YAML config.", "checked_at": "2026-10-28" } },
+      { "text": "Propose the minimum scope list and write a reason for each.", "claim": { "text": "Reviewers look at the reason for each scope.", "label": "official_docs", "source_type": "docs", "source_url": "https://docs.slack.dev/slack-marketplace/slack-marketplace-review-guide", "evidence_quote": "a quick look at the reasons you", "checked_at": "2026-10-28" } },
+      { "text": "Scan your code for hard-coded tokens and webhook URLs.", "claim": { "text": "Distribution requires removing hard-coded information.", "label": "official_docs", "source_type": "portal_text", "evidence_quote": "Before activating public distribution, please remove any hard-coded information from your app", "checked_at": "2026-10-28" } },
+      { "text": "Draft listing copy and a demo script.", "claim": { "text": "Listing and demo are part of submission.", "label": "inferred", "source_type": "none", "note": "Agent drafting task, not tested.", "checked_at": "2026-10-28" } }
+    ],
+    "human": [
+      { "text": "Create the app and install it to a workspace.", "claim": { "text": "Done by hand in the portal.", "label": "tested", "source_type": "manual_test", "note": "Requires your Slack sign-in.", "checked_at": "2026-10-28" } },
+      { "text": "Attest that hard-coded information is removed.", "claim": { "text": "Distribution has a self-attestation checkbox.", "label": "official_docs", "source_type": "portal_text", "evidence_quote": "I’ve reviewed and removed any hard-coded information.", "checked_at": "2026-10-28" } },
+      { "text": "Get the app installed on 10 active workspaces.", "claim": { "text": "Required before Marketplace submission.", "label": "official_docs", "source_type": "docs", "source_url": "https://docs.slack.dev/slack-marketplace/slack-marketplace-review-guide", "evidence_quote": "Your app has been installed on 10 or more active workspaces", "checked_at": "2026-10-28" } },
+      { "text": "Provide reviewer test accounts and record the demo.", "claim": { "text": "Reviewers need test credentials and benefit from a video demo.", "label": "official_docs", "source_type": "docs", "source_url": "https://docs.slack.dev/slack-marketplace/slack-marketplace-review-guide", "evidence_quote": "provide us with test account credentials needed to access your service", "checked_at": "2026-10-28" } },
+      { "text": "Commit to maintaining and supporting the app.", "claim": { "text": "A stated prerequisite for submission.", "label": "official_docs", "source_type": "docs", "source_url": "https://docs.slack.dev/slack-marketplace/slack-marketplace-review-guide", "evidence_quote": "You are prepared to maintain your app and to provide good levels of support to the customers who choose to install it.", "checked_at": "2026-10-28" } }
+    ]
+  },
+
+  "extras": [
+    {
+      "title": "Org-level installs",
+      "why_it_matters": "Enterprise customers may install across an organisation, which can need an admin.",
+      "claims": [
+        { "text": "Upgrading to an org-level installation may require an Org Owner or Org Admin.", "label": "official_docs", "source_type": "docs", "source_url": "https://docs.slack.dev/authentication/installing-with-oauth/", "evidence_quote": "upgrading to an org-level installation may require an Org Owner or Org Admin", "checked_at": "2026-10-28" }
+      ]
+    },
+    {
+      "title": "Coded workflows cannot be listed",
+      "why_it_matters": "If your integration is built on coded workflows, the Marketplace is not available.",
+      "claims": [
+        { "text": "Coded workflows are not currently eligible for Marketplace listing.", "label": "official_docs", "source_type": "docs", "source_url": "https://docs.slack.dev/slack-marketplace/slack-marketplace-review-guide", "evidence_quote": "Coded workflows are currently not eligible for listing in the Slack Marketplace.", "checked_at": "2026-10-28" }
+      ]
+    },
+    {
+      "title": "PKCE is optional for web apps",
+      "why_it_matters": "Native or custom-scheme redirects need PKCE; web apps can skip it.",
+      "claims": [
+        { "text": "The portal says PKCE is required for custom URI schemes and optional for web authentication.", "label": "official_docs", "source_type": "portal_text", "evidence_quote": "This is required if your app redirects to a custom URI scheme like myapp://OAuth, and optional for web-based authentication.", "checked_at": "2026-10-28" }
+      ]
+    }
+  ],
+
+  "evidence": {
+    "not_verified": [
+      { "item": "Installation requirements and app guidelines pages", "note": "Linked from the review page; not read. Guidelines may list refused app kinds." },
+      { "item": "Rate limits for non-Marketplace apps", "note": "Not researched." },
+      { "item": "Time to reach 10 active workspaces", "note": "Not documented; depends on adoption." },
+      { "item": "Whether activating public distribution triggers a review", "note": "Not clicked; no review mentioned on the page." },
+      { "item": "http://localhost redirect URL acceptance", "note": "Docs say HTTPS only; portal test pending." },
+      { "item": "User token flow", "note": "No user scopes were added in the test." }
+    ],
+    "conflicts": [
+      {
+        "topic": "Preliminary review wait",
+        "a": "Portal: 'The current wait time for preliminary review is 10 days.'",
+        "b": "Review guide: 'up to 10 business days'.",
+        "note": "Minor mismatch in units; the docs wording is used."
+      },
+      {
+        "topic": "Meaning of active workspace",
+        "a": "Review guide: used in the past 28 days.",
+        "b": "Changelog: does not define 'active'.",
+        "note": "The review guide definition is used."
+      }
+    ],
+    "sources": [
+      { "title": "Installing via OAuth authorization code flow", "url": "https://docs.slack.dev/authentication/installing-with-oauth/", "type": "docs" },
+      { "title": "Slack Marketplace review guide", "url": "https://docs.slack.dev/slack-marketplace/slack-marketplace-review-guide", "type": "docs" },
+      { "title": "Slack Marketplace install requirement (changelog)", "url": "https://docs.slack.dev/changelog/2026/09/01/slack-marketplace-install-requirement", "type": "docs" },
+      { "title": "Slack app portal: create, OAuth & Permissions, Manage Distribution, Prepare & Submit", "url": "https://api.slack.com/apps", "type": "portal" },
+      { "title": "Manual creation of a test app (Blank app path)", "url": "https://api.slack.com/apps", "type": "manual_test" }
+    ]
+  }
+}

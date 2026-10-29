@@ -1,0 +1,822 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/oauth-guide.schema.json",
+  "title": "OAuth setup guide",
+  "description": "Core fields are fixed and comparable across providers. Provider-specific findings go in `extras`. Every fact is a Claim with a label and evidence.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "provider",
+    "generated_at",
+    "generated_by",
+    "summary",
+    "difficulty",
+    "time",
+    "access_ladder",
+    "requirements",
+    "limits",
+    "blockers",
+    "steps",
+    "agent_vs_human",
+    "evidence"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "provider": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "website",
+        "docs_urls"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "website": {
+          "type": "string",
+          "format": "uri"
+        },
+        "docs_urls": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      }
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "generated_by": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode"
+      ],
+      "properties": {
+        "mode": {
+          "enum": [
+            "manual",
+            "agent",
+            "manual_plus_agent"
+          ]
+        },
+        "model": {
+          "type": "string"
+        }
+      }
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 400
+    },
+    "difficulty": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "public"
+      ],
+      "properties": {
+        "start": {
+          "$ref": "#/$defs/rated"
+        },
+        "public": {
+          "$ref": "#/$defs/rated"
+        }
+      }
+    },
+    "time": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "to_start",
+        "to_approval"
+      ],
+      "properties": {
+        "to_start": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "display",
+            "claim"
+          ],
+          "properties": {
+            "display": {
+              "type": "string"
+            },
+            "claim": {
+              "$ref": "#/$defs/claim"
+            }
+          }
+        },
+        "to_approval": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "display",
+            "stages",
+            "claim"
+          ],
+          "properties": {
+            "display": {
+              "type": "string"
+            },
+            "stages": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "name",
+                  "duration_text"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "duration_text": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "claim": {
+              "$ref": "#/$defs/claim"
+            },
+            "total_estimate": {
+              "$ref": "#/$defs/claim"
+            }
+          }
+        }
+      }
+    },
+    "setup_types": {
+      "description": "Optional. Present only when the provider offers several registration or token types.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "types",
+        "rows",
+        "recommendation"
+      ],
+      "properties": {
+        "types": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "name",
+              "one_line",
+              "recommended"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9_]+$"
+              },
+              "name": {
+                "type": "string"
+              },
+              "one_line": {
+                "type": "string"
+              },
+              "recommended": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "label",
+              "cells"
+            ],
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "cells": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "type_id",
+                    "value",
+                    "claim"
+                  ],
+                  "properties": {
+                    "type_id": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    },
+                    "claim": {
+                      "$ref": "#/$defs/claim"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "recommendation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type_id",
+            "claim",
+            "exceptions"
+          ],
+          "properties": {
+            "type_id": {
+              "type": "string"
+            },
+            "claim": {
+              "$ref": "#/$defs/claim"
+            },
+            "exceptions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "when",
+                  "use_instead_type_id",
+                  "claim"
+                ],
+                "properties": {
+                  "when": {
+                    "type": "string"
+                  },
+                  "use_instead_type_id": {
+                    "type": "string"
+                  },
+                  "claim": {
+                    "$ref": "#/$defs/claim"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "creation_paths": {
+      "description": "Optional. Present only when the provider offers several ways to create the app.",
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "gives",
+          "use_when",
+          "claim"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
+          },
+          "name": {
+            "type": "string"
+          },
+          "gives": {
+            "type": "string"
+          },
+          "use_when": {
+            "type": "string"
+          },
+          "claim": {
+            "$ref": "#/$defs/claim"
+          },
+          "recommended": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "access_ladder": {
+      "description": "Stages from 'works for me' to 'public', each with its gate.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "tier",
+          "name",
+          "allows",
+          "gate",
+          "prerequisites",
+          "claims"
+        ],
+        "properties": {
+          "tier": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "name": {
+            "type": "string"
+          },
+          "allows": {
+            "type": "string"
+          },
+          "gate": {
+            "type": "string"
+          },
+          "prerequisites": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "claims": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/$defs/claim"
+            }
+          }
+        }
+      }
+    },
+    "requirements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "register",
+        "go_public"
+      ],
+      "properties": {
+        "register": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/requirement"
+          }
+        },
+        "go_public": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/requirement"
+          }
+        }
+      }
+    },
+    "limits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "item",
+          "value",
+          "claim"
+        ],
+        "properties": {
+          "item": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "claim": {
+            "$ref": "#/$defs/claim"
+          }
+        }
+      }
+    },
+    "blockers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "issue",
+          "fix",
+          "claim"
+        ],
+        "properties": {
+          "issue": {
+            "type": "string"
+          },
+          "fix": {
+            "type": "string"
+          },
+          "claim": {
+            "$ref": "#/$defs/claim"
+          }
+        }
+      }
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "order",
+          "text",
+          "actor"
+        ],
+        "properties": {
+          "order": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "text": {
+            "type": "string"
+          },
+          "actor": {
+            "enum": [
+              "agent",
+              "human",
+              "both"
+            ]
+          },
+          "applies_to": {
+            "type": "string",
+            "description": "A setup_types id, if the step is type-specific."
+          },
+          "claim": {
+            "$ref": "#/$defs/claim"
+          }
+        }
+      }
+    },
+    "agent_vs_human": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "agent",
+        "human"
+      ],
+      "properties": {
+        "agent": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/task"
+          }
+        },
+        "human": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/task"
+          }
+        }
+      }
+    },
+    "extras": {
+      "description": "Provider-specific findings the fixed fields do not cover. Max 5. Promote to core if the same extra recurs across guides.",
+      "type": "array",
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "title",
+          "why_it_matters",
+          "claims"
+        ],
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "why_it_matters": {
+            "type": "string"
+          },
+          "claims": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/$defs/claim"
+            }
+          }
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "not_verified",
+        "conflicts",
+        "sources"
+      ],
+      "properties": {
+        "not_verified": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "item",
+              "note"
+            ],
+            "properties": {
+              "item": {
+                "type": "string"
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "conflicts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "topic",
+              "a",
+              "b",
+              "note"
+            ],
+            "properties": {
+              "topic": {
+                "type": "string"
+              },
+              "a": {
+                "type": "string"
+              },
+              "b": {
+                "type": "string"
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "title",
+              "url",
+              "type"
+            ],
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "type": {
+                "enum": [
+                  "docs",
+                  "portal",
+                  "manual_test"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "label": {
+      "enum": [
+        "tested",
+        "official_docs",
+        "inferred",
+        "unknown"
+      ]
+    },
+    "level": {
+      "enum": [
+        "easy",
+        "medium",
+        "hard",
+        "unknown"
+      ]
+    },
+    "rated": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "level",
+        "reason"
+      ],
+      "properties": {
+        "level": {
+          "$ref": "#/$defs/level"
+        },
+        "reason": {
+          "$ref": "#/$defs/claim"
+        }
+      }
+    },
+    "requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "item",
+        "status",
+        "claim"
+      ],
+      "properties": {
+        "item": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "required",
+            "optional",
+            "not_asked",
+            "unknown"
+          ]
+        },
+        "claim": {
+          "$ref": "#/$defs/claim"
+        }
+      }
+    },
+    "task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "text",
+        "claim"
+      ],
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "claim": {
+          "$ref": "#/$defs/claim"
+        }
+      }
+    },
+    "claim": {
+      "description": "One checkable statement. The rules below enforce what each label must carry.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "text",
+        "label",
+        "checked_at"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "label": {
+          "$ref": "#/$defs/label"
+        },
+        "source_type": {
+          "enum": [
+            "docs",
+            "portal_text",
+            "manual_test",
+            "agent_probe",
+            "none"
+          ]
+        },
+        "source_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "evidence_quote": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        },
+        "checked_at": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "label": {
+                "const": "official_docs"
+              }
+            },
+            "required": [
+              "label"
+            ]
+          },
+          "then": {
+            "required": [
+              "source_type",
+              "evidence_quote"
+            ],
+            "properties": {
+              "source_type": {
+                "enum": [
+                  "docs",
+                  "portal_text"
+                ]
+              },
+              "evidence_quote": {
+                "minLength": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "source_type": {
+                "const": "docs"
+              }
+            },
+            "required": [
+              "source_type"
+            ]
+          },
+          "then": {
+            "required": [
+              "source_url"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "label": {
+                "const": "tested"
+              }
+            },
+            "required": [
+              "label"
+            ]
+          },
+          "then": {
+            "required": [
+              "source_type",
+              "note"
+            ],
+            "properties": {
+              "source_type": {
+                "enum": [
+                  "manual_test",
+                  "agent_probe"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "label": {
+                "enum": [
+                  "inferred",
+                  "unknown"
+                ]
+              }
+            },
+            "required": [
+              "label"
+            ]
+          },
+          "then": {
+            "required": [
+              "note"
+            ],
+            "properties": {
+              "source_type": {
+                "const": "none"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

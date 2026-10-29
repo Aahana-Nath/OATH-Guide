@@ -1,0 +1,3 @@
+# Optional extras (not needed for the web app or the CLI)
+streamlit>=1.30                   # the alternative Streamlit UI (app.py)
+google-cloud-secret-manager>=2.16 # read the Gemini key from GCP Secret Manager instead of .env

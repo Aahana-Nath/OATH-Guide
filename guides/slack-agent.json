@@ -1,0 +1,918 @@
+{
+  "schema_version": "1.0",
+  "provider": {
+    "name": "Slack",
+    "website": "https://slack.com",
+    "docs_urls": [
+      "https://docs.slack.dev/app-management/distribution",
+      "https://docs.slack.dev/authentication/installing-with-oauth",
+      "https://docs.slack.dev/apis/web-api/rate-limits",
+      "https://docs.slack.dev"
+    ]
+  },
+  "generated_at": "2026-10-30",
+  "generated_by": {
+    "mode": "agent",
+    "model": "gemini-3.1-flash-lite"
+  },
+  "summary": "Slack provides a structured process for app development and distribution. Developers can use the Slack CLI or dashboard to create apps, which require workspace association. Public distribution involves meeting specific prerequisites, security guidelines, and a formal review process.",
+  "difficulty": {
+    "start": {
+      "level": "easy",
+      "reason": {
+        "text": "The Slack CLI and dashboard provide clear paths for creating and running a new app project.",
+        "label": "inferred",
+        "source_type": "none",
+        "note": "Model judgement from the verified claims in this guide; not tested.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    "public": {
+      "level": "hard",
+      "reason": {
+        "text": "Public distribution requires meeting multiple prerequisites, including a 10-workspace installation threshold and a lengthy functional review process.",
+        "label": "inferred",
+        "source_type": "none",
+        "note": "Model judgement from the verified claims in this guide; not tested.",
+        "checked_at": "2026-10-30"
+      }
+    }
+  },
+  "time": {
+    "to_start": {
+      "display": "Unknown",
+      "claim": {
+        "text": "Setup time was not stated in the pages read.",
+        "label": "unknown",
+        "source_type": "none",
+        "note": "Only a hands-on attempt shows how long registration takes.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    "to_approval": {
+      "display": "Preliminary review: up to 10 business days; Functional review: up to 10 weeks for new submissions; Functional review: 6 weeks for published apps resubmitting changes",
+      "stages": [
+        {
+          "name": "Preliminary review",
+          "duration_text": "up to 10 business days"
+        },
+        {
+          "name": "Functional review",
+          "duration_text": "up to 10 weeks for new submissions"
+        },
+        {
+          "name": "Functional review",
+          "duration_text": "6 weeks for published apps resubmitting changes"
+        }
+      ],
+      "claim": {
+        "text": "The preliminary review takes up to 10 business days.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/slack-marketplace/slack-marketplace-review-guide",
+        "evidence_quote": "Currently, the preliminary part of the review takes up to 10 business days to receive feedback",
+        "checked_at": "2026-10-30"
+      }
+    }
+  },
+  "access_ladder": [
+    {
+      "tier": 1,
+      "name": "Development",
+      "allows": "The app is restricted to a single workspace and cannot be distributed to other workspaces.",
+      "gate": "Default",
+      "prerequisites": [],
+      "claims": [
+        {
+          "text": "Undistributed apps are associated with a single workspace and cannot be distributed to other workspaces.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.slack.dev/app-management/distribution",
+          "evidence_quote": "Undistributed apps exist on a single workspace and can use the full range of app capabilities, but they can't be distributed to other workspaces.",
+          "checked_at": "2026-10-30"
+        }
+      ]
+    },
+    {
+      "tier": 2,
+      "name": "Review",
+      "allows": "The app undergoes preliminary and functional reviews to ensure it meets quality standards.",
+      "gate": "Submission for distribution",
+      "prerequisites": [],
+      "claims": [
+        {
+          "text": "The preliminary review takes up to 10 business days.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.slack.dev/slack-marketplace/slack-marketplace-review-guide",
+          "evidence_quote": "Currently, the preliminary part of the review takes up to 10 business days to receive feedback",
+          "checked_at": "2026-10-30"
+        },
+        {
+          "text": "The functional review for new submissions takes up to 10 weeks.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.slack.dev/slack-marketplace/slack-marketplace-review-guide",
+          "evidence_quote": "while the functional review takes up to 10 weeks for new submissions",
+          "checked_at": "2026-10-30"
+        },
+        {
+          "text": "The functional review for published apps resubmitting changes takes up to 6 weeks.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.slack.dev/slack-marketplace/slack-marketplace-review-guide",
+          "evidence_quote": "and 6 weeks for published apps resubmitting changes.",
+          "checked_at": "2026-10-30"
+        }
+      ]
+    },
+    {
+      "tier": 3,
+      "name": "Marketplace",
+      "allows": "The app is publicly available in the Slack Marketplace after passing all review requirements.",
+      "gate": "Approval",
+      "prerequisites": [],
+      "claims": [
+        {
+          "text": "Listed distributed apps are reviewed against Slack's requirements and guidelines for quality and are available in the Slack Marketplace.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.slack.dev/app-management/distribution",
+          "evidence_quote": "The Slack Marketplace contains distributed Slack apps that have been reviewed to ensure they meet our standards of quality. Distributing to the Slack Marketplace is the best path for safe and trustworthy third-party apps",
+          "checked_at": "2026-10-30"
+        }
+      ]
+    }
+  ],
+  "requirements": {
+    "register": [
+      {
+        "item": "A signed-in account on api.slack.com",
+        "status": "required",
+        "claim": {
+          "text": "https://api.slack.com/apps?new_app=1 opened without an account but says sign-in is needed to create an app.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://api.slack.com/apps?new_app=1",
+          "note": "Automated read-only probe by the agent on 2026-10-30: GET https://api.slack.com/apps?new_app=1 without an account (redirects followed). Creating the app needs your own account, so the agent stopped here and left it to you.",
+          "checked_at": "2026-10-30",
+          "evidence_quote": "Your Apps You'll need to sign in to your Slack account to create an application."
+        }
+      },
+      {
+        "item": "workspace association (only in some cases)",
+        "status": "optional",
+        "claim": {
+          "text": "You must associate a Slack app with a workspace when you create it.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.slack.dev/app-management/distribution",
+          "evidence_quote": "When you create a Slack app, you associate it with a workspace: to do this, open the app dashboard for your app and click Install App to Workspace within the Install App section.",
+          "checked_at": "2026-10-30"
+        }
+      }
+    ],
+    "go_public": [
+      {
+        "item": "commercial distribution",
+        "status": "required",
+        "claim": {
+          "text": "Apps intended for commercial distribution must be submitted and approved for listing in the Slack Marketplace.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.slack.dev/app-management/distribution",
+          "evidence_quote": "apps intended for commercial distribution should be submitted and approved for listing in the Slack Marketplace.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "SSL support",
+        "status": "required",
+        "claim": {
+          "text": "Apps open to installation by other workspaces must support SSL for specific URLs.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.slack.dev/app-management/distribution",
+          "evidence_quote": "Your app must support SSL for all of the following URLs: OAuth redirect URLs Request URLs for interaction payloads from interactive components, actions and slash commands Block Kit interactive component options load URLs Events API request URLs",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "Active workspace installations",
+        "status": "required",
+        "claim": {
+          "text": "Apps must be installed on 10 or more active workspaces before submission.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.slack.dev/slack-marketplace/slack-marketplace-review-guide",
+          "evidence_quote": "Your app has been installed on 10 or more active workspaces and the service has been tested on those workspaces in accordance with the above bullet.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "Prerequisites for review",
+        "status": "required",
+        "claim": {
+          "text": "Apps must meet specific prerequisites before they can be submitted for review.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.slack.dev/slack-marketplace",
+          "evidence_quote": "Review process: What happens after you submit your app, including the prerequisites your app needs to meet before review and how to prepare for a smooth submission.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "Submission guidelines",
+        "status": "required",
+        "claim": {
+          "text": "Apps are checked against guidelines covering suitability, functionality, security, design, and listing details.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.slack.dev/slack-marketplace",
+          "evidence_quote": "Submission guidelines and requirements: The guidelines we check your app against during review, covering app suitability, functionality, security, design, and the details of your listing.",
+          "checked_at": "2026-10-30"
+        }
+      }
+    ]
+  },
+  "limits": [
+    {
+      "item": "The temporary authorization code expires after ten minutes.",
+      "value": "ten minutes",
+      "claim": {
+        "text": "The temporary authorization code expires after ten minutes.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/authentication/installing-with-oauth",
+        "evidence_quote": "Parse the HTTP request that lands at your Redirect URL for a code field. That's your temporary authorization code, which expires after ten minutes.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "item": "User profiles set per token",
+      "value": "30 per minute",
+      "claim": {
+        "text": "A single token may set 30 user profiles per minute.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/apis/web-api/rate-limits",
+        "evidence_quote": "And a single token may only set 30 user profiles per minute.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "item": "Posting messages",
+      "value": "1 per second",
+      "claim": {
+        "text": "The rate limit for posting messages is one per second per channel.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/apis/web-api/rate-limits",
+        "evidence_quote": "In general, apps may post no more than one message per second per channel, whether a message is posted via chat.postMessage, an incoming webhook, or one of the many other ways to send messages in to Slack.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "item": "Profile updates per user",
+      "value": "10 per minute",
+      "claim": {
+        "text": "Updating a user's profile is limited to 10 times per minute per token.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/apis/web-api/rate-limits",
+        "evidence_quote": "A token may update a single user's profile no more than 10 times per minute.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "item": "Workflow event triggers",
+      "value": "10,000 per hour",
+      "claim": {
+        "text": "Workflow triggers for events are limited to 10,000 per hour.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/apis/web-api/rate-limits",
+        "evidence_quote": "Workflow triggers: event triggers\n10,000 per hour",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "item": "Workflow webhook triggers",
+      "value": "10 per minute",
+      "claim": {
+        "text": "Workflow triggers for webhooks are limited to 10 per minute.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/apis/web-api/rate-limits",
+        "evidence_quote": "Workflow triggers: webhook triggers\n10 per minute",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "item": "RTM websocket URL requests",
+      "value": "1 per minute",
+      "claim": {
+        "text": "RTM websocket URL requests are limited to 1 per minute.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/apis/web-api/rate-limits",
+        "evidence_quote": "Limit requests to these methods to no more than 1 per minute, with some bursting behavior allowed.",
+        "checked_at": "2026-10-30"
+      }
+    }
+  ],
+  "blockers": [
+    {
+      "issue": "disabling distribution",
+      "fix": "See the cited page.",
+      "claim": {
+        "text": "You cannot disable distribution once your app is published in the Slack Marketplace.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/app-management/distribution",
+        "evidence_quote": "Note that you cannot disable distribution in this way once your app is published within the Slack Marketplace; instead, you must discontinue your listing there.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "app-level config",
+      "fix": "See the cited page.",
+      "claim": {
+        "text": "Certain app-level configurations cannot be turned off once enabled.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/app-management/distribution",
+        "evidence_quote": "oauth_config.token_management_enabled App-level config, takes effect for new token issuance. Cannot be turned off once enabled. oauth_config.pkce_enabled App-level config, takes effect for new OAuth flows. Cannot be turned off once enabled.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "You must use HTTPS for your redirect URI.",
+      "fix": "See the cited page.",
+      "claim": {
+        "text": "You must use HTTPS for your redirect URI.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/authentication/installing-with-oauth",
+        "evidence_quote": "The redirect_uri must use HTTPS. Alternatively, you can configure a Redirect URL in the App Management page under OAuth & Permissions. A Redirect URL must also use HTTPS.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "A bad_redirect_uri error occurs if the redirect_uri parameter does not match the…",
+      "fix": "See the cited page.",
+      "claim": {
+        "text": "A bad_redirect_uri error occurs if the redirect_uri parameter does not match the configured Redirect URL or if multiple values are provided that do not match.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/authentication/installing-with-oauth",
+        "evidence_quote": "When there are multiple Redirect URL values configured, the redirect_url parameter must be sent in both the Authorize and Access steps described below, and the parameter value must be the same for both steps — otherwise, you will encounter a bad_redirect_uri error:",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "You cannot combine Sign in with Slack user scopes with non-Sign in with Slack scopes in…",
+      "fix": "See the cited page.",
+      "claim": {
+        "text": "You cannot combine Sign in with Slack user scopes with non-Sign in with Slack scopes in the same OAuth flow.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/authentication/installing-with-oauth",
+        "evidence_quote": "A scope conflict occurs when attempting to combine Sign in with Slack (SIWS) user scopes with non-Sign in with Slack scopes in the same OAuth flow",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "RTM message length limit",
+      "fix": "Limit messages to 4000 characters or split the message into multiple parts.",
+      "claim": {
+        "text": "Sending a message longer than 16 kilobytes via RTM will cause the client to be disconnected.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/apis/web-api/rate-limits",
+        "evidence_quote": "The message server will disconnect any client that sends a message longer than 16 kilobytes.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "RTM rate limit violation",
+      "fix": "Stop sending messages when rate limits are exceeded.",
+      "claim": {
+        "text": "Continuing to send messages after exceeding a rate limit on RTM risks permanent app disablement.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/apis/web-api/rate-limits",
+        "evidence_quote": "Continuing to send messages after exceeding a rate limit runs the risk of your app being permanently disabled.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "Granular permissions upgrade",
+      "fix": "Test your app fully before upgrading.",
+      "claim": {
+        "text": "Upgrading to granular permissions cannot be undone.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/slack-marketplace/slack-marketplace-review-guide",
+        "evidence_quote": "Note: Upgrading to granular permissions is a fundamental change to your app. It cannot be undone.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "Slack apps cannot access the Real Time Messaging API.",
+      "fix": "If you require access to RTM, you'll need to create a legacy Slack app and use its bot token to call rtm.connect.",
+      "claim": {
+        "text": "Slack apps cannot access the Real Time Messaging API.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/app-management/quickstart-app-settings",
+        "evidence_quote": "Slack apps cannot access the Real Time Messaging (RTM) API",
+        "checked_at": "2026-10-30"
+      }
+    }
+  ],
+  "steps": [
+    {
+      "order": 1,
+      "text": "[Creating an app from app settings] Create a Slack app via the apps page.",
+      "actor": "human",
+      "claim": {
+        "text": "Create a Slack app via the apps page.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/app-management/quickstart-app-settings",
+        "evidence_quote": "Create a Slack app via the apps page by selecting the following button:",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 2,
+      "text": "[Creating an app from app settings] Select Blank app and click Continue.",
+      "actor": "human",
+      "claim": {
+        "text": "Select Blank app and click Continue.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/app-management/quickstart-app-settings",
+        "evidence_quote": "Select Blank app. Click Continue.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 3,
+      "text": "[Creating an app from app settings] Enter your App Name.",
+      "actor": "human",
+      "claim": {
+        "text": "Enter your App Name.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/app-management/quickstart-app-settings",
+        "evidence_quote": "Enter your App Name. For this example, enter \"Grocery Reminders\".",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 4,
+      "text": "[Creating an app from app settings] Select the Workspace where you'll be developing your app.",
+      "actor": "human",
+      "claim": {
+        "text": "Select the Workspace where you'll be developing your app.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/app-management/quickstart-app-settings",
+        "evidence_quote": "Select the Workspace where you'll be developing your app.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 5,
+      "text": "[Creating an app from app settings] Add OAuth scopes within the OAuth & Permissions section.",
+      "actor": "both",
+      "claim": {
+        "text": "Add OAuth scopes within the OAuth & Permissions section.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/app-management/quickstart-app-settings",
+        "evidence_quote": "Within OAuth & Permissions, scroll down to Scopes.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 6,
+      "text": "[Creating an app from app settings] Install your app by selecting the Install to Workspace button.",
+      "actor": "human",
+      "claim": {
+        "text": "Install your app by selecting the Install to Workspace button.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/app-management/quickstart-app-settings",
+        "evidence_quote": "Install your app by selecting the Install to Workspace button.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 7,
+      "text": "[Creating an app from app settings] Select Allow on the OAuth flow screen.",
+      "actor": "human",
+      "claim": {
+        "text": "Select Allow on the OAuth flow screen.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/app-management/quickstart-app-settings",
+        "evidence_quote": "You'll now be sent through the Slack OAuth flow. Select Allow on the following screen.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 8,
+      "text": "[App lifecycle & distribution] Open the app dashboard for your app.",
+      "actor": "human",
+      "claim": {
+        "text": "Open the app dashboard for your app.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/app-management/distribution",
+        "evidence_quote": "Go to your app's dashboard.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 9,
+      "text": "[App lifecycle & distribution] Navigate to the Manage Distribution section to share your app.",
+      "actor": "human",
+      "claim": {
+        "text": "Navigate to the Manage Distribution section to share your app.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/app-management/distribution",
+        "evidence_quote": "Scroll to Share Your App with Other Workspaces within the Manage Distribution section.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 10,
+      "text": "[App lifecycle & distribution] Complete the checklist items before activating distribution.",
+      "actor": "human",
+      "claim": {
+        "text": "Complete the checklist items before activating distribution.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/app-management/distribution",
+        "evidence_quote": "Ensure all items in the supplied checklist are completed.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 11,
+      "text": "[App lifecycle & distribution] Click Activate Public Distribution to enable distribution.",
+      "actor": "human",
+      "claim": {
+        "text": "Click Activate Public Distribution to enable distribution.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/app-management/distribution",
+        "evidence_quote": "Click Activate Public Distribution.",
+        "checked_at": "2026-10-30"
+      }
+    }
+  ],
+  "agent_vs_human": {
+    "agent": [
+      {
+        "text": "Look up the provider's live OAuth endpoints and check how they answer an unregistered client (done during this run).",
+        "claim": {
+          "text": "The provider publishes OpenID Connect metadata at https://slack.com/.well-known/openid-configuration.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://slack.com/.well-known/openid-configuration",
+          "note": "Automated read-only probe by the agent on 2026-10-30: GET https://slack.com/.well-known/openid-configuration returned HTTP 200 with JSON. This is the OpenID Connect (sign-in) metadata, which may not describe the main app OAuth flow.",
+          "checked_at": "2026-10-30",
+          "evidence_quote": "issuer: https://slack.com"
+        }
+      },
+      {
+        "text": "Generate a project structure using the Slack CLI starter template",
+        "claim": {
+          "text": "Generate a project structure using the Slack CLI starter template",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "text": "Draft the app manifest configuration based on required scopes",
+        "claim": {
+          "text": "Draft the app manifest configuration based on required scopes",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-30"
+        }
+      }
+    ],
+    "human": [
+      {
+        "text": "Sign in to api.slack.com and register the app. The agent was stopped by a sign-in page at api.slack.com/apps.",
+        "claim": {
+          "text": "https://api.slack.com/apps?new_app=1 opened without an account but says sign-in is needed to create an app.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://api.slack.com/apps?new_app=1",
+          "note": "Automated read-only probe by the agent on 2026-10-30: GET https://api.slack.com/apps?new_app=1 without an account (redirects followed). Creating the app needs your own account, so the agent stopped here and left it to you.",
+          "checked_at": "2026-10-30",
+          "evidence_quote": "Your Apps You'll need to sign in to your Slack account to create an application."
+        }
+      },
+      {
+        "text": "Create a Slack app via the apps page.",
+        "claim": {
+          "text": "Create a Slack app via the apps page.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.slack.dev/app-management/quickstart-app-settings",
+          "evidence_quote": "Create a Slack app via the apps page by selecting the following button:",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "text": "Select Blank app and click Continue.",
+        "claim": {
+          "text": "Select Blank app and click Continue.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.slack.dev/app-management/quickstart-app-settings",
+          "evidence_quote": "Select Blank app. Click Continue.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "text": "Enter your App Name.",
+        "claim": {
+          "text": "Enter your App Name.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.slack.dev/app-management/quickstart-app-settings",
+          "evidence_quote": "Enter your App Name. For this example, enter \"Grocery Reminders\".",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "text": "Select the Workspace where you'll be developing your app.",
+        "claim": {
+          "text": "Select the Workspace where you'll be developing your app.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.slack.dev/app-management/quickstart-app-settings",
+          "evidence_quote": "Select the Workspace where you'll be developing your app.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "text": "Sign in to a Slack workspace to create and manage the app",
+        "claim": {
+          "text": "Sign in to a Slack workspace to create and manage the app",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-30"
+        }
+      }
+    ]
+  },
+  "extras": [
+    {
+      "title": "Tested live by the agent",
+      "why_it_matters": "The agent made read-only requests to the provider (no login, no registration) and recorded what came back. These are observations, not documentation.",
+      "claims": [
+        {
+          "text": "The provider publishes OpenID Connect metadata at https://slack.com/.well-known/openid-configuration.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://slack.com/.well-known/openid-configuration",
+          "note": "Automated read-only probe by the agent on 2026-10-30: GET https://slack.com/.well-known/openid-configuration returned HTTP 200 with JSON. This is the OpenID Connect (sign-in) metadata, which may not describe the main app OAuth flow.",
+          "checked_at": "2026-10-30",
+          "evidence_quote": "issuer: https://slack.com"
+        },
+        {
+          "text": "Supported grant types: authorization_code.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://slack.com/.well-known/openid-configuration",
+          "note": "Automated read-only probe by the agent on 2026-10-30: GET https://slack.com/.well-known/openid-configuration returned HTTP 200 with JSON. This is the OpenID Connect (sign-in) metadata, which may not describe the main app OAuth flow.",
+          "checked_at": "2026-10-30",
+          "evidence_quote": "grant_types_supported: ['authorization_code']"
+        },
+        {
+          "text": "Client authentication methods at the token endpoint: client_secret_post, client_secret_basic.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://slack.com/.well-known/openid-configuration",
+          "note": "Automated read-only probe by the agent on 2026-10-30: GET https://slack.com/.well-known/openid-configuration returned HTTP 200 with JSON. This is the OpenID Connect (sign-in) metadata, which may not describe the main app OAuth flow.",
+          "checked_at": "2026-10-30",
+          "evidence_quote": "token_endpoint_auth_methods_supported: ['client_secret_post', 'client_secret_basic']"
+        },
+        {
+          "text": "The metadata lists 3 supported scopes.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://slack.com/.well-known/openid-configuration",
+          "note": "Automated read-only probe by the agent on 2026-10-30: GET https://slack.com/.well-known/openid-configuration returned HTTP 200 with JSON. This is the OpenID Connect (sign-in) metadata, which may not describe the main app OAuth flow.",
+          "checked_at": "2026-10-30",
+          "evidence_quote": "scopes_supported: openid, profile, email"
+        },
+        {
+          "text": "https://api.slack.com/apps?new_app=1 opened without an account but says sign-in is needed to create an app.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://api.slack.com/apps?new_app=1",
+          "note": "Automated read-only probe by the agent on 2026-10-30: GET https://api.slack.com/apps?new_app=1 without an account (redirects followed). Creating the app needs your own account, so the agent stopped here and left it to you.",
+          "checked_at": "2026-10-30",
+          "evidence_quote": "Your Apps You'll need to sign in to your Slack account to create an application."
+        }
+      ]
+    },
+    {
+      "title": "Choices to make before you start (token / app / registration types)",
+      "why_it_matters": "The provider offers more than one way to set up. Compare before you choose.",
+      "claims": [
+        {
+          "text": "Slack apps can use three different types of tokens.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.slack.dev/authentication",
+          "evidence_quote": "Understand the different types of tokens your app can use (user tokens, bot tokens, and app tokens) and how to manage them, as well as employ token rotation and expiry to keep things fresh.",
+          "checked_at": "2026-10-30"
+        },
+        {
+          "text": "You can choose between undistributed apps that reside in a single workspace or distributed apps that can be installed on multiple workspaces.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.slack.dev/app-management/distribution",
+          "evidence_quote": "When you create a Slack app, it resides in one workspace. You can also distribute Slack apps in either listed or unlisted fashion.",
+          "checked_at": "2026-10-30"
+        },
+        {
+          "text": "Undistributed apps are limited to a single workspace and cannot be distributed to others.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.slack.dev/app-management/distribution",
+          "evidence_quote": "Undistributed apps exist on a single workspace and can use the full range of app capabilities, but they can't be distributed to other workspaces.",
+          "checked_at": "2026-10-30"
+        },
+        {
+          "text": "Distributed apps require an OAuth 2.0 flow to generate access tokens for each workspace and user.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.slack.dev/app-management/distribution",
+          "evidence_quote": "Installing your app on other workspaces means that you'll need to set up an OAuth 2.0 flow. Once you've done that, your app will be able to generate access tokens for each workspace and user.",
+          "checked_at": "2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "Also worth knowing",
+      "why_it_matters": "",
+      "claims": [
+        {
+          "text": "OAuth tokens do not expire.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.slack.dev/authentication/installing-with-oauth",
+          "evidence_quote": "OAuth tokens do not expire. If they are no longer needed, they can be revoked.",
+          "checked_at": "2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "What the docs recommend",
+      "why_it_matters": "Slack Marketplace",
+      "claims": [
+        {
+          "text": "Submitting your app to the Slack Marketplace is recommended for apps intended for commercial distribution.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.slack.dev/app-management/distribution",
+          "evidence_quote": "You can also go a step further and submit your app to the Slack Marketplace. This is recommended for apps intended for commercial distribution.",
+          "checked_at": "2026-10-30"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "not_verified": [
+      {
+        "item": "Registering, installing and submitting an app",
+        "note": "Not attempted. These steps need your account and create real state, so the agent stopped at the sign-in wall. Only the live checks under 'Tested live by the agent' were run."
+      },
+      {
+        "item": "Dropped model claim: Apps that do not meet the 10 active workspace installation requirement will be blocked from submitting to the Marketplac",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Dropped model claim: Navigate to the Your Apps page to begin creating or managing an app.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Dropped model claim: Select Create to finish creating the app.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Dropped model claim: Unlisted distributed apps allow installation on other workspaces via an OAuth 2.0 flow without being listed in the Slack",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Live check not completed: https://slack.com/oauth/v2/authorize",
+        "note": "robots.txt disallows it, so the agent did not request it"
+      }
+    ],
+    "conflicts": [],
+    "sources": [
+      {
+        "title": "App lifecycle & distribution | Slack Developer Docs",
+        "url": "https://docs.slack.dev/app-management/distribution",
+        "type": "docs"
+      },
+      {
+        "title": "Installing via OAuth authorization code flow | Slack Developer Docs",
+        "url": "https://docs.slack.dev/authentication/installing-with-oauth",
+        "type": "docs"
+      },
+      {
+        "title": "Rate limits | Slack Developer Docs",
+        "url": "https://docs.slack.dev/apis/web-api/rate-limits",
+        "type": "docs"
+      },
+      {
+        "title": "Slack developer docs | Slack Developer Docs",
+        "url": "https://docs.slack.dev",
+        "type": "docs"
+      },
+      {
+        "title": "Slack Marketplace review process | Slack Developer Docs",
+        "url": "https://docs.slack.dev/slack-marketplace/slack-marketplace-review-guide",
+        "type": "docs"
+      },
+      {
+        "title": "Quickstart: Creating a Slack app | Slack Developer Docs",
+        "url": "https://docs.slack.dev/quickstart",
+        "type": "docs"
+      },
+      {
+        "title": "Submission guidelines and requirements | Slack Developer Docs",
+        "url": "https://docs.slack.dev/slack-marketplace/slack-marketplace-app-guidelines-and-requirements",
+        "type": "docs"
+      },
+      {
+        "title": "Authentication overview | Slack Developer Docs",
+        "url": "https://docs.slack.dev/authentication",
+        "type": "docs"
+      },
+      {
+        "title": "App manifests | Slack Developer Docs",
+        "url": "https://docs.slack.dev/app-manifests",
+        "type": "docs"
+      },
+      {
+        "title": "Slack Marketplace | Slack Developer Docs",
+        "url": "https://docs.slack.dev/slack-marketplace",
+        "type": "docs"
+      },
+      {
+        "title": "Creating an app from app settings | Slack Developer Docs",
+        "url": "https://docs.slack.dev/app-management/quickstart-app-settings",
+        "type": "docs"
+      }
+    ]
+  },
+  "creation_paths": [
+    {
+      "id": "bolt_project_from_a_starter_template",
+      "name": "Bolt project from a starter template",
+      "gives": "A new Bolt project",
+      "use_when": "See the cited page.",
+      "claim": {
+        "text": "You can create a new Bolt project using a starter template via the Slack CLI.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev",
+        "evidence_quote": "Set up a new Bolt project from a starter template.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "id": "create_from_a_manifest",
+      "name": "Create from a manifest",
+      "gives": "Replicate a manifest from another app by pasting the recycled manifest there.",
+      "use_when": "See the cited page.",
+      "claim": {
+        "text": "You can create an app from a manifest or as a blank app.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.slack.dev/app-manifests",
+        "evidence_quote": "When you create an app through Your Apps using the Create New App button, you have an option to create from a manifest or a blank app.",
+        "checked_at": "2026-10-30"
+      }
+    }
+  ]
+}

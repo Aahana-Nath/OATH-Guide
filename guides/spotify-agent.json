@@ -1,0 +1,601 @@
+{
+  "schema_version": "1.0",
+  "provider": {
+    "name": "Spotify",
+    "website": "https://spotify.com",
+    "docs_urls": [
+      "https://developer.spotify.com/documentation/web-api/concepts/rate-limits",
+      "https://developer.spotify.com/documentation/web-api/concepts/apps",
+      "https://developer.spotify.com/documentation/web-api/tutorials/getting-started",
+      "https://developer.spotify.com/documentation/web-api/concepts/authorization"
+    ]
+  },
+  "generated_at": "2026-10-30",
+  "generated_by": {
+    "mode": "agent",
+    "model": "gemini-3.1-flash-lite"
+  },
+  "summary": "Spotify requires a Premium account to use the Web API. Apps begin in development mode with restricted user access, requiring an allowlist. Moving to extended quota mode for public access requires meeting strict business and user base criteria, with a review process taking up to six weeks.",
+  "difficulty": {
+    "start": {
+      "level": "easy",
+      "reason": {
+        "text": "The claims provide clear, step-by-step instructions for registering an app and managing the development mode allowlist via the Developer Dashboard.",
+        "label": "inferred",
+        "source_type": "none",
+        "note": "Model judgement from the verified claims in this guide; not tested.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    "public": {
+      "level": "hard",
+      "reason": {
+        "text": "The claims specify rigorous requirements for extended quota mode, including business entity status, 250k monthly active users, and a lengthy review process.",
+        "label": "inferred",
+        "source_type": "none",
+        "note": "Model judgement from the verified claims in this guide; not tested.",
+        "checked_at": "2026-10-30"
+      }
+    }
+  },
+  "time": {
+    "to_start": {
+      "display": "Unknown",
+      "claim": {
+        "text": "Setup time was not stated in the pages read.",
+        "label": "unknown",
+        "source_type": "none",
+        "note": "Only a hands-on attempt shows how long registration takes.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    "to_approval": {
+      "display": "Extended quota mode review: up to six weeks",
+      "stages": [
+        {
+          "name": "Extended quota mode review",
+          "duration_text": "up to six weeks"
+        }
+      ],
+      "claim": {
+        "text": "The app review process for extended quota mode can take up to six weeks.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.spotify.com/documentation/web-api/concepts/quota-modes",
+        "evidence_quote": "This review process can take up to six weeks.",
+        "checked_at": "2026-10-30"
+      }
+    }
+  },
+  "access_ladder": [
+    {
+      "tier": 1,
+      "name": "Development Mode",
+      "allows": "The app is restricted to the developer's own workspace or account for initial testing.",
+      "gate": "Default",
+      "prerequisites": [],
+      "claims": [
+        {
+          "text": "Apps start in development mode and can move to extended quota mode for a wider audience.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.spotify.com/documentation/web-api/concepts/quota-modes",
+          "evidence_quote": "The quota mode refers to the mode in which an app can be: development mode or extended quota mode.",
+          "checked_at": "2026-10-30"
+        }
+      ]
+    },
+    {
+      "tier": 2,
+      "name": "Extended Quota Mode",
+      "allows": "The app supports an unlimited number of users and removes the allowlist requirement.",
+      "gate": "Completion of a six-week app review process",
+      "prerequisites": [],
+      "claims": [
+        {
+          "text": "Apps start in development mode and can move to extended quota mode for a wider audience.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.spotify.com/documentation/web-api/concepts/quota-modes",
+          "evidence_quote": "The quota mode refers to the mode in which an app can be: development mode or extended quota mode.",
+          "checked_at": "2026-10-30"
+        },
+        {
+          "text": "Extended quota mode allows an unlimited number of users and removes the allowlist requirement.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.spotify.com/documentation/web-api/concepts/quota-modes",
+          "evidence_quote": "Apps in this category can be installed by an unlimited number of users and the allowlist in development mode no longer applies.",
+          "checked_at": "2026-10-30"
+        },
+        {
+          "text": "The app review process for extended quota mode can take up to six weeks.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.spotify.com/documentation/web-api/concepts/quota-modes",
+          "evidence_quote": "This review process can take up to six weeks.",
+          "checked_at": "2026-10-30"
+        },
+        {
+          "text": "The app review process for moving to extended quota mode can take up to six weeks.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.spotify.com/documentation/web-api/concepts/quota-modes",
+          "evidence_quote": "This review process can take up to six weeks.",
+          "checked_at": "2026-10-30"
+        }
+      ]
+    }
+  ],
+  "requirements": {
+    "register": [
+      {
+        "item": "Spotify Premium account",
+        "status": "required",
+        "claim": {
+          "text": "A Spotify Premium account is required to use the Web API.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.spotify.com/documentation/web-api/tutorials/getting-started",
+          "evidence_quote": "This tutorial assumes you have a Spotify Premium account.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "client credentials",
+        "status": "required",
+        "claim": {
+          "text": "The authorization process requires a client ID and a client secret.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.spotify.com/documentation/web-api/concepts/authorization",
+          "evidence_quote": "The authorization process requires valid client credentials: a client ID and a client secret. You can follow the Apps guide to learn how to generate them.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "redirect URI (only in some cases)",
+        "status": "optional",
+        "claim": {
+          "text": "A redirect URI must be specified when creating an app.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.spotify.com/documentation/web-api/concepts/redirect_uri",
+          "evidence_quote": "When you create an app, you need to specify a redirect URI. This is the URI to which Spotify redirects the user after they have granted or denied permission to your app.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "Scopes",
+        "status": "required",
+        "claim": {
+          "text": "Scopes are needed when implementing some of the authorization grant types.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.spotify.com/documentation/web-api/concepts/scopes",
+          "evidence_quote": "Scopes are needed when implementing some of the authorization grant types. Make sure you have read the Authorization guide to understand the basics.",
+          "checked_at": "2026-10-30"
+        }
+      }
+    ],
+    "go_public": [
+      {
+        "item": "Applicants for extended quota mode must be an established business entity.",
+        "status": "required",
+        "claim": {
+          "text": "Applicants for extended quota mode must be an established business entity.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.spotify.com/documentation/web-api/concepts/quota-modes",
+          "evidence_quote": "Established Business Entity (legally registered business or organisation)",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "Applicants for extended quota mode must have at least 250k monthly active users.",
+        "status": "required",
+        "claim": {
+          "text": "Applicants for extended quota mode must have at least 250k monthly active users.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.spotify.com/documentation/web-api/concepts/quota-modes",
+          "evidence_quote": "Maintaining a minimum of active users (at least 250k MAUs)",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "As of May 15th 2025, Spotify only accepts applications from organizations, not…",
+        "status": "optional",
+        "claim": {
+          "text": "As of May 15th 2025, Spotify only accepts applications from organizations, not individuals.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.spotify.com/documentation/web-api/concepts/quota-modes",
+          "evidence_quote": "Please note that as of May 15th 2025, Spotify only accepts applications from organizations (not individuals).",
+          "checked_at": "2026-10-30"
+        }
+      }
+    ]
+  },
+  "limits": [
+    {
+      "item": "Rate limit window",
+      "value": "30 seconds",
+      "claim": {
+        "text": "Spotify's API rate limit is calculated based on the number of calls that your app makes to Spotify in a rolling 30 second window.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.spotify.com/documentation/web-api/concepts/rate-limits",
+        "evidence_quote": "Spotify's API rate limit is calculated based on the number of calls that your app makes to Spotify in a rolling 30 second window.",
+        "checked_at": "2026-10-30"
+      }
+    }
+  ],
+  "blockers": [
+    {
+      "issue": "429 error response",
+      "fix": "See the cited page.",
+      "claim": {
+        "text": "If your app makes a lot of Web API requests in a short period of time then it may receive a 429 error response from Spotify.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.spotify.com/documentation/web-api/concepts/rate-limits",
+        "evidence_quote": "If your app makes a lot of Web API requests in a short period of time then it\nmay receive a 429 error response from Spotify. This indicates that your app has\nreached our Web API rate limit.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "Never reveal your client secret key publicly.",
+      "fix": "If you suspect that the secret key has been compromised, regenerate it immediately by clicking the ROTATE button on the app overview page.",
+      "claim": {
+        "text": "Never reveal your client secret key publicly.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.spotify.com/documentation/web-api/concepts/apps",
+        "evidence_quote": "Always store the client secret key securely; never reveal it publicly!",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "Using localhost as a redirect URI is not allowed.",
+      "fix": "Use an explicit IPv4 or IPv6 loopback address instead.",
+      "claim": {
+        "text": "Using localhost as a redirect URI is not allowed.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.spotify.com/documentation/web-api/concepts/redirect_uri",
+        "evidence_quote": "localhost is not allowed as redirect URI.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "Unauthorized user access",
+      "fix": "See the cited page.",
+      "claim": {
+        "text": "API requests from users not on the allowlist will receive a 403 error.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.spotify.com/documentation/web-api/concepts/quota-modes",
+        "evidence_quote": "Users may be able to log into a development mode app without having been allowlisted by the developer. However, API requests with an access token associated to that user and app will receive a 403 status code error.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "API requests with an access token associated to a user not on the allowlist will receive…",
+      "fix": "See the cited page.",
+      "claim": {
+        "text": "API requests with an access token associated to a user not on the allowlist will receive a 403 error.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.spotify.com/documentation/web-api/concepts/quota-modes",
+        "evidence_quote": "Users may be able to log into a development mode app without having been allowlisted by the developer. However, API requests with an access token associated to that user and app will receive a 403 status code error.",
+        "checked_at": "2026-10-30"
+      }
+    }
+  ],
+  "steps": [
+    {
+      "order": 1,
+      "text": "Log in to the Spotify Developer Dashboard.",
+      "actor": "human",
+      "claim": {
+        "text": "Log in to the Spotify Developer Dashboard.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.spotify.com/documentation/web-api/tutorials/getting-started",
+        "evidence_quote": "Login to the Spotify Developer Dashboard.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 2,
+      "text": "Login to the Spotify Developer Dashboard.",
+      "actor": "human",
+      "claim": {
+        "text": "Login to the Spotify Developer Dashboard.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.spotify.com/documentation/web-api/tutorials/getting-started",
+        "evidence_quote": "Login to the Spotify Developer Dashboard.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 3,
+      "text": "Read the latest Developer Terms of Service to complete your account set up.",
+      "actor": "both",
+      "claim": {
+        "text": "Read the latest Developer Terms of Service to complete your account set up.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.spotify.com/documentation/web-api/tutorials/getting-started",
+        "evidence_quote": "If necessary, read the latest Developer Terms of Service to complete your account set up.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 4,
+      "text": "Click the Create an app button in the Dashboard.",
+      "actor": "human",
+      "claim": {
+        "text": "Click the Create an app button in the Dashboard.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.spotify.com/documentation/web-api/tutorials/getting-started",
+        "evidence_quote": "To create an app, go to your Dashboard, click on the Create an app button",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 5,
+      "text": "Go to your Dashboard, click on the Create an app button.",
+      "actor": "human",
+      "claim": {
+        "text": "Go to your Dashboard, click on the Create an app button.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.spotify.com/documentation/web-api/tutorials/getting-started",
+        "evidence_quote": "To create an app, go to your Dashboard, click on the Create an app button",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 6,
+      "text": "Enter the App Name, App Description, and Redirect URI.",
+      "actor": "human",
+      "claim": {
+        "text": "Enter the App Name, App Description, and Redirect URI.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.spotify.com/documentation/web-api/tutorials/getting-started",
+        "evidence_quote": "and enter the following information: App Name: My App App Description: This is my first Spotify app Redirect URI: You won't need this parameter in this example, so let's use http://127.0.0.1:3000.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 7,
+      "text": "Enter the app name, description, and redirect URI.",
+      "actor": "human",
+      "claim": {
+        "text": "Enter the app name, description, and redirect URI.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.spotify.com/documentation/web-api/tutorials/getting-started",
+        "evidence_quote": "enter the following information:\n\nApp Name: My App\n\nApp Description: This is my first Spotify app\n\nRedirect URI: You won't need this parameter in this example, so let's use http://127.0.0.1:3000.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 8,
+      "text": "Accept the Developer Terms of Service and click Create.",
+      "actor": "human",
+      "claim": {
+        "text": "Accept the Developer Terms of Service and click Create.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.spotify.com/documentation/web-api/tutorials/getting-started",
+        "evidence_quote": "Finally, check the Developer Terms of Service checkbox and tap on the\nCreate button.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "order": 9,
+      "text": "Check the Developer Terms of Service checkbox and tap on the Create button.",
+      "actor": "human",
+      "claim": {
+        "text": "Check the Developer Terms of Service checkbox and tap on the Create button.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.spotify.com/documentation/web-api/tutorials/getting-started",
+        "evidence_quote": "Finally, check the Developer Terms of Service checkbox and tap on the Create button.",
+        "checked_at": "2026-10-30"
+      }
+    }
+  ],
+  "agent_vs_human": {
+    "agent": [
+      {
+        "text": "Draft the app name and description for the registration form",
+        "claim": {
+          "text": "Draft the app name and description for the registration form",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "text": "Determine the appropriate authorization flow based on the application architecture",
+        "claim": {
+          "text": "Determine the appropriate authorization flow based on the application architecture",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-30"
+        }
+      }
+    ],
+    "human": [
+      {
+        "text": "Log in to the Spotify Developer Dashboard.",
+        "claim": {
+          "text": "Log in to the Spotify Developer Dashboard.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.spotify.com/documentation/web-api/tutorials/getting-started",
+          "evidence_quote": "Login to the Spotify Developer Dashboard.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "text": "Login to the Spotify Developer Dashboard.",
+        "claim": {
+          "text": "Login to the Spotify Developer Dashboard.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.spotify.com/documentation/web-api/tutorials/getting-started",
+          "evidence_quote": "Login to the Spotify Developer Dashboard.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "text": "Read the latest Developer Terms of Service to complete your account set up.",
+        "claim": {
+          "text": "Read the latest Developer Terms of Service to complete your account set up.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.spotify.com/documentation/web-api/tutorials/getting-started",
+          "evidence_quote": "If necessary, read the latest Developer Terms of Service to complete your account set up.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "text": "Click the Create an app button in the Dashboard.",
+        "claim": {
+          "text": "Click the Create an app button in the Dashboard.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.spotify.com/documentation/web-api/tutorials/getting-started",
+          "evidence_quote": "To create an app, go to your Dashboard, click on the Create an app button",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "text": "Log in to the Spotify Developer Dashboard",
+        "claim": {
+          "text": "Log in to the Spotify Developer Dashboard",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-30"
+        }
+      }
+    ]
+  },
+  "extras": [
+    {
+      "title": "Also worth knowing",
+      "why_it_matters": "",
+      "claims": [
+        {
+          "text": "Apps in development mode have quota restrictions that differ from standard rate limits.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.spotify.com/documentation/web-api/concepts/rate-limits",
+          "evidence_quote": "Note that development mode apps also have\nquota restrictions which\nhave a different enforcement mechanism than rate limits.",
+          "checked_at": "2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "HTTPS requirement",
+      "why_it_matters": "Required for all redirect URIs except loopback addresses.",
+      "claims": [
+        {
+          "text": "Redirect URIs must use HTTPS unless using a loopback address.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.spotify.com/documentation/web-api/concepts/redirect_uri",
+          "evidence_quote": "Use HTTPS for your redirect URI, unless you are using a loopback address, when HTTP is permitted.",
+          "checked_at": "2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "What the docs recommend",
+      "why_it_matters": "Stated preference",
+      "claims": [
+        {
+          "text": "The authorization code flow is recommended for long-running server-side applications that can safely store a client secret.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.spotify.com/documentation/web-api/concepts/authorization",
+          "evidence_quote": "If you are developing a long-running application (e.g. web app running on the server) that can refresh access tokens and request user authorization again when needed, and the client secret can be safely stored, then the authorization code flow is the recommended choice.",
+          "checked_at": "2026-10-30"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "not_verified": [
+      {
+        "item": "Registering, installing and submitting an app",
+        "note": "Not attempted. These steps need your account and create real state, so the agent stopped at the sign-in wall. The live checks found nothing to record."
+      },
+      {
+        "item": "Dropped model claim: Access tokens are valid for 1 hour.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Live check not completed: OAuth server metadata",
+        "note": "none published at spotify.com, developer.spotify.com (checked /.well-known/oauth-authorization-server, /.well-known/openid-configuration)"
+      },
+      {
+        "item": "Live check not completed: Authorize endpoint",
+        "note": "no authorization URL found in the metadata or the docs read"
+      },
+      {
+        "item": "Live check not completed: https://developer.spotify.com/dashboard",
+        "note": "the page needs JavaScript, so the agent cannot read what is behind it without a browser"
+      }
+    ],
+    "conflicts": [],
+    "sources": [
+      {
+        "title": "Rate Limits | Spotify for Developers",
+        "url": "https://developer.spotify.com/documentation/web-api/concepts/rate-limits",
+        "type": "docs"
+      },
+      {
+        "title": "Apps | Spotify for Developers",
+        "url": "https://developer.spotify.com/documentation/web-api/concepts/apps",
+        "type": "docs"
+      },
+      {
+        "title": "Getting started with Web API | Spotify for Developers",
+        "url": "https://developer.spotify.com/documentation/web-api/tutorials/getting-started",
+        "type": "docs"
+      },
+      {
+        "title": "Authorization | Spotify for Developers",
+        "url": "https://developer.spotify.com/documentation/web-api/concepts/authorization",
+        "type": "docs"
+      },
+      {
+        "title": "Redirect URIs | Spotify for Developers",
+        "url": "https://developer.spotify.com/documentation/web-api/concepts/redirect_uri",
+        "type": "docs"
+      },
+      {
+        "title": "Scopes | Spotify for Developers",
+        "url": "https://developer.spotify.com/documentation/web-api/concepts/scopes",
+        "type": "docs"
+      },
+      {
+        "title": "Quota modes | Spotify for Developers",
+        "url": "https://developer.spotify.com/documentation/web-api/concepts/quota-modes",
+        "type": "docs"
+      }
+    ]
+  }
+}

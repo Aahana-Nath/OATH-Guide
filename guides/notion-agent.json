@@ -1,0 +1,596 @@
+{
+  "schema_version": "1.0",
+  "provider": {
+    "name": "Notion",
+    "website": "https://notion.so",
+    "docs_urls": [
+      "https://developers.notion.com/guides/get-started/overview",
+      "https://developers.notion.com/guides/get-started/authorization",
+      "https://developers.notion.com/reference/request-limits",
+      "https://www.notion.com/product/docs"
+    ]
+  },
+  "generated_at": "2026-10-30",
+  "generated_by": {
+    "mode": "agent",
+    "model": "gemini-3.1-flash-lite"
+  },
+  "summary": "Notion allows developers to build internal or public connections. Public connections require a security review for Marketplace listing and must support 'Any workspace' scope. Developers must manage OAuth flows, rate limits, and specific workspace permissions for all integrations.",
+  "difficulty": {
+    "start": {
+      "level": "easy",
+      "reason": {
+        "text": "The documentation provides clear steps for navigating the Developer portal to create connections and generate tokens.",
+        "label": "inferred",
+        "source_type": "none",
+        "note": "Model judgement from the verified claims in this guide; not tested.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    "public": {
+      "level": "hard",
+      "reason": {
+        "text": "Public listing requires a mandatory security review and strict adherence to installation scope requirements that cannot be modified after creation.",
+        "label": "inferred",
+        "source_type": "none",
+        "note": "Model judgement from the verified claims in this guide; not tested.",
+        "checked_at": "2026-10-30"
+      }
+    }
+  },
+  "time": {
+    "to_start": {
+      "display": "Unknown",
+      "claim": {
+        "text": "Setup time was not stated in the pages read.",
+        "label": "unknown",
+        "source_type": "none",
+        "note": "Only a hands-on attempt shows how long registration takes.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    "to_approval": {
+      "display": "Initial review: 5-10 business days",
+      "stages": [
+        {
+          "name": "Initial review",
+          "duration_text": "5-10 business days"
+        }
+      ],
+      "claim": {
+        "text": "The review timeline for a submitted connection is 5-10 business days.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
+        "evidence_quote": "After submission, expect to hear back from our team within 5-10 business days via email.",
+        "checked_at": "2026-10-30"
+      }
+    }
+  },
+  "access_ladder": [
+    {
+      "tier": 1,
+      "name": "Development",
+      "allows": "The developer can use public connections via OAuth without being listed on the Marketplace.",
+      "gate": "Default",
+      "prerequisites": [],
+      "claims": [
+        {
+          "text": "Public connections can be used via OAuth without being listed on the Marketplace.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
+          "evidence_quote": "Public connections work independently of Marketplace listings. Listing on the Marketplace is optional and helps your connection reach a wider audience, but your connection can be used via its OAuth flow without being listed.",
+          "checked_at": "2026-10-30"
+        }
+      ]
+    },
+    {
+      "tier": 2,
+      "name": "Marketplace Submission",
+      "allows": "The developer can submit their connection for a Notion team review to be listed.",
+      "gate": "Submission of listing request",
+      "prerequisites": [],
+      "claims": [
+        {
+          "text": "The review timeline for a submitted connection is 5-10 business days.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
+          "evidence_quote": "After submission, expect to hear back from our team within 5-10 business days via email.",
+          "checked_at": "2026-10-30"
+        },
+        {
+          "text": "Notion team review of listing submission.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
+          "evidence_quote": "After submission, expect to hear back from our team within 5-10 business days via email.",
+          "checked_at": "2026-10-30"
+        }
+      ]
+    }
+  ],
+  "requirements": {
+    "register": [
+      {
+        "item": "workspace owner",
+        "status": "required",
+        "claim": {
+          "text": "You are required to be a workspace owner to create an internal connection.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.notion.com/guides/get-started/authorization",
+          "evidence_quote": "You are required to be a workspace owner to create a connection.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "Redirect URI",
+        "status": "required",
+        "claim": {
+          "text": "A redirect URI is required for public connections.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.notion.com/guides/get-started/authorization",
+          "evidence_quote": "Fill out the form with your connection details, including your redirect URI(s) under the OAuth configuration section",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "Connection name and development workspace",
+        "status": "required",
+        "claim": {
+          "text": "You must provide a connection name and development workspace when creating a public connection.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.notion.com/guides/get-started/public-connections",
+          "evidence_quote": "Connection name and development workspace",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "Installation scope",
+        "status": "required",
+        "claim": {
+          "text": "You must choose an installation scope when creating a public connection.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.notion.com/guides/get-started/public-connections",
+          "evidence_quote": "Installation scope — choose Any workspace or Selected workspaces only (if you pick the latter, select the workspaces from the list that appears)",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "Membership status",
+        "status": "required",
+        "claim": {
+          "text": "Only full workspace members can create personal access tokens.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.notion.com/guides/get-started/personal-access-tokens",
+          "evidence_quote": "Guests and restricted members cannot create PATs or log in with the Notion CLI (ntn login). Only full workspace members can create tokens",
+          "checked_at": "2026-10-30"
+        }
+      }
+    ],
+    "go_public": [
+      {
+        "item": "Public connections must undergo a Notion security review before being listed on the…",
+        "status": "required",
+        "claim": {
+          "text": "Public connections must undergo a Notion security review before being listed on the Marketplace.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.notion.com/guides/get-started/overview",
+          "evidence_quote": "Public connections must undergo a Notion security review before being listed on the Marketplace. You can create and use a public connection without listing it.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "Installation scope",
+        "status": "required",
+        "claim": {
+          "text": "Only public connections with an installation scope of Any workspace can be listed on the Marketplace.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
+          "evidence_quote": "Only public connections with an installation scope of Any workspace can be listed on the Marketplace. Internal connections and Selected workspaces only public connections are not eligible.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "item": "Internal connections and Selected workspaces only public connections are not eligible for…",
+        "status": "required",
+        "claim": {
+          "text": "Internal connections and Selected workspaces only public connections are not eligible for Marketplace listing.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
+          "evidence_quote": "Internal connections and Selected workspaces only public connections are not eligible.",
+          "checked_at": "2026-10-30"
+        }
+      }
+    ]
+  },
+  "limits": [
+    {
+      "item": "Token expiration",
+      "value": "1 year",
+      "claim": {
+        "text": "The maximum expiration period for a personal access token is one year.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/personal-access-tokens",
+        "evidence_quote": "If you don’t choose an expiration, the token expires after 1 year.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "item": "Business/Enterprise connection limit",
+      "value": "600 requests per minute",
+      "claim": {
+        "text": "Business and Enterprise plans have a per-connection rate limit of 600 requests per minute.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/reference/request-limits",
+        "evidence_quote": "Business and Enterprise\n\n600 requests per minute (an average of 10 per second)",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "item": "Other plans connection limit",
+      "value": "180 requests per minute",
+      "claim": {
+        "text": "All other plans have a per-connection rate limit of 180 requests per minute.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/reference/request-limits",
+        "evidence_quote": "All other plans\n\n180 requests per minute (an average of 3 per second)",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "item": "Data source query limit",
+      "value": "3 requests per second",
+      "claim": {
+        "text": "Querying a data source has a limit of about 3 requests per second per connection.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/reference/request-limits",
+        "evidence_quote": "Querying a data source has a separate limit of about 3 requests per second per connection.",
+        "checked_at": "2026-10-30"
+      }
+    }
+  ],
+  "blockers": [
+    {
+      "issue": "The installation scope cannot be changed after the public connection is created.",
+      "fix": "Ensure the correct installation scope is selected during the initial creation of the public connection.",
+      "claim": {
+        "text": "The installation scope cannot be changed after the public connection is created.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/authorization",
+        "evidence_quote": "Fill out the form with your connection details, including your redirect URI(s) under the OAuth configuration section and the connection’s installation scope — either Any workspace or Selected workspaces only. This can’t be changed after creation.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "If a page is not shared with the connection, API requests will return an error.",
+      "fix": "Manually share the page with the connection using the Add connections option in the page menu.",
+      "claim": {
+        "text": "If a page is not shared with the connection, API requests will return an error.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/authorization",
+        "evidence_quote": "Once the connection is shared, you can start making API requests. If the page is not shared, any API requests made will respond with an error.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "Blocked API access",
+      "fix": "Contact Notion support.",
+      "claim": {
+        "text": "Do not retry a 429 error if the rate_limit_reason is public_api_request_blocked.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/reference/request-limits",
+        "evidence_quote": "Do not retry every error. Retry 429 and 529 responses, except a 429 with public_api_request_blocked.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "Installation scope immutability",
+      "fix": "Ensure the correct installation scope is selected during the initial creation of the connection.",
+      "claim": {
+        "text": "Installation scope cannot be changed after the connection is created.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
+        "evidence_quote": "Installation scope is set when the connection is created and can’t be changed afterward — see Installation scope.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "Installation scope cannot be changed after the connection is created.",
+      "fix": "Ensure the correct installation scope is selected during the initial connection creation.",
+      "claim": {
+        "text": "Installation scope cannot be changed after the connection is created.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
+        "evidence_quote": "Installation scope is set when the connection is created and can’t be changed afterward",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "Personal access token creation is restricted by default on Business and Enterprise plans.",
+      "fix": "Ask a workspace owner to enable it in Settings → Connections.",
+      "claim": {
+        "text": "Personal access token creation is restricted by default on Business and Enterprise plans.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/quick-start",
+        "evidence_quote": "On Business and Enterprise plans, PAT creation is restricted by default. Ask a workspace owner to enable it in Settings → Connections.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "The installation scope (Any workspace or Selected workspaces only) cannot be changed…",
+      "fix": "Carefully select the installation scope during the initial creation of the public connection.",
+      "claim": {
+        "text": "The installation scope (Any workspace or Selected workspaces only) cannot be changed after creation.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/authorization",
+        "evidence_quote": "This can’t be changed after creation.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "If the page is not shared with the connection, any API requests made will respond with an…",
+      "fix": "Ensure the page is manually shared with the connection via the Add connections menu.",
+      "claim": {
+        "text": "If the page is not shared with the connection, any API requests made will respond with an error.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/authorization",
+        "evidence_quote": "Before a connection can interact with your Notion workspace page(s), the page must be manually shared with the connection. ... If the page is not shared, any API requests made will respond with an error.",
+        "checked_at": "2026-10-30"
+      }
+    },
+    {
+      "issue": "Installation scope cannot be changed after the connection is created.",
+      "fix": "Create a new connection if you need to change the installation scope.",
+      "claim": {
+        "text": "Installation scope cannot be changed after the connection is created.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/public-connections",
+        "evidence_quote": "Installation scope is set once, at creation time, and can’t be changed afterward. If you pick Selected workspaces only and later want to list on the Marketplace, create a new connection.",
+        "checked_at": "2026-10-30"
+      }
+    }
+  ],
+  "steps": [
+    {
+      "order": 1,
+      "actor": "human",
+      "text": "Start from the provider's developer docs: https://developers.notion.com/guides/get-started/overview",
+      "claim": {
+        "text": "No registration steps could be extracted from the registration pages read.",
+        "label": "inferred",
+        "source_type": "none",
+        "note": "8 pages read: https://developers.notion.com/guides/get-started/overview, https://developers.notion.com/guides/get-started/authorization, https://developers.notion.com/reference/request-limits, https://www.notion.com/product/docs, https://developers.notion.com/guides/get-started/marketplace-listing, https://developers.notion.com/guides/get-started/quick-start …",
+        "checked_at": "2026-10-30"
+      }
+    }
+  ],
+  "agent_vs_human": {
+    "agent": [
+      {
+        "text": "Look up the provider's live OAuth endpoints and check how they answer an unregistered client (done during this run).",
+        "claim": {
+          "text": "The authorize endpoint answered an unregistered test client with a redirect (HTTP 302) to app.notion.com/install-integration.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://api.notion.com/v1/oauth/authorize",
+          "note": "Automated read-only probe by the agent on 2026-10-30: GET https://api.notion.com/v1/oauth/authorize with a made-up client_id (oauth-guide-agent-probe), no login, redirects not followed.",
+          "checked_at": "2026-10-30",
+          "evidence_quote": "HTTP 302 Location: app.notion.com/install-integration"
+        }
+      },
+      {
+        "text": "Draft the connection name, description, and category for the Marketplace listing.",
+        "claim": {
+          "text": "Draft the connection name, description, and category for the Marketplace listing.",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "text": "Prepare the required logo and promotional images for the listing submission.",
+        "claim": {
+          "text": "Prepare the required logo and promotional images for the listing submission.",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-30"
+        }
+      }
+    ],
+    "human": [
+      {
+        "text": "Sign in to the Notion Developer portal as a workspace owner.",
+        "claim": {
+          "text": "Sign in to the Notion Developer portal as a workspace owner.",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-30"
+        }
+      },
+      {
+        "text": "Submit the public connection for the mandatory Notion security review.",
+        "claim": {
+          "text": "Submit the public connection for the mandatory Notion security review.",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-30"
+        }
+      }
+    ]
+  },
+  "extras": [
+    {
+      "title": "Tested live by the agent",
+      "why_it_matters": "The agent made read-only requests to the provider (no login, no registration) and recorded what came back. These are observations, not documentation.",
+      "claims": [
+        {
+          "text": "The authorize endpoint answered an unregistered test client with a redirect (HTTP 302) to app.notion.com/install-integration.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://api.notion.com/v1/oauth/authorize",
+          "note": "Automated read-only probe by the agent on 2026-10-30: GET https://api.notion.com/v1/oauth/authorize with a made-up client_id (oauth-guide-agent-probe), no login, redirects not followed.",
+          "checked_at": "2026-10-30",
+          "evidence_quote": "HTTP 302 Location: app.notion.com/install-integration"
+        }
+      ]
+    },
+    {
+      "title": "Choices to make before you start (token / app / registration types)",
+      "why_it_matters": "The provider offers more than one way to set up. Compare before you choose.",
+      "claims": [
+        {
+          "text": "Internal connections are scoped to a single workspace and use a static credential called an internal connection API token.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.notion.com/guides/get-started/overview",
+          "evidence_quote": "Internal connections are scoped to a single workspace and use a static credential called an internal connection API token. They’re ideal for custom automations and workflows — things like syncing data, sending notifications, or building internal dashboards.",
+          "checked_at": "2026-10-30"
+        },
+        {
+          "text": "Public connections use OAuth 2.0 for authentication.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.notion.com/guides/get-started/overview",
+          "evidence_quote": "Public connections use OAuth 2.0 for authentication. At creation time, you choose their installation scope: Any workspace (any Notion user can install; Marketplace-eligible) or Selected workspaces only (restricted to workspaces you select; not Marketplace-eligible).",
+          "checked_at": "2026-10-30"
+        },
+        {
+          "text": "Personal access tokens are user-scoped tokens for scripts, CLI workflows, Workers, and tools that should act as one Notion user.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.notion.com/guides/get-started/overview",
+          "evidence_quote": "Personal access tokens (PATs) are user-scoped tokens for scripts, CLI workflows, Workers, and tools that should act as one Notion user. A PAT uses the creator’s workspace membership and page permissions.",
+          "checked_at": "2026-10-30"
+        },
+        {
+          "text": "A personal access token allows API authentication without OAuth.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.notion.com/guides/get-started/quick-start",
+          "evidence_quote": "A personal access token (PAT) lets you authenticate API requests as yourself without setting up a connection or completing an OAuth flow.",
+          "checked_at": "2026-10-30"
+        },
+        {
+          "text": "Public connections use OAuth 2.0 for multi-workspace installation, while internal connections are scoped to a single workspace.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.notion.com/guides/get-started/public-connections",
+          "evidence_quote": "A public connection is an OAuth connection that users install into their Notion workspaces. Unlike internal connections, which are scoped to a single workspace with a static token, public connections follow the OAuth 2.0 protocol",
+          "checked_at": "2026-10-30"
+        }
+      ]
+    },
+    {
+      "title": "What the docs recommend",
+      "why_it_matters": "Stated preference",
+      "claims": [
+        {
+          "text": "Use a PAT for personal or developer-owned workflows that one Notion user should own.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.notion.com/guides/get-started/personal-access-tokens",
+          "evidence_quote": "Use a PAT for personal or developer-owned workflows that one Notion user should own:",
+          "checked_at": "2026-10-30"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "not_verified": [
+      {
+        "item": "Registering, installing and submitting an app",
+        "note": "Not attempted. These steps need your account and create real state, so the agent stopped at the sign-in wall. Only the live checks under 'Tested live by the agent' were run."
+      },
+      {
+        "item": "Dropped model claim: Select the option to create a new token.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Dropped model claim: Select the New token button.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Live check not completed: OAuth server metadata",
+        "note": "none published at notion.so, developers.notion.com, www.notion.com (checked /.well-known/oauth-authorization-server, /.well-known/openid-configuration)"
+      },
+      {
+        "item": "Live check not completed: https://www.notion.so/developers",
+        "note": "the page needs JavaScript, so the agent cannot read what is behind it without a browser"
+      },
+      {
+        "item": "Live check not completed: https://app.notion.com/developers/connections",
+        "note": "the page needs JavaScript, so the agent cannot read what is behind it without a browser"
+      }
+    ],
+    "conflicts": [],
+    "sources": [
+      {
+        "title": "Overview - Notion Docs",
+        "url": "https://developers.notion.com/guides/get-started/overview",
+        "type": "docs"
+      },
+      {
+        "title": "Authorization - Notion Docs",
+        "url": "https://developers.notion.com/guides/get-started/authorization",
+        "type": "docs"
+      },
+      {
+        "title": "Request limits - Notion Docs",
+        "url": "https://developers.notion.com/reference/request-limits",
+        "type": "docs"
+      },
+      {
+        "title": "Docs | Notion",
+        "url": "https://www.notion.com/product/docs",
+        "type": "docs"
+      },
+      {
+        "title": "List on the Marketplace - Notion Docs",
+        "url": "https://developers.notion.com/guides/get-started/marketplace-listing",
+        "type": "docs"
+      },
+      {
+        "title": "API quickstart - Notion Docs",
+        "url": "https://developers.notion.com/guides/get-started/quick-start",
+        "type": "docs"
+      },
+      {
+        "title": "Public connections - Notion Docs",
+        "url": "https://developers.notion.com/guides/get-started/public-connections",
+        "type": "docs"
+      },
+      {
+        "title": "Personal access tokens - Notion Docs",
+        "url": "https://developers.notion.com/guides/get-started/personal-access-tokens",
+        "type": "docs"
+      }
+    ]
+  }
+}

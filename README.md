@@ -1,0 +1,156 @@
+# OAuth Guide Agent
+
+Type an app name or a website. An agent reads its developer docs, makes a few read-only live checks against the provider, and
+writes an OAuth setup guide a developer can follow and share: **how hard it is, how long it takes (including any approval wait),
+what the requirements and traps are, and what an AI agent can do versus what you must do yourself.**
+
+Every statement carries a label (**Tested**, **Official docs**, **Inferred**, **Unknown**), a source, a date, and, for documentation
+claims, an exact quote that code has checked against the fetched page.
+
+![A finished guide: what was tested, and what wasn't](docs/img/guide-tested.png)
+
+| | |
+|---|---|
+| **Demo: nine real apps** and a live walkthrough | [docs/DEMO.md](docs/DEMO.md) |
+| **Verification: what was checked, corrected, and could not be verified** | [docs/VERIFICATION.md](docs/VERIFICATION.md) |
+| **Saved guides** (open in the app) | [`guides/`](guides) |
+
+## Quick start
+
+You need Python 3.10+, Node 20+ (developed on Node 22) and a [Gemini API key](https://aistudio.google.com/apikey).
+
+```bash
+cp .env.example .env                 # then set GEMINI_API_KEY (and optionally GEMINI_MODEL)
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt      # just jsonschema; the agent itself uses only the standard library
+
+cd nuxt-app
+npm install
+npm run dev                          # http://localhost:3000
+```
+
+Open a **Saved guide**, or type any app (`Calendly`, `linear.app`, `https://developers.figma.com`) and press **Research**. A run takes
+roughly 1.5 to 3 minutes; the right-hand side shows a live working screen, and the guide opens when it finishes.
+
+The web app starts the Python agent for you (it uses `../.venv/bin/python`, otherwise `python3`).
+
+**Command line instead:**
+
+```bash
+python agent/guide_agent.py linear.app --out out/linear.json --trace out/linear.trace.json
+```
+
+Options: `--max-pages 20`, `--max-seconds 300`, `--max-steps 10` (agent-loop steps; `0` = first pass only), `--no-probes` (skip live
+checks), `--model <id>`. Check any guide's quotes against their sources with `python tools/recheck_quotes.py guides/*-agent.json`.
+
+**Also included:** a Streamlit UI (`pip install -r requirements-extras.txt && streamlit run app.py`) and a static viewer
+(`python web/build.py web/template.html web/guides.html guides/github.json guides/slack.json`). Both are secondary; the Nuxt app is the main experience.
+
+### Configuration
+
+| Variable | Purpose |
+|---|---|
+| `GEMINI_API_KEY` | Your Gemini key. Never commit `.env`. |
+| `GEMINI_MODEL` | Model to use. Blank = auto-detect a Flash model. Smaller "flash-lite" models were the most reliable under load. |
+| `GEMINI_FALLBACK_MODELS` | Comma-separated models to try when the main one is overloaded (503/429) or unavailable (404). |
+| `GCP_PROJECT_ID` | Optional: read the key from GCP Secret Manager (secret `gemini_api_key`) instead. Needs `requirements-extras.txt` and `gcloud auth application-default login`. |
+| `RESEARCH_COOLDOWN_SECONDS` | Hosting only: minimum seconds between runs per IP (the Docker image sets 60). |
+| `OAUTH_AGENT_ROOT` | Hosting only: project root if the Nuxt app is not run from `nuxt-app/`. |
+
+## How it works
+
+```
+ app name / URL
+      │
+      ▼
+ discover ── homepage, llms.txt, sitemaps, web search, URL guesses (all only candidates, never evidence)
+      │
+      ▼
+ agent loop ── Gemini sees a checklist of what the guide still lacks and picks one tool per turn:
+      │        fetch_page · list_links · search_pages · web_search · record_finding · finish
+      │        (code owns the budget, the domain scope and the safety guard)
+      ▼
+ verify ── CODE checks every quote against the fetched text. A claim without a real quote is dropped and listed.
+      │
+      ▼
+ live probes ── read-only requests to the provider: OAuth metadata, how the authorize endpoint treats an
+      │         unregistered client, whether the developer portal sits behind a sign-in wall
+      ▼
+ judge + assemble ── difficulty, waits, tiers, requirements, limits, blockers, hand-offs → guide JSON
+      │
+      ▼
+ validate against guides/guide.schema.json
+```
+
+The web app is a Nuxt 3 app. Its server route starts the Python agent and streams the agent's log to the browser, which drives the
+stage chips, live counters and the pixelated working screen.
+
+## Key decisions
+
+1. **Evidence over fluency.** Four labels on every claim. A model can say anything, so a *documentation* claim must carry a quote that code finds verbatim in the fetched page; otherwise it is dropped and shown under "Not verified".
+2. **Tested means observed.** The agent may label something **Tested** only when its own live probe saw it, with a distinct source type (`agent_probe`) so it is never confused with a person's hands-on test (`manual_test`).
+3. **Never register, install or submit.** Those steps need your account and create real state, so the guide hands them to you and says where the agent was stopped (for example "redirected to `github.com/login`").
+4. **An agent loop, with code in charge.** The model decides what to read next, but code enforces the step and time budget, restricts fetches to the provider's own domains, and re-checks every recorded quote.
+5. **"Not found" beats a guess.** A review stage must state a duration to count as a wait; otherwise the guide says the wait is not published. A "fix" that fills a blank with plausible text would be worse than the blank.
+6. **A fixed, comparable schema** with an `extras` escape hatch, validated on every run, so guides for different providers line up.
+7. **Verify with outside evidence.** Checking quotes is not enough (see [VERIFICATION](docs/VERIFICATION.md)): the worst defects had real quotes. Relevance and duration guards were added after comparing against independent sources and human-tested guides.
+8. **Reliability.** Overloaded or unavailable models trigger a fallback chain; runs have hard time and step limits.
+
+## Verification in one paragraph
+
+311 of 314 documentation quotes across the nine demo guides were re-found exactly at their sources on a fresh fetch (the other 3
+are intermittent on one site), none fabricated. A manual sample against independent sources **confirmed** limits and waits for
+Notion, Calendly, Google and Slack, and **found real mistakes**: Spotify's hardest gate was missing, GitHub's steps included
+seven unrelated Copilot steps, some "approval waits" were not waits, and two live probes were misleading. All were fixed or
+flagged. Details, including what could not be verified, are in [docs/VERIFICATION.md](docs/VERIFICATION.md).
+
+## Limitations
+
+- **It is research, not a hands-on test.** The agent cannot create an app, so form fields, required fields and behaviour behind a login are not seen. A person who actually registered found details the agent's GitHub guide lacks (see the hand-tested [GitHub](guides/github.json) guide).
+- **"Time to get started" is Unknown** in every agent guide; only a hands-on attempt shows it.
+- **Difficulty ratings and the "what an agent can do" lists are model judgement** (labelled *Inferred*). They depend on coverage: Spotify moved from medium to hard once the missing gate was found.
+- **Coverage varies.** If a provider's docs are JavaScript-rendered, thin or spread across many pages, the guide has gaps and says "Not found". Some guides have few steps (Notion, Google: 1).
+- **Runs are not deterministic.** Two runs of the same app can list different limits or blockers.
+- **Live probes are modest.** At most 10 read-only requests; they honour `robots.txt` (Slack's blocks the OAuth path, so that check is skipped). Many providers publish no OAuth metadata.
+- **Provider-specific traps.** Metadata can describe a different product (Figma's is for its MCP server); probes caveat this, but cannot always tell.
+- **English docs only.** Not tested on other languages.
+- **One run at a time**, because each run makes many Gemini calls. Free-tier rate limits apply.
+- **Hosting.** The UI has no login, so on a public host your Gemini quota is exposed. The per-IP cooldown and one-run-at-a-time limit reduce, not remove, that risk; put it behind authentication for anything beyond a demo. The outbound-request guard blocks private and internal addresses but cannot fully stop DNS rebinding (see `agent/netguard.py`).
+- **The Dockerfile has not been built** in this environment (Docker was not available). The production Nuxt build (`npm run build`, then `node .output/server/index.mjs`) was run and tested.
+
+## Hosting
+
+```bash
+docker build -t oauth-guide-agent .
+docker run -p 3000:3000 -e GEMINI_API_KEY=your-key -e GEMINI_MODEL=gemini-3.1-flash-lite oauth-guide-agent
+```
+
+Any container host works (Render, Fly.io, Railway, Cloud Run). Set `GEMINI_API_KEY` as a secret environment variable, not in the image. Without Docker:
+
+```bash
+cd nuxt-app && npm ci && npm run build
+OAUTH_AGENT_ROOT=.. NITRO_PORT=3000 RESEARCH_COOLDOWN_SECONDS=60 node .output/server/index.mjs
+```
+
+## Layout
+
+```
+agent/guide_agent.py   discover · agent loop · verify · assemble (standard library only)
+agent/probes.py        read-only live checks against the provider
+agent/netguard.py      outbound-request guard (http(s) only, public addresses only, redirects re-checked)
+agent/gcp_secrets.py   optional: Gemini key from GCP Secret Manager
+guides/                schema, hand-tested GitHub and Slack guides, nine agent-generated demo guides
+nuxt-app/              the web app (Nuxt 3): journey rail, pixel working screen, guide view, API routes
+tools/                 recheck_quotes.py (independent re-check), summarize_guides.py, gemini_check.py
+tests/                 unit_test.py, probe_test.py (+ serve.py fake OAuth server)
+docs/                  DEMO.md, VERIFICATION.md, screenshots
+app.py, web/           the secondary Streamlit UI and static viewer
+```
+
+## Tests
+
+```bash
+python tests/unit_test.py                       # safety guard, accuracy fixes (no network)
+python tests/serve.py &  python tests/probe_test.py   # live probes against a fake OAuth server
+python guides/validate.py guides/github.json    # a guide against the schema
+```

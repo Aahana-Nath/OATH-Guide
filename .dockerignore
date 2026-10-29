@@ -1,0 +1,11 @@
+.venv
+.env
+out
+**/node_modules
+**/.nuxt
+**/.output
+**/__pycache__
+.git
+.vscode
+tests
+docs
