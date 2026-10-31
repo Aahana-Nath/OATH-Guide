@@ -1,0 +1,409 @@
+{
+  "input": "linear.app",
+  "pages": [
+    {
+      "url": "https://linear.app/developers/oauth-2-0-authentication.md",
+      "chars": 13944,
+      "thin": false
+    },
+    {
+      "url": "https://linear.app/developers/oauth-actor-authorization.md",
+      "chars": 2182,
+      "thin": false
+    },
+    {
+      "url": "https://linear.app/developers/oauth-app-manifests.md",
+      "chars": 9465,
+      "thin": false
+    },
+    {
+      "url": "https://linear.app/developers/rate-limiting.md",
+      "chars": 8313,
+      "thin": false
+    }
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "action": "web_search",
+      "arg": "site:linear.app \"create an app\" \"oauth\" \"marketplace\"",
+      "thought": "I need to find more information about the Linear OAuth app registration process, public requirements, and review stages to complete the checklist. I will search for Linear's developer documentation re",
+      "result": "No results (search unavailable or empty). Try fetch_page on a known docs URL."
+    },
+    {
+      "step": 2,
+      "action": "list_links",
+      "arg": "1",
+      "thought": "I need to find information about creating and publishing apps on Linear. Since the search failed, I will list links from the developer documentation pages I have already accessed to find relevant page",
+      "result": "Links on page 1:\n(none)"
+    },
+    {
+      "step": 3,
+      "action": "web_search",
+      "arg": "site:linear.app/docs oauth app registration",
+      "thought": "I need to find more information about the Linear OAuth app registration process, public requirements, and access tiers. Since the previous search was unsuccessful, I will try to fetch the main develop",
+      "result": "No results (search unavailable or empty). Try fetch_page on a known docs URL."
+    },
+    {
+      "step": 4,
+      "action": "list_links",
+      "arg": "2",
+      "thought": "I need to find more information about the Linear OAuth app registration process, public requirements, and review stages. Since the search is not working, I will list links from the other pages I have ",
+      "result": "Links on page 2:\n(none)"
+    },
+    {
+      "step": 5,
+      "action": "web_search",
+      "arg": "site:linear.app/docs \"OAuth\" \"app\"",
+      "thought": "I need to find more information about the app registration process, public requirements, and access tiers for Linear. Since the previous searches were unsuccessful, I will try to find a general docume",
+      "result": "No results (search unavailable or empty). Try fetch_page on a known docs URL."
+    },
+    {
+      "step": 6,
+      "action": "list_links",
+      "arg": "1",
+      "thought": "I need to find more information about the Linear OAuth app registration process, public requirements, and access tiers. Since the search tool is not returning results, I will try to list links from th",
+      "result": "Links on page 1:\n(none)"
+    },
+    {
+      "step": 7,
+      "action": "list_links",
+      "arg": "3",
+      "thought": "I have already read the core OAuth documentation pages. I need to find more information about the registration process, public app requirements, and review stages. Since the previous search actions we",
+      "result": "Links on page 3:\n(none)"
+    },
+    {
+      "step": 8,
+      "action": "web_search",
+      "arg": "site:linear.app/docs oauth app registration",
+      "thought": "I have exhausted the provided documentation links and need to find more information about Linear's app registration, public requirements, and review processes. Since I cannot search, I will try to fin",
+      "result": "No results (search unavailable or empty). Try fetch_page on a known docs URL."
+    },
+    {
+      "step": 9,
+      "action": "list_links",
+      "arg": "1",
+      "thought": "I have already read the core OAuth documentation pages. I need to check if there are any other relevant pages for app registration or marketplace requirements that I might have missed by listing links",
+      "result": "Links on page 1:\n(none)"
+    },
+    {
+      "step": 10,
+      "action": "finish",
+      "thought": "I have exhausted the available documentation pages for Linear's OAuth implementation. The documentation provided covers rate limits, token usage, and basic OAuth flows, but does not contain informatio",
+      "result": ""
+    }
+  ],
+  "probes": {
+    "observations": [],
+    "skipped": [
+      {
+        "what": "OAuth server metadata",
+        "why": "none published at linear.app (checked /.well-known/oauth-authorization-server, /.well-known/openid-configuration)"
+      },
+      {
+        "what": "How https://linear.app/oauth/authorize treats an unregistered client",
+        "why": "it returned HTTP 200 with no readable error (likely a JavaScript page), so nothing could be concluded"
+      },
+      {
+        "what": "https://api.linear.app/oauth/token",
+        "why": "robots.txt disallows it, so the agent did not request it"
+      },
+      {
+        "what": "https://api.linear.app/",
+        "why": "robots.txt disallows it, so the agent did not request it"
+      },
+      {
+        "what": "Developer portal",
+        "why": "no 'create an app' or dashboard link found in the pages read"
+      }
+    ],
+    "requests": 3,
+    "login_wall": null
+  },
+  "savecheck": {
+    "checked": 19,
+    "pages": 4,
+    "ok": 19,
+    "failed": [],
+    "removed": [],
+    "kept_unpruned": false
+  },
+  "findings": [
+    {
+      "category": "requirement_register",
+      "text": "It is highly recommended to create a dedicated workspace for managing the OAuth2 application.",
+      "quote": "It is **highly recommended** you create a workspace for the purpose of managing the OAuth2 Application, as each admin user will have access.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Create a new OAuth2 application in the Linear settings.",
+      "quote": "Create a new [OAuth2 Application](https://linear.app/settings/api/applications/new) and configure the redirect callback URLs to your application.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "Access tokens are valid for 24 hours.",
+      "quote": "The access token is valid for 24 hours and will need to be refreshed when it expires.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "Refresh token requests have a 30-minute grace period for retries.",
+      "quote": "Requests to consume a refresh token and obtain a new one have a 30-minute grace period to allow for network errors.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "OAuth2 apps can have up to 1000 active client credentials tokens in parallel.",
+      "quote": "OAuth2 apps can have up to 1000 active client credentials tokens in parallel, provided each token uses the same scopes.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "Client credentials tokens are valid for 30 days.",
+      "quote": "The token generated using this grant type will be an `app` actor token that has access to all public teams in the workspace and is valid for 30 days.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "The token field must not be combined with legacy fields during revocation.",
+      "quote": "The `token` field must not be combined with legacy fields.",
+      "verified": true
+    },
+    {
+      "category": "setup_type",
+      "text": "Linear supports two authentication modes: user-based actor or app-based actor.",
+      "quote": "Linear also supports an alternative authentication method with **OAuth Actor Authorization** – when authenticating this way the user will instead authorize installing the app within the workspace, actions performed with the received OAuth token will come from the app itself.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "To enable actor authorization, add the actor=app parameter to the OAuth authorization URL.",
+      "quote": "To enable the actor authorization, add `actor=app` parameter to your [OAuth authorization URL](https://linear.app/developers/oauth-2-0-authentication#redirect-user-access-requests-to-linear).",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "The actor=application mode is deprecated.",
+      "quote": "Note, we previously supported a similar `actor=application` as a mode – this was deprecated in favor of the behavior in `actor=app`.",
+      "verified": true
+    },
+    {
+      "category": "requirement_register",
+      "text": "The developer name is required for a complete setup.",
+      "quote": "developer.name\n\n* Required for a complete setup",
+      "verified": false
+    },
+    {
+      "category": "requirement_register",
+      "text": "The OAuth client name is required for a complete setup.",
+      "quote": "oauth.client_name\n\n* Required for a complete setup",
+      "verified": false
+    },
+    {
+      "category": "requirement_register",
+      "text": "The OAuth client URI is required for a complete setup.",
+      "quote": "oauth.client_uri\n\n* Required for a complete setup",
+      "verified": false
+    },
+    {
+      "category": "requirement_register",
+      "text": "The OAuth redirect URIs are required for a complete setup.",
+      "quote": "oauth.redirect_uris\n\n* Required for a complete setup",
+      "verified": false
+    },
+    {
+      "category": "limit",
+      "text": "The maximum number of redirect URIs is 32.",
+      "quote": "* Maximum items: 32",
+      "verified": false
+    },
+    {
+      "category": "blocker",
+      "text": "The OAuth client name must not contain the word Linear.",
+      "quote": "* Must not contain `Linear`",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "The OAuth client name must not contain http:// or https://.",
+      "quote": "* Must not contain `http://` or `https://`",
+      "verified": true
+    },
+    {
+      "category": "recommendation",
+      "text": "It is recommended to use an image at least 256x256px for the application icon.",
+      "quote": "* Recommendation: use an image at least 256×256px",
+      "verified": true
+    },
+    {
+      "category": "creation_path",
+      "text": "You can create an app using URL parameters to pre-populate the form.",
+      "quote": "Create a pre-populated OAuth application by adding allowed URL parameters to the workspace+agnostic version of the OAuth application creation form:",
+      "verified": true
+    },
+    {
+      "category": "creation_path",
+      "text": "You can create an app using a JSON manifest file.",
+      "quote": "The JSON manifest format is the canonical, versioned representation of the same OAuth app configuration.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "OAuth apps are limited to 5,000 requests per hour per user.",
+      "quote": "OAuth App | 5,000 | User (or App User) | 1 hour",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "OAuth apps are limited to 2,000,000 complexity points per hour per user.",
+      "quote": "OAuth app | 2,000,000 | User (or App User) | 1 hour",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "The maximum complexity for a single query is 10,000 points.",
+      "quote": "We also enforce a maximum complexity of a single query at any time to 10,000 points.",
+      "verified": false
+    },
+    {
+      "category": "blocker",
+      "text": "Queries exceeding the maximum complexity of 10,000 points will be rejected.",
+      "quote": "We also enforce a maximum complexity of a single query at any time to 10,000 points. Your query will always get rejected if it exceeds that.",
+      "verified": false
+    },
+    {
+      "category": "setup_type",
+      "text": "Linear supports standard user-based OAuth and an alternative OAuth Actor Authorization where the app itself performs actions.",
+      "quote": "Linear also supports an alternative authentication method with OAuth Actor Authorization – when authenticating this way the user will instead authorize installing the app within the workspace, actions performed with the received OAuth token will come from the app itself.",
+      "verified": false
+    },
+    {
+      "category": "creation_path",
+      "text": "Developers can create an OAuth app by filling out a form manually on the Linear website.",
+      "quote": "Create a new OAuth2 Application and configure the redirect callback URLs to your application.",
+      "verified": false
+    },
+    {
+      "category": "creation_path",
+      "text": "Developers can use URL parameters to pre-populate the OAuth app creation form.",
+      "quote": "Create a pre-populated OAuth application by adding allowed URL parameters to the workspace+agnostic version of the OAuth application creation form:",
+      "verified": false
+    },
+    {
+      "category": "creation_path",
+      "text": "Developers can use a JSON manifest to define and share an OAuth app configuration.",
+      "quote": "The JSON manifest format is the canonical, versioned representation of the same OAuth app configuration.",
+      "verified": false
+    },
+    {
+      "category": "recommendation",
+      "text": "It is highly recommended to create a dedicated workspace for managing OAuth2 applications.",
+      "quote": "It is highly recommended you create a workspace for the purpose of managing the OAuth2 Application, as each admin user will have access.",
+      "verified": false
+    },
+    {
+      "category": "recommendation",
+      "text": "It is recommended to use an image at least 256x256px for the application icon.",
+      "quote": "Recommendation: use an image at least 256×256px",
+      "verified": true
+    },
+    {
+      "category": "access_tier",
+      "text": "Apps can be configured to be private to a single workspace or publicly installable by other workspaces.",
+      "quote": "Whether the application is private to one workspace or publicly installable.",
+      "verified": true
+    },
+    {
+      "category": "access_tier",
+      "text": "The distribution setting determines if the app is private or public.",
+      "quote": "Whether the app should be available only in the current workspace or installable by other workspaces.",
+      "verified": false
+    },
+    {
+      "category": "requirement_public",
+      "text": "The developer name is required for a complete app setup.",
+      "quote": "developer.name\n\nThe person or company responsible for the application.\n\n* Required for a complete setup",
+      "verified": false
+    },
+    {
+      "category": "requirement_public",
+      "text": "The client name is required for a complete app setup.",
+      "quote": "oauth.client_name\n\nThe user-visible name of the OAuth app.\n\n* Required for a complete setup",
+      "verified": false
+    },
+    {
+      "category": "requirement_public",
+      "text": "The client URI is required for a complete app setup.",
+      "quote": "oauth.client_uri\n\nThe homepage or documentation URL for the application.\n\n* Format: absolute HTTP or HTTPS URL\n* Required for a complete setup",
+      "verified": false
+    },
+    {
+      "category": "requirement_public",
+      "text": "At least one redirect URI is required for a complete app setup.",
+      "quote": "oauth.redirect_uris\n\nA redirect URI registered for the OAuth app. Repeat this parameter to provide multiple values.\n\n* Format: absolute HTTP or HTTPS URL\n* Required for a complete setup",
+      "verified": false
+    },
+    {
+      "category": "requirement_register",
+      "text": "The developer name is required for a complete setup.",
+      "quote": "developer.name\n\n* Required for a complete setup",
+      "verified": false
+    },
+    {
+      "category": "requirement_register",
+      "text": "The OAuth client name is required for a complete setup.",
+      "quote": "oauth.client_name\n\n* Required for a complete setup",
+      "verified": false
+    },
+    {
+      "category": "requirement_register",
+      "text": "The OAuth client URI is required for a complete setup.",
+      "quote": "oauth.client_uri\n\n* Required for a complete setup",
+      "verified": false
+    },
+    {
+      "category": "requirement_register",
+      "text": "At least one redirect URI is required for a complete setup.",
+      "quote": "oauth.redirect_uris\n\n* Required for a complete setup",
+      "verified": false
+    },
+    {
+      "category": "requirement_register",
+      "text": "The authorization_code grant type is always required.",
+      "quote": "* `authorization_code` is always required",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Create a new OAuth2 Application by navigating to the application settings page.",
+      "quote": "Create a new [OAuth2 Application](https://linear.app/settings/api/applications/new) and configure the redirect callback URLs to your application.",
+      "verified": false
+    },
+    {
+      "category": "step",
+      "text": "Redirect the user to the Linear authorization URL with the required parameters and scopes.",
+      "quote": "When authorizing a user to the Linear API, redirect to an authorization URL with correct parameters and scopes:",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Handle the redirect back to your application after the user approves the request.",
+      "quote": "Once the user approves your application they will be redirected back to your application, with the OAuth authorization `code` in the URL params.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Exchange the authorization code for an access token by making a POST request to the token endpoint.",
+      "quote": "After receiving the `code`, you can exchange it for a Linear API access token:",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Initialize the Linear Client with the access token to make API requests.",
+      "quote": "Once you have obtained a valid access token, you can make a request to Linear's GraphQL API. You can initialize the [Linear Client](https://linear.app/developers/sdk) with the access token:",
+      "verified": true
+    }
+  ]
+}

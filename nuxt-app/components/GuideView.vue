@@ -1,8 +1,6 @@
 <script setup lang="ts">
-const props = defineProps<{ guide: Guide; entry: GuideEntry | null }>()
-
-const showAll = ref(false)
-provide('showAll', showAll)
+// Guide sections only. The header, sections nav and research panel live in pages/guide.vue.
+const props = defineProps<{ guide: Guide }>()
 
 const filter = ref('all')
 const selType = ref<string | null>(null)
@@ -29,98 +27,10 @@ const shownClaims = computed(() => claims.value.filter((c) => filter.value === '
 const steps = computed(() => g.value.steps.filter((s: any) => !s.applies_to || s.applies_to === selType.value))
 const selTypeName = computed(() => st.value?.types.find((t: any) => t.id === selType.value)?.name || '')
 const typeName = (id: string) => st.value?.types.find((t: any) => t.id === id)?.name || id
-
-// Header chips: which parts of the guide actually carry information.
-const coverage = computed(() => {
-  const x = g.value
-  const sourced = claims.value.every((c) => !['official_docs', 'tested'].includes(c.claim.label) || c.claim.source_url || c.claim.source_type === 'manual_test')
-  return [
-    { name: 'Difficulty', ok: x.difficulty.start.level !== 'unknown' || x.difficulty.public.level !== 'unknown' },
-    { name: 'Time & approval wait', ok: x.time.to_approval.display !== 'Not found' || x.time.to_start.display !== 'Unknown' },
-    { name: 'Requirements', ok: x.requirements.register.length + x.requirements.go_public.length > 0 },
-    { name: 'Blockers', ok: x.blockers.length > 0 },
-    { name: 'Agent vs human', ok: x.agent_vs_human.agent.length + x.agent_vs_human.human.length > 0 },
-    { name: 'Setup steps', ok: x.steps.some((s: any) => s.claim?.label !== 'inferred') },
-    { name: 'Sources on every claim', ok: sourced }
-  ]
-})
-const nav = [
-  ['sec-1', 'Difficulty & time'], ['sec-2', 'Path'], ['sec-3', 'Steps'], ['sec-4', 'Needs'],
-  ['sec-5', 'Risks'], ['sec-6', 'Who does what'], ['sec-7', 'Trust']
-]
-
-// Quick links: smooth-scroll to a section and highlight the one being read.
-const activeSection = ref('')
-function jump(id: string) {
-  if (id === 'top') return window.scrollTo({ top: 0, behavior: 'smooth' })
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  activeSection.value = id
-}
-let spy: IntersectionObserver | null = null
-function observe() {
-  spy?.disconnect()
-  // A section counts as current while it crosses the band just below the sticky bar.
-  spy = new IntersectionObserver(
-    (entries) => entries.forEach((e) => { if (e.isIntersecting) activeSection.value = e.target.id }),
-    { rootMargin: '-80px 0px -65% 0px' }
-  )
-  nav.forEach(([id]) => { const el = document.getElementById(id); if (el) spy!.observe(el) })
-}
-onMounted(observe)
-watch(g, () => { activeSection.value = ''; nextTick(observe) })
-onBeforeUnmount(() => spy?.disconnect())
-
-const copied = ref('')
-async function copyLink() {
-  try {
-    await navigator.clipboard.writeText(location.href)
-    copied.value = 'Link copied.'
-  } catch {
-    copied.value = 'Copy the address bar.'
-  }
-  setTimeout(() => (copied.value = ''), 2500)
-}
 </script>
 
 <template>
   <div class="guide">
-    <!-- header -->
-    <section class="card pad-lg head">
-      <div class="head-top">
-        <h1>{{ g.provider.name }}</h1>
-        <div class="row-chips">
-          <button class="btn small" type="button" @click="copyLink">Copy link</button>
-          <span v-if="copied" class="note" role="status">{{ copied }}</span>
-        </div>
-      </div>
-      <p class="lead">{{ g.summary }}</p>
-      <p class="meta-line">
-        <a :href="g.provider.website" target="_blank" rel="noopener">{{ g.provider.website }}</a>
-        · generated {{ g.generated_at }} · {{ g.generated_by.mode === 'manual_plus_agent' ? 'hands-on testing plus documentation research' : g.generated_by.mode }}
-        <template v-if="g.generated_by.model"> · {{ g.generated_by.model }}</template>
-      </p>
-      <div class="row-chips">
-        <span v-for="c in coverage" :key="c.name" class="cov" :class="{ ok: c.ok }">{{ c.ok ? '✓' : '–' }} {{ c.name }}</span>
-      </div>
-    </section>
-
-    <div class="quicknav">
-      <nav aria-label="Jump to a section">
-        <a
-          v-for="[id, label] in nav"
-          :key="id"
-          :href="`#${id}`"
-          :class="{ active: activeSection === id }"
-          :aria-current="activeSection === id ? 'location' : undefined"
-          @click.prevent="jump(id)"
-        >{{ label }}</a>
-      </nav>
-      <div class="qn-right">
-        <label class="check"><input v-model="showAll" type="checkbox"> Show all evidence</label>
-        <button class="btn small" type="button" @click="jump('top')">↑ Top</button>
-      </div>
-    </div>
-
     <!-- 1 -->
     <section id="sec-1" class="block">
       <h2 class="h2">1 · How hard, how long</h2>

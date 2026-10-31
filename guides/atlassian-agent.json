@@ -1,0 +1,793 @@
+{
+  "schema_version": "1.0",
+  "provider": {
+    "name": "Atlassian",
+    "website": "https://atlassian.com",
+    "docs_urls": [
+      "https://developer.atlassian.com/cloud/jira/platform/getting-started-with-connect",
+      "https://developer.atlassian.com/cloud/jira/platform/rate-limiting",
+      "https://developer.atlassian.com/platform/forge",
+      "https://www.atlassian.com/developers"
+    ]
+  },
+  "generated_at": "2026-10-31",
+  "generated_by": {
+    "mode": "agent",
+    "model": "gemini-3.1-flash-lite"
+  },
+  "summary": "Atlassian development involves creating app descriptors or OAuth integrations. While private apps are easy to start, public listing requires rigorous partner enrollment, due diligence, and a formal review process. New Connect apps cannot be published to the Marketplace.",
+  "difficulty": {
+    "start": {
+      "level": "easy",
+      "reason": {
+        "text": "The claims describe a straightforward process of creating an app descriptor file and a static HTML page to begin development.",
+        "label": "inferred",
+        "source_type": "none",
+        "note": "Model judgement from the verified claims in this guide; not tested.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    "public": {
+      "level": "hard",
+      "reason": {
+        "text": "Public listing requires extensive prerequisites including partner enrollment, due diligence, security verification, and a formal review process.",
+        "label": "inferred",
+        "source_type": "none",
+        "note": "Model judgement from the verified claims in this guide; not tested.",
+        "checked_at": "2026-10-31"
+      }
+    }
+  },
+  "time": {
+    "to_start": {
+      "display": "Unknown",
+      "claim": {
+        "text": "Setup time was not stated in the pages read.",
+        "label": "unknown",
+        "source_type": "none",
+        "note": "Only a hands-on attempt shows how long registration takes.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    "to_approval": {
+      "display": "Not found",
+      "stages": [],
+      "claim": {
+        "text": "No review or approval timeline was found.",
+        "label": "unknown",
+        "source_type": "none",
+        "note": "10 pages read: https://developer.atlassian.com/cloud/jira/platform/getting-started-with-connect, https://developer.atlassian.com/cloud/jira/platform/rate-limiting, https://developer.atlassian.com/platform/forge, https://www.atlassian.com/developers, https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps, https://developer.atlassian.com/platform/marketplace/knowledge-base/listing-a-third-party-integration-on-the-atlassian-marketplace …",
+        "checked_at": "2026-10-31"
+      }
+    }
+  },
+  "access_ladder": [
+    {
+      "tier": 1,
+      "name": "Private Development",
+      "allows": "The app is restricted to the developer's own account for installation and usage.",
+      "gate": "Default",
+      "prerequisites": [],
+      "claims": [
+        {
+          "text": "When you create an OAuth 2.0 (3LO) app, it's private by default. This means that only you can install and use it.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps",
+          "evidence_quote": "When you create an OAuth 2.0 (3LO) app, it's private by default. This means that only you can install and use it.",
+          "checked_at": "2026-10-31"
+        }
+      ]
+    },
+    {
+      "tier": 2,
+      "name": "Shared Distribution",
+      "allows": "The developer can distribute the app to other users by enabling sharing.",
+      "gate": "Enable sharing",
+      "prerequisites": [],
+      "claims": [
+        {
+          "text": "If you want to distribute your app to other users, you must enable sharing.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps",
+          "evidence_quote": "If you want to distribute your app to other users, you must enable sharing.",
+          "checked_at": "2026-10-31"
+        }
+      ]
+    },
+    {
+      "tier": 3,
+      "name": "Marketplace Listing",
+      "allows": "The app can be listed on the Atlassian Marketplace with informational details.",
+      "gate": "Submit for marketplace listing",
+      "prerequisites": [],
+      "claims": [
+        {
+          "text": "Although OAuth 2.0 (3LO) apps can be listed on the Atlassian Marketplace, they will appear as informational listings only, with limited Marketplace features.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps",
+          "evidence_quote": "Although OAuth 2.0 (3LO) apps can be listed on the Atlassian Marketplace, they will appear as informational listings only, with limited Marketplace features.",
+          "checked_at": "2026-10-31"
+        }
+      ]
+    }
+  ],
+  "requirements": {
+    "register": [
+      {
+        "item": "OAuth 2.0 integration",
+        "status": "required",
+        "claim": {
+          "text": "You must create an OAuth 2.0 integration in the developer console to create an OAuth 2.0 (3LO) app.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps",
+          "evidence_quote": "In the Developer console, select the Create dropdown and choose OAuth 2.0 integration to create an OAuth 2.0 (3LO) app.",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "item": "Build number",
+        "status": "required",
+        "claim": {
+          "text": "A build number is mandatory for the Marketplace app.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.atlassian.com/platform/marketplace/knowledge-base/listing-a-third-party-integration-on-the-atlassian-marketplace",
+          "evidence_quote": "Build number - the unique identifier for each build, which determines the order of different versions of the Marketplace app. This field is mandatory.",
+          "checked_at": "2026-10-31"
+        }
+      }
+    ],
+    "go_public": [
+      {
+        "item": "Test instance access",
+        "status": "required",
+        "claim": {
+          "text": "You must provide access to a test instance of your software for the review team.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.atlassian.com/platform/marketplace/knowledge-base/listing-a-third-party-integration-on-the-atlassian-marketplace",
+          "evidence_quote": "In order to test the integration we will need access to a test instance of your software so we can run through the set up and configuration.",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "item": "Publicly listed app approval",
+        "status": "required",
+        "claim": {
+          "text": "All new publicly listed apps must be approved by Atlassian.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.atlassian.com/platform/marketplace/app-approval-guidelines",
+          "evidence_quote": "All new publicly listed apps need to be approved by Atlassian.",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "item": "Privacy and security tab and ticket approval",
+        "status": "required",
+        "claim": {
+          "text": "Partners must have a privacy and security tab and ticket approval.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.atlassian.com/platform/marketplace/app-approval-guidelines",
+          "evidence_quote": "Privacy and security tab and ticket approval",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "item": "Partner verification ticket",
+        "status": "required",
+        "claim": {
+          "text": "Partners must have a partner verification ticket.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.atlassian.com/platform/marketplace/app-approval-guidelines",
+          "evidence_quote": "Partner verification ticket",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "item": "Marketplace Partner Agreement",
+        "status": "required",
+        "claim": {
+          "text": "Partners must accept the Marketplace Partner Agreement upon submission.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.atlassian.com/platform/marketplace/app-approval-guidelines",
+          "evidence_quote": "Upon submission, accept the Marketplace Partner Agreement.",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "item": "Privacy policy",
+        "status": "required",
+        "claim": {
+          "text": "Partners must create a privacy policy.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.atlassian.com/platform/marketplace/app-approval-guidelines",
+          "evidence_quote": "Create a privacy policy",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "item": "Developer Community registration",
+        "status": "required",
+        "claim": {
+          "text": "At least one contact from the partner profile must be registered with the Atlassian Developer Community.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.atlassian.com/platform/marketplace/app-approval-guidelines",
+          "evidence_quote": "At least one contact from your partner profile is registered with the Atlassian Developer Community for future correspondence.",
+          "checked_at": "2026-10-31"
+        }
+      }
+    ]
+  },
+  "limits": [
+    {
+      "item": "Per-tenant hourly cap",
+      "value": "500000",
+      "claim": {
+        "text": "Per-tenant rate limits are capped at 500,000 points per hour.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.atlassian.com/cloud/jira/platform/rate-limiting",
+        "evidence_quote": "Per-tenant rate limits are capped at 500,000 points per hour for Standard, Premium, and Enterprise editions.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "item": "GET burst limit",
+      "value": "100",
+      "claim": {
+        "text": "The default burst limit for GET requests is 100 requests per second.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.atlassian.com/cloud/jira/platform/rate-limiting",
+        "evidence_quote": "HTTP method Requests per second GET 100",
+        "checked_at": "2026-10-31"
+      }
+    }
+  ],
+  "blockers": [
+    {
+      "issue": "The app descriptor file can only be fetched from specific web server ports.",
+      "fix": "Ensure the web server is running on port 80, 443, or 8080.",
+      "claim": {
+        "text": "The app descriptor file can only be fetched from specific web server ports.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.atlassian.com/cloud/jira/platform/getting-started-with-connect",
+        "evidence_quote": "The descriptor file can only be fetched from web server ports 80, 443, or 8080.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "issue": "New Connect apps cannot be published to the Atlassian Marketplace.",
+      "fix": "Use Forge for new app development.",
+      "claim": {
+        "text": "New Connect apps cannot be published to the Atlassian Marketplace.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.atlassian.com/cloud/jira/platform/getting-started-with-connect",
+        "evidence_quote": "You can no longer publish Connect apps on the Atlassian Marketplace. All new extensibility features\nwill be delivered only on Forge.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "issue": "Deleting an app",
+      "fix": "See the cited page.",
+      "claim": {
+        "text": "You cannot delete an app if it is currently installed on a site.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps",
+        "evidence_quote": "You can only delete an app if it's not installed anywhere. If your app is currently installed on a site, uninstall it.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "issue": "Implicit grant flow",
+      "fix": "See the cited page.",
+      "claim": {
+        "text": "The implicit grant flow is not supported.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps",
+        "evidence_quote": "OAuth 2.0 (3LO) currently supports the code grant flow only. It does not support the implicit grant flow.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "issue": "The App Key cannot be changed after it is set.",
+      "fix": "Choose the App Key carefully as it is permanent.",
+      "claim": {
+        "text": "The App Key cannot be changed after it is set.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.atlassian.com/platform/marketplace/knowledge-base/listing-a-third-party-integration-on-the-atlassian-marketplace",
+        "evidence_quote": "App Key - the unique identifier for the Marketplace app. This value can't be altered once you set it.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "issue": "Incomplete listing fields, missing policy links, or install failures on a clean site…",
+      "fix": "Review app approval guidelines one final time and test your app on a clean environment one final time.",
+      "claim": {
+        "text": "Incomplete listing fields, missing policy links, or install failures on a clean site cause review rejections.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.atlassian.com/platform/marketplace/onboarding-hub/launch/submit-for-review",
+        "evidence_quote": "Most review rejections come from avoidable gaps like incomplete listing fields, missing policy links, or install failures on a clean site.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "issue": "UI breakage",
+      "fix": "See the cited page.",
+      "claim": {
+        "text": "Apps that break the host Atlassian app UI will be rejected.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.atlassian.com/platform/marketplace/app-approval-guidelines",
+        "evidence_quote": "If the UI breaks, your app will be rejected.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "issue": "Trademark infringement",
+      "fix": "See the cited page.",
+      "claim": {
+        "text": "Trademark infringement results in automatic rejection.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.atlassian.com/platform/marketplace/app-approval-guidelines",
+        "evidence_quote": "Trademark infringement is an automatic rejection, so be sure to read our brand guidelines for Marketplace Partners before submitting your app.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "issue": "Basic authentication",
+      "fix": "See the cited page.",
+      "claim": {
+        "text": "Basic authentication is not permitted for public, approved apps.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.atlassian.com/platform/marketplace/app-approval-guidelines",
+        "evidence_quote": "Whilst your app may make use of Basic authentication with Atlassian's product REST APIs for ease of development/speed during development, this shall not be the case for any public, approved app.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "issue": "Do not use prohibited words in your app name.",
+      "fix": "Remove prohibited words from the app name.",
+      "claim": {
+        "text": "Do not use prohibited words in your app name.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.atlassian.com/platform/marketplace/marketplace-app-listing-principles",
+        "evidence_quote": "Prohibited words: Do not use \"Atlassian,\" \"plugin,\" \"beta,\" \"add-on,\" or \"app.\"",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "issue": "Do not start your app name with an Atlassian product name.",
+      "fix": "Reorder the app name so the Atlassian product name is not at the start.",
+      "claim": {
+        "text": "Do not start your app name with an Atlassian product name.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.atlassian.com/platform/marketplace/marketplace-app-listing-principles",
+        "evidence_quote": "Branding: Do not start with an Atlassian product name. Use \"Time Tracker for Jira,\" not \"Jira Time Tracker.\"",
+        "checked_at": "2026-10-31"
+      }
+    }
+  ],
+  "steps": [
+    {
+      "order": 1,
+      "text": "[OAuth 2.0 (3LO) apps] Navigate to the developer console to create an app.",
+      "actor": "human",
+      "claim": {
+        "text": "Navigate to the developer console to create an app.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps",
+        "evidence_quote": "From any page on developer.atlassian.com, select your profile icon in the top-right corner, and from the dropdown, select Developer console.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 2,
+      "text": "[OAuth 2.0 (3LO) apps] Select the Create dropdown and choose OAuth 2.0 integration.",
+      "actor": "human",
+      "claim": {
+        "text": "Select the Create dropdown and choose OAuth 2.0 integration.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps",
+        "evidence_quote": "In the Developer console, select the Create dropdown and choose OAuth 2.0 integration to create an OAuth 2.0 (3LO) app.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 3,
+      "text": "[OAuth 2.0 (3LO) apps] Enter an app name and choose the grant type.",
+      "actor": "human",
+      "claim": {
+        "text": "Enter an app name and choose the grant type.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps",
+        "evidence_quote": "Enter an app name and choose the OAuth 2.0 (3LO) grant type for your app.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 4,
+      "text": "[OAuth 2.0 (3LO) apps] Configure OAuth 2.0 (3LO) in the Authorization menu.",
+      "actor": "both",
+      "claim": {
+        "text": "Configure OAuth 2.0 (3LO) in the Authorization menu.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps",
+        "evidence_quote": "Select Authorization in the left menu. Next to OAuth 2.0 (3LO), select Configure.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 5,
+      "text": "[OAuth 2.0 (3LO) apps] Enter the Callback URL and save changes.",
+      "actor": "human",
+      "claim": {
+        "text": "Enter the Callback URL and save changes.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps",
+        "evidence_quote": "Enter the Callback URL. Set this to any URL that is accessible by the app. When you implement OAuth 2.0 (3LO) in your app (see next section), the redirect_uri must match this URL. Click Save changes.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 6,
+      "text": "[OAuth 2.0 (3LO) apps] Add APIs to the app via the Permissions menu.",
+      "actor": "both",
+      "claim": {
+        "text": "Add APIs to the app via the Permissions menu.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps",
+        "evidence_quote": "Select Permissions in the left menu. Next to the API you want to add, select Add.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 7,
+      "text": "[Submit for review and respond to questions] Complete the final pre-submission checklist.",
+      "actor": "both",
+      "claim": {
+        "text": "Complete the final pre-submission checklist.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.atlassian.com/platform/marketplace/onboarding-hub/launch/submit-for-review",
+        "evidence_quote": "1. Complete the final pre-submission checklist",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 8,
+      "text": "[Submit for review and respond to questions] Submit your app for review via the partner portal.",
+      "actor": "human",
+      "claim": {
+        "text": "Submit your app for review via the partner portal.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.atlassian.com/platform/marketplace/onboarding-hub/launch/submit-for-review",
+        "evidence_quote": "Submit your app for review via the partner portal",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 9,
+      "text": "[Submit for review and respond to questions] Respond to review feedback from the review team.",
+      "actor": "agent",
+      "claim": {
+        "text": "Respond to review feedback from the review team.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developer.atlassian.com/platform/marketplace/onboarding-hub/launch/submit-for-review",
+        "evidence_quote": "3. Respond to review feedback",
+        "checked_at": "2026-10-31"
+      }
+    }
+  ],
+  "agent_vs_human": {
+    "agent": [
+      {
+        "text": "Look up the provider's live OAuth endpoints and check how they answer an unregistered client (done during this run).",
+        "claim": {
+          "text": "Responses from api.atlassian.com carry rate-limit headers: x-ratelimit-limit: 400, 400;w=60, x-ratelimit-remaining: 391.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://api.atlassian.com/",
+          "note": "Automated probe by the agent on 2026-10-31: GET https://api.atlassian.com/ with no token. Observed on a request with no token; the limit for authenticated apps may differ.",
+          "checked_at": "2026-10-31",
+          "evidence_quote": "x-ratelimit-limit: 400, 400;w=60 | x-ratelimit-remaining: 391"
+        }
+      },
+      {
+        "text": "Respond to review feedback from the review team.",
+        "claim": {
+          "text": "Respond to review feedback from the review team.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.atlassian.com/platform/marketplace/onboarding-hub/launch/submit-for-review",
+          "evidence_quote": "3. Respond to review feedback",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "text": "Generate the atlassian-connect.json descriptor file based on provided requirements.",
+        "claim": {
+          "text": "Generate the atlassian-connect.json descriptor file based on provided requirements.",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "text": "Draft the content for the app's privacy policy and security documentation.",
+        "claim": {
+          "text": "Draft the content for the app's privacy policy and security documentation.",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-31"
+        }
+      }
+    ],
+    "human": [
+      {
+        "text": "Navigate to the developer console to create an app.",
+        "claim": {
+          "text": "Navigate to the developer console to create an app.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps",
+          "evidence_quote": "From any page on developer.atlassian.com, select your profile icon in the top-right corner, and from the dropdown, select Developer console.",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "text": "Select the Create dropdown and choose OAuth 2.0 integration.",
+        "claim": {
+          "text": "Select the Create dropdown and choose OAuth 2.0 integration.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps",
+          "evidence_quote": "In the Developer console, select the Create dropdown and choose OAuth 2.0 integration to create an OAuth 2.0 (3LO) app.",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "text": "Enter an app name and choose the grant type.",
+        "claim": {
+          "text": "Enter an app name and choose the grant type.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps",
+          "evidence_quote": "Enter an app name and choose the OAuth 2.0 (3LO) grant type for your app.",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "text": "Configure OAuth 2.0 (3LO) in the Authorization menu.",
+        "claim": {
+          "text": "Configure OAuth 2.0 (3LO) in the Authorization menu.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps",
+          "evidence_quote": "Select Authorization in the left menu. Next to OAuth 2.0 (3LO), select Configure.",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "text": "Sign up for a cloud development site and verify your Atlassian organization.",
+        "claim": {
+          "text": "Sign up for a cloud development site and verify your Atlassian organization.",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-31"
+        }
+      }
+    ]
+  },
+  "extras": [
+    {
+      "title": "Tested live by the agent",
+      "why_it_matters": "The agent made harmless requests to the provider (no login, no registration; one deliberately invalid token request) and recorded what came back. These are observations, not documentation.",
+      "claims": [
+        {
+          "text": "When this guide was saved, the agent re-fetched the 8 pages it cites and re-checked 37 quoted passages: 37 were found again, none were missing.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://developer.atlassian.com/cloud/jira/platform/getting-started-with-connect",
+          "note": "Automated test on 2026-10-31: each quote must appear in a fresh copy of the cited page. A quote that does not is removed, together with anything that rested only on it.",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "text": "Responses from api.atlassian.com carry rate-limit headers: x-ratelimit-limit: 400, 400;w=60, x-ratelimit-remaining: 391.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://api.atlassian.com/",
+          "note": "Automated probe by the agent on 2026-10-31: GET https://api.atlassian.com/ with no token. Observed on a request with no token; the limit for authenticated apps may differ.",
+          "checked_at": "2026-10-31",
+          "evidence_quote": "x-ratelimit-limit: 400, 400;w=60 | x-ratelimit-remaining: 391"
+        }
+      ]
+    },
+    {
+      "title": "Choices to make before you start (token / app / registration types)",
+      "why_it_matters": "The provider offers more than one way to set up. Compare before you choose.",
+      "claims": [
+        {
+          "text": "You can choose between account-level or resource-level grant types when creating an OAuth 2.0 (3LO) app.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps",
+          "evidence_quote": "When you create an OAuth 2.0 (3LO) app, you can choose between two grant types: Account-level grant: The user’s consent applies at the Atlassian account level. A single grant can cover access to multiple sites where your app is installed, subject to the scopes you request. Resource-level grant: The user’s consent is limited to the specific site(s) they select on the consent screen.",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "text": "Connect is a development framework for extending Atlassian cloud products.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.atlassian.com/cloud/jira/platform/getting-started-with-connect",
+          "evidence_quote": "Connect is a development framework for extending Atlassian cloud products. Connect gives you control over the tech stack, infrastructure, and integration with Atlassian Cloud products.",
+          "checked_at": "2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Cloud developer site",
+      "why_it_matters": "Free forever",
+      "claims": [
+        {
+          "text": "Developers can obtain a free cloud developer site for testing purposes.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://www.atlassian.com/developers",
+          "evidence_quote": "Get a cloud developer site to test your app. It's free forever.",
+          "checked_at": "2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "What the docs recommend",
+      "why_it_matters": "Bundling CSS and JS files",
+      "claims": [
+        {
+          "text": "Bundle CSS and JS files with your site for production environments.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developer.atlassian.com/cloud/jira/platform/getting-started-with-connect",
+          "evidence_quote": "For production environments, we recommend bundling CSS and JS files with your site, rather than relying on a third-party CDN.",
+          "checked_at": "2026-10-31"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "not_verified": [
+      {
+        "item": "Review or approval timeline",
+        "note": "Not found in the pages read. 10 pages read: https://developer.atlassian.com/cloud/jira/platform/getting-started-with-connect, https://developer.atlassian.com/cloud/jira/platform/rate-limiting, https://developer.atlassian.com/platform/forge, https://www.atlassian.com/developers, https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps, https://developer.atlassian.com/platform/marketplace/knowledge-base/listing-a-third-party-integration-on-the-atlassian-marketplace …"
+      },
+      {
+        "item": "Registering, installing and submitting an app",
+        "note": "Not attempted. These steps need your account and create real state, so the agent stopped at the sign-in wall. Only the live checks under 'Tested live by the agent' were run."
+      },
+      {
+        "item": "Dropped model claim: The default burst limit for POST requests is 100 requests per second.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Dropped model claim: The default burst limit for PUT requests is 50 requests per second.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Dropped model claim: The default burst limit for DELETE requests is 50 requests per second.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Dropped model claim: Verify the listing is live and test the installation.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Live check not completed: OAuth server metadata",
+        "note": "none published at atlassian.com, developer.atlassian.com, www.atlassian.com (checked /.well-known/oauth-authorization-server, /.well-known/openid-configuration)"
+      },
+      {
+        "item": "Live check not completed: https://auth.atlassian.com/authorize",
+        "note": "robots.txt disallows it, so the agent did not request it"
+      },
+      {
+        "item": "Live check not completed: https://auth.atlassian.com/oauth/token",
+        "note": "robots.txt disallows it, so the agent did not request it"
+      },
+      {
+        "item": "Live check not completed: https://developer.atlassian.com/platform/marketplace/app-approval-security-workflow",
+        "note": "it opened without a visible sign-in wall (HTTP 200); the agent cannot tell whether creating an app there needs an account"
+      },
+      {
+        "item": "Live check not completed: https://developer.atlassian.com/platform/marketplace/new-app-categorization-system-in-marketplace",
+        "note": "it opened without a visible sign-in wall (HTTP 200); the agent cannot tell whether creating an app there needs an account"
+      },
+      {
+        "item": "Live check not completed: https://developer.atlassian.com/platform/forge/build-an-app-compatible-with-confluence-and-jira",
+        "note": "it opened without a visible sign-in wall (HTTP 200); the agent cannot tell whether creating an app there needs an account"
+      }
+    ],
+    "conflicts": [],
+    "sources": [
+      {
+        "title": "Getting started with Connect",
+        "url": "https://developer.atlassian.com/cloud/jira/platform/getting-started-with-connect",
+        "type": "docs"
+      },
+      {
+        "title": "Rate limiting",
+        "url": "https://developer.atlassian.com/cloud/jira/platform/rate-limiting",
+        "type": "docs"
+      },
+      {
+        "title": "About Forge",
+        "url": "https://developer.atlassian.com/platform/forge",
+        "type": "docs"
+      },
+      {
+        "title": "Atlassian Developers Build Apps and Integrations | Atlassian",
+        "url": "https://www.atlassian.com/developers",
+        "type": "docs"
+      },
+      {
+        "title": "OAuth 2.0 (3LO) apps",
+        "url": "https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps",
+        "type": "docs"
+      },
+      {
+        "title": "List a third-party integration on the Atlassian Marketplace",
+        "url": "https://developer.atlassian.com/platform/marketplace/knowledge-base/listing-a-third-party-integration-on-the-atlassian-marketplace",
+        "type": "docs"
+      },
+      {
+        "title": "Submit for review and respond to questions",
+        "url": "https://developer.atlassian.com/platform/marketplace/onboarding-hub/launch/submit-for-review",
+        "type": "docs"
+      },
+      {
+        "title": "App approval guidelines",
+        "url": "https://developer.atlassian.com/platform/marketplace/app-approval-guidelines",
+        "type": "docs"
+      },
+      {
+        "title": "Marketplace app listing principles",
+        "url": "https://developer.atlassian.com/platform/marketplace/marketplace-app-listing-principles",
+        "type": "docs"
+      },
+      {
+        "title": "Register as an Atlassian Marketplace Partner",
+        "url": "https://developer.atlassian.com/platform/marketplace/onboarding-hub/plan/register-as-an-atlassian-marketplace-partner",
+        "type": "docs"
+      }
+    ]
+  }
+}

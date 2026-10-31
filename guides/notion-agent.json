@@ -10,31 +10,31 @@
       "https://www.notion.com/product/docs"
     ]
   },
-  "generated_at": "2026-10-30",
+  "generated_at": "2026-10-31",
   "generated_by": {
     "mode": "agent",
     "model": "gemini-3.1-flash-lite"
   },
-  "summary": "Notion allows developers to build internal or public connections. Public connections require a security review for Marketplace listing and must support 'Any workspace' scope. Developers must manage OAuth flows, rate limits, and specific workspace permissions for all integrations.",
+  "summary": "Notion allows developers to build internal or public connections via its Developer portal. Public connections require a security review for Marketplace listing, while internal connections are restricted to workspace owners. OAuth configuration and installation scopes are permanent upon creation.",
   "difficulty": {
     "start": {
       "level": "easy",
       "reason": {
-        "text": "The documentation provides clear steps for navigating the Developer portal to create connections and generate tokens.",
+        "text": "The documentation provides clear, step-by-step instructions for navigating the Developer portal to create and configure both internal and public connections.",
         "label": "inferred",
         "source_type": "none",
         "note": "Model judgement from the verified claims in this guide; not tested.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     "public": {
-      "level": "hard",
+      "level": "medium",
       "reason": {
-        "text": "Public listing requires a mandatory security review and strict adherence to installation scope requirements that cannot be modified after creation.",
+        "text": "Public listing requires meeting specific installation scope requirements and undergoing a mandatory security review process by the Notion team.",
         "label": "inferred",
         "source_type": "none",
         "note": "Model judgement from the verified claims in this guide; not tested.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     }
   },
@@ -46,7 +46,7 @@
         "label": "unknown",
         "source_type": "none",
         "note": "Only a hands-on attempt shows how long registration takes.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     "to_approval": {
@@ -63,7 +63,7 @@
         "source_type": "docs",
         "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
         "evidence_quote": "After submission, expect to hear back from our team within 5-10 business days via email.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     }
   },
@@ -81,7 +81,7 @@
           "source_type": "docs",
           "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
           "evidence_quote": "Public connections work independently of Marketplace listings. Listing on the Marketplace is optional and helps your connection reach a wider audience, but your connection can be used via its OAuth flow without being listed.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       ]
     },
@@ -98,7 +98,7 @@
           "source_type": "docs",
           "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
           "evidence_quote": "After submission, expect to hear back from our team within 5-10 business days via email.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         },
         {
           "text": "Notion team review of listing submission.",
@@ -106,7 +106,7 @@
           "source_type": "docs",
           "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
           "evidence_quote": "After submission, expect to hear back from our team within 5-10 business days via email.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       ]
     }
@@ -122,7 +122,7 @@
           "source_type": "docs",
           "source_url": "https://developers.notion.com/guides/get-started/authorization",
           "evidence_quote": "You are required to be a workspace owner to create a connection.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       },
       {
@@ -134,7 +134,7 @@
           "source_type": "docs",
           "source_url": "https://developers.notion.com/guides/get-started/authorization",
           "evidence_quote": "Fill out the form with your connection details, including your redirect URI(s) under the OAuth configuration section",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       },
       {
@@ -146,7 +146,7 @@
           "source_type": "docs",
           "source_url": "https://developers.notion.com/guides/get-started/public-connections",
           "evidence_quote": "Connection name and development workspace",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       },
       {
@@ -158,7 +158,7 @@
           "source_type": "docs",
           "source_url": "https://developers.notion.com/guides/get-started/public-connections",
           "evidence_quote": "Installation scope — choose Any workspace or Selected workspaces only (if you pick the latter, select the workspaces from the list that appears)",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       },
       {
@@ -170,7 +170,7 @@
           "source_type": "docs",
           "source_url": "https://developers.notion.com/guides/get-started/personal-access-tokens",
           "evidence_quote": "Guests and restricted members cannot create PATs or log in with the Notion CLI (ntn login). Only full workspace members can create tokens",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       }
     ],
@@ -184,7 +184,7 @@
           "source_type": "docs",
           "source_url": "https://developers.notion.com/guides/get-started/overview",
           "evidence_quote": "Public connections must undergo a Notion security review before being listed on the Marketplace. You can create and use a public connection without listing it.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       },
       {
@@ -196,7 +196,7 @@
           "source_type": "docs",
           "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
           "evidence_quote": "Only public connections with an installation scope of Any workspace can be listed on the Marketplace. Internal connections and Selected workspaces only public connections are not eligible.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       },
       {
@@ -208,7 +208,7 @@
           "source_type": "docs",
           "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
           "evidence_quote": "Internal connections and Selected workspaces only public connections are not eligible.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       }
     ]
@@ -223,7 +223,7 @@
         "source_type": "docs",
         "source_url": "https://developers.notion.com/guides/get-started/personal-access-tokens",
         "evidence_quote": "If you don’t choose an expiration, the token expires after 1 year.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -235,7 +235,7 @@
         "source_type": "docs",
         "source_url": "https://developers.notion.com/reference/request-limits",
         "evidence_quote": "Business and Enterprise\n\n600 requests per minute (an average of 10 per second)",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -247,7 +247,7 @@
         "source_type": "docs",
         "source_url": "https://developers.notion.com/reference/request-limits",
         "evidence_quote": "All other plans\n\n180 requests per minute (an average of 3 per second)",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -259,7 +259,7 @@
         "source_type": "docs",
         "source_url": "https://developers.notion.com/reference/request-limits",
         "evidence_quote": "Querying a data source has a separate limit of about 3 requests per second per connection.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     }
   ],
@@ -273,7 +273,7 @@
         "source_type": "docs",
         "source_url": "https://developers.notion.com/guides/get-started/authorization",
         "evidence_quote": "Fill out the form with your connection details, including your redirect URI(s) under the OAuth configuration section and the connection’s installation scope — either Any workspace or Selected workspaces only. This can’t be changed after creation.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -285,7 +285,7 @@
         "source_type": "docs",
         "source_url": "https://developers.notion.com/guides/get-started/authorization",
         "evidence_quote": "Once the connection is shared, you can start making API requests. If the page is not shared, any API requests made will respond with an error.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -297,7 +297,7 @@
         "source_type": "docs",
         "source_url": "https://developers.notion.com/reference/request-limits",
         "evidence_quote": "Do not retry every error. Retry 429 and 529 responses, except a 429 with public_api_request_blocked.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -309,7 +309,7 @@
         "source_type": "docs",
         "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
         "evidence_quote": "Installation scope is set when the connection is created and can’t be changed afterward — see Installation scope.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -321,7 +321,7 @@
         "source_type": "docs",
         "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
         "evidence_quote": "Installation scope is set when the connection is created and can’t be changed afterward",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -333,7 +333,7 @@
         "source_type": "docs",
         "source_url": "https://developers.notion.com/guides/get-started/quick-start",
         "evidence_quote": "On Business and Enterprise plans, PAT creation is restricted by default. Ask a workspace owner to enable it in Settings → Connections.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -345,7 +345,7 @@
         "source_type": "docs",
         "source_url": "https://developers.notion.com/guides/get-started/authorization",
         "evidence_quote": "This can’t be changed after creation.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -357,7 +357,7 @@
         "source_type": "docs",
         "source_url": "https://developers.notion.com/guides/get-started/authorization",
         "evidence_quote": "Before a connection can interact with your Notion workspace page(s), the page must be manually shared with the connection. ... If the page is not shared, any API requests made will respond with an error.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -369,21 +369,295 @@
         "source_type": "docs",
         "source_url": "https://developers.notion.com/guides/get-started/public-connections",
         "evidence_quote": "Installation scope is set once, at creation time, and can’t be changed afterward. If you pick Selected workspaces only and later want to list on the Marketplace, create a new connection.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     }
   ],
   "steps": [
     {
       "order": 1,
+      "text": "[List on the Marketplace - Notion Docs] Navigate to the Marketplace listing dashboard.",
       "actor": "human",
-      "text": "Start from the provider's developer docs: https://developers.notion.com/guides/get-started/overview",
       "claim": {
-        "text": "No registration steps could be extracted from the registration pages read.",
-        "label": "inferred",
-        "source_type": "none",
-        "note": "8 pages read: https://developers.notion.com/guides/get-started/overview, https://developers.notion.com/guides/get-started/authorization, https://developers.notion.com/reference/request-limits, https://www.notion.com/product/docs, https://developers.notion.com/guides/get-started/marketplace-listing, https://developers.notion.com/guides/get-started/quick-start …",
-        "checked_at": "2026-10-30"
+        "text": "Navigate to the Marketplace listing dashboard.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
+        "evidence_quote": "1 Navigate to the Marketplace listing dashboard.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 2,
+      "text": "[List on the Marketplace - Notion Docs] Navigate to the Marketplace listing dashboard.",
+      "actor": "human",
+      "claim": {
+        "text": "Navigate to the Marketplace listing dashboard.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
+        "evidence_quote": "Navigate to the Marketplace listing dashboard.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 3,
+      "text": "[List on the Marketplace - Notion Docs] In the Listings section of the sidebar, select Connections.",
+      "actor": "human",
+      "claim": {
+        "text": "In the Listings section of the sidebar, select Connections.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
+        "evidence_quote": "2 In the Listings section of the sidebar, select Connections.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 4,
+      "text": "[List on the Marketplace - Notion Docs] Select Connections in the Listings section of the sidebar.",
+      "actor": "human",
+      "claim": {
+        "text": "Select Connections in the Listings section of the sidebar.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
+        "evidence_quote": "In the Listings section of the sidebar, select Connections.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 5,
+      "text": "[List on the Marketplace - Notion Docs] Under Drafts, click Start a new connection listing.",
+      "actor": "human",
+      "claim": {
+        "text": "Under Drafts, click Start a new connection listing.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
+        "evidence_quote": "3 Under Drafts, click Start a new connection listing.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 6,
+      "text": "[List on the Marketplace - Notion Docs] Click Start a new connection listing under Drafts.",
+      "actor": "human",
+      "claim": {
+        "text": "Click Start a new connection listing under Drafts.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
+        "evidence_quote": "Under Drafts, click Start a new connection listing.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 7,
+      "text": "[List on the Marketplace - Notion Docs] Fill in the listing details, including listing name, description, category, tags, images, logo, and the public connection to associate.",
+      "actor": "human",
+      "claim": {
+        "text": "Fill in the listing details, including listing name, description, category, tags, images, logo, and the public connection to associate.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
+        "evidence_quote": "4 Fill in the listing details, including: Listing name and description Category and tags Listing images and logo The public connection to associate with this listing",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 8,
+      "text": "[List on the Marketplace - Notion Docs] Fill in the listing details including name, description, category, tags, images, logo, and the associated public connection.",
+      "actor": "human",
+      "claim": {
+        "text": "Fill in the listing details including name, description, category, tags, images, logo, and the associated public connection.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
+        "evidence_quote": "Fill in the listing details, including:\n\nListing name and description\n\nCategory and tags\n\nListing images and logo\n\nThe public connection to associate with this listing",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 9,
+      "text": "[List on the Marketplace - Notion Docs] Save your listing as a draft.",
+      "actor": "both",
+      "claim": {
+        "text": "Save your listing as a draft.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
+        "evidence_quote": "5 Save your listing as a draft. You can return to edit it at any time before submitting.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 10,
+      "text": "[List on the Marketplace - Notion Docs] Save the listing as a draft.",
+      "actor": "both",
+      "claim": {
+        "text": "Save the listing as a draft.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
+        "evidence_quote": "Save your listing as a draft. You can return to edit it at any time before submitting.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 11,
+      "text": "[List on the Marketplace - Notion Docs] Submit your listing for review from the Connections listing page.",
+      "actor": "human",
+      "claim": {
+        "text": "Submit your listing for review from the Connections listing page.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
+        "evidence_quote": "When your listing is ready, submit it for review from the Connections listing page.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 12,
+      "text": "[List on the Marketplace - Notion Docs] Submit the listing for review from the Connections listing page.",
+      "actor": "human",
+      "claim": {
+        "text": "Submit the listing for review from the Connections listing page.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
+        "evidence_quote": "Submit your listing for review by the Notion team.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 13,
+      "text": "[Authorization - Notion Docs] Navigate to the Developer portal to create a new public connection.",
+      "actor": "human",
+      "claim": {
+        "text": "Navigate to the Developer portal to create a new public connection.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/authorization",
+        "evidence_quote": "Navigate to the Developer portal and create a new public connection.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 14,
+      "text": "[Authorization - Notion Docs] Navigate to the Developer portal and create a new public connection.",
+      "actor": "human",
+      "claim": {
+        "text": "Navigate to the Developer portal and create a new public connection.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/authorization",
+        "evidence_quote": "Navigate to the Developer portal and create a new public connection.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 15,
+      "text": "[Authorization - Notion Docs] Fill out the connection details including redirect URIs and installation scope.",
+      "actor": "human",
+      "claim": {
+        "text": "Fill out the connection details including redirect URIs and installation scope.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/authorization",
+        "evidence_quote": "Fill out the form with your connection details, including your redirect URI(s) under the OAuth configuration section and the connection’s installation scope — either Any workspace or Selected workspaces only.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 16,
+      "text": "[Authorization - Notion Docs] Fill out the form with your connection details, including your redirect URI(s) under the OAuth configuration section and the connection’s installation scope.",
+      "actor": "human",
+      "claim": {
+        "text": "Fill out the form with your connection details, including your redirect URI(s) under the OAuth configuration section and the connection’s installation scope.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/authorization",
+        "evidence_quote": "Fill out the form with your connection details, including your redirect URI(s) under the OAuth configuration section and the connection’s installation scope — either Any workspace or Selected workspaces only.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 17,
+      "text": "[Authorization - Notion Docs] Exchange the temporary code for an access token via a POST request.",
+      "actor": "agent",
+      "claim": {
+        "text": "Exchange the temporary code for an access token via a POST request.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/authorization",
+        "evidence_quote": "Make a POST request to create an access token, which exchanges the temporary code for an access token.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 18,
+      "text": "[Authorization - Notion Docs] Exchange the temporary code for an access token by making a POST request to the Notion token endpoint.",
+      "actor": "agent",
+      "claim": {
+        "text": "Exchange the temporary code for an access token by making a POST request to the Notion token endpoint.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/authorization",
+        "evidence_quote": "Make a POST request to create an access token, which exchanges the temporary code for an access token.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 19,
+      "text": "[Authorization - Notion Docs] Store the access token and refresh token for future API requests.",
+      "actor": "agent",
+      "claim": {
+        "text": "Store the access token and refresh token for future API requests.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/authorization",
+        "evidence_quote": "Store the access token for future API requests.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 20,
+      "text": "[Authorization - Notion Docs] Store the access token and refresh token for future API requests.",
+      "actor": "agent",
+      "claim": {
+        "text": "Store the access token and refresh token for future API requests.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/authorization",
+        "evidence_quote": "Store the access token for future API requests.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 21,
+      "text": "[Authorization - Notion Docs] Direct the user to the authorization URL to start the OAuth flow.",
+      "actor": "both",
+      "claim": {
+        "text": "Direct the user to the authorization URL to start the OAuth flow.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/authorization",
+        "evidence_quote": "To start the authorization flow for a public connection, direct the prospective user to the authorization URL.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 22,
+      "text": "[Authorization - Notion Docs] Direct the prospective user to the authorization URL to start the flow.",
+      "actor": "both",
+      "claim": {
+        "text": "Direct the prospective user to the authorization URL to start the flow.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.notion.com/guides/get-started/authorization",
+        "evidence_quote": "To start the authorization flow for a public connection, direct the prospective user to the authorization URL.",
+        "checked_at": "2026-10-31"
       }
     }
   ],
@@ -396,9 +670,42 @@
           "label": "tested",
           "source_type": "agent_probe",
           "source_url": "https://api.notion.com/v1/oauth/authorize",
-          "note": "Automated read-only probe by the agent on 2026-10-30: GET https://api.notion.com/v1/oauth/authorize with a made-up client_id (oauth-guide-agent-probe), no login, redirects not followed.",
-          "checked_at": "2026-10-30",
+          "note": "Automated probe by the agent on 2026-10-31: GET https://api.notion.com/v1/oauth/authorize with a made-up client_id (oauth-guide-agent-probe), no login, redirects not followed.",
+          "checked_at": "2026-10-31",
           "evidence_quote": "HTTP 302 Location: app.notion.com/install-integration"
+        }
+      },
+      {
+        "text": "Exchange the temporary code for an access token via a POST request.",
+        "claim": {
+          "text": "Exchange the temporary code for an access token via a POST request.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.notion.com/guides/get-started/authorization",
+          "evidence_quote": "Make a POST request to create an access token, which exchanges the temporary code for an access token.",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "text": "Exchange the temporary code for an access token by making a POST request to the Notion token endpoint.",
+        "claim": {
+          "text": "Exchange the temporary code for an access token by making a POST request to the Notion token endpoint.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.notion.com/guides/get-started/authorization",
+          "evidence_quote": "Make a POST request to create an access token, which exchanges the temporary code for an access token.",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "text": "Store the access token and refresh token for future API requests.",
+        "claim": {
+          "text": "Store the access token and refresh token for future API requests.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.notion.com/guides/get-started/authorization",
+          "evidence_quote": "Store the access token for future API requests.",
+          "checked_at": "2026-10-31"
         }
       },
       {
@@ -408,7 +715,7 @@
           "label": "inferred",
           "source_type": "none",
           "note": "Model suggestion; not verified against this provider's portal.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       },
       {
@@ -418,19 +725,52 @@
           "label": "inferred",
           "source_type": "none",
           "note": "Model suggestion; not verified against this provider's portal.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       }
     ],
     "human": [
       {
-        "text": "Sign in to the Notion Developer portal as a workspace owner.",
+        "text": "Navigate to the Marketplace listing dashboard.",
         "claim": {
-          "text": "Sign in to the Notion Developer portal as a workspace owner.",
+          "text": "Navigate to the Marketplace listing dashboard.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
+          "evidence_quote": "1 Navigate to the Marketplace listing dashboard.",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "text": "In the Listings section of the sidebar, select Connections.",
+        "claim": {
+          "text": "In the Listings section of the sidebar, select Connections.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
+          "evidence_quote": "2 In the Listings section of the sidebar, select Connections.",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "text": "Select Connections in the Listings section of the sidebar.",
+        "claim": {
+          "text": "Select Connections in the Listings section of the sidebar.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.notion.com/guides/get-started/marketplace-listing",
+          "evidence_quote": "In the Listings section of the sidebar, select Connections.",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "text": "Sign in to the Notion Developer portal to register the connection.",
+        "claim": {
+          "text": "Sign in to the Notion Developer portal to register the connection.",
           "label": "inferred",
           "source_type": "none",
           "note": "Model suggestion; not verified against this provider's portal.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       },
       {
@@ -440,7 +780,7 @@
           "label": "inferred",
           "source_type": "none",
           "note": "Model suggestion; not verified against this provider's portal.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       }
     ]
@@ -448,16 +788,33 @@
   "extras": [
     {
       "title": "Tested live by the agent",
-      "why_it_matters": "The agent made read-only requests to the provider (no login, no registration) and recorded what came back. These are observations, not documentation.",
+      "why_it_matters": "The agent made harmless requests to the provider (no login, no registration; one deliberately invalid token request) and recorded what came back. These are observations, not documentation.",
       "claims": [
+        {
+          "text": "When this guide was saved, the agent re-fetched the 7 pages it cites and re-checked 46 quoted passages: 46 were found again, none were missing.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://developers.notion.com/guides/get-started/authorization",
+          "note": "Automated test on 2026-10-31: each quote must appear in a fresh copy of the cited page. A quote that does not is removed, together with anything that rested only on it.",
+          "checked_at": "2026-10-31"
+        },
         {
           "text": "The authorize endpoint answered an unregistered test client with a redirect (HTTP 302) to app.notion.com/install-integration.",
           "label": "tested",
           "source_type": "agent_probe",
           "source_url": "https://api.notion.com/v1/oauth/authorize",
-          "note": "Automated read-only probe by the agent on 2026-10-30: GET https://api.notion.com/v1/oauth/authorize with a made-up client_id (oauth-guide-agent-probe), no login, redirects not followed.",
-          "checked_at": "2026-10-30",
+          "note": "Automated probe by the agent on 2026-10-31: GET https://api.notion.com/v1/oauth/authorize with a made-up client_id (oauth-guide-agent-probe), no login, redirects not followed.",
+          "checked_at": "2026-10-31",
           "evidence_quote": "HTTP 302 Location: app.notion.com/install-integration"
+        },
+        {
+          "text": "The token endpoint rejected an invalid test request with HTTP 401: \"invalid_client\".",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://api.notion.com/v1/oauth/token",
+          "note": "Automated probe by the agent on 2026-10-31: POST https://api.notion.com/v1/oauth/token with a made-up authorization code and client (nothing is created or changed). So it validates the client and code before issuing anything. It asks for client authentication via the WWW-Authenticate header.",
+          "checked_at": "2026-10-31",
+          "evidence_quote": "invalid_client | WWW-Authenticate: Basic realm=\"OAuth\""
         }
       ]
     },
@@ -471,7 +828,7 @@
           "source_type": "docs",
           "source_url": "https://developers.notion.com/guides/get-started/overview",
           "evidence_quote": "Internal connections are scoped to a single workspace and use a static credential called an internal connection API token. They’re ideal for custom automations and workflows — things like syncing data, sending notifications, or building internal dashboards.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         },
         {
           "text": "Public connections use OAuth 2.0 for authentication.",
@@ -479,7 +836,7 @@
           "source_type": "docs",
           "source_url": "https://developers.notion.com/guides/get-started/overview",
           "evidence_quote": "Public connections use OAuth 2.0 for authentication. At creation time, you choose their installation scope: Any workspace (any Notion user can install; Marketplace-eligible) or Selected workspaces only (restricted to workspaces you select; not Marketplace-eligible).",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         },
         {
           "text": "Personal access tokens are user-scoped tokens for scripts, CLI workflows, Workers, and tools that should act as one Notion user.",
@@ -487,7 +844,7 @@
           "source_type": "docs",
           "source_url": "https://developers.notion.com/guides/get-started/overview",
           "evidence_quote": "Personal access tokens (PATs) are user-scoped tokens for scripts, CLI workflows, Workers, and tools that should act as one Notion user. A PAT uses the creator’s workspace membership and page permissions.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         },
         {
           "text": "A personal access token allows API authentication without OAuth.",
@@ -495,7 +852,7 @@
           "source_type": "docs",
           "source_url": "https://developers.notion.com/guides/get-started/quick-start",
           "evidence_quote": "A personal access token (PAT) lets you authenticate API requests as yourself without setting up a connection or completing an OAuth flow.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         },
         {
           "text": "Public connections use OAuth 2.0 for multi-workspace installation, while internal connections are scoped to a single workspace.",
@@ -503,7 +860,7 @@
           "source_type": "docs",
           "source_url": "https://developers.notion.com/guides/get-started/public-connections",
           "evidence_quote": "A public connection is an OAuth connection that users install into their Notion workspaces. Unlike internal connections, which are scoped to a single workspace with a static token, public connections follow the OAuth 2.0 protocol",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       ]
     },
@@ -517,7 +874,7 @@
           "source_type": "docs",
           "source_url": "https://developers.notion.com/guides/get-started/personal-access-tokens",
           "evidence_quote": "Use a PAT for personal or developer-owned workflows that one Notion user should own:",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       ]
     }
@@ -539,6 +896,10 @@
       {
         "item": "Live check not completed: OAuth server metadata",
         "note": "none published at notion.so, developers.notion.com, www.notion.com (checked /.well-known/oauth-authorization-server, /.well-known/openid-configuration)"
+      },
+      {
+        "item": "Live check not completed: How api.notion.com answers a request with no token",
+        "note": "HTTP 200 with no auth challenge or rate-limit headers, so nothing could be concluded"
       },
       {
         "item": "Live check not completed: https://www.notion.so/developers",

@@ -10,21 +10,21 @@
       "https://developer.calendly.com/api-docs/overview/rate-limits.md"
     ]
   },
-  "generated_at": "2026-10-30",
+  "generated_at": "2026-10-31",
   "generated_by": {
     "mode": "agent",
     "model": "gemini-3.1-flash-lite"
   },
-  "summary": "Calendly provides a standard OAuth 2.0 implementation with mandatory PKCE support. Developers can register applications via the developer portal or an API, and must adhere to specific naming and HTTPS redirect URI requirements. Personal access tokens are available for internal use cases.",
+  "summary": "Calendly provides a standard OAuth 2.0 implementation requiring PKCE for security. Developers can register applications via the developer portal or an API endpoint. The platform enforces strict rate limits and requires HTTPS for production redirect URIs.",
   "difficulty": {
     "start": {
       "level": "easy",
       "reason": {
-        "text": "The documentation provides clear, step-by-step instructions for logging into the developer portal and creating an OAuth application or personal access token.",
+        "text": "The documentation provides clear, step-by-step instructions for logging into the developer portal and creating an OAuth application.",
         "label": "inferred",
         "source_type": "none",
         "note": "Model judgement from the verified claims in this guide; not tested.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     "public": {
@@ -34,7 +34,7 @@
         "label": "unknown",
         "source_type": "none",
         "note": "7 pages read: https://developer.calendly.com/docs/authentication/creating-an-oauth-app.md, https://developer.calendly.com/docs/authentication/scopes.md, https://developer.calendly.com/docs/authentication/how-to-authenticate-with-personal-access-tokens.md, https://developer.calendly.com/api-docs/overview/rate-limits.md, https://developer.calendly.com/docs, https://developer.calendly.com/docs/getting-started/frequently-asked-questions …",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     }
   },
@@ -46,7 +46,7 @@
         "label": "unknown",
         "source_type": "none",
         "note": "Only a hands-on attempt shows how long registration takes.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     "to_approval": {
@@ -57,7 +57,7 @@
         "label": "unknown",
         "source_type": "none",
         "note": "7 pages read: https://developer.calendly.com/docs/authentication/creating-an-oauth-app.md, https://developer.calendly.com/docs/authentication/scopes.md, https://developer.calendly.com/docs/authentication/how-to-authenticate-with-personal-access-tokens.md, https://developer.calendly.com/api-docs/overview/rate-limits.md, https://developer.calendly.com/docs, https://developer.calendly.com/docs/getting-started/frequently-asked-questions …",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     }
   },
@@ -75,7 +75,7 @@
           "source_type": "docs",
           "source_url": "https://developer.calendly.com/docs/authentication/how-to-authenticate-with-personal-access-tokens.md",
           "evidence_quote": "Use a personal access token to authenticate an internal or private application with the Calendly API v2.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       ]
     }
@@ -91,7 +91,7 @@
           "source_type": "docs",
           "source_url": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app",
           "evidence_quote": "App name: use letters, numbers, hyphens, and spaces only.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       },
       {
@@ -103,7 +103,7 @@
           "source_type": "docs",
           "source_url": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app",
           "evidence_quote": "Redirect URI: the URL where Calendly sends users after they authorize your app. Enter exactly one URI.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       },
       {
@@ -115,7 +115,7 @@
           "source_type": "docs",
           "source_url": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app",
           "evidence_quote": "Select the scopes that your app needs. Select at least one scope.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       }
     ],
@@ -131,7 +131,7 @@
         "source_type": "docs",
         "source_url": "https://developer.calendly.com/api-docs/overview/rate-limits.md",
         "evidence_quote": "Only 8 OAuth tokens per user can be requested within a span of 1 minute.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -143,7 +143,7 @@
         "source_type": "docs",
         "source_url": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app.md",
         "evidence_quote": "Production  | `https` URIs only",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -155,7 +155,7 @@
         "source_type": "docs",
         "source_url": "https://developer.calendly.com/docs/authentication/how-to-authenticate-with-personal-access-tokens.md",
         "evidence_quote": "You can have up to 10 personal access tokens.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -167,7 +167,7 @@
         "source_type": "docs",
         "source_url": "https://developer.calendly.com/api-docs/overview/rate-limits.md",
         "evidence_quote": "Paid Plans   | 500 requests per user per minute",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -179,7 +179,7 @@
         "source_type": "docs",
         "source_url": "https://developer.calendly.com/api-docs/overview/rate-limits.md",
         "evidence_quote": "Free Plan    | 50 requests per user per minute",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -191,7 +191,7 @@
         "source_type": "docs",
         "source_url": "https://developer.calendly.com/docs/getting-started/frequently-asked-questions",
         "evidence_quote": "Single use scheduling links (that haven’t been used to book an event) expire after 90 days.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     }
   ],
@@ -205,7 +205,7 @@
         "source_type": "docs",
         "source_url": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app.md",
         "evidence_quote": "Every OAuth app must use Proof Key for Code Exchange (PKCE) with the `S256` method. If the authorization request does not include a code challenge, the request fails.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -217,7 +217,7 @@
         "source_type": "docs",
         "source_url": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app.md",
         "evidence_quote": "Copy all three values and store them securely before you leave this screen. You cannot view the client secret or the webhook signing key again. At this time, you also cannot view the client ID again in Developer tools.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -229,7 +229,7 @@
         "source_type": "docs",
         "source_url": "https://developer.calendly.com/docs/authentication/how-to-authenticate-with-personal-access-tokens.md",
         "evidence_quote": "Do not share your personal access token with public sources.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -241,7 +241,7 @@
         "source_type": "docs",
         "source_url": "https://developer.calendly.com/docs/authentication/how-to-authenticate-with-personal-access-tokens.md",
         "evidence_quote": "Do not reuse a token across applications.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -253,7 +253,7 @@
         "source_type": "docs",
         "source_url": "https://developer.calendly.com/api-docs/overview/rate-limits.md",
         "evidence_quote": "If you exceed your allowed rate limit, the Calendly API will respond with:\n\n```json\nHTTP/2 429 Too Many Requests",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -265,7 +265,7 @@
         "source_type": "docs",
         "source_url": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app",
         "evidence_quote": "Every OAuth app must use Proof Key for Code Exchange (PKCE) with the S256 method. If the authorization request does not include a code challenge, the request fails.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     }
   ],
@@ -280,7 +280,7 @@
         "source_type": "docs",
         "source_url": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app.md",
         "evidence_quote": "1. Log in to Calendly, or sign up for a Calendly account.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -293,7 +293,7 @@
         "source_type": "docs",
         "source_url": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app.md",
         "evidence_quote": "2. Open [Developer tools](https://calendly.com/app/developer). In Calendly, open the **Profile menu** and select **Developer**.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -306,7 +306,7 @@
         "source_type": "docs",
         "source_url": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app.md",
         "evidence_quote": "3. On the **OAuth apps** tab, select **Create OAuth app**.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -319,7 +319,7 @@
         "source_type": "docs",
         "source_url": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app.md",
         "evidence_quote": "4. Enter the app details:\n   * **App name**: use letters, numbers, hyphens, and spaces only.\n   * **Redirect URI**: the URL where Calendly sends users after they authorize your app. Enter exactly one URI.\n   * **Environment type**: select **Sandbox** for development and testing, or **Production** when your app is ready for real users.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -332,7 +332,7 @@
         "source_type": "docs",
         "source_url": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app.md",
         "evidence_quote": "6. Select the scopes that your app needs. Select at least one scope. Learn more about [scopes](/docs/authentication/scopes).",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -345,7 +345,7 @@
         "source_type": "docs",
         "source_url": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app.md",
         "evidence_quote": "7. Select **Create**.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -358,7 +358,7 @@
         "source_type": "docs",
         "source_url": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app",
         "evidence_quote": "Log in to Calendly, or sign up for a Calendly account.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -371,7 +371,7 @@
         "source_type": "docs",
         "source_url": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app",
         "evidence_quote": "Open Developer tools. In Calendly, open the Profile menu and select Developer.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -384,7 +384,7 @@
         "source_type": "docs",
         "source_url": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app",
         "evidence_quote": "On the OAuth apps tab, select Create OAuth app.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -397,7 +397,7 @@
         "source_type": "docs",
         "source_url": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app",
         "evidence_quote": "Enter the app details:\n\nApp name: use letters, numbers, hyphens, and spaces only.\n\nRedirect URI: the URL where Calendly sends users after they authorize your app. Enter exactly one URI.\n\nEnvironment type: select Sandbox for development and testing, or Production when your app is ready for real users.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -410,7 +410,7 @@
         "source_type": "docs",
         "source_url": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app",
         "evidence_quote": "Select the scopes that your app needs. Select at least one scope. Learn more about scopes.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     }
   ],
@@ -423,29 +423,29 @@
           "label": "tested",
           "source_type": "agent_probe",
           "source_url": "https://calendly.com/.well-known/oauth-authorization-server",
-          "note": "Automated read-only probe by the agent on 2026-10-30: GET https://calendly.com/.well-known/oauth-authorization-server returned HTTP 200 with JSON.",
-          "checked_at": "2026-10-30",
+          "note": "Automated probe by the agent on 2026-10-31: GET https://calendly.com/.well-known/oauth-authorization-server returned HTTP 200 with JSON.",
+          "checked_at": "2026-10-31",
           "evidence_quote": "issuer: https://calendly.com/"
         }
       },
       {
-        "text": "Draft the application name according to the naming constraints.",
+        "text": "Draft the application name following the naming requirements",
         "claim": {
-          "text": "Draft the application name according to the naming constraints.",
+          "text": "Draft the application name following the naming requirements",
           "label": "inferred",
           "source_type": "none",
           "note": "Model suggestion; not verified against this provider's portal.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       },
       {
-        "text": "Determine the minimum set of scopes required for the application functionality.",
+        "text": "Determine the minimum set of scopes required for the application use case",
         "claim": {
-          "text": "Determine the minimum set of scopes required for the application functionality.",
+          "text": "Determine the minimum set of scopes required for the application use case",
           "label": "inferred",
           "source_type": "none",
           "note": "Model suggestion; not verified against this provider's portal.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       }
     ],
@@ -458,7 +458,7 @@
           "source_type": "docs",
           "source_url": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app.md",
           "evidence_quote": "1. Log in to Calendly, or sign up for a Calendly account.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       },
       {
@@ -469,7 +469,7 @@
           "source_type": "docs",
           "source_url": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app.md",
           "evidence_quote": "2. Open [Developer tools](https://calendly.com/app/developer). In Calendly, open the **Profile menu** and select **Developer**.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       },
       {
@@ -480,7 +480,7 @@
           "source_type": "docs",
           "source_url": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app.md",
           "evidence_quote": "3. On the **OAuth apps** tab, select **Create OAuth app**.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       },
       {
@@ -491,17 +491,17 @@
           "source_type": "docs",
           "source_url": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app.md",
           "evidence_quote": "4. Enter the app details:\n   * **App name**: use letters, numbers, hyphens, and spaces only.\n   * **Redirect URI**: the URL where Calendly sends users after they authorize your app. Enter exactly one URI.\n   * **Environment type**: select **Sandbox** for development and testing, or **Production** when your app is ready for real users.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       },
       {
-        "text": "Log in to the Calendly developer portal.",
+        "text": "Log in to the Calendly developer portal",
         "claim": {
-          "text": "Log in to the Calendly developer portal.",
+          "text": "Log in to the Calendly developer portal",
           "label": "inferred",
           "source_type": "none",
           "note": "Model suggestion; not verified against this provider's portal.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       }
     ]
@@ -509,15 +509,23 @@
   "extras": [
     {
       "title": "Tested live by the agent",
-      "why_it_matters": "The agent made read-only requests to the provider (no login, no registration) and recorded what came back. These are observations, not documentation.",
+      "why_it_matters": "The agent made harmless requests to the provider (no login, no registration; one deliberately invalid token request) and recorded what came back. These are observations, not documentation.",
       "claims": [
+        {
+          "text": "When this guide was saved, the agent re-fetched the 6 pages it cites and re-checked 30 quoted passages: 30 were found again, none were missing.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://developer.calendly.com/api-docs/overview/rate-limits.md",
+          "note": "Automated test on 2026-10-31: each quote must appear in a fresh copy of the cited page. A quote that does not is removed, together with anything that rested only on it.",
+          "checked_at": "2026-10-31"
+        },
         {
           "text": "The provider publishes OAuth server metadata at https://calendly.com/.well-known/oauth-authorization-server.",
           "label": "tested",
           "source_type": "agent_probe",
           "source_url": "https://calendly.com/.well-known/oauth-authorization-server",
-          "note": "Automated read-only probe by the agent on 2026-10-30: GET https://calendly.com/.well-known/oauth-authorization-server returned HTTP 200 with JSON.",
-          "checked_at": "2026-10-30",
+          "note": "Automated probe by the agent on 2026-10-31: GET https://calendly.com/.well-known/oauth-authorization-server returned HTTP 200 with JSON.",
+          "checked_at": "2026-10-31",
           "evidence_quote": "issuer: https://calendly.com/"
         },
         {
@@ -525,8 +533,8 @@
           "label": "tested",
           "source_type": "agent_probe",
           "source_url": "https://calendly.com/.well-known/oauth-authorization-server",
-          "note": "Automated read-only probe by the agent on 2026-10-30: GET https://calendly.com/.well-known/oauth-authorization-server returned HTTP 200 with JSON.",
-          "checked_at": "2026-10-30",
+          "note": "Automated probe by the agent on 2026-10-31: GET https://calendly.com/.well-known/oauth-authorization-server returned HTTP 200 with JSON.",
+          "checked_at": "2026-10-31",
           "evidence_quote": "code_challenge_methods_supported: ['S256']"
         },
         {
@@ -534,8 +542,8 @@
           "label": "tested",
           "source_type": "agent_probe",
           "source_url": "https://calendly.com/.well-known/oauth-authorization-server",
-          "note": "Automated read-only probe by the agent on 2026-10-30: GET https://calendly.com/.well-known/oauth-authorization-server returned HTTP 200 with JSON. The agent did not register an app: that would create a real client on your behalf.",
-          "checked_at": "2026-10-30",
+          "note": "Automated probe by the agent on 2026-10-31: GET https://calendly.com/.well-known/oauth-authorization-server returned HTTP 200 with JSON. The agent did not register an app: that would create a real client on your behalf.",
+          "checked_at": "2026-10-31",
           "evidence_quote": "registration_endpoint: https://calendly.com/oauth/register"
         },
         {
@@ -543,8 +551,8 @@
           "label": "tested",
           "source_type": "agent_probe",
           "source_url": "https://calendly.com/.well-known/oauth-authorization-server",
-          "note": "Automated read-only probe by the agent on 2026-10-30: GET https://calendly.com/.well-known/oauth-authorization-server returned HTTP 200 with JSON.",
-          "checked_at": "2026-10-30",
+          "note": "Automated probe by the agent on 2026-10-31: GET https://calendly.com/.well-known/oauth-authorization-server returned HTTP 200 with JSON.",
+          "checked_at": "2026-10-31",
           "evidence_quote": "token_endpoint_auth_methods_supported: ['none']"
         },
         {
@@ -552,9 +560,27 @@
           "label": "tested",
           "source_type": "agent_probe",
           "source_url": "https://calendly.com/oauth/authorize",
-          "note": "Automated read-only probe by the agent on 2026-10-30: GET https://calendly.com/oauth/authorize with a made-up client_id (oauth-guide-agent-probe), no login, redirects not followed. Sign-in comes before any client check here, so the agent could not see how an unregistered client is treated.",
-          "checked_at": "2026-10-30",
+          "note": "Automated probe by the agent on 2026-10-31: GET https://calendly.com/oauth/authorize with a made-up client_id (oauth-guide-agent-probe), no login, redirects not followed. Sign-in comes before any client check here, so the agent could not see how an unregistered client is treated.",
+          "checked_at": "2026-10-31",
           "evidence_quote": "HTTP 302 Location: calendly.com/app/login"
+        },
+        {
+          "text": "The token endpoint rejected an invalid test request with HTTP 401: \"invalid_client: Client authentication failed due to unknown client, no client authentication included, or unsupported authentication method.\".",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://calendly.com/oauth/token",
+          "note": "Automated probe by the agent on 2026-10-31: POST https://calendly.com/oauth/token with a made-up authorization code and client (nothing is created or changed). So it validates the client and code before issuing anything. It asks for client authentication via the WWW-Authenticate header.",
+          "checked_at": "2026-10-31",
+          "evidence_quote": "invalid_client: Client authentication failed due to unknown client, no client authentication included, or unsupported authentication method. | WWW-Authenticate: Bearer realm=\"Doorkeeper\", error=\"invalid_client\", error_description=\"Client aut"
+        },
+        {
+          "text": "A request to api.calendly.com with no token is rejected with HTTP 401.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://api.calendly.com/",
+          "note": "Automated probe by the agent on 2026-10-31: GET https://api.calendly.com/ with no token. So API calls need an access token.",
+          "checked_at": "2026-10-31",
+          "evidence_quote": "HTTP 401"
         }
       ]
     },
@@ -563,12 +589,12 @@
       "why_it_matters": "",
       "claims": [
         {
-          "text": "Newly created OAuth apps have no API access until scopes are requested.",
+          "text": "For newly created OAuth apps, no API access is granted until scopes are explicitly requested and approved.",
           "label": "official_docs",
           "source_type": "docs",
           "source_url": "https://developer.calendly.com/docs/authentication/scopes.md",
           "evidence_quote": "For newly created OAuth apps and new Personal Access Tokens, no API access is granted until scopes are explicitly requested and approved.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       ]
     },
@@ -582,7 +608,7 @@
           "source_type": "docs",
           "source_url": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app",
           "evidence_quote": "Copy all three values and store them securely before you leave this screen. You cannot view the client secret or the webhook signing key again.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       ]
     },
@@ -596,7 +622,7 @@
           "source_type": "docs",
           "source_url": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app.md",
           "evidence_quote": "We recommend that you start with a Sandbox app for development. Create a second app for Production when you are ready to use real customer data.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       ]
     }
@@ -620,7 +646,7 @@
         "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
       },
       {
-        "item": "Dropped model claim: Requests missing required scopes will return a 403 error.",
+        "item": "Dropped model claim: A write scope implicitly includes the corresponding read scope within the same domain.",
         "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
       },
       {

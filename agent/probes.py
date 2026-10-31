@@ -1,12 +1,15 @@
-"""Live probes: read-only checks the agent runs against the provider to test what the docs say.
+"""Live probes: harmless checks the agent runs against the provider to test what the docs say.
 
-Safe by design: GET requests only, no login, no registration, no credentials, at most MAX_REQUESTS requests,
-and robots.txt is honoured. Anything that needs an account (creating the app, installing, submitting for review)
+Safe by design: no login, no registration, no credentials, at most MAX_REQUESTS requests, and robots.txt is honoured.
+Everything is a GET except one deliberately invalid token request (a made-up code and client), which any OAuth server
+rejects without changing anything. Anything that needs an account (creating the app, installing, submitting for review)
 is NOT attempted; it is reported as a hand-off instead.
 
 Probes:
   metadata   - does the provider publish OAuth server metadata (/.well-known/...)? PKCE, grant types, registration endpoint
   authorize  - how does the authorize endpoint answer an unregistered test client? (proves an app must be registered first)
+  token      - how does the token endpoint answer an invalid code? (error format, client authentication)
+  api        - how does the API answer a request with no token? (auth scheme, rate-limit headers)
   portal     - does the developer portal / "create an app" page sit behind a sign-in wall?
 """
 import json
@@ -17,11 +20,13 @@ import urllib.parse
 import urllib.request
 
 from netguard import SafeRedirect, check_url
-MAX_REQUESTS = 10
+MAX_REQUESTS = 14
 TIMEOUT = 10
 TEST_CLIENT_ID = "oauth-guide-agent-probe"
 TEST_REDIRECT = "https://localhost/oauth-guide-agent-probe"
 META_PATHS = ("/.well-known/oauth-authorization-server", "/.well-known/openid-configuration")
+TOKEN_RE = re.compile(r"https?://[^\s\"'<>)\]\\]+/(?:oauth2?/(?:v\d+/)?)?(?:token|access_token)(?![\w/-])", re.I)
+API_HOST_RE = re.compile(r"https?://(api[.-][a-z0-9.-]+\.[a-z]{2,})(?![a-z0-9.-])", re.I)
 AUTHORIZE_RE = re.compile(r"https?://[^\s\"'<>)\]\\]+/(?:oauth2?/(?:v\d+/)?)?authori[sz]e(?:[^\s\"'<>)\]\\]*)?", re.I)
 PORTAL_RE = re.compile(
     r"(create|new|register|build)\W+(an?\W+)?(app|application|integration)|developer\W*(portal|console|dashboard)"
@@ -60,8 +65,9 @@ class Prober:
         scheme_ok = url.startswith("https://") or (self.allow_http and url.startswith("http://"))
         return scheme_ok and self.env.root_domain(host) in self.roots
 
-    def _get(self, url, follow=True):
-        """One GET. Returns (status, final_url, headers, body_text) or None. Honours robots.txt and the request cap."""
+    def _get(self, url, follow=True, form=None):
+        """One request (GET, or a form POST when `form` is given). Returns (status, final_url, headers, body_text) or None.
+        Honours robots.txt and the request cap."""
         if self.requests >= MAX_REQUESTS or time.time() >= self.deadline:
             return None
         if not self._in_scope(url):
@@ -71,7 +77,12 @@ class Prober:
             self.skipped.append({"what": url.split("?")[0], "why": "robots.txt disallows it, so the agent did not request it"})
             return None
         self.requests += 1
-        req = urllib.request.Request(url, headers={"User-Agent": self.env.UA, "Accept": "application/json,text/html;q=0.8,*/*;q=0.5"})
+        headers = {"User-Agent": self.env.UA, "Accept": "application/json,text/html;q=0.8,*/*;q=0.5"}
+        data = None
+        if form is not None:
+            data = urllib.parse.urlencode(form).encode()
+            headers["Content-Type"] = "application/x-www-form-urlencoded"
+        req = urllib.request.Request(url, data=data, headers=headers, method="POST" if data else "GET")
         opener = urllib.request.build_opener(SafeRedirect) if follow else urllib.request.build_opener(_NoRedirect)
         try:
             check_url(url)
@@ -206,7 +217,80 @@ class Prober:
             self.skipped.append({"what": f"How {base} treats an unregistered client",
                                  "why": f"it returned HTTP {status} with no readable error (likely a JavaScript page), so nothing could be concluded"})
 
-    # ---- 3. developer portal
+    # ---- 3. token endpoint (one deliberately invalid request)
+    def _token_url(self):
+        meta = getattr(self, "meta", None)
+        if meta and meta.get("token_endpoint") and not (getattr(self, "meta_oidc", False) or getattr(self, "meta_mcp", False)):
+            return meta["token_endpoint"]
+        for p in self.pages:
+            for m in TOKEN_RE.finditer(p["text"]):
+                u = m.group(0).rstrip(".,;").split("?")[0]
+                if self._in_scope(u):
+                    return u
+        return None
+
+    def token(self):
+        url = self._token_url()
+        if not url:
+            self.skipped.append({"what": "Token endpoint", "why": "no token URL found in the metadata or the docs read"})
+            return
+        res = self._get(url, follow=False, form={"grant_type": "authorization_code", "code": "oauth-guide-agent-probe", "client_id": TEST_CLIENT_ID,
+                                                  "redirect_uri": TEST_REDIRECT, "code_verifier": "oauth-guide-agent-probe"})
+        if not res:
+            return
+        status, _, headers, body = res
+        how = f"POST {url} with a made-up authorization code and client (nothing is created or changed)"
+        err = ""
+        try:
+            j = json.loads(body)
+            if isinstance(j, dict):
+                err = str(j.get("error_description") or j.get("error") or j.get("message") or "")[:200]
+                if j.get("error") and j.get("error_description"):
+                    err = f"{j['error']}: {j['error_description']}"[:200]
+        except ValueError:
+            err = _text(body)[:160]
+        wa = (headers.get("WWW-Authenticate") or "") if headers else ""
+        if status in (400, 401, 403) or (status == 200 and err and ERROR_RE.search(err)):
+            self._add("token", f"The token endpoint rejected an invalid test request with HTTP {status}" + (f": \"{err}\"." if err else "."), url,
+                      quote=(err or f"HTTP {status}") + (f" | WWW-Authenticate: {wa[:80]}" if wa else ""), how=how,
+                      note="So it validates the client and code before issuing anything." + (" It asks for client authentication via the WWW-Authenticate header." if wa else ""))
+        else:
+            self.skipped.append({"what": f"How {url} answers an invalid request", "why": f"it returned HTTP {status} with no readable error, so nothing could be concluded"})
+
+    # ---- 4. the API, with no token
+    def api(self):
+        hosts = []
+        for p in self.pages:
+            for m in API_HOST_RE.finditer(p["text"]):
+                h = m.group(1).lower()
+                if h not in hosts and self._in_scope(f"https://{h}/"):
+                    hosts.append(h)
+        if not hosts:
+            self.skipped.append({"what": "API host", "why": "no API host (api.<provider>) was mentioned in the docs read"})
+            return
+        for h in hosts[:2]:
+            url = f"https://{h}/"
+            res = self._get(url)
+            if not res:
+                continue
+            status, _, headers, body = res
+            how = f"GET {url} with no token"
+            hdrs = {k.lower(): v for k, v in (headers.items() if headers else [])}
+            rl = [(k, v) for k, v in hdrs.items() if k.startswith(("x-ratelimit", "ratelimit", "x-rate-limit")) and k.endswith(("limit", "remaining", "policy"))]
+            wa = hdrs.get("www-authenticate", "")
+            made = False
+            if status in (401, 403):
+                self._add("api", f"A request to {h} with no token is rejected with HTTP {status}" + (f" (WWW-Authenticate: {wa[:70]})." if wa else "."), url,
+                          quote=f"HTTP {status}" + (f" | WWW-Authenticate: {wa[:90]}" if wa else ""), how=how, note="So API calls need an access token.")
+                made = True
+            if rl:
+                self._add("api", f"Responses from {h} carry rate-limit headers: " + ", ".join(f"{k}: {v}" for k, v in rl[:3]) + ".", url,
+                          quote=" | ".join(f"{k}: {v}" for k, v in rl[:3]), how=how, note="Observed on a request with no token; the limit for authenticated apps may differ.")
+                made = True
+            if not made:
+                self.skipped.append({"what": f"How {h} answers a request with no token", "why": f"HTTP {status} with no auth challenge or rate-limit headers, so nothing could be concluded"})
+
+    # ---- 5. developer portal
     def _portal_candidates(self):
         seen, out = set(), []
         for p in self.pages:
@@ -248,7 +332,8 @@ class Prober:
                 self.skipped.append({"what": url, "why": "the page needs JavaScript, so the agent cannot read what is behind it without a browser"})
                 continue
             need = NEED_LOGIN_RE.search(text)
-            if LOGIN_PATH_RE.search(fu.path) or LOGIN_PATH_RE.search(fu.netloc) or (final != url and LOGIN_TEXT_RE.search(text[:600])):
+            moved = urllib.parse.urlparse(final).path.rstrip("/") != urllib.parse.urlparse(url).path.rstrip("/")   # a trailing-slash redirect is not a login redirect
+            if LOGIN_PATH_RE.search(fu.path) or LOGIN_PATH_RE.search(fu.netloc) or (moved and LOGIN_TEXT_RE.search(text[:600])):
                 self._add("portal", f"Opening {url} without an account ended on a sign-in page ({dest}).", url, quote=text[:160], how=how,
                           note="Creating the app needs your own account, so the agent stopped here and left it to you.")
                 self.login_wall = (url, dest)
@@ -264,7 +349,7 @@ class Prober:
 
     def run(self):
         self.meta, self.login_wall = None, None
-        for step in (self.metadata, self.authorize, self.portal):
+        for step in (self.metadata, self.authorize, self.token, self.api, self.portal):
             try:
                 step()
             except Exception as e:
@@ -275,7 +360,7 @@ class Prober:
 
 def run_probes(env, target, pages, deadline):
     """env supplies: log, UA, root_domain, norm_url, allowed_by_robots."""
-    env.log("probe", "starting read-only live checks (no login, no registration)")
+    env.log("probe", "starting harmless live checks (no login, no registration)")
     res = Prober(env, target, pages, deadline).run()
     env.log("probe", f"{len(res['observations'])} observation(s) from {res['requests']} request(s); {len(res['skipped'])} skipped")
     return res
@@ -283,7 +368,7 @@ def run_probes(env, target, pages, deadline):
 
 def claim_of(obs, today):
     c = {"text": obs["text"], "label": "tested", "source_type": "agent_probe", "source_url": obs["url"],
-         "note": f"Automated read-only probe by the agent on {today}: {obs['how']}." + (f" {obs['note']}" if obs["note"] else ""),
+         "note": f"Automated probe by the agent on {today}: {obs['how']}." + (f" {obs['note']}" if obs["note"] else ""),
          "checked_at": today}
     if obs["quote"]:
         c["evidence_quote"] = obs["quote"]
@@ -297,7 +382,7 @@ def apply_probes(guide, res, today):
     if claims:
         guide["extras"].insert(0, {
             "title": "Tested live by the agent",
-            "why_it_matters": "The agent made read-only requests to the provider (no login, no registration) and recorded what came back. These are observations, not documentation.",
+            "why_it_matters": "The agent made harmless requests to the provider (no login, no registration; one deliberately invalid token request) and recorded what came back. These are observations, not documentation.",
             "claims": claims})
         del guide["extras"][5:]
         done = next((c for o, c in zip(obs, claims) if o["kind"] in ("metadata", "authorize")), claims[0])

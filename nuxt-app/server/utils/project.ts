@@ -26,11 +26,17 @@ export interface GuideEntry {
   dir: string
   stem: string
   name: string
+  website: string
+  summary: string
+  approval: string
   mode: string
   model: string
   generated_at: string
   start: string
   public: string
+  tested: number
+  claims: number
+  retested: { ok: number; checked: number } | null
   mtime: number
 }
 
@@ -40,6 +46,18 @@ function readJson(path: string) {
   } catch {
     return null
   }
+}
+
+// Count claims (objects with a label, a date and text) and how many are "tested".
+function countClaims(node: any, acc = { total: 0, tested: 0 }) {
+  if (Array.isArray(node)) node.forEach((n) => countClaims(n, acc))
+  else if (node && typeof node === 'object') {
+    if (node.label && node.checked_at && node.text) {
+      acc.total++
+      if (node.label === 'tested') acc.tested++
+    } else Object.values(node).forEach((v) => countClaims(v, acc))
+  }
+  return acc
 }
 
 // Every guide JSON on disk (trace and schema files excluded), newest first within a folder.
@@ -54,16 +72,25 @@ export function scanGuides(): GuideEntry[] {
       const g = readJson(path)
       if (!g || !g.provider || !g.difficulty) continue
       const stem = f.replace(/\.json$/, '')
+      const { provider, evidence, ...body } = g
+      const c = countClaims(body)
+      const sc = readJson(join(full, `${stem}.trace.json`))?.savecheck
       found.push({
         key: `${dir}/${stem}`,
         dir,
         stem,
         name: g.provider.name,
+        website: g.provider.website,
+        summary: g.summary || '',
+        approval: g.time?.to_approval?.display || '',
         mode: g.generated_by?.mode || 'agent',
         model: g.generated_by?.model || '',
         generated_at: g.generated_at,
         start: g.difficulty.start.level,
         public: g.difficulty.public.level,
+        tested: c.tested,
+        claims: c.total,
+        retested: sc ? { ok: sc.ok, checked: sc.checked } : null,
         mtime: statSync(path).mtimeMs
       })
     }

@@ -1,6 +1,6 @@
 # OAuth Guide Agent
 
-Type an app name or a website. An agent reads its developer docs, makes a few read-only live checks against the provider, and
+Type an app name or a website. An agent reads its developer docs, tests them live against the provider, and
 writes an OAuth setup guide a developer can follow and share: **how hard it is, how long it takes (including any approval wait),
 what the requirements and traps are, and what an AI agent can do versus what you must do yourself.**
 
@@ -11,9 +11,9 @@ claims, an exact quote that code has checked against the fetched page.
 
 | | |
 |---|---|
-| **Demo: nine real apps** and a live walkthrough | [docs/DEMO.md](docs/DEMO.md) |
+| **Demo: thirteen real apps** and a live walkthrough | [docs/DEMO.md](docs/DEMO.md) |
 | **Verification: what was checked, corrected, and could not be verified** | [docs/VERIFICATION.md](docs/VERIFICATION.md) |
-| **Saved guides** (open in the app) | [`guides/`](guides) |
+| **Saved guides** (15, open in the app's *Saved guides* section) | [`guides/`](guides) |
 
 ## Quick start
 
@@ -29,8 +29,8 @@ npm install
 npm run dev                          # http://localhost:3000
 ```
 
-Open a **Saved guide**, or type any app (`Calendly`, `linear.app`, `https://developers.figma.com`) and press **Research**. A run takes
-roughly 1.5 to 3 minutes; the right-hand side shows a live working screen, and the guide opens when it finishes.
+Open a **Saved guide** (the sidebar and the *Saved guides* page list all of them), or paste any website or app name (`Calendly`, `linear.app`, `https://developers.figma.com`) into the big search bar and press **Research**. A run takes
+roughly 1.5 to 3 minutes. On first landing the right-hand column is empty and says to paste a URL or open a saved guide; during a run it becomes a large animated "watch the agents work" scene, and the guide opens when it finishes.
 
 The web app starts the Python agent for you (it uses `../.venv/bin/python`, otherwise `python3`).
 
@@ -73,10 +73,14 @@ checks), `--model <id>`. Check any guide's quotes against their sources with `py
  verify ── CODE checks every quote against the fetched text. A claim without a real quote is dropped and listed.
       │
       ▼
- live probes ── read-only requests to the provider: OAuth metadata, how the authorize endpoint treats an
-      │         unregistered client, whether the developer portal sits behind a sign-in wall
+ live probes ── harmless requests to the provider: OAuth metadata, how the authorize and token endpoints treat an
+      │         unregistered client or invalid code, how the API answers with no token, and whether the
+      │         developer portal sits behind a sign-in wall (no login, no registration)
       ▼
  judge + assemble ── difficulty, waits, tiers, requirements, limits, blockers, hand-offs → guide JSON
+      │
+      ▼
+ test-then-save gate ── every cited page is fetched again and every quote re-checked; failures are removed
       │
       ▼
  validate against guides/guide.schema.json
@@ -88,7 +92,7 @@ stage chips, live counters and the pixelated working screen.
 ## Key decisions
 
 1. **Evidence over fluency.** Four labels on every claim. A model can say anything, so a *documentation* claim must carry a quote that code finds verbatim in the fetched page; otherwise it is dropped and shown under "Not verified".
-2. **Tested means observed.** The agent may label something **Tested** only when its own live probe saw it, with a distinct source type (`agent_probe`) so it is never confused with a person's hands-on test (`manual_test`).
+2. **Tested means observed, and nothing is saved untested.** The agent may label something **Tested** only when its own test saw it (a live probe, or the save gate re-finding a quote), with a distinct source type (`agent_probe`) so it is never confused with a person's hands-on test (`manual_test`). Before a guide is saved, every cited page is fetched again and every quote re-checked; a claim that fails is removed.
 3. **Never register, install or submit.** Those steps need your account and create real state, so the guide hands them to you and says where the agent was stopped (for example "redirected to `github.com/login`").
 4. **An agent loop, with code in charge.** The model decides what to read next, but code enforces the step and time budget, restricts fetches to the provider's own domains, and re-checks every recorded quote.
 5. **"Not found" beats a guess.** A review stage must state a duration to count as a wait; otherwise the guide says the wait is not published. A "fix" that fills a blank with plausible text would be worse than the blank.
@@ -98,10 +102,9 @@ stage chips, live counters and the pixelated working screen.
 
 ## Verification in one paragraph
 
-311 of 314 documentation quotes across the nine demo guides were re-found exactly at their sources on a fresh fetch (the other 3
-are intermittent on one site), none fabricated. A manual sample against independent sources **confirmed** limits and waits for
-Notion, Calendly, Google and Slack, and **found real mistakes**: Spotify's hardest gate was missing, GitHub's steps included
-seven unrelated Copilot steps, some "approval waits" were not waits, and two live probes were misleading. All were fixed or
+In the latest full pass, **472 of 472** documentation quotes across the thirteen agent-researched guides were re-found at their sources on a fresh fetch, none fabricated, and each guide also passed its own save-time test. A manual sample against independent sources **confirmed** limits and waits for
+Notion, Calendly, Google and Slack, reproduced the live-test observations with `curl`, and **found real mistakes**: Spotify's hardest gate was missing, GitHub's steps included
+seven unrelated Copilot steps, steps from pages like Dropbox's and Linear's OAuth docs were silently discarded, some "approval waits" were not waits, and three live observations were misleading or false. All were fixed or
 flagged. Details, including what could not be verified, are in [docs/VERIFICATION.md](docs/VERIFICATION.md).
 
 ## Limitations
@@ -109,9 +112,9 @@ flagged. Details, including what could not be verified, are in [docs/VERIFICATIO
 - **It is research, not a hands-on test.** The agent cannot create an app, so form fields, required fields and behaviour behind a login are not seen. A person who actually registered found details the agent's GitHub guide lacks (see the hand-tested [GitHub](guides/github.json) guide).
 - **"Time to get started" is Unknown** in every agent guide; only a hands-on attempt shows it.
 - **Difficulty ratings and the "what an agent can do" lists are model judgement** (labelled *Inferred*). They depend on coverage: Spotify moved from medium to hard once the missing gate was found.
-- **Coverage varies.** If a provider's docs are JavaScript-rendered, thin or spread across many pages, the guide has gaps and says "Not found". Some guides have few steps (Notion, Google: 1).
+- **Coverage varies.** If a provider's docs are JavaScript-rendered, thin, blocked for crawlers by `robots.txt`, or spread across many pages, the guide has gaps and says "Not found". Some guides have few steps (Notion, Google: 1). Zoom's main docs host returned only stubs, so its guide was researched from `developers.zoom.us` directly.
 - **Runs are not deterministic.** Two runs of the same app can list different limits or blockers.
-- **Live probes are modest.** At most 10 read-only requests; they honour `robots.txt` (Slack's blocks the OAuth path, so that check is skipped). Many providers publish no OAuth metadata.
+- **Live tests are modest and vary by provider.** At most 14 requests; they honour `robots.txt` (Slack's blocks the OAuth path, so that check is skipped) and need no account, so many providers expose little to test. Several guides (Asana, Google, Linear, Shopify, Spotify, Zoom) have only the save-gate result as a tested claim. Everything the guide states beyond that is documentation (re-checked against its source when saved) or labelled *Inferred*.
 - **Provider-specific traps.** Metadata can describe a different product (Figma's is for its MCP server); probes caveat this, but cannot always tell.
 - **English docs only.** Not tested on other languages.
 - **One run at a time**, because each run makes many Gemini calls. Free-tier rate limits apply.
@@ -136,11 +139,12 @@ OAUTH_AGENT_ROOT=.. NITRO_PORT=3000 RESEARCH_COOLDOWN_SECONDS=60 node .output/se
 
 ```
 agent/guide_agent.py   discover · agent loop · verify · assemble (standard library only)
-agent/probes.py        read-only live checks against the provider
+agent/probes.py        harmless live tests against the provider (metadata, authorize, token, API, portal)
+agent/savecheck.py     test-then-save gate: re-fetch every cited page, re-check every quote, drop what fails
 agent/netguard.py      outbound-request guard (http(s) only, public addresses only, redirects re-checked)
 agent/gcp_secrets.py   optional: Gemini key from GCP Secret Manager
-guides/                schema, hand-tested GitHub and Slack guides, nine agent-generated demo guides
-nuxt-app/              the web app (Nuxt 3): journey rail, pixel working screen, guide view, API routes
+guides/                schema, hand-tested GitHub and Slack guides, thirteen agent-generated guides with their traces
+nuxt-app/              the web app (Nuxt 3): sidebar, big search home, animated agents-at-work scene, saved-guides library, guide page with sections nav and research panel, API routes
 tools/                 recheck_quotes.py (independent re-check), summarize_guides.py, gemini_check.py
 tests/                 unit_test.py, probe_test.py (+ serve.py fake OAuth server)
 docs/                  DEMO.md, VERIFICATION.md, screenshots

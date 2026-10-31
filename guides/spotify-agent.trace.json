@@ -114,12 +114,28 @@
         "why": "no authorization URL found in the metadata or the docs read"
       },
       {
+        "what": "https://accounts.spotify.com/api/token",
+        "why": "robots.txt disallows it, so the agent did not request it"
+      },
+      {
+        "what": "https://api.spotify.com/",
+        "why": "robots.txt disallows it, so the agent did not request it"
+      },
+      {
         "what": "https://developer.spotify.com/dashboard",
         "why": "the page needs JavaScript, so the agent cannot read what is behind it without a browser"
       }
     ],
     "requests": 5,
     "login_wall": null
+  },
+  "savecheck": {
+    "checked": 25,
+    "pages": 7,
+    "ok": 25,
+    "failed": [],
+    "removed": [],
+    "kept_unpruned": false
   },
   "findings": [
     {

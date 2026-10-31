@@ -11,6 +11,8 @@ export function useResearch() {
   const stage = useState('research-stage', () => -1) // index of the stage in progress; STAGES.length once finished
   const error = useState('research-error', () => '')
   const target = useState('research-target', () => '')
+  const startedAt = useState('research-started', () => 0)
+  const readyKey = useState('research-ready', () => '') // key of a finished guide the user has not opened yet
 
   const liveStats = computed<RunStats>(() => {
     const pages = new Set<string>()
@@ -28,6 +30,8 @@ export function useResearch() {
 
   async function start(opts: { target: string; model?: string; maxPages: number; maxSeconds: number; maxSteps: number; probes?: boolean }): Promise<string | null> {
     running.value = true
+    startedAt.value = Date.now()
+    readyKey.value = ''
     error.value = ''
     log.value = []
     stage.value = 0
@@ -55,6 +59,7 @@ export function useResearch() {
           if (tag && tag in STAGE_OF) stage.value = Math.max(stage.value, STAGE_OF[tag])
         } else if (m.type === 'done') {
           key = m.key
+          readyKey.value = m.key
           stage.value = STAGES.length
         } else if (m.type === 'error') {
           error.value = m.message
@@ -84,5 +89,5 @@ export function useResearch() {
     target.value = ''
   }
 
-  return { running, log, stage, error, target, liveStats, start, reset }
+  return { running, log, stage, error, target, startedAt, readyKey, liveStats, start, reset }
 }

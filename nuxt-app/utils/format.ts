@@ -5,13 +5,27 @@ export interface GuideEntry {
   dir: string
   stem: string
   name: string
+  website: string
+  summary: string
+  approval: string
   mode: string
   model: string
   generated_at: string
   start: string
   public: string
+  tested: number
+  claims: number
+  retested: { ok: number; checked: number } | null
   mtime: number
 }
+
+// Display helpers shared by the sidebar, library and guide pages
+export const GUIDE_SECTIONS: [string, string, string][] = [
+  ['sec-1', '📊', 'Difficulty & time'], ['sec-2', '🪜', 'Path to public'], ['sec-3', '🛠', 'Steps'], ['sec-4', '📋', 'What you need'],
+  ['sec-5', '⚠️', 'Risks'], ['sec-6', '🤝', 'Who does what'], ['sec-7', '🔎', 'Trust & sources']
+]
+const AVATAR_COLORS = ['#e11d48', '#7c3aed', '#2563eb', '#0891b2', '#059669', '#d97706', '#db2777', '#4f46e5']
+export const avatarColor = (name: string) => AVATAR_COLORS[[...name].reduce((a, c) => a + c.charCodeAt(0), 0) % AVATAR_COLORS.length]
 
 export const LABELS: Record<string, string> = { tested: 'Tested', official_docs: 'Official docs', inferred: 'Inferred', unknown: 'Unknown' }
 export const LABEL_HELP: Record<string, string> = {

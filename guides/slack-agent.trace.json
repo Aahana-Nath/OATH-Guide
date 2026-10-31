@@ -176,6 +176,14 @@
       {
         "what": "https://slack.com/oauth/v2/authorize",
         "why": "robots.txt disallows it, so the agent did not request it"
+      },
+      {
+        "what": "Token endpoint",
+        "why": "no token URL found in the metadata or the docs read"
+      },
+      {
+        "what": "API host",
+        "why": "no API host (api.<provider>) was mentioned in the docs read"
       }
     ],
     "requests": 3,
@@ -183,6 +191,14 @@
       "url": "https://api.slack.com/apps?new_app=1",
       "lands_on": "api.slack.com/apps"
     }
+  },
+  "savecheck": {
+    "checked": 45,
+    "pages": 9,
+    "ok": 45,
+    "failed": [],
+    "removed": [],
+    "kept_unpruned": false
   },
   "findings": [
     {

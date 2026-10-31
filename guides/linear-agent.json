@@ -1,0 +1,542 @@
+{
+  "schema_version": "1.0",
+  "provider": {
+    "name": "Linear",
+    "website": "https://linear.app",
+    "docs_urls": [
+      "https://linear.app/developers/oauth-2-0-authentication.md",
+      "https://linear.app/developers/oauth-actor-authorization.md",
+      "https://linear.app/developers/oauth-app-manifests.md",
+      "https://linear.app/developers/rate-limiting.md"
+    ]
+  },
+  "generated_at": "2026-10-31",
+  "generated_by": {
+    "mode": "agent",
+    "model": "gemini-3.1-flash-lite"
+  },
+  "summary": "Linear provides a structured OAuth2 flow for building integrations. Developers can register apps via the settings portal, using JSON manifests, or URL parameters. The platform supports both private and public app distribution while enforcing specific naming and icon requirements.",
+  "difficulty": {
+    "start": {
+      "level": "easy",
+      "reason": {
+        "text": "The documentation provides clear steps for creating an OAuth2 application via settings, URL parameters, or a JSON manifest.",
+        "label": "inferred",
+        "source_type": "none",
+        "note": "Model judgement from the verified claims in this guide; not tested.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    "public": {
+      "level": "easy",
+      "reason": {
+        "text": "The documentation explicitly states that apps can be configured to be publicly installable by other workspaces.",
+        "label": "inferred",
+        "source_type": "none",
+        "note": "Model judgement from the verified claims in this guide; not tested.",
+        "checked_at": "2026-10-31"
+      }
+    }
+  },
+  "time": {
+    "to_start": {
+      "display": "Unknown",
+      "claim": {
+        "text": "Setup time was not stated in the pages read.",
+        "label": "unknown",
+        "source_type": "none",
+        "note": "Only a hands-on attempt shows how long registration takes.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    "to_approval": {
+      "display": "Not found",
+      "stages": [],
+      "claim": {
+        "text": "No review or approval timeline was found.",
+        "label": "unknown",
+        "source_type": "none",
+        "note": "4 pages read: https://linear.app/developers/oauth-2-0-authentication.md, https://linear.app/developers/oauth-actor-authorization.md, https://linear.app/developers/oauth-app-manifests.md, https://linear.app/developers/rate-limiting.md",
+        "checked_at": "2026-10-31"
+      }
+    }
+  },
+  "access_ladder": [
+    {
+      "tier": 1,
+      "name": "Private Workspace Access",
+      "allows": "The application is restricted to a single workspace for internal use and testing.",
+      "gate": "Default",
+      "prerequisites": [],
+      "claims": [
+        {
+          "text": "Apps can be configured to be private to a single workspace or publicly installable by other workspaces.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://linear.app/developers/oauth-app-manifests.md",
+          "evidence_quote": "Whether the application is private to one workspace or publicly installable.",
+          "checked_at": "2026-10-31"
+        }
+      ]
+    },
+    {
+      "tier": 2,
+      "name": "Public Marketplace Access",
+      "allows": "The application is discoverable and installable by other workspaces.",
+      "gate": "Public configuration",
+      "prerequisites": [],
+      "claims": [
+        {
+          "text": "Apps can be configured to be private to a single workspace or publicly installable by other workspaces.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://linear.app/developers/oauth-app-manifests.md",
+          "evidence_quote": "Whether the application is private to one workspace or publicly installable.",
+          "checked_at": "2026-10-31"
+        }
+      ]
+    }
+  ],
+  "requirements": {
+    "register": [
+      {
+        "item": "dedicated workspace",
+        "status": "optional",
+        "claim": {
+          "text": "It is highly recommended to create a dedicated workspace for managing the OAuth2 application.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://linear.app/developers/oauth-2-0-authentication.md",
+          "evidence_quote": "It is **highly recommended** you create a workspace for the purpose of managing the OAuth2 Application, as each admin user will have access.",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "item": "oauth.grant_types",
+        "status": "required",
+        "claim": {
+          "text": "The authorization_code grant type is always required.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://linear.app/developers/oauth-app-manifests.md",
+          "evidence_quote": "* `authorization_code` is always required",
+          "checked_at": "2026-10-31"
+        }
+      }
+    ],
+    "go_public": []
+  },
+  "limits": [
+    {
+      "item": "client credentials tokens",
+      "value": "1000",
+      "claim": {
+        "text": "OAuth2 apps can have up to 1000 active client credentials tokens in parallel.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://linear.app/developers/oauth-2-0-authentication.md",
+        "evidence_quote": "OAuth2 apps can have up to 1000 active client credentials tokens in parallel, provided each token uses the same scopes.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "item": "access token lifetime",
+      "value": "24 hours",
+      "claim": {
+        "text": "Access tokens are valid for 24 hours.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://linear.app/developers/oauth-2-0-authentication.md",
+        "evidence_quote": "The access token is valid for 24 hours and will need to be refreshed when it expires.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "item": "refresh token grace period",
+      "value": "30 minutes",
+      "claim": {
+        "text": "Refresh token requests have a 30-minute grace period for retries.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://linear.app/developers/oauth-2-0-authentication.md",
+        "evidence_quote": "Requests to consume a refresh token and obtain a new one have a 30-minute grace period to allow for network errors.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "item": "client credentials token lifetime",
+      "value": "30 days",
+      "claim": {
+        "text": "Client credentials tokens are valid for 30 days.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://linear.app/developers/oauth-2-0-authentication.md",
+        "evidence_quote": "The token generated using this grant type will be an `app` actor token that has access to all public teams in the workspace and is valid for 30 days.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "item": "OAuth App request limit",
+      "value": "5,000",
+      "claim": {
+        "text": "OAuth apps are limited to 5,000 requests per hour per user.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://linear.app/developers/rate-limiting.md",
+        "evidence_quote": "OAuth App | 5,000 | User (or App User) | 1 hour",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "item": "OAuth App complexity limit",
+      "value": "2,000,000",
+      "claim": {
+        "text": "OAuth apps are limited to 2,000,000 complexity points per hour per user.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://linear.app/developers/rate-limiting.md",
+        "evidence_quote": "OAuth app | 2,000,000 | User (or App User) | 1 hour",
+        "checked_at": "2026-10-31"
+      }
+    }
+  ],
+  "blockers": [
+    {
+      "issue": "The token field must not be combined with legacy fields during revocation.",
+      "fix": "Use only the token field for revocation.",
+      "claim": {
+        "text": "The token field must not be combined with legacy fields during revocation.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://linear.app/developers/oauth-2-0-authentication.md",
+        "evidence_quote": "The `token` field must not be combined with legacy fields.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "issue": "actor=application mode",
+      "fix": "See the cited page.",
+      "claim": {
+        "text": "The actor=application mode is deprecated.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://linear.app/developers/oauth-actor-authorization.md",
+        "evidence_quote": "Note, we previously supported a similar `actor=application` as a mode – this was deprecated in favor of the behavior in `actor=app`.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "issue": "oauth.client_name",
+      "fix": "Remove the word Linear from the client name.",
+      "claim": {
+        "text": "The OAuth client name must not contain the word Linear.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://linear.app/developers/oauth-app-manifests.md",
+        "evidence_quote": "* Must not contain `Linear`",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "issue": "oauth.client_name",
+      "fix": "Remove the URL protocol from the client name.",
+      "claim": {
+        "text": "The OAuth client name must not contain http:// or https://.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://linear.app/developers/oauth-app-manifests.md",
+        "evidence_quote": "* Must not contain `http://` or `https://`",
+        "checked_at": "2026-10-31"
+      }
+    }
+  ],
+  "steps": [
+    {
+      "order": 1,
+      "text": "Create a new OAuth2 application in the Linear settings.",
+      "actor": "both",
+      "claim": {
+        "text": "Create a new OAuth2 application in the Linear settings.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://linear.app/developers/oauth-2-0-authentication.md",
+        "evidence_quote": "Create a new [OAuth2 Application](https://linear.app/settings/api/applications/new) and configure the redirect callback URLs to your application.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 2,
+      "text": "Redirect the user to the Linear authorization URL with the required parameters and scopes.",
+      "actor": "agent",
+      "claim": {
+        "text": "Redirect the user to the Linear authorization URL with the required parameters and scopes.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://linear.app/developers/oauth-2-0-authentication.md",
+        "evidence_quote": "When authorizing a user to the Linear API, redirect to an authorization URL with correct parameters and scopes:",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 3,
+      "text": "Handle the redirect back to your application after the user approves the request.",
+      "actor": "agent",
+      "claim": {
+        "text": "Handle the redirect back to your application after the user approves the request.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://linear.app/developers/oauth-2-0-authentication.md",
+        "evidence_quote": "Once the user approves your application they will be redirected back to your application, with the OAuth authorization `code` in the URL params.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 4,
+      "text": "Exchange the authorization code for an access token by making a POST request to the token endpoint.",
+      "actor": "agent",
+      "claim": {
+        "text": "Exchange the authorization code for an access token by making a POST request to the token endpoint.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://linear.app/developers/oauth-2-0-authentication.md",
+        "evidence_quote": "After receiving the `code`, you can exchange it for a Linear API access token:",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 5,
+      "text": "Initialize the Linear Client with the access token to make API requests.",
+      "actor": "both",
+      "claim": {
+        "text": "Initialize the Linear Client with the access token to make API requests.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://linear.app/developers/oauth-2-0-authentication.md",
+        "evidence_quote": "Once you have obtained a valid access token, you can make a request to Linear's GraphQL API. You can initialize the [Linear Client](https://linear.app/developers/sdk) with the access token:",
+        "checked_at": "2026-10-31"
+      }
+    }
+  ],
+  "agent_vs_human": {
+    "agent": [
+      {
+        "text": "Redirect the user to the Linear authorization URL with the required parameters and scopes.",
+        "claim": {
+          "text": "Redirect the user to the Linear authorization URL with the required parameters and scopes.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://linear.app/developers/oauth-2-0-authentication.md",
+          "evidence_quote": "When authorizing a user to the Linear API, redirect to an authorization URL with correct parameters and scopes:",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "text": "Handle the redirect back to your application after the user approves the request.",
+        "claim": {
+          "text": "Handle the redirect back to your application after the user approves the request.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://linear.app/developers/oauth-2-0-authentication.md",
+          "evidence_quote": "Once the user approves your application they will be redirected back to your application, with the OAuth authorization `code` in the URL params.",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "text": "Exchange the authorization code for an access token by making a POST request to the token endpoint.",
+        "claim": {
+          "text": "Exchange the authorization code for an access token by making a POST request to the token endpoint.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://linear.app/developers/oauth-2-0-authentication.md",
+          "evidence_quote": "After receiving the `code`, you can exchange it for a Linear API access token:",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "text": "Generate a JSON manifest file for application registration",
+        "claim": {
+          "text": "Generate a JSON manifest file for application registration",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "text": "Draft the application name ensuring it excludes restricted terms like Linear or URLs",
+        "claim": {
+          "text": "Draft the application name ensuring it excludes restricted terms like Linear or URLs",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-31"
+        }
+      }
+    ],
+    "human": [
+      {
+        "text": "Create a new OAuth2 application in the Linear settings.",
+        "claim": {
+          "text": "Create a new OAuth2 application in the Linear settings.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://linear.app/developers/oauth-2-0-authentication.md",
+          "evidence_quote": "Create a new [OAuth2 Application](https://linear.app/settings/api/applications/new) and configure the redirect callback URLs to your application.",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "text": "Initialize the Linear Client with the access token to make API requests.",
+        "claim": {
+          "text": "Initialize the Linear Client with the access token to make API requests.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://linear.app/developers/oauth-2-0-authentication.md",
+          "evidence_quote": "Once you have obtained a valid access token, you can make a request to Linear's GraphQL API. You can initialize the [Linear Client](https://linear.app/developers/sdk) with the access token:",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "text": "Create a dedicated workspace for managing the OAuth2 application",
+        "claim": {
+          "text": "Create a dedicated workspace for managing the OAuth2 application",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "text": "Register the application in the Linear settings portal",
+        "claim": {
+          "text": "Register the application in the Linear settings portal",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-31"
+        }
+      }
+    ]
+  },
+  "extras": [
+    {
+      "title": "Tested live by the agent",
+      "why_it_matters": "The agent tested this guide's evidence and the provider's live behaviour before saving it. These are observations, not documentation.",
+      "claims": [
+        {
+          "text": "When this guide was saved, the agent re-fetched the 4 pages it cites and re-checked 19 quoted passages: 19 were found again, none were missing.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://linear.app/developers/oauth-2-0-authentication.md",
+          "note": "Automated test on 2026-10-31: each quote must appear in a fresh copy of the cited page. A quote that does not is removed, together with anything that rested only on it.",
+          "checked_at": "2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "What the docs recommend",
+      "why_it_matters": "display.iconUrl",
+      "claims": [
+        {
+          "text": "It is recommended to use an image at least 256x256px for the application icon.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://linear.app/developers/oauth-app-manifests.md",
+          "evidence_quote": "* Recommendation: use an image at least 256×256px",
+          "checked_at": "2026-10-31"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "not_verified": [
+      {
+        "item": "Review or approval timeline",
+        "note": "Not found in the pages read. 4 pages read: https://linear.app/developers/oauth-2-0-authentication.md, https://linear.app/developers/oauth-actor-authorization.md, https://linear.app/developers/oauth-app-manifests.md, https://linear.app/developers/rate-limiting.md"
+      },
+      {
+        "item": "Requirements to go public",
+        "note": "Not found in the pages read. 4 pages read: https://linear.app/developers/oauth-2-0-authentication.md, https://linear.app/developers/oauth-actor-authorization.md, https://linear.app/developers/oauth-app-manifests.md, https://linear.app/developers/rate-limiting.md"
+      },
+      {
+        "item": "Registering, installing and submitting an app",
+        "note": "Not attempted. These steps need your account and create real state, so the agent stopped at the sign-in wall. The live checks found nothing to record."
+      },
+      {
+        "item": "Dropped model claim: The developer name is required for a complete setup.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Dropped model claim: The OAuth client name is required for a complete setup.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Dropped model claim: The OAuth client URI is required for a complete setup.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Dropped model claim: The OAuth redirect URIs are required for a complete setup.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Dropped model claim: The maximum number of redirect URIs is 32.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Dropped model claim: The maximum complexity for a single query is 10,000 points.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Dropped model claim: Queries exceeding the maximum complexity of 10,000 points will be rejected.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Dropped model claim: Linear supports standard user-based OAuth and an alternative OAuth Actor Authorization where the app itself performs act",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Live check not completed: OAuth server metadata",
+        "note": "none published at linear.app (checked /.well-known/oauth-authorization-server, /.well-known/openid-configuration)"
+      },
+      {
+        "item": "Live check not completed: How https://linear.app/oauth/authorize treats an unregistered client",
+        "note": "it returned HTTP 200 with no readable error (likely a JavaScript page), so nothing could be concluded"
+      },
+      {
+        "item": "Live check not completed: https://api.linear.app/oauth/token",
+        "note": "robots.txt disallows it, so the agent did not request it"
+      },
+      {
+        "item": "Live check not completed: https://api.linear.app/",
+        "note": "robots.txt disallows it, so the agent did not request it"
+      },
+      {
+        "item": "Live check not completed: Developer portal",
+        "note": "no 'create an app' or dashboard link found in the pages read"
+      }
+    ],
+    "conflicts": [],
+    "sources": [
+      {
+        "title": "https://linear.app/developers/oauth-2-0-authentication.md",
+        "url": "https://linear.app/developers/oauth-2-0-authentication.md",
+        "type": "docs"
+      },
+      {
+        "title": "https://linear.app/developers/oauth-actor-authorization.md",
+        "url": "https://linear.app/developers/oauth-actor-authorization.md",
+        "type": "docs"
+      },
+      {
+        "title": "https://linear.app/developers/oauth-app-manifests.md",
+        "url": "https://linear.app/developers/oauth-app-manifests.md",
+        "type": "docs"
+      },
+      {
+        "title": "https://linear.app/developers/rate-limiting.md",
+        "url": "https://linear.app/developers/rate-limiting.md",
+        "type": "docs"
+      }
+    ]
+  }
+}

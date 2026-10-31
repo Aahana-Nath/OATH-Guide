@@ -52,7 +52,7 @@ def main(paths):
     print("|---|---|---|---|---|---|---|---|---|---|---|---|---|")
     for p in paths:
         r = row(p)
-        print(f"| {r['name']} | {r['start']} | {r['public']} | {r['approval'][:60]} | {r['tiers']} | {r['steps']} | {r['req']} | {r['limits']} | {r['blockers']} | "
+        print(f"| {r['name']} | {r['start']} | {r['public']} | {r['approval'][:150]} | {r['tiers']} | {r['steps']} | {r['req']} | {r['limits']} | {r['blockers']} | "
               f"{r['docs']} | {r['probe']} / {r['manual']} | {r['inferred']} | {r['unknown']} |")
 
 

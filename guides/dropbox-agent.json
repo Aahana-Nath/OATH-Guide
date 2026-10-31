@@ -1,0 +1,661 @@
+{
+  "schema_version": "1.0",
+  "provider": {
+    "name": "Dropbox",
+    "website": "https://dropbox.com",
+    "docs_urls": [
+      "https://docs.dropboxapi.com/dropbox-api/docs/oauth",
+      "https://www.dropbox.com/developers",
+      "https://docs.dropboxapi.com/dropbox-api/docs/get-started/tutorial/overview",
+      "https://www.dropbox.com/app-integrations"
+    ]
+  },
+  "generated_at": "2026-10-31",
+  "generated_by": {
+    "mode": "agent",
+    "model": "gemini-3.1-flash-lite"
+  },
+  "summary": "Dropbox provides a robust OAuth 2.0 implementation supporting PKCE and multiple grant types. Developers must register apps in the App Console, configure redirect URIs, and follow specific security guidelines regarding web-views and scope selection to ensure a smooth integration process.",
+  "difficulty": {
+    "start": {
+      "level": "easy",
+      "reason": {
+        "text": "The process involves standard app registration in the App Console and using well-documented OAuth flows like PKCE.",
+        "label": "inferred",
+        "source_type": "none",
+        "note": "Model judgement from the verified claims in this guide; not tested.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    "public": {
+      "level": "medium",
+      "reason": {
+        "text": "Making an app public requires configuring visibility settings and potentially undergoing an app review process based on requested scopes.",
+        "label": "inferred",
+        "source_type": "none",
+        "note": "Model judgement from the verified claims in this guide; not tested.",
+        "checked_at": "2026-10-31"
+      }
+    }
+  },
+  "time": {
+    "to_start": {
+      "display": "Unknown",
+      "claim": {
+        "text": "Setup time was not stated in the pages read.",
+        "label": "unknown",
+        "source_type": "none",
+        "note": "Only a hands-on attempt shows how long registration takes.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    "to_approval": {
+      "display": "Not found",
+      "stages": [],
+      "claim": {
+        "text": "No review or approval timeline was found.",
+        "label": "unknown",
+        "source_type": "none",
+        "note": "7 pages read: https://docs.dropboxapi.com/dropbox-api/docs/oauth, https://www.dropbox.com/developers, https://docs.dropboxapi.com/dropbox-api/docs/get-started/tutorial/overview, https://www.dropbox.com/app-integrations, https://docs.dropboxapi.com/dropbox-api/docs/get-started/authorization, https://docs.dropboxapi.com/dropbox-api/docs/auth-types …",
+        "checked_at": "2026-10-31"
+      }
+    }
+  },
+  "access_ladder": [
+    {
+      "tier": 1,
+      "name": "Development",
+      "allows": "The developer can configure the app to access only its own folder or the entire Dropbox account.",
+      "gate": "Default",
+      "prerequisites": [],
+      "claims": [
+        {
+          "text": "Apps can be configured to access only their own folder or the entire Dropbox account.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/oauth",
+          "evidence_quote": "App Folder: Your application will be able to take actions allowed by its scopes on data within its app folder only (in the /apps folder). This option is suitable for apps that export content or manage only their content. Full Dropbox: Your application will be able to take actions allowed by its scopes on all data within the user’s Dropbox account.",
+          "checked_at": "2026-10-31"
+        }
+      ]
+    },
+    {
+      "tier": 2,
+      "name": "Review",
+      "allows": "The developer must ensure requested scopes and content access are minimal to avoid user rejection and pass the app review process.",
+      "gate": "Submission for app review",
+      "prerequisites": [],
+      "claims": [
+        {
+          "text": "Requesting more scope and content access than required may result in end users not accepting your OAuth request and could impact your app review process.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/oauth",
+          "evidence_quote": "Requesting more scope and content access than required may result in end users not accepting your OAuth request and could impact your app review process.",
+          "checked_at": "2026-10-31"
+        }
+      ]
+    }
+  ],
+  "requirements": {
+    "register": [
+      {
+        "item": "Full Dropbox access",
+        "status": "required",
+        "claim": {
+          "text": "Dropbox Extensions require an app with Full Dropbox access.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/extensions",
+          "evidence_quote": "Dropbox Extensions can be added to any new or existing Dropbox app with Full Dropbox access.",
+          "checked_at": "2026-10-31"
+        }
+      }
+    ],
+    "go_public": [
+      {
+        "item": "Visibility",
+        "status": "required",
+        "claim": {
+          "text": "Uncheck the Only me box in the Visibility section to enable the Extension for other users.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/extensions",
+          "evidence_quote": "Once you have configured the Extension settings and have carried out tests to ensure that the Extension works as you intended, you can return to this field and uncheck the Only me box to enable the Extension for other users.",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "item": "OAuth authorization",
+        "status": "required",
+        "claim": {
+          "text": "Users must authorize the app via OAuth before the extension shows in their menu.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/extensions",
+          "evidence_quote": "Extensions will not show in “Open” or “Share” menu of the end user until a) you have unchecked the “Only me” box under “Visibility” section of the app and b) the user authorizes the app via OAuth*.",
+          "checked_at": "2026-10-31"
+        }
+      }
+    ]
+  },
+  "limits": [
+    {
+      "item": "The exact expiry time of an access token is returned by the…",
+      "value": "The exact expiry time of an access…",
+      "claim": {
+        "text": "The exact expiry time of an access token is returned by the /oauth2/token endpoint.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/oauth",
+        "evidence_quote": "The exact expiry time of an access token is returned by the /oauth2/token endpoint (or the redirect URI in implicit grant) - but is generally long enough for a reasonable web session.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "item": "Dropbox access tokens are short lived and will expire after a short…",
+      "value": "Dropbox access tokens are short lived…",
+      "claim": {
+        "text": "Dropbox access tokens are short lived and will expire after a short period of time.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/oauth",
+        "evidence_quote": "Dropbox access tokens are short lived, and will expire after a short period of time.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "item": "The state parameter can be up to 2000 bytes.",
+      "value": "2000 bytes",
+      "claim": {
+        "text": "The state parameter can be up to 2000 bytes.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/get-started/authorization",
+        "evidence_quote": "state String? Up to 2000 bytes of arbitrary data that will be passed back to your redirect URI. This parameter should be used to protect against cross-site request forgery (CSRF).",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "item": "The code_challenge parameter must be between 43 and 128 characters.",
+      "value": "43-128",
+      "claim": {
+        "text": "The code_challenge parameter must be between 43 and 128 characters.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/get-started/authorization",
+        "evidence_quote": "code_challenge String?(min_length=43, max_length=128) Part of the PKCE flow, the challenge should be an SHA-256 (S256) encoded value of a string that will serve as the code_verifier of the corresponding /oauth2/token call.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "item": "The code_challenge parameter in the PKCE flow must be between 43 and…",
+      "value": "43 and",
+      "claim": {
+        "text": "The code_challenge parameter in the PKCE flow must be between 43 and 128 characters.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/get-started/authorization",
+        "evidence_quote": "code_challenge String?(min_length=43, max_length=128)",
+        "checked_at": "2026-10-31"
+      }
+    }
+  ],
+  "blockers": [
+    {
+      "issue": "Do not instruct users to register their own Dropbox application to use your app.",
+      "fix": "See the cited page.",
+      "claim": {
+        "text": "Do not instruct users to register their own Dropbox application to use your app.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/oauth",
+        "evidence_quote": "Do not instruct your users to register their own Dropbox application to use your app - you just need to register your app once.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "issue": "You must register the exact redirect URI(s) your app may use in the App Console.",
+      "fix": "See the cited page.",
+      "claim": {
+        "text": "You must register the exact redirect URI(s) your app may use in the App Console.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/oauth",
+        "evidence_quote": "You’ll need to register the exact redirect URI(s) your app may use in the App Console for your application. Dropbox checks that the specified redirect_uri parameter in your Authorization URL matches one of the registered values at authorization time.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "issue": "The authorization page must not be displayed in a web-view.",
+      "fix": "See the cited page.",
+      "claim": {
+        "text": "The authorization page must not be displayed in a web-view.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/get-started/authorization",
+        "evidence_quote": "This web page should not be displayed in a web-view. This is in order to maintain compatibility with the website and to comply with Google’s policy against processing their OAuth flow inside a web-view, to support users who sign in to Dropbox using their Google accounts.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "issue": "The authorization page must not be displayed in a web-view.",
+      "fix": "Use the system browser instead of a web-view.",
+      "claim": {
+        "text": "The authorization page must not be displayed in a web-view.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/get-started/authorization",
+        "evidence_quote": "This web page should not be displayed in a web-view. This is in order to maintain compatibility with the website and to comply with Google’s policy against processing their OAuth flow inside a web-view",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "issue": "Using the Dropbox-API-Select-User header can result in a 401 error if the member ID does…",
+      "fix": "See the cited page.",
+      "claim": {
+        "text": "Using the Dropbox-API-Select-User header can result in a 401 error if the member ID does not exist on the team.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/auth-types",
+        "evidence_quote": "An additional error may occur when using Dropbox-API-Select-User:\n\n401 Member ID doesn’t exist on the team.",
+        "checked_at": "2026-10-31"
+      }
+    }
+  ],
+  "steps": [
+    {
+      "order": 1,
+      "text": "The developer must use the /oauth2/token endpoint to exchange an authorization code for a bearer access token.",
+      "actor": "agent",
+      "claim": {
+        "text": "The developer must use the /oauth2/token endpoint to exchange an authorization code for a bearer access token.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/get-started/authorization",
+        "evidence_quote": "The code flow returns an authorization code via the optional redirect_uri callback which should then be converted into a bearer access token using the /oauth2/token call.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 2,
+      "text": "Send the user to the authorization page.",
+      "actor": "agent",
+      "claim": {
+        "text": "Send the user to the authorization page.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/get-started/authorization",
+        "evidence_quote": "Your app should send the user to this app authorization page in their system browser, which will display the permissions being granted.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 3,
+      "text": "The developer must send the user to the app authorization page in their system browser to display permissions.",
+      "actor": "agent",
+      "claim": {
+        "text": "The developer must send the user to the app authorization page in their system browser to display permissions.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/get-started/authorization",
+        "evidence_quote": "Your app should send the user to this app authorization page in their system browser, which will display the permissions being granted.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 4,
+      "text": "Register the redirect URI in the App Console.",
+      "actor": "agent",
+      "claim": {
+        "text": "Register the redirect URI in the App Console.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/get-started/authorization",
+        "evidence_quote": "This must be the exact URI registered in the App Console; even ‘localhost’ must be listed if it is used for testing. All redirect URIs must be HTTPS except for localhost URIs.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 5,
+      "text": "Exchange the authorization code for an access token.",
+      "actor": "agent",
+      "claim": {
+        "text": "Exchange the authorization code for an access token.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/get-started/authorization",
+        "evidence_quote": "An app calls this endpoint to acquire a refresh token and/or access token.",
+        "checked_at": "2026-10-31"
+      }
+    }
+  ],
+  "agent_vs_human": {
+    "agent": [
+      {
+        "text": "Look up the provider's live OAuth endpoints and check how they answer an unregistered client (done during this run).",
+        "claim": {
+          "text": "The provider publishes OAuth server metadata at https://dropbox.com/.well-known/oauth-authorization-server.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://dropbox.com/.well-known/oauth-authorization-server",
+          "note": "Automated probe by the agent on 2026-10-31: GET https://dropbox.com/.well-known/oauth-authorization-server returned HTTP 200 with JSON.",
+          "checked_at": "2026-10-31",
+          "evidence_quote": "issuer: https://www.dropbox.com"
+        }
+      },
+      {
+        "text": "The developer must use the /oauth2/token endpoint to exchange an authorization code for a bearer access token.",
+        "claim": {
+          "text": "The developer must use the /oauth2/token endpoint to exchange an authorization code for a bearer access token.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/get-started/authorization",
+          "evidence_quote": "The code flow returns an authorization code via the optional redirect_uri callback which should then be converted into a bearer access token using the /oauth2/token call.",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "text": "Send the user to the authorization page.",
+        "claim": {
+          "text": "Send the user to the authorization page.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/get-started/authorization",
+          "evidence_quote": "Your app should send the user to this app authorization page in their system browser, which will display the permissions being granted.",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "text": "The developer must send the user to the app authorization page in their system browser to display permissions.",
+        "claim": {
+          "text": "The developer must send the user to the app authorization page in their system browser to display permissions.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/get-started/authorization",
+          "evidence_quote": "Your app should send the user to this app authorization page in their system browser, which will display the permissions being granted.",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "text": "Register the redirect URI in the App Console.",
+        "claim": {
+          "text": "Register the redirect URI in the App Console.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/get-started/authorization",
+          "evidence_quote": "This must be the exact URI registered in the App Console; even ‘localhost’ must be listed if it is used for testing. All redirect URIs must be HTTPS except for localhost URIs.",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "text": "Generate the OAuth authorization URL with appropriate scopes and PKCE parameters.",
+        "claim": {
+          "text": "Generate the OAuth authorization URL with appropriate scopes and PKCE parameters.",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-31"
+        }
+      }
+    ],
+    "human": [
+      {
+        "text": "Create a Dropbox account and register the application in the App Console.",
+        "claim": {
+          "text": "Create a Dropbox account and register the application in the App Console.",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "text": "Configure the required redirect URIs and select necessary permissions in the App Console.",
+        "claim": {
+          "text": "Configure the required redirect URIs and select necessary permissions in the App Console.",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-31"
+        }
+      }
+    ]
+  },
+  "extras": [
+    {
+      "title": "Tested live by the agent",
+      "why_it_matters": "The agent made harmless requests to the provider (no login, no registration; one deliberately invalid token request) and recorded what came back. These are observations, not documentation.",
+      "claims": [
+        {
+          "text": "When this guide was saved, the agent re-fetched the 5 pages it cites and re-checked 25 quoted passages: 25 were found again, none were missing.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/auth-types",
+          "note": "Automated test on 2026-10-31: each quote must appear in a fresh copy of the cited page. A quote that does not is removed, together with anything that rested only on it.",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "text": "The provider publishes OAuth server metadata at https://dropbox.com/.well-known/oauth-authorization-server.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://dropbox.com/.well-known/oauth-authorization-server",
+          "note": "Automated probe by the agent on 2026-10-31: GET https://dropbox.com/.well-known/oauth-authorization-server returned HTTP 200 with JSON.",
+          "checked_at": "2026-10-31",
+          "evidence_quote": "issuer: https://www.dropbox.com"
+        },
+        {
+          "text": "The metadata lists PKCE code challenge methods: plain, S256.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://dropbox.com/.well-known/oauth-authorization-server",
+          "note": "Automated probe by the agent on 2026-10-31: GET https://dropbox.com/.well-known/oauth-authorization-server returned HTTP 200 with JSON.",
+          "checked_at": "2026-10-31",
+          "evidence_quote": "code_challenge_methods_supported: ['plain', 'S256']"
+        },
+        {
+          "text": "The metadata advertises a client registration endpoint (https://www.dropbox.com/oauth2/register), so apps may be creatable through an API.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://dropbox.com/.well-known/oauth-authorization-server",
+          "note": "Automated probe by the agent on 2026-10-31: GET https://dropbox.com/.well-known/oauth-authorization-server returned HTTP 200 with JSON. The agent did not register an app: that would create a real client on your behalf.",
+          "checked_at": "2026-10-31",
+          "evidence_quote": "registration_endpoint: https://www.dropbox.com/oauth2/register"
+        },
+        {
+          "text": "Supported grant types: authorization_code, client_credentials, refresh_token, device_code, urn:ietf:params:oauth:grant-type:jwt-bearer.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://dropbox.com/.well-known/oauth-authorization-server",
+          "note": "Automated probe by the agent on 2026-10-31: GET https://dropbox.com/.well-known/oauth-authorization-server returned HTTP 200 with JSON.",
+          "checked_at": "2026-10-31",
+          "evidence_quote": "grant_types_supported: ['authorization_code', 'client_credentials', 'refresh_token', 'device_code', 'urn:ietf:params:oauth:grant-type:jwt-bearer']"
+        },
+        {
+          "text": "Client authentication methods at the token endpoint: client_secret_post, client_secret_basic, none, private_key_jwt.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://dropbox.com/.well-known/oauth-authorization-server",
+          "note": "Automated probe by the agent on 2026-10-31: GET https://dropbox.com/.well-known/oauth-authorization-server returned HTTP 200 with JSON.",
+          "checked_at": "2026-10-31",
+          "evidence_quote": "token_endpoint_auth_methods_supported: ['client_secret_post', 'client_secret_basic', 'none', 'private_key_jwt']"
+        },
+        {
+          "text": "The metadata lists 39 supported scopes.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://dropbox.com/.well-known/oauth-authorization-server",
+          "note": "Automated probe by the agent on 2026-10-31: GET https://dropbox.com/.well-known/oauth-authorization-server returned HTTP 200 with JSON.",
+          "checked_at": "2026-10-31",
+          "evidence_quote": "scopes_supported: account_info.read, contacts.read, contacts.write, files.metadata.read, files.content.read, files.content.write, files.permanent_delete, files.metadata.write"
+        },
+        {
+          "text": "The authorize endpoint answered an unregistered test client with a redirect (HTTP 302) to www.dropbox.com/oauth2/authorize_error.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://www.dropbox.com/oauth2/authorize",
+          "note": "Automated probe by the agent on 2026-10-31: GET https://www.dropbox.com/oauth2/authorize with a made-up client_id (oauth-guide-agent-probe), no login, redirects not followed.",
+          "checked_at": "2026-10-31",
+          "evidence_quote": "HTTP 302 Location: www.dropbox.com/oauth2/authorize_error"
+        },
+        {
+          "text": "The token endpoint rejected an invalid test request with HTTP 400: \"invalid_client: Invalid client_id\".",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://api.dropboxapi.com/oauth2/token",
+          "note": "Automated probe by the agent on 2026-10-31: POST https://api.dropboxapi.com/oauth2/token with a made-up authorization code and client (nothing is created or changed). So it validates the client and code before issuing anything.",
+          "checked_at": "2026-10-31",
+          "evidence_quote": "invalid_client: Invalid client_id"
+        }
+      ]
+    },
+    {
+      "title": "Choices to make before you start (token / app / registration types)",
+      "why_it_matters": "The provider offers more than one way to set up. Compare before you choose.",
+      "claims": [
+        {
+          "text": "User Authentication uses an access token for a specific user and app pair.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/auth-types",
+          "evidence_quote": "This type uses an access token for a specific user and app pair, in order to operate on that user’s account, to the extent allowed by that app’s permission.",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "text": "Team Authentication uses an access token for a specific team and app pair.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/auth-types",
+          "evidence_quote": "This type uses an access token for a specific team and app pair, in order to operate on that team, to the extent allowed by that app’s permissions.",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "text": "App Authentication uses the app's own key and secret or an app auth token without identifying a specific user or team.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/auth-types",
+          "evidence_quote": "This type can either use the app’s own app key and secret, or an app auth token. This type of authentication doesn’t identify a specific user or team.",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "text": "Dropbox offers two content access types: App Folder and Full Dropbox.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/oauth",
+          "evidence_quote": "App Folder: Your application will be able to take actions allowed by its scopes on data within its app folder only (in the /apps folder). This option is suitable for apps that export content or manage only their content. Full Dropbox: Your application will be able to take actions allowed by its scopes on all data within the user’s Dropbox account.",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "text": "PKCE is an extension to OAuth 2.0 that uses dynamic codes instead of a static client_secret.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/oauth",
+          "evidence_quote": "PKCE is an open extension to OAuth 2.0, and solves this problem using dynamic codes instead of the static client_secret.",
+          "checked_at": "2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "Also worth knowing",
+      "why_it_matters": "",
+      "claims": [
+        {
+          "text": "The DBX Platform provides APIs for building custom solutions.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://www.dropbox.com/app-integrations",
+          "evidence_quote": "DBX Platform enables you to leverage our robust set of APIs to build custom solutions that improve collaboration, streamline workflows, and secure content.",
+          "checked_at": "2026-10-31"
+        }
+      ]
+    },
+    {
+      "title": "What the docs recommend",
+      "why_it_matters": "Stated preference",
+      "claims": [
+        {
+          "text": "Dropbox recommends using one of the Dropbox SDKs when possible.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.dropboxapi.com/dropbox-api/docs/oauth",
+          "evidence_quote": "Using one of these SDKs is recommended when possible.",
+          "checked_at": "2026-10-31"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "not_verified": [
+      {
+        "item": "Registering, installing and submitting an app",
+        "note": "Not attempted. These steps need your account and create real state, so the agent stopped at the sign-in wall. Only the live checks under 'Tested live by the agent' were run."
+      },
+      {
+        "item": "Dropped model claim: The first step to start developing is to create an app.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Dropped model claim: Access tokens are short-lived and expire after 14400 seconds.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Live check not completed: How api.dropboxapi.com answers a request with no token",
+        "note": "HTTP 404 with no auth challenge or rate-limit headers, so nothing could be concluded"
+      },
+      {
+        "item": "Live check not completed: How api.dropbox.com answers a request with no token",
+        "note": "HTTP 404 with no auth challenge or rate-limit headers, so nothing could be concluded"
+      },
+      {
+        "item": "Live check not completed: https://www.dropbox.com/developers/apps/create?_tk=pilot_lp&_ad=ctabtn2_free&_camp=create",
+        "note": "the page needs JavaScript, so the agent cannot read what is behind it without a browser"
+      },
+      {
+        "item": "Live check not completed: https://www.dropbox.com/developers/apps/create?_tk=pilot_lp&_ad=ctabtn1&_camp=create",
+        "note": "the page needs JavaScript, so the agent cannot read what is behind it without a browser"
+      },
+      {
+        "item": "Live check not completed: https://www.dropbox.com/developers/apps?_tk=pilot_lp&_ad=topbar4&_camp=myapps",
+        "note": "the page needs JavaScript, so the agent cannot read what is behind it without a browser"
+      }
+    ],
+    "conflicts": [],
+    "sources": [
+      {
+        "title": "OAuth | Dropbox API Documentation",
+        "url": "https://docs.dropboxapi.com/dropbox-api/docs/oauth",
+        "type": "docs"
+      },
+      {
+        "title": "DBX Platform for Developers - Dropbox",
+        "url": "https://www.dropbox.com/developers",
+        "type": "docs"
+      },
+      {
+        "title": "Overview | Dropbox API Documentation",
+        "url": "https://docs.dropboxapi.com/dropbox-api/docs/get-started/tutorial/overview",
+        "type": "docs"
+      },
+      {
+        "title": "Dropbox App Integrations",
+        "url": "https://www.dropbox.com/app-integrations",
+        "type": "docs"
+      },
+      {
+        "title": "Authorization | Dropbox API Documentation",
+        "url": "https://docs.dropboxapi.com/dropbox-api/docs/get-started/authorization",
+        "type": "docs"
+      },
+      {
+        "title": "Authentication Types | Dropbox API Documentation",
+        "url": "https://docs.dropboxapi.com/dropbox-api/docs/auth-types",
+        "type": "docs"
+      },
+      {
+        "title": "Extensions | Dropbox API Documentation",
+        "url": "https://docs.dropboxapi.com/dropbox-api/docs/extensions",
+        "type": "docs"
+      }
+    ]
+  }
+}

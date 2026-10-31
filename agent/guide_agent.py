@@ -21,8 +21,9 @@ Usage:
   export GEMINI_API_KEY="your-key"
   python3 guide_agent.py linear.app --out linear.json
 Options: --model ID  --max-pages N  --max-seconds N  --max-steps N  --no-probes  --trace trace.json  --schema guide.schema.json
-Live probes (agent/probes.py) run after the reading: read-only GETs that check the provider's OAuth metadata, how the
-authorize endpoint answers an unregistered client, and whether the developer portal sits behind a sign-in wall. What
+Live probes (agent/probes.py) run after the reading: harmless requests that check the provider's OAuth metadata, how the
+authorize and token endpoints answer an unregistered client or an invalid code, how the API answers a request with no token,
+and whether the developer portal sits behind a sign-in wall. What
 they observe becomes "Tested" claims (source type agent_probe). Registering or submitting an app is never attempted.
 Standard library only (jsonschema is used for validation if installed).
 """
@@ -46,6 +47,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from gcp_secrets import get_gemini_api_key
 from netguard import host_is_public, open_url
 from probes import apply_probes, run_probes
+from savecheck import recheck_and_prune
 
 UA = "OAuthGuideAgent/0.1 (research prototype; reads public developer docs)"
 BASE = "https://generativelanguage.googleapis.com/v1beta"
@@ -58,7 +60,7 @@ NOISE = re.compile(r"/reference/(methods|scopes|events|block|objects)|/changelog
 DOCHOST = re.compile(r"^(docs|developers?|dev|api|platform|apidocs)\.", re.I)
 LIM_GOOD_RE = re.compile(r"oauth|token|authori[sz]|code|expire|rate limit|per minute|per hour|per second|redirect|secret|rotat", re.I)
 LIM_BAD_RE = re.compile(r"review|feedback|submission|workspaces?\b|deliver|character|description|image|video|words?\b|shortcut|slash command|unfurl|kilobyte|display_name|manifest|\bname length|megabyte|mb\b", re.I)
-STEP_ALLOW = re.compile(r"quickstart|getting-started|creating|create|install|register|manifest|app-settings|distribution|publish|submit|setup|set-up|build", re.I)
+STEP_ALLOW = re.compile(r"quickstart|getting-started|get-started|creating|create|install|register|manifest|app-settings|distribution|publish|submit|setup|set-up|build|oauth|authenticat|authoriz", re.I)
 REG_PAGE = re.compile(r"quickstart|getting-started|creating|create|manifest|app-settings|register|install", re.I)
 STEP_DENY = re.compile(r"verifying|enterprise|events|webhook|signing|rate-limit|tokens|scopes|reference|agent|mcp|admins", re.I)
 # a section counts as covered only when it has at least this many verified claims
@@ -175,15 +177,17 @@ def norm_url(u):
     return u.rstrip("/") if urllib.parse.urlparse(u).path not in ("", "/") else u.rstrip("/")
 
 
-def fetch(url, timeout=12):
-    """Return a page dict, or None if blocked, missing, binary or unreachable."""
+def fetch(url, timeout=12, accept=None):
+    """Return a page dict, or None if blocked, missing, binary or unreachable.
+    `accept` asks for one rendition by name (e.g. "text/html" or "text/markdown"); some docs sites serve different text for each."""
     url = norm_url(url)
-    if url in _cache:
-        return _cache[url]
+    ckey = (url, accept) if accept else url
+    if ckey in _cache:
+        return _cache[ckey]
     page = None
     try:
         if allowed_by_robots(url):
-            req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "text/html,text/plain,text/markdown,*/*;q=0.5"})
+            req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": accept or "text/html,text/plain,text/markdown,*/*;q=0.5"})
             with open_url(req, timeout) as r:
                 ctype = (r.headers.get("Content-Type") or "").lower()
                 if r.status == 200 and any(x in ctype for x in ("html", "text/", "xml", "markdown")):
@@ -206,7 +210,7 @@ def fetch(url, timeout=12):
                     page = {"url": final, "title": title, "text": text, "links": links, "thin": thin, "ctype": ctype}
     except Exception:
         page = None
-    _cache[url] = page
+    _cache[ckey] = page
     return page
 
 
@@ -1434,7 +1438,7 @@ def agent_first_empty(pages):
     return not pages
 
 
-def run_agent(raw_input, model, max_pages=20, max_seconds=300, max_steps=10, agent_first=True, probes=True):
+def run_agent(raw_input, model, max_pages=20, max_seconds=300, max_steps=10, agent_first=True, probes=True, savecheck=True):
     deadline = time.time() + max_seconds
     RUN_ERRORS.clear()
     raw_input = resolve_bare_name(raw_input)
@@ -1482,8 +1486,12 @@ def run_agent(raw_input, model, max_pages=20, max_seconds=300, max_steps=10, age
     guide = assemble(t, readable if readable else pages, good, dropped, judgement, model, seeds)
     if probe_res:
         apply_probes(guide, probe_res, TODAY)
+    save_res = None
+    if savecheck:       # test-then-save: nothing is kept that cannot be re-found at its cited source
+        senv = types.SimpleNamespace(fetch=fetch, cache=_cache, norm_url=norm_url, norm=norm, quote_ok=quote_ok, log=log)
+        guide, save_res = recheck_and_prune(guide, senv, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "guides", "guide.schema.json"), TODAY)
     trace = {"input": raw_input, "pages": [{"url": p["url"], "chars": len(p["text"]), "thin": p["thin"]} for p in pages],
-             "steps": steps, "probes": probe_res,
+             "steps": steps, "probes": probe_res, "savecheck": save_res,
              "findings": [{"category": f["category"], "text": f["text"], "quote": f["quote"], "verified": f in good} for f in findings]}
     return guide, trace
 
@@ -1522,7 +1530,8 @@ def main():
     ap.add_argument("--max-seconds", type=int, default=600)
     ap.add_argument("--classic", action="store_true", help="old mode: crawl first, agent only fills gaps")
     ap.add_argument("--max-steps", type=int, default=25, help="agent-loop steps after the first pass (0 = first pass only)")
-    ap.add_argument("--no-probes", action="store_true", help="skip the read-only live checks against the provider")
+    ap.add_argument("--no-savecheck", action="store_true", help="skip the final re-test of every quoted claim before saving")
+    ap.add_argument("--no-probes", action="store_true", help="skip the harmless live checks against the provider")
     ap.add_argument("--trace", help="write pages read and every finding (verified or not) here")
     ap.add_argument("--schema", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "guides", "guide.schema.json"))
     a = ap.parse_args()
@@ -1534,7 +1543,7 @@ def main():
     model = a.model or pick_model(os.environ["GEMINI_API_KEY"].strip())
     log("start", f"model {model}")
     try:
-        guide, trace = run_agent(a.target, model, a.max_pages, a.max_seconds, a.max_steps, agent_first=not a.classic, probes=not a.no_probes)
+        guide, trace = run_agent(a.target, model, a.max_pages, a.max_seconds, a.max_steps, agent_first=not a.classic, probes=not a.no_probes, savecheck=not a.no_savecheck)
     except ValueError as e:
         sys.exit(str(e))
     ok = os.path.exists(a.schema) and validate(guide, a.schema)

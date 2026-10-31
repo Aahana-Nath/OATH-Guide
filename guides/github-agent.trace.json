@@ -37,13 +37,28 @@
       "thin": false
     },
     {
-      "url": "https://docs.github.com/en/apps/github-marketplace/listing-an-app-on-github-marketplace/submitting-your-listing-for-publication",
-      "chars": 1051,
+      "url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/scopes-for-oauth-apps",
+      "chars": 8037,
+      "thin": false
+    },
+    {
+      "url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps",
+      "chars": 1566,
       "thin": false
     },
     {
       "url": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/rate-limits-for-oauth-apps",
       "chars": 2749,
+      "thin": false
+    },
+    {
+      "url": "https://docs.github.com/en/apps/oauth-apps/maintaining-oauth-apps/troubleshooting-authorization-request-errors",
+      "chars": 2304,
+      "thin": false
+    },
+    {
+      "url": "https://docs.github.com/en/apps/github-marketplace/listing-an-app-on-github-marketplace/submitting-your-listing-for-publication",
+      "chars": 1051,
       "thin": false
     }
   ],
@@ -52,71 +67,70 @@
       "step": 1,
       "action": "fetch_page",
       "arg": "https://docs.github.com/en/apps/oauth-apps",
-      "thought": "I need to find information on public app requirements, review stages, and access tiers for GitHub OAuth apps to complete the checklist. I will start by fetching the OAuth apps overview page to find re",
+      "thought": "I need to find information on requirements for public apps, review stages, and access tiers for GitHub OAuth apps. I will start by fetching the main OAuth apps documentation page to see if it links to",
       "result": "auto-read saved 1 verified finding(s).\nPAGE 5\nURL: https://docs.github.com/en/apps/oauth-apps\nTITLE: OAuth apps - GitHub Docs\nTEXT:\nSkip to main content\n\nSkip to content\n\nCollapse sidebar\n\nExpand sidebar\n\nOAuth apps\n\nLearn how to build and maintain OAuth apps.\n\nUsing OAuth apps, 1 of 3\n\nInstalling a"
     },
     {
       "step": 2,
       "action": "fetch_page",
       "arg": "https://docs.github.com/en/apps/github-marketplace/creating-apps-for-github-marketplace/requirements-for-listing-an-app",
-      "thought": "I need to find information about requirements for public apps, review stages, and access tiers. I will start by checking the listing requirements for GitHub Marketplace, as this is a common path for p",
+      "thought": "I need to find information about requirements for public apps, review stages, and access tiers. I will start by checking the listing requirements for the GitHub Marketplace, as this is a common path f",
       "result": "auto-read saved 10 verified finding(s).\nPAGE 6\nURL: https://docs.github.com/en/apps/github-marketplace/creating-apps-for-github-marketplace/requirements-for-listing-an-app\nTITLE: Requirements for listing an app - GitHub Docs\nTEXT:\nSkip to main content\n\nSkip to content\n\nCollapse sidebar\n\nExpand sideb"
     },
     {
       "step": 3,
-      "action": "record_finding",
-      "arg": "4 finding(s)",
-      "thought": "I have gathered significant information about marketplace requirements and blockers. I need to find information about review stages and access tiers to complete the checklist.",
-      "result": "4 finding(s) verified and saved."
+      "action": "fetch_page",
+      "arg": "https://docs.github.com/en/apps/github-marketplace/github-marketplace-overview/applying-for-publisher-verification-for-your-organization",
+      "thought": "I have gathered significant information about marketplace requirements. I need to find information about the review stages and access tiers, as well as more registration requirements. I will start by ",
+      "result": "auto-read saved 6 verified finding(s).\nPAGE 7\nURL: https://docs.github.com/en/apps/github-marketplace/github-marketplace-overview/applying-for-publisher-verification-for-your-organization\nTITLE: Applying for publisher verification for your organization - GitHub Docs\nTEXT:\nSkip to main content\n\nSkip "
     },
     {
       "step": 4,
       "action": "fetch_page",
-      "arg": "https://docs.github.com/en/apps/github-marketplace/github-marketplace-overview/applying-for-publisher-verification-for-your-organization",
-      "thought": "I need to find more information on OAuth app registration requirements, review stages, and access tiers to complete the checklist. I will fetch the page about applying for publisher verification as it",
-      "result": "auto-read saved 6 verified finding(s).\nPAGE 7\nURL: https://docs.github.com/en/apps/github-marketplace/github-marketplace-overview/applying-for-publisher-verification-for-your-organization\nTITLE: Applying for publisher verification for your organization - GitHub Docs\nTEXT:\nSkip to main content\n\nSkip "
+      "arg": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/scopes-for-oauth-apps",
+      "thought": "I need to find more information about OAuth app registration requirements, review stages, and access tiers. I will fetch the page about OAuth app scopes to see if it contains registration requirements",
+      "result": "auto-read saved 2 verified finding(s).\nPAGE 8\nURL: https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/scopes-for-oauth-apps\nTITLE: Scopes for OAuth apps - GitHub Docs\nTEXT:\nSkip to main content\n\nSkip to content\n\nCollapse sidebar\n\nExpand sidebar\n\nIn this article\n\nScopes for OAuth apps\n\nSc"
     },
     {
       "step": 5,
-      "action": "fetch_page",
-      "arg": "https://docs.github.com/en/apps/github-marketplace/listing-an-app-on-github-marketplace/submitting-your-listing-for-publication",
-      "thought": "I have gathered information on publisher verification and listing requirements. I still need to find information on review stages, access tiers, and additional registration requirements. I will fetch ",
-      "result": "auto-read saved 3 verified finding(s).\nPAGE 8\nURL: https://docs.github.com/en/apps/github-marketplace/listing-an-app-on-github-marketplace/submitting-your-listing-for-publication\nTITLE: Submitting your listing for publication - GitHub Docs\nTEXT:\nSkip to main content\n\nSkip to content\n\nCollapse sideba"
+      "action": "web_search",
+      "arg": "GitHub OAuth app review process access tiers",
+      "thought": "I have gathered sufficient information about OAuth scopes and requirements. I need to find information about review stages and access tiers to complete the checklist.",
+      "result": "No results (search unavailable or empty). Try fetch_page on a known docs URL."
     },
     {
       "step": 6,
-      "action": "web_search",
-      "arg": "GitHub Marketplace app review process stages and access tiers",
-      "thought": "I need to find information about review stages and access tiers to complete the checklist. I will search for information regarding the review process for Marketplace apps and access levels.",
-      "result": "No results (search unavailable or empty). Try fetch_page on a known docs URL."
+      "action": "fetch_page",
+      "arg": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps",
+      "thought": "I need to find information about access tiers and review stages for OAuth apps. I will fetch the 'Building OAuth apps' overview page to see if it links to more specific documentation on these topics.",
+      "result": "auto-read saved 2 verified finding(s).\nPAGE 9\nURL: https://docs.github.com/en/apps/oauth-apps/building-oauth-apps\nTITLE: Building OAuth apps - GitHub Docs\nTEXT:\nSkip to main content\n\nSkip to content\n\nCollapse sidebar\n\nExpand sidebar\n\nBuilding OAuth apps\n\nYou can build OAuth apps for yourself or othe"
     },
     {
       "step": 7,
       "action": "fetch_page",
-      "arg": "https://docs.github.com/en/apps/github-marketplace/listing-an-app-on-github-marketplace/submitting-your-listing-for-publication",
-      "thought": "I need to find information on review stages and access tiers for GitHub apps to complete the checklist. I will fetch the page about submitting a listing for publication to see if it details the review",
-      "result": "PAGE 8\nURL: https://docs.github.com/en/apps/github-marketplace/listing-an-app-on-github-marketplace/submitting-your-listing-for-publication\nTITLE: Submitting your listing for publication - GitHub Docs\nTEXT:\nSkip to main content\n\nSkip to content\n\nCollapse sidebar\n\nExpand sidebar\n\nSubmitting your list"
+      "arg": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/rate-limits-for-oauth-apps",
+      "thought": "I need to find information about review stages and access tiers for OAuth apps. I will fetch the page about rate limits for OAuth apps to see if it contains any information about review or access, and",
+      "result": "auto-read saved 3 verified finding(s).\nPAGE 10\nURL: https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/rate-limits-for-oauth-apps\nTITLE: Rate limits for OAuth apps - GitHub Docs\nTEXT:\nSkip to main content\n\nSkip to content\n\nCollapse sidebar\n\nExpand sidebar\n\nIn this article\n\nRate limits fo"
     },
     {
       "step": 8,
-      "action": "web_search",
-      "arg": "GitHub Marketplace app review process stages and access tiers",
-      "thought": "I need to find information about review stages and access tiers for GitHub Marketplace apps. The current page mentions an 'onboarding expert' review process. I will search for more details on the revi",
-      "result": "No results (search unavailable or empty). Try fetch_page on a known docs URL."
+      "action": "fetch_page",
+      "arg": "https://docs.github.com/en/apps/oauth-apps/maintaining-oauth-apps/troubleshooting-authorization-request-errors",
+      "thought": "I have gathered significant information on limits and requirements. I still need to find information on review stages and access tiers for OAuth apps specifically, as the current findings are heavily ",
+      "result": "auto-read saved 3 verified finding(s).\nPAGE 11\nURL: https://docs.github.com/en/apps/oauth-apps/maintaining-oauth-apps/troubleshooting-authorization-request-errors\nTITLE: Troubleshooting authorization request errors - GitHub Docs\nTEXT:\nSkip to main content\n\nSkip to content\n\nCollapse sidebar\n\nExpand s"
     },
     {
       "step": 9,
       "action": "fetch_page",
       "arg": "https://docs.github.com/en/apps/github-marketplace/listing-an-app-on-github-marketplace/submitting-your-listing-for-publication",
-      "thought": "I need to find information about review stages and access tiers for GitHub Marketplace apps to complete the checklist. I will fetch the page about submitting a listing for publication again to see if ",
-      "result": "PAGE 8\nURL: https://docs.github.com/en/apps/github-marketplace/listing-an-app-on-github-marketplace/submitting-your-listing-for-publication\nTITLE: Submitting your listing for publication - GitHub Docs\nTEXT:\nSkip to main content\n\nSkip to content\n\nCollapse sidebar\n\nExpand sidebar\n\nSubmitting your list"
+      "thought": "I have gathered significant information on OAuth app registration, limits, and blockers. I still need to find information regarding 'review_stage' and 'access_tier' for OAuth apps specifically. I will",
+      "result": "auto-read saved 3 verified finding(s).\nPAGE 12\nURL: https://docs.github.com/en/apps/github-marketplace/listing-an-app-on-github-marketplace/submitting-your-listing-for-publication\nTITLE: Submitting your listing for publication - GitHub Docs\nTEXT:\nSkip to main content\n\nSkip to content\n\nCollapse sideb"
     },
     {
       "step": 10,
-      "action": "fetch_page",
-      "arg": "https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/rate-limits-for-oauth-apps",
-      "thought": "I need to find information about access tiers and review stages for GitHub apps. I will fetch the page about OAuth app rate limits to see if it contains any information about access tiers or review st",
-      "result": "auto-read saved 3 verified finding(s).\nPAGE 9\nURL: https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/rate-limits-for-oauth-apps\nTITLE: Rate limits for OAuth apps - GitHub Docs\nTEXT:\nSkip to main content\n\nSkip to content\n\nCollapse sidebar\n\nExpand sidebar\n\nIn this article\n\nRate limits for"
+      "action": "finish",
+      "thought": "I have gathered information on the submission process for GitHub Marketplace, which involves a review by an onboarding expert. I still need to find information regarding access tiers (e.g., private vs",
+      "result": ""
     }
   ],
   "probes": {
@@ -128,6 +142,14 @@
         "quote": "HTTP 302 Location: github.com/login",
         "how": "GET https://github.com/login/oauth/authorize with a made-up client_id (oauth-guide-agent-probe), no login, redirects not followed",
         "note": "Sign-in comes before any client check here, so the agent could not see how an unregistered client is treated."
+      },
+      {
+        "kind": "api",
+        "text": "Responses from api.github.com carry rate-limit headers: x-ratelimit-limit: 60, x-ratelimit-remaining: 53.",
+        "url": "https://api.github.com/",
+        "quote": "x-ratelimit-limit: 60 | x-ratelimit-remaining: 53",
+        "how": "GET https://api.github.com/ with no token",
+        "note": "Observed on a request with no token; the limit for authenticated apps may differ."
       },
       {
         "kind": "portal",
@@ -142,13 +164,25 @@
       {
         "what": "OAuth server metadata",
         "why": "none published at github.com, docs.github.com (checked /.well-known/oauth-authorization-server, /.well-known/openid-configuration)"
+      },
+      {
+        "what": "How https://github.com/login/oauth/access_token answers an invalid request",
+        "why": "it returned HTTP 404 with no readable error, so nothing could be concluded"
       }
     ],
-    "requests": 6,
+    "requests": 8,
     "login_wall": {
       "url": "https://github.com/settings/applications/new",
       "lands_on": "github.com/login"
     }
+  },
+  "savecheck": {
+    "checked": 41,
+    "pages": 9,
+    "ok": 41,
+    "failed": [],
+    "removed": [],
+    "kept_unpruned": false
   },
   "findings": [
     {
@@ -506,30 +540,6 @@
       "verified": true
     },
     {
-      "category": "blocker",
-      "text": "Listings must not actively persuade users away from GitHub.",
-      "quote": "Listings must not actively persuade users away from GitHub.",
-      "verified": true
-    },
-    {
-      "category": "blocker",
-      "text": "Apps must be publicly available in GitHub Marketplace and cannot be in public preview or available by invite only.",
-      "quote": "Apps must be publicly available in GitHub Marketplace and cannot be in public preview or available by invite only.",
-      "verified": true
-    },
-    {
-      "category": "limit",
-      "text": "OAuth apps should have a minimum of 200 users to publish a paid plan.",
-      "quote": "OAuth apps should have a minimum of 200 users.",
-      "verified": true
-    },
-    {
-      "category": "requirement_public",
-      "text": "To publish a paid plan for your app on the GitHub Marketplace, your app must be owned by an organization that is a verified publisher.",
-      "quote": "To publish a paid plan for your app on the GitHub Marketplace, your app must be owned by an organization that is a verified publisher.",
-      "verified": true
-    },
-    {
       "category": "requirement_register",
       "text": "To offer paid plans for your app, the app must be owned by an organization.",
       "quote": "To offer paid plans for your app, the app must be owned by an organization and you must have owner permissions in the organization.",
@@ -566,21 +576,27 @@
       "verified": true
     },
     {
-      "category": "step",
-      "text": "Navigate to the Overview section of your app listing page.",
-      "quote": "In the left sidebar on the app listing page, click Overview.",
+      "category": "recommendation",
+      "text": "GitHub recommends building a GitHub App instead of an OAuth app because GitHub Apps use fine-grained permissions.",
+      "quote": "Consider building a GitHub App instead of an OAuth app. GitHub Apps use fine-grained permissions instead of scopes, which give you more control over what your app can do.",
       "verified": true
     },
     {
       "category": "step",
-      "text": "Click the Request publish button to submit your app listing.",
-      "quote": "To submit your completed app listing, click Request publish.",
+      "text": "Specify requested scopes in the initial authorization request by separating them with a space using %20.",
+      "quote": "Your OAuth app can request the scopes in the initial authorization request. You can specify multiple scopes by separating them with a space using %20:",
       "verified": true
     },
     {
-      "category": "blocker",
-      "text": "You cannot delete a GitHub App if it has an active listing in the GitHub Marketplace.",
-      "quote": "If you want to delete your GitHub App, you must first delete the listing from GitHub Marketplace.",
+      "category": "recommendation",
+      "text": "GitHub Apps are preferred to OAuth apps because they use fine-grained permissions, give more control over which repositories the app can access, and use short-lived tokens.",
+      "quote": "In general, GitHub Apps are preferred to OAuth apps because they use fine-grained permissions, give more control over which repositories the app can access, and use short-lived tokens.",
+      "verified": true
+    },
+    {
+      "category": "requirement_register",
+      "text": "You can create and register an OAuth app under your personal account or under any organization you have administrative access to.",
+      "quote": "You can create and register an OAuth app under your personal account or under any organization you have administrative access to.",
       "verified": true
     },
     {
@@ -602,22 +618,52 @@
       "verified": true
     },
     {
-      "category": "recommendation",
-      "text": "GitHub recommends building a GitHub App instead of an OAuth app.",
-      "quote": "Consider building a GitHub App instead of an OAuth app.",
+      "category": "blocker",
+      "text": "An application suspended for abuse or spam will return an application_suspended error.",
+      "quote": "If the OAuth app you set up has been suspended (due to reported abuse, spam, or a mis-use of the API), GitHub will redirect to the registered callback URL using the following parameters to summarize the error:",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "A redirect_uri mismatch error occurs if the provided URI does not match the registered callback URL.",
+      "quote": "If you provide a redirect_uri that doesn't match what you've registered with your application, GitHub will redirect to the registered callback URL with the following parameters summarizing the error:",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "An access_denied error occurs if the user rejects the application access request.",
+      "quote": "If the user rejects access to your application, GitHub will redirect to\nthe registered callback URL with the following parameters summarizing\nthe error:",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Navigate to the Overview section of your app listing page.",
+      "quote": "In the left sidebar on the app listing page, click Overview.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Click the Request publish button to submit your app listing.",
+      "quote": "To submit your completed app listing, click Request publish.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "You cannot delete a GitHub App if it has an active listing in the GitHub Marketplace.",
+      "quote": "If you want to delete your GitHub App, you must first delete the listing from GitHub Marketplace.",
       "verified": true
     },
     {
       "category": "setup_type",
-      "text": "OAuth apps act only on behalf of a user, while GitHub Apps can act on behalf of a user or independently.",
-      "quote": "OAuth apps can only act on behalf of a user while GitHub Apps can either act on behalf of a user or independently of a user.",
-      "verified": true
+      "text": "GitHub Apps use fine-grained permissions instead of scopes, which give you more control over what your app can do.",
+      "quote": "Consider building a GitHub App instead of an OAuth app. GitHub Apps use fine-grained permissions instead of scopes, which give you more control over what your app can do.",
+      "verified": false
     },
     {
-      "category": "creation_path",
-      "text": "You can create an OAuth app by navigating to Developer settings in your GitHub profile.",
-      "quote": "In the upper-right corner of any page on GitHub, click your profile picture, then click Settings. In the left sidebar, click Developer settings. In the left sidebar, click OAuth apps. Click New OAuth App.",
-      "verified": true
+      "category": "recommendation",
+      "text": "GitHub recommends building a GitHub App instead of an OAuth app for better control.",
+      "quote": "Consider building a GitHub App instead of an OAuth app. GitHub Apps use fine-grained permissions instead of scopes, which give you more control over what your app can do.",
+      "verified": false
     },
     {
       "category": "review_stage",
@@ -627,7 +673,7 @@
     },
     {
       "category": "review_stage",
-      "text": "GitHub will review the publisher verification details.",
+      "text": "GitHub reviews the publisher verification details.",
       "quote": "GitHub will review your details and let you know once your publisher verification is complete.",
       "verified": true
     },
@@ -642,12 +688,6 @@
       "text": "To offer paid plans for your app or to include a marketplace badge in your app listing, you must complete the publisher verification process for your organization.",
       "quote": "To offer paid plans for your app or to include a marketplace badge in your app listing, you must complete the publisher verification process for your organization.",
       "verified": true
-    },
-    {
-      "category": "requirement_register",
-      "text": "A user or organization can own up to 100 OAuth apps.",
-      "quote": "A user or organization can own up to 100 OAuth apps.",
-      "verified": false
     }
   ]
 }

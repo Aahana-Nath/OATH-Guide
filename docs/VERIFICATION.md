@@ -13,17 +13,21 @@ fixed or flagged below. A guide is still research, not a substitute for trying t
 | **3. Manual cross-check against pages the agent did not cite** | That the *content* is right: numbers, gates, waits. Sources fetched independently. | Anything behind a login. |
 | **4. Reproduction of the agent's live "Tested" claims with `curl`** | That observations such as "redirects to sign-in" are real and repeatable. | Whether they generalise. |
 | **5. Comparison with the human-tested guides** ([GitHub](../guides/github.json), [Slack](../guides/slack.json)) | Where the agent agrees with, or misses, what a person found by actually registering. | n/a |
+| **6. Test-then-save gate** (in the agent, [`savecheck.py`](../agent/savecheck.py)) | Before a guide is saved, every cited page is fetched again (HTML and markdown renditions) and every quote re-checked. A claim that fails is removed, with anything that rested only on it, and the guide is re-validated. The result is recorded in the guide as a tested claim. | That a documentation claim is *true*, only that it is still on its source. |
 
 Run layer 2 yourself: `python tools/recheck_quotes.py guides/*-agent.json`.
 
 ## Layer 2 result
 
-**311 of 314 documentation quotes were re-found exactly at their cited source** across the nine saved demo guides
-(GitHub, Slack, Spotify, Shopify, Notion, Google, Figma, Asana, Calendly). Zero were fabricated.
+**472 of 472 documentation quotes were re-found at their cited source** across all thirteen agent-researched guides (GitHub, Slack,
+Spotify, Shopify, Notion, Google, Figma, Asana, Calendly, Dropbox, Linear, Zoom, Atlassian). Zero were fabricated, zero were missing.
+Every guide also passed its own save-time gate (the "Tested before saving" card), with no claims removed.
 
-The 3 misses are all Shopify, and they are intermittent. shopify.dev returns different renditions of the same URL
-(`text/markdown` or HTML) on different requests; two earlier runs of the same check found these quotes, and five other Shopify
-quotes exist only in the page's `.md` rendition. The tool reports that case separately instead of calling it a pass or a failure.
+**A caution about the checking tool itself.** An earlier pass reported 18 Shopify misses. They were not in the guide: shopify.dev
+serves **different text for the same URL** depending on the request (an HTML rendition, which contains the quote, and a markdown
+rendition, which does not), and the first version of the tool fetched each page once per quote, in bursts. The tool and the gate now
+fetch each page once per rendition, by name, one request at a time per host. If you see unexplained misses on a docs site, suspect
+the site's content negotiation before suspecting the guide.
 
 ## Layer 3 to 5: the sample
 
@@ -38,6 +42,7 @@ quotes exist only in the page's `.md` rendition. The tool reports that case sepa
 | **Spotify** rate limit is a rolling 30-second window | Spotify's rate-limit page | ✅ |
 | **Notion** 5-10 business day review; **Asana** initial response within one week; **Google** brand verification 2-3 business days, sensitive-scope verification up to 10 days | Quotes re-found at the cited official pages | ✅ |
 | **Live probes:** GitHub's authorize endpoint redirects an unauthenticated request to `github.com/login`; `/settings/applications/new` ends on a sign-in page; Slack's apps page says "You'll need to sign in to your Slack account to create an application"; Slack's `robots.txt` disallows `/oauth` (so the agent correctly skipped that endpoint) | Reproduced with `curl` | ✅ All four reproduce. |
+| **New live tests:** GitHub's unauthenticated API sends `x-ratelimit-limit: 60`; Atlassian's API (after a redirect) sends `x-ratelimit-limit: 400, 400;w=60`; Calendly's API answers a no-token request with HTTP 401, and its token endpoint answers an invalid request with `invalid_client` (HTTP 401); Dropbox publishes `token_endpoint_auth_methods_supported` of `client_secret_post`, `client_secret_basic`, `none`, `private_key_jwt` and PKCE methods `plain`, `S256` | Reproduced with `curl` | ✅ All five reproduce exactly. |
 
 ### Corrected (mistakes found by checking, then fixed in the agent)
 
@@ -47,7 +52,10 @@ quotes exist only in the page's `.md` rendition. The tool reports that case sepa
 | **"Approval waits" that were not waits:** Spotify "Development Mode: default", Shopify "regularly / at their discretion / before it goes live", GitHub "not specified". | Reading the approval-wait line for every guide. | A review stage now only counts if its text states a duration. Otherwise the guide says "Not found". |
 | **Unrelated product docs leaked in.** GitHub's steps included **seven steps for installing the Copilot IDE extension** plus "Copilot access: required"; Figma listed Code Connect requirements (Node 18, a Dev seat). Every quote was real, so the quote check could not catch it. | Comparing GitHub's agent guide with the human-tested one. | Requirements and steps must come from a page that is actually about OAuth or app registration. GitHub went from 15 steps to **8**, matching the human-tested path. |
 | **A conditional requirement shown as required.** "Organization ownership: required", from "To offer paid plans for your app, the app must be owned by an organization". You can register under a personal account. | Reading the source quote. | Now "optional (only in some cases)". |
+| **A false live-test claim (Atlassian).** The portal probe reported that a developer-docs page "ended on a sign-in page". The page had only redirected to add a trailing slash, and "Sign in" is in the site's navigation bar. | Reading the new guide's tested claims against the page with `curl`. | A redirect now counts only if it moves to a different path, with a regression test. Atlassian was regenerated, and the claim is gone. |
 | **Duplicate limits** (Google listed "Test user cap" twice). | Reading the guide. | De-duplicated. |
+| **Steps silently discarded.** Dropbox's and Linear's guides had **zero real setup steps** even though 10 and 4 steps had been extracted and verified. Steps were only kept from pages whose *URL* contained words like "quickstart", "creating" or "register" (a rule tuned on Slack and GitHub), so `/oauth` and `oauth-2-0-authentication` pages were thrown away. | Auditing why the library's thinnest guides were thin. | The rule now also accepts OAuth and authorization pages. Linear now has 5 steps starting at "Create a new OAuth2 application", Dropbox 5, and Atlassian went from 3 to 9. GitHub was re-run as a regression check and is unchanged (8 steps, no Copilot). |
+| **Zoom's guide was empty** (no requirements, limits or blockers). Zoom's main docs site is JavaScript-rendered and its `robots.txt` blocks sub-pages, which the agent respects. | Reading the run log. | Researched from `developers.zoom.us` directly instead: 6 steps, 7 requirements, 29 verified claims. Recorded as a known limitation. |
 | **A misleading live probe.** Figma's metadata described its *MCP server*, not the standard app OAuth flow, yet was reported as "OAuth server metadata… apps may be creatable through an API". | Reproducing the probe with `curl` and reading the scope (`mcp:connect`). | Every observation from MCP or OpenID metadata now carries a caveat, and the docs' authorize URL is preferred over it. |
 | **A meaningless live probe.** Asana's marketing page "opened without signing in (HTTP 200)". | Reading the probe output. | A plain HTTP 200 is no longer reported as evidence; it is listed as "not completed". |
 | **Outbound-request safety.** A public "type any URL" box could be used to make the agent fetch `file://` or internal addresses. | Threat review before packaging for hosting. | Added [`netguard.py`](../agent/netguard.py): http(s) only, public addresses only, redirects re-checked. Covered by [`tests/unit_test.py`](../tests/unit_test.py). |

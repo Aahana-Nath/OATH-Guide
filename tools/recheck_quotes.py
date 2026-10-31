@@ -12,11 +12,12 @@ import argparse
 import json
 import os
 import sys
-import time
+import types
 from concurrent.futures import ThreadPoolExecutor
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "agent"))
 import guide_agent as g  # noqa: E402  (reuses the same fetcher and quote matcher the agent uses)
+import savecheck  # noqa: E402
 
 
 def doc_claims(node, where, out):
@@ -32,29 +33,12 @@ def doc_claims(node, where, out):
             doc_claims(v, where or k, out)
 
 
-def check(item):
-    where, c = item
-    status = _check_once(where, c)
-    if status in ("quote-not-found", "unreachable"):
-        # one retry after a pause: busy docs sites sometimes answer parallel requests with a different or partial page
-        time.sleep(2)
-        status = _check_once(where, c)
-    return where, c, status
-
-
-def _check_once(where, c):
-    g._cache.pop(g.norm_url(c["source_url"]), None)          # force a fresh fetch
-    page = g.fetch(c["source_url"])
-    if not page:
-        return "unreachable"
-    if g.quote_ok(c["evidence_quote"], g.norm(page["text"])):
-        return "ok"
-    # some docs sites serve different text as markdown (.md) than as HTML; report that separately
-    if not c["source_url"].endswith(".md"):
-        md = g.fetch(c["source_url"].rstrip("/") + ".md")
-        if md and g.quote_ok(c["evidence_quote"], g.norm(md["text"])):
-            return "only-in-md-variant"
-    return "quote-not-found"
+def check_group(args):
+    """Fetch one cited URL (a few attempts, markdown variant accepted) and test every quote cited from it."""
+    url, items = args
+    env = types.SimpleNamespace(cache=g._cache, norm_url=g.norm_url, norm=g.norm, quote_ok=g.quote_ok, fetch=g.fetch)
+    found = savecheck._check_url(env, url, sorted({c["evidence_quote"] for _, c in items}))
+    return [(w, c, "ok" if found[c["evidence_quote"]] else "quote-not-found") for w, c in items]
 
 
 def main():
@@ -73,8 +57,11 @@ def main():
             if key not in seen:
                 seen.add(key)
                 uniq.append(it)
+        by_url = {}
+        for it in uniq:                                       # fetch each cited page once, then test all its quotes
+            by_url.setdefault(it[1]["source_url"], []).append(it)
         with ThreadPoolExecutor(max_workers=2) as ex:
-            results = list(ex.map(check, uniq))
+            results = [r for grp in ex.map(check_group, by_url.items()) for r in grp]
         bad = [r for r in results if r[2] not in ("ok", "only-in-md-variant")]
         md_only = [r for r in results if r[2] == "only-in-md-variant"]
         bad_total += len(bad)

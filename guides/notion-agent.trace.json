@@ -123,12 +123,24 @@
         "quote": "HTTP 302 Location: app.notion.com/install-integration",
         "how": "GET https://api.notion.com/v1/oauth/authorize with a made-up client_id (oauth-guide-agent-probe), no login, redirects not followed",
         "note": ""
+      },
+      {
+        "kind": "token",
+        "text": "The token endpoint rejected an invalid test request with HTTP 401: \"invalid_client\".",
+        "url": "https://api.notion.com/v1/oauth/token",
+        "quote": "invalid_client | WWW-Authenticate: Basic realm=\"OAuth\"",
+        "how": "POST https://api.notion.com/v1/oauth/token with a made-up authorization code and client (nothing is created or changed)",
+        "note": "So it validates the client and code before issuing anything. It asks for client authentication via the WWW-Authenticate header."
       }
     ],
     "skipped": [
       {
         "what": "OAuth server metadata",
         "why": "none published at notion.so, developers.notion.com, www.notion.com (checked /.well-known/oauth-authorization-server, /.well-known/openid-configuration)"
+      },
+      {
+        "what": "How api.notion.com answers a request with no token",
+        "why": "HTTP 200 with no auth challenge or rate-limit headers, so nothing could be concluded"
       },
       {
         "what": "https://www.notion.so/developers",
@@ -139,8 +151,16 @@
         "why": "the page needs JavaScript, so the agent cannot read what is behind it without a browser"
       }
     ],
-    "requests": 9,
+    "requests": 11,
     "login_wall": null
+  },
+  "savecheck": {
+    "checked": 46,
+    "pages": 7,
+    "ok": 46,
+    "failed": [],
+    "removed": [],
+    "kept_unpruned": false
   },
   "findings": [
     {

@@ -168,6 +168,14 @@
         "quote": "scopes_supported: mcp:connect",
         "how": "GET https://figma.com/.well-known/oauth-authorization-server returned HTTP 200 with JSON",
         "note": "This metadata mentions MCP, so it likely describes the provider's MCP server sign-in, not the standard app OAuth flow in the docs."
+      },
+      {
+        "kind": "token",
+        "text": "The token endpoint rejected an invalid test request with HTTP 400: \"invalid_grant: An error occurred processing your request\".",
+        "url": "https://api.figma.com/v1/oauth/token",
+        "quote": "invalid_grant: An error occurred processing your request",
+        "how": "POST https://api.figma.com/v1/oauth/token with a made-up authorization code and client (nothing is created or changed)",
+        "note": "So it validates the client and code before issuing anything."
       }
     ],
     "skipped": [
@@ -176,12 +184,24 @@
         "why": "no authorization URL found in the metadata or the docs read"
       },
       {
+        "what": "How api.figma.com answers a request with no token",
+        "why": "HTTP 200 with no auth challenge or rate-limit headers, so nothing could be concluded"
+      },
+      {
         "what": "https://www.figma.com/developers/apps",
         "why": "the page needs JavaScript, so the agent cannot read what is behind it without a browser"
       }
     ],
-    "requests": 2,
+    "requests": 4,
     "login_wall": null
+  },
+  "savecheck": {
+    "checked": 40,
+    "pages": 7,
+    "ok": 40,
+    "failed": [],
+    "removed": [],
+    "kept_unpruned": false
   },
   "findings": [
     {

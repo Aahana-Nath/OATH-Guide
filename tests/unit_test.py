@@ -53,4 +53,35 @@ page = g.norm("Authorization codes expire after 10 minutes and can be used only 
 check("exact quote accepted", g.quote_ok("Authorization codes expire after 10 minutes", page))
 check("invented quote rejected", not g.quote_ok("Apps are limited to 99 users per workspace at all times.", page))
 
+# --- test-then-save gate: claims whose quotes cannot be re-found are removed; the result is recorded as a tested claim
+import copy, json, types
+import savecheck
+savecheck.time.sleep = lambda s: None
+base = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "guides", "github-agent.json")))
+schema = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "guides", "guide.schema.json")
+keys = set()
+savecheck._collect({k: v for k, v in base.items() if k not in ("provider", "evidence")}, keys)
+check("sample guide has documentation claims to test", len(keys) > 10)
+gone = set(sorted(keys)[:4])
+texts = {}
+for u, q in keys:
+    if (u, q) not in gone:
+        texts[u] = texts.get(u, "") + " " + q
+env = types.SimpleNamespace(cache={}, norm_url=g.norm_url, norm=g.norm, quote_ok=g.quote_ok, log=lambda *a: None,
+                            fetch=lambda url, accept=None: {"text": texts[url]} if url in texts else None)
+out, res = savecheck.recheck_and_prune(copy.deepcopy(base), env, schema, "2026-01-01")
+left = set()
+savecheck._collect({k: v for k, v in out.items() if k not in ("provider", "evidence")}, left)
+check("every removed quote is gone from the saved guide", not (left & gone))
+check("every re-found quote is kept", (keys - gone) <= left)
+check("gate reports what failed", res["checked"] == len(keys) and len(res["failed"]) == len(gone))
+check("gate result is recorded as a tested claim", out["extras"][0]["title"] == "Tested live by the agent"
+      and out["extras"][0]["claims"][0]["label"] == "tested" and "re-checked" in out["extras"][0]["claims"][0]["text"])
+check("pruned guide still validates", g.validate(out, schema))
+check("removed claims are listed under not verified", any("removed at save time" in n["item"] for n in out["evidence"]["not_verified"]))
+env_ok = types.SimpleNamespace(cache={}, norm_url=g.norm_url, norm=g.norm, quote_ok=g.quote_ok, log=lambda *a: None,
+                               fetch=lambda url, accept=None: {"text": " ".join(q for (u, q) in keys if u == url)})
+out2, res2 = savecheck.recheck_and_prune(copy.deepcopy(base), env_ok, schema, "2026-01-01")
+check("a fully verified guide loses nothing", not res2["failed"] and len(out2["steps"]) == len(base["steps"]))
+
 print(f"{passed} unit checks passed")

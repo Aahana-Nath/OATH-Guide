@@ -12,7 +12,7 @@ BASE = "http://127.0.0.1:8765"
 env = types.SimpleNamespace(log=g.log, UA=g.UA, root_domain=g.root_domain, norm_url=g.norm_url,
                             allowed_by_robots=g.allowed_by_robots, allow_http=True)
 t = g.parse_target(BASE)
-pages = [{"url": BASE + "/docs", "text": "Send users to http://127.0.0.1:8765/oauth/authorize to begin.", "title": "Docs", "thin": False,
+pages = [{"url": BASE + "/docs", "text": "Send users to http://127.0.0.1:8765/oauth/authorize to begin, then exchange the code at http://127.0.0.1:8765/oauth/token.", "title": "Docs", "thin": False,
           "links": [(BASE + "/dashboard", "Create an app"), (BASE + "/docs/oauth", "OAuth guide")]}]
 res = probes.run_probes(env, t, pages, time.time() + 30)
 
@@ -23,6 +23,7 @@ assert "PKCE" in texts and "S256" in texts, texts
 assert "registration endpoint" in texts, texts
 assert any(o["kind"] == "authorize" and "rejected an unregistered test client with HTTP 400" in o["text"] and "Unknown client_id" in o["text"] for o in res["observations"]), texts
 assert any(o["kind"] == "portal" and "sign-in page" in o["text"] for o in res["observations"]), texts
+assert any(o["kind"] == "token" and "HTTP 401" in o["text"] and "Client authentication failed" in o["text"] and "WWW-Authenticate" in o["quote"] for o in res["observations"]), texts
 assert res["login_wall"] and res["login_wall"]["lands_on"].endswith("/login"), res["login_wall"]
 assert res["requests"] <= probes.MAX_REQUESTS
 
@@ -42,4 +43,10 @@ assert g.validate(guide, os.path.join(HERE, "..", "guides", "guide.schema.json")
 # an https-only run must refuse the plain-http fake server and not crash
 strict = probes.Prober(types.SimpleNamespace(**{**vars(env), "allow_http": False}), t, pages, time.time() + 30).run()
 assert strict["requests"] == 0 and not strict["observations"]
+# a docs page that only redirects to add a trailing slash and has "Sign in" in its navigation is NOT a login wall
+doc_pages = [{"url": BASE + "/docs", "text": "Nothing here.", "title": "Docs", "thin": False, "links": [(BASE + "/guide-doc", "Create an app")]}]
+doc_res = probes.Prober(env, t, doc_pages, time.time() + 30).run()
+assert not [o for o in doc_res["observations"] if o["kind"] == "portal"], doc_res["observations"]
+assert doc_res["login_wall"] is None
+
 print("probe tests passed:", len(res["observations"]), "observations,", res["requests"], "requests")

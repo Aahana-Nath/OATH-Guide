@@ -38,7 +38,7 @@
     },
     {
       "url": "https://developers.google.com/identity/protocols/oauth2/production-readiness/brand-verification",
-      "chars": 13476,
+      "chars": 13481,
       "thin": false
     },
     {
@@ -67,54 +67,54 @@
       "action": "fetch_page",
       "arg": "https://developers.google.com/identity/protocols/oauth2/production-readiness/policy-compliance",
       "thought": "I need to find more steps for the registration process and information on public requirements and review stages. I will fetch the page about app verification policy compliance to gather more details.",
-      "result": "auto-read saved 10 verified finding(s).\nPAGE 6\nURL: https://developers.google.com/identity/protocols/oauth2/production-readiness/policy-compliance\nTITLE: Comply with OAuth 2.0 policies  |  App verification to use Google Authorization APIs  |  Google for Developers\nTEXT:\nSkip to main content\n\nIdentit"
+      "result": "auto-read saved 9 verified finding(s).\nPAGE 6\nURL: https://developers.google.com/identity/protocols/oauth2/production-readiness/policy-compliance\nTITLE: Comply with OAuth 2.0 policies  |  App verification to use Google Authorization APIs  |  Google for Developers\nTEXT:\nSkip to main content\n\nIdentity"
     },
     {
       "step": 4,
       "action": "record_finding",
-      "arg": "9 finding(s)",
-      "thought": "I have gathered significant information from the policy compliance page. I need to record the findings regarding blockers, requirements, and steps to fulfill the checklist. I have enough information t",
-      "result": "9 finding(s) verified and saved."
+      "arg": "7 finding(s)",
+      "thought": "I have gathered significant information about Google's OAuth app registration, including requirements, blockers, and policies. I need to add more steps to the registration process to meet the goal of ",
+      "result": "7 finding(s) verified and saved."
     },
     {
       "step": 5,
       "action": "fetch_page",
       "arg": "https://developers.google.com/identity/protocols/oauth2/production-readiness/sensitive-scope-verification",
-      "thought": "I need to find information about review stages and additional registration/setup steps to complete the checklist. I will fetch the page about sensitive scope verification as it likely contains informa",
-      "result": "auto-read saved 9 verified finding(s).\nPAGE 7\nURL: https://developers.google.com/identity/protocols/oauth2/production-readiness/sensitive-scope-verification\nTITLE: Sensitive scope verification  |  App verification to use Google Authorization APIs  |  Google for Developers\nTEXT:\nSkip to main content\n"
+      "thought": "I need to find more steps for the registration process and information about review stages. I will fetch the page about sensitive scope verification as it likely contains information about the review ",
+      "result": "auto-read saved 8 verified finding(s).\nPAGE 7\nURL: https://developers.google.com/identity/protocols/oauth2/production-readiness/sensitive-scope-verification\nTITLE: Sensitive scope verification  |  App verification to use Google Authorization APIs  |  Google for Developers\nTEXT:\nSkip to main content\n"
     },
     {
       "step": 6,
       "action": "record_finding",
-      "arg": "9 finding(s)",
-      "thought": "I have gathered significant information about the verification process, including steps, requirements, and blockers. I have enough information to fulfill the checklist requirements for steps, review s",
-      "result": "9 finding(s) verified and saved."
+      "arg": "7 finding(s)",
+      "thought": "I have gathered significant information about the verification process, including steps for branding and sensitive scope verification. I have enough information to fulfill the remaining checklist item",
+      "result": "7 finding(s) verified and saved."
     },
     {
       "step": 7,
       "action": "fetch_page",
       "arg": "https://developers.google.com/identity/protocols/oauth2/production-readiness/brand-verification",
       "thought": "I need to find more steps for the registration process to reach the goal of 6+ steps. I will fetch the page about brand verification to see if it contains additional steps in the registration/verifica",
-      "result": "auto-read saved 4 verified finding(s).\nPAGE 8\nURL: https://developers.google.com/identity/protocols/oauth2/production-readiness/brand-verification\nTITLE: Submit for brand verification  |  App verification to use Google Authorization APIs  |  Google for Developers\nTEXT:\nSkip to main content\n\nIdentity"
+      "result": "auto-read saved 3 verified finding(s).\nPAGE 8\nURL: https://developers.google.com/identity/protocols/oauth2/production-readiness/brand-verification\nTITLE: Submit for brand verification  |  App verification to use Google Authorization APIs  |  Google for Developers\nTEXT:\nSkip to main content\n\nIdentity"
     },
     {
       "step": 8,
-      "action": "record_finding",
-      "arg": "8 finding(s)",
-      "thought": "I have read the page on brand verification and have enough information to record the remaining steps and blockers related to the verification process. I will now record these findings.",
-      "result": "4 finding(s) verified and saved. Not saved: already recorded: Go to the Cloud Console OAuth Branding page.; already recorded: Click the Project selector button and select your project.; already recorded: Provide app branding information including name, logo, contact info, a; already recorded: Click "
+      "action": "finish",
+      "arg": "refused",
+      "thought": "I have gathered sufficient information from the documentation to cover the checklist items. I have identified the registration steps, requirements for public apps, review stages, limits, access tiers,",
+      "result": "Not finished: the checklist still has missing items: step. Search or fetch pages for them. Call finish again only if they are not documented anywhere you can reach."
     },
     {
       "step": 9,
       "action": "fetch_page",
       "arg": "https://developers.google.com/identity/protocols/oauth2/production-readiness/restricted-scope-verification",
       "thought": "I need to find more steps for the registration process to reach the goal of 6+ steps. I will fetch the page about restricted scope verification as it likely contains additional configuration steps.",
-      "result": "auto-read saved 6 verified finding(s).\nPAGE 9\nURL: https://developers.google.com/identity/protocols/oauth2/production-readiness/restricted-scope-verification\nTITLE: Restricted scope verification  |  App verification to use Google Authorization APIs  |  Google for Developers\nTEXT:\nSkip to main conten"
+      "result": "auto-read saved 5 verified finding(s).\nPAGE 9\nURL: https://developers.google.com/identity/protocols/oauth2/production-readiness/restricted-scope-verification\nTITLE: Restricted scope verification  |  App verification to use Google Authorization APIs  |  Google for Developers\nTEXT:\nSkip to main conten"
     },
     {
       "step": 10,
       "action": "finish",
-      "thought": "I have gathered extensive information about Google's OAuth app registration, verification, and policies from the provided documentation. I have sufficient information to cover the checklist items, inc",
+      "thought": "I have gathered sufficient information to cover the checklist requirements. I have identified the registration steps, requirements for public apps, review stages, limits, access tiers, and common bloc",
       "result": ""
     }
   ],
@@ -138,12 +138,28 @@
         "why": "no authorization URL found in the metadata or the docs read"
       },
       {
+        "what": "Token endpoint",
+        "why": "no token URL found in the metadata or the docs read"
+      },
+      {
+        "what": "API host",
+        "why": "no API host (api.<provider>) was mentioned in the docs read"
+      },
+      {
         "what": "https://play.google.com/console/about",
         "why": "it opened without a visible sign-in wall (HTTP 200); the agent cannot tell whether creating an app there needs an account"
       }
     ],
     "requests": 3,
     "login_wall": null
+  },
+  "savecheck": {
+    "checked": 63,
+    "pages": 8,
+    "ok": 63,
+    "failed": [],
+    "removed": [],
+    "kept_unpruned": false
   },
   "findings": [
     {
@@ -418,92 +434,74 @@
     },
     {
       "category": "requirement_register",
-      "text": "You must create a separate project for production apps.",
+      "text": "Google requires separate projects for testing and production environments.",
       "quote": "Google's OAuth policies require separate projects for testing and production.",
       "verified": true
     },
     {
       "category": "step",
-      "text": "Go to the Google API Console to create a project.",
+      "text": "Create a new project in the Google API Console.",
       "quote": "Go to the Google API Console. Click Create project, enter a name, and click Create.",
       "verified": true
     },
     {
       "category": "step",
-      "text": "Enable the APIs your clients use.",
-      "quote": "Enable any APIs in use by your clients.",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Configure the OAuth Consent Screen branding.",
+      "text": "Configure the OAuth consent screen branding.",
       "quote": "Review your OAuth Consent Screen configuration for the new project in the Cloud Console's Branding page.",
       "verified": true
     },
     {
       "category": "blocker",
-      "text": "Production OAuth clients must not contain test environments or local redirect URIs.",
+      "text": "Production OAuth clients must not contain test environments, redirect URIs, or JavaScript origins.",
       "quote": "Google OAuth clients used in production must not contain test environments, redirect URIs, or JavaScript origins available to only you or your development team.",
       "verified": true
     },
     {
       "category": "requirement_public",
-      "text": "You must verify your app's brand information before it displays to users.",
-      "quote": "For production apps, brand information defined in your OAuth consent screen must be verified before it displays to users.",
-      "verified": true
-    },
-    {
-      "category": "requirement_public",
-      "text": "You must submit your app for verification if it uses sensitive or restricted scopes.",
-      "quote": "If your production app uses sensitive or restricted scopes, you must submit your use of those scopes for verification before you include the scopes in an authorization request.",
-      "verified": true
-    },
-    {
-      "category": "requirement_public",
-      "text": "You must own all domains associated with your project.",
-      "quote": "Google's OAuth consent screen verification process requires verification of all domains associated with your project's home page, privacy policy, terms of service, authorized redirect URIs, or authorized JavaScript origins.",
-      "verified": true
-    },
-    {
-      "category": "requirement_public",
-      "text": "Every production app must have a publicly accessible home page.",
+      "text": "Production apps must have a publicly accessible home page.",
       "quote": "Every production app that uses OAuth 2.0 must have a publicly accessible home page.",
       "verified": true
     },
     {
+      "category": "requirement_public",
+      "text": "The home page must include a description, privacy policy, and terms of service.",
+      "quote": "Your application's home page must include a description of the app's functionality, as well as links to a privacy policy and optional terms of service.",
+      "verified": true
+    },
+    {
+      "category": "requirement_public",
+      "text": "All domains associated with the app must be verified.",
+      "quote": "Google's OAuth consent screen verification process requires verification of all domains associated with your project's home page, privacy policy, terms of service, authorized redirect URIs, or authorized JavaScript origins.",
+      "verified": true
+    },
+    {
       "category": "blocker",
-      "text": "OAuth requests must use HTTPS.",
+      "text": "OAuth requests using plain HTTP for redirect URIs or JavaScript origins may be rejected.",
       "quote": "OAuth 2.0 clients for web apps must secure their data using HTTPS redirect URIs and JavaScript origins, not plain HTTP. Google can reject OAuth requests that don't originate from or resolve to a secure context.",
       "verified": true
     },
     {
-      "category": "blocker",
-      "text": "Google can reject OAuth requests that don't originate from or resolve to a secure context.",
-      "quote": "Google can reject OAuth requests that don't originate from or resolve to a secure context.",
-      "verified": true
-    },
-    {
-      "category": "blocker",
-      "text": "Google can revoke or suspend access to Google API Services and other Google products and services for apps that misrepresent their identity or attempt to deceive users.",
-      "quote": "Google can revoke or suspend access to Google API Services and other Google products and services for apps that misrepresent their identity or attempt to deceive users.",
-      "verified": true
-    },
-    {
-      "category": "blocker",
-      "text": "Google OAuth clients used in production must not contain test environments, redirect URIs, or JavaScript origins available to only you or your development team.",
-      "quote": "Google OAuth clients used in production must not contain test environments, redirect URIs, or JavaScript origins available to only you or your development team.",
+      "category": "requirement_public",
+      "text": "Apps using sensitive or restricted scopes must be submitted for verification.",
+      "quote": "If your production app uses sensitive or restricted scopes, you must submit your use of those scopes for verification before you include the scopes in an authorization request.",
       "verified": true
     },
     {
       "category": "step",
-      "text": "Go to the Google API Console, click Create project, enter a name, and click Create.",
-      "quote": "Go to the Google API Console. Click Create project, enter a name, and click Create.",
+      "text": "Go to the Google API Console.",
+      "quote": "Go to the Google API Console.",
       "verified": true
     },
     {
       "category": "step",
-      "text": "Review the OAuth clients in this project that might be associated with your testing tier. If applicable, create similar OAuth clients for the production clients inside your production project.",
-      "quote": "Review the OAuth clients in this project that might be associated with your testing tier. If applicable, create similar OAuth clients for the production clients inside your production project.",
+      "text": "Click Create project, enter a name, and click Create.",
+      "quote": "Click Create project, enter a name, and click Create.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Review the OAuth clients in this project that might be associated with your testing tier.",
+      "quote": "Review the OAuth clients in this project that might be associated with your testing tier.",
       "verified": true
     },
     {
@@ -519,21 +517,15 @@
       "verified": true
     },
     {
-      "category": "requirement_public",
-      "text": "Every production app that uses OAuth 2.0 must have a publicly accessible home page.",
-      "quote": "Every production app that uses OAuth 2.0 must have a publicly accessible home page.",
+      "category": "blocker",
+      "text": "Google OAuth clients used in production must not contain test environments, redirect URIs, or JavaScript origins available to only you or your development team.",
+      "quote": "Google OAuth clients used in production must not contain test environments, redirect URIs, or JavaScript origins available to only you or your development team.",
       "verified": true
     },
     {
-      "category": "requirement_public",
-      "text": "The home page must include a description of the app's functionality, as well as links to a privacy policy and optional terms of service.",
-      "quote": "Your application's home page must include a description of the app's functionality, as well as links to a privacy policy and optional terms of service.",
-      "verified": true
-    },
-    {
-      "category": "requirement_public",
-      "text": "Apps requesting sensitive or restricted scopes require review by Google before a Google Account can grant access.",
-      "quote": "Sensitive scopes require review by Google before a Google Account can grant access and might be restricted by Google Workspace organization administrators.",
+      "category": "blocker",
+      "text": "Google can reject OAuth requests that don't originate from or resolve to a secure context.",
+      "quote": "Google can reject OAuth requests that don't originate from or resolve to a secure context.",
       "verified": true
     },
     {
@@ -544,38 +536,38 @@
     },
     {
       "category": "step",
-      "text": "Verify ownership of your project's authorized domains within the Google Search Console.",
-      "quote": "Verify ownership of your project's authorized domains within the Google Search Console. Use a Google Account that's associated with your API Console project as an Owner or an Editor.",
+      "text": "Go to the Cloud Console OAuth Branding page.",
+      "quote": "Go to the Cloud Console OAuth Branding page.",
       "verified": true
     },
     {
       "category": "step",
-      "text": "Provide branding information on the OAuth Branding page.",
-      "quote": "In the Branding page, provide your app's branding information, including app name, logo, developer contact information, and relevant links. Any changes you make are saved as Draft Branding.",
+      "text": "Click the Project selector button.",
+      "quote": "Click the Project selector button.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Select your project from the dialog that appears.",
+      "quote": "On the Select from dialog that appears, select your project.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Provide your app's branding information in the Branding page.",
+      "quote": "In the Branding page, provide your app's branding information, including app name, logo, developer contact information, and relevant links.",
       "verified": true
     },
     {
       "category": "step",
       "text": "Click the Verify Branding button to start the evaluation process.",
-      "quote": "Click the Verify Branding button to start the evaluation process. The automated review usually completes in a few minutes.",
+      "quote": "Click the Verify Branding button to start the evaluation process.",
       "verified": true
     },
     {
       "category": "step",
       "text": "Click the Publish branding button to make the new branding live.",
       "quote": "Click the Publish branding button to make the new branding live.",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Navigate to the OAuth Verification Center to track your Data access status and provide additional information.",
-      "quote": "If your app also requires verification for sensitive or restricted scopes, navigate to the OAuth Verification Center to track your Data access status and provide any additional information requested, such as a demonstration video.",
-      "verified": true
-    },
-    {
-      "category": "blocker",
-      "text": "You must have a published branding status before you can request verification for data access.",
-      "quote": "Note that you must have a published branding status before you can request verification for data access.",
       "verified": true
     },
     {
@@ -598,20 +590,20 @@
     },
     {
       "category": "step",
-      "text": "Provide app branding information including name, logo, contact info, and links.",
-      "quote": "In the Branding page, provide your app's branding information, including app name, logo, developer contact information, and relevant links.",
+      "text": "Provide app branding information and click Verify Branding.",
+      "quote": "In the Branding page, provide your app's branding information, including app name, logo, developer contact information, and relevant links. Any changes you make are saved as Draft Branding. Click the Verify Branding button to start the evaluation process.",
       "verified": true
     },
     {
       "category": "step",
-      "text": "Click the Verify Branding button to start the automated evaluation.",
-      "quote": "Click the Verify Branding button to start the evaluation process. The automated review usually completes in a few minutes.",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Click the Publish branding button to make the branding live.",
+      "text": "Click the Publish branding button to make the new branding live.",
       "quote": "Click the Publish branding button to make the new branding live.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Navigate to the OAuth Verification Center to track Data access status and provide additional information.",
+      "quote": "If your app also requires verification for sensitive or restricted scopes, navigate to the OAuth Verification Center to track your Data access status and provide any additional information requested, such as a demonstration video.",
       "verified": true
     },
     {
@@ -627,18 +619,6 @@
       "verified": true
     },
     {
-      "category": "blocker",
-      "text": "You must have a published branding status before you can request verification for data access.",
-      "quote": "Note that you must have a published branding status before you can request verification for data access.",
-      "verified": true
-    },
-    {
-      "category": "blocker",
-      "text": "If your app asks for permission to use Google APIs to access Google users' data, you might have to complete a verification process before you make your app publicly available for the first time.",
-      "quote": "If your app asks for permission to use Google APIs to access Google users' data, you might have to complete a verification process before you make your app publicly available for the first time.",
-      "verified": true
-    },
-    {
       "category": "requirement_public",
       "text": "Apps require verification if they are configured for external users and display a logo or display name on the OAuth consent screen.",
       "quote": "Your app requires verification if configured for external users and displays a logo or display name on the OAuth consent screen.",
@@ -651,14 +631,32 @@
       "verified": true
     },
     {
+      "category": "blocker",
+      "text": "If your OAuth clients are not ready for production, you should delete them from the project requesting verification.",
+      "quote": "If any of your OAuth clients aren't ready for production, we suggest that you delete them from the project that's requesting verification.",
+      "verified": true
+    },
+    {
       "category": "step",
-      "text": "Verify ownership of your project's authorized domains within the Google Search Console.",
-      "quote": "Verify ownership of your project's authorized domains within the Google Search Console. Use a Google Account that's associated with your API Console project as an Owner or an Editor.",
+      "text": "Go to the Cloud Console OAuth Branding page.",
+      "quote": "Go to the Cloud Console OAuth Branding page.",
       "verified": false
     },
     {
       "category": "step",
-      "text": "Provide your app's branding information on the Cloud Console OAuth Branding page.",
+      "text": "Click the Project selector button.",
+      "quote": "Click the Project selector button.",
+      "verified": false
+    },
+    {
+      "category": "step",
+      "text": "Select your project from the dialog.",
+      "quote": "On the Select from dialog that appears, select your project.",
+      "verified": false
+    },
+    {
+      "category": "step",
+      "text": "Provide your app's branding information on the Branding page.",
       "quote": "In the Branding page, provide your app's branding information, including app name, logo, developer contact information, and relevant links.",
       "verified": false
     },
@@ -666,60 +664,24 @@
       "category": "step",
       "text": "Click the Verify Branding button to start the evaluation process.",
       "quote": "Click the Verify Branding button to start the evaluation process.",
-      "verified": true
+      "verified": false
     },
     {
       "category": "step",
-      "text": "Click the Publish branding button to make the new branding live.",
+      "text": "Click the Publish branding button to make the branding live.",
       "quote": "Click the Publish branding button to make the new branding live.",
       "verified": false
     },
     {
       "category": "recommendation",
-      "text": "Google recommends having different projects for testing and production environments.",
+      "text": "Google recommends using different projects for testing and production environments.",
       "quote": "In order to comply with Google OAuth 2.0 Policies, we recommend that you have different projects for testing and production environments.",
       "verified": false
-    },
-    {
-      "category": "blocker",
-      "text": "If your OAuth clients are not ready for production, delete them from the project requesting verification.",
-      "quote": "If any of your OAuth clients aren't ready for production, we suggest that you delete them from the project that's requesting verification.",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Click the Verify Branding button to start the evaluation process.",
-      "quote": "Click the Verify Branding button to start the evaluation process.",
-      "verified": true
-    },
-    {
-      "category": "blocker",
-      "text": "Unverified branding can lead to decreased user trust and more revocations.",
-      "quote": "If your app's branding information remains unverified, it might result in decreased user trust of your request for their data, which can lead to fewer user authorizations and more revocations later.",
-      "verified": true
-    },
-    {
-      "category": "blocker",
-      "text": "Links to Google Play Store or Facebook pages are not valid home pages.",
-      "quote": "Links to your app's listing on the Google Play Store or its Facebook page aren't considered valid application home pages.",
-      "verified": true
-    },
-    {
-      "category": "blocker",
-      "text": "Privacy policy must be hosted on the same domain as the application home page.",
-      "quote": "The privacy policy must be visible to users, hosted within the same domain as your application's home page, and linked to on the OAuth consent screen of the Google API Console.",
-      "verified": true
     },
     {
       "category": "requirement_public",
       "text": "Apps accessing restricted data from or through a third-party server must undergo an annual security assessment.",
       "quote": "Apps accessing restricted data from or through a third-party server must undergo an annual security assessment by a Google-approved third party.",
-      "verified": true
-    },
-    {
-      "category": "requirement_public",
-      "text": "All apps must complete brand verification before requesting data access verification.",
-      "quote": "Note that all apps must complete the brand verification step first, which typically takes 2-3 business days, if branding information has changed since the last approved OAuth consent screen verification.",
       "verified": true
     },
     {
@@ -729,46 +691,64 @@
       "verified": true
     },
     {
+      "category": "review_stage",
+      "text": "Restricted scopes verification can take several weeks.",
+      "quote": "For this reason, the restricted scopes verification process can potentially take several weeks to complete.",
+      "verified": true
+    },
+    {
       "category": "limit",
-      "text": "Security assessments must be renewed every 12 months.",
-      "quote": "apps must be reverified for compliance and complete a security assessment at least every 12 months after your assessor's Letter of Assessment (LOA) approval date.",
+      "text": "Security assessments must be completed at least every 12 months.",
+      "quote": "As mentioned previously, to keep access to any verified restricted scopes, apps must be reverified for compliance and complete a security assessment at least every 12 months after your assessor's Letter of Assessment (LOA) approval date.",
       "verified": true
     },
     {
       "category": "step",
-      "text": "Verify ownership of your project's authorized domains in Google Search Console.",
-      "quote": "Verify ownership of your project's authorized domains within the Google Search Console. Use a Google Account that's associated with your API Console project as an Owner or an Editor.",
+      "text": "Go to the Cloud Console OAuth Branding page.",
+      "quote": "Go to the Cloud Console OAuth Branding page.",
       "verified": false
     },
     {
       "category": "step",
-      "text": "Provide branding information in the Cloud Console OAuth Branding page.",
-      "quote": "In the Branding page, provide your app's branding information, including app name, logo, developer contact information, and relevant links. Any changes you make are saved as Draft Branding.",
+      "text": "Click the Project selector button.",
+      "quote": "Click the Project selector button.",
       "verified": false
     },
     {
       "category": "step",
-      "text": "Click the Verify Branding button to start the evaluation.",
-      "quote": "Click the Verify Branding button to start the evaluation process. The automated review usually completes in a few minutes.",
+      "text": "Select your project from the dialog.",
+      "quote": "On the Select from dialog that appears, select your project.",
       "verified": false
     },
     {
       "category": "step",
-      "text": "Publish the branding to make it live.",
+      "text": "Provide branding information in the Branding page.",
+      "quote": "In the Branding page, provide your app's branding information, including app name, logo, developer contact information, and relevant links.",
+      "verified": false
+    },
+    {
+      "category": "step",
+      "text": "Click the Verify Branding button.",
+      "quote": "Click the Verify Branding button to start the evaluation process.",
+      "verified": false
+    },
+    {
+      "category": "step",
+      "text": "Click the Publish branding button.",
       "quote": "Click the Publish branding button to make the new branding live.",
       "verified": false
     },
     {
-      "category": "step",
-      "text": "Declare all requested scopes in the OAuth Verification Center.",
-      "quote": "Use the Add or remove scopes button to declare all scopes requested by your app. An initial set of scopes that are necessary for Google Sign-In are pre-filled in the Non-sensitive scopes section.",
+      "category": "blocker",
+      "text": "You must have a published branding status before requesting verification for data access.",
+      "quote": "Note that you must have a published branding status before you can request verification for data access.",
       "verified": true
     },
     {
-      "category": "step",
-      "text": "Upload a demonstration video to YouTube as Unlisted.",
-      "quote": "Prepare a video that fully demonstrates how a user initiates and grants access to the requested scopes and shows, in detail, the usage of the granted sensitive and restricted scopes in the app. Upload the video to YouTube Studio and set Visibility as Unlisted.",
-      "verified": true
+      "category": "recommendation",
+      "text": "Google recommends having different projects for testing and production environments.",
+      "quote": "In order to comply with Google OAuth 2.0 Policies, we recommend that you have different projects for testing and production environments.",
+      "verified": false
     },
     {
       "category": "setup_type",

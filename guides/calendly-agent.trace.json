@@ -8,7 +8,7 @@
     },
     {
       "url": "https://developer.calendly.com/docs/authentication/scopes.md",
-      "chars": 12260,
+      "chars": 12935,
       "thin": false
     },
     {
@@ -149,6 +149,22 @@
         "quote": "HTTP 302 Location: calendly.com/app/login",
         "how": "GET https://calendly.com/oauth/authorize with a made-up client_id (oauth-guide-agent-probe), no login, redirects not followed",
         "note": "Sign-in comes before any client check here, so the agent could not see how an unregistered client is treated."
+      },
+      {
+        "kind": "token",
+        "text": "The token endpoint rejected an invalid test request with HTTP 401: \"invalid_client: Client authentication failed due to unknown client, no client authentication included, or unsupported authentication method.\".",
+        "url": "https://calendly.com/oauth/token",
+        "quote": "invalid_client: Client authentication failed due to unknown client, no client authentication included, or unsupported authentication method. | WWW-Authenticate: Bearer realm=\"Doorkeeper\", error=\"invalid_client\", error_description=\"Client aut",
+        "how": "POST https://calendly.com/oauth/token with a made-up authorization code and client (nothing is created or changed)",
+        "note": "So it validates the client and code before issuing anything. It asks for client authentication via the WWW-Authenticate header."
+      },
+      {
+        "kind": "api",
+        "text": "A request to api.calendly.com with no token is rejected with HTTP 401.",
+        "url": "https://api.calendly.com/",
+        "quote": "HTTP 401",
+        "how": "GET https://api.calendly.com/ with no token",
+        "note": "So API calls need an access token."
       }
     ],
     "skipped": [
@@ -157,8 +173,16 @@
         "why": "no 'create an app' or dashboard link found in the pages read"
       }
     ],
-    "requests": 2,
+    "requests": 4,
     "login_wall": null
+  },
+  "savecheck": {
+    "checked": 30,
+    "pages": 6,
+    "ok": 30,
+    "failed": [],
+    "removed": [],
+    "kept_unpruned": false
   },
   "findings": [
     {
@@ -240,14 +264,14 @@
       "verified": true
     },
     {
-      "category": "blocker",
-      "text": "Requests missing required scopes will return a 403 error.",
-      "quote": "When a request is missing required scopes, the API returns an error indicating insufficient permissions.",
+      "category": "extra",
+      "text": "A write scope implicitly includes the corresponding read scope within the same domain.",
+      "quote": "A :write scope implicitly includes the corresponding :read scope within the same domain.",
       "verified": false
     },
     {
       "category": "extra",
-      "text": "Newly created OAuth apps have no API access until scopes are requested.",
+      "text": "For newly created OAuth apps, no API access is granted until scopes are explicitly requested and approved.",
       "quote": "For newly created OAuth apps and new Personal Access Tokens, no API access is granted until scopes are explicitly requested and approved.",
       "verified": true
     },

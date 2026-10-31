@@ -10,31 +10,31 @@
       "https://developers.asana.com/docs/overview"
     ]
   },
-  "generated_at": "2026-10-30",
+  "generated_at": "2026-10-31",
   "generated_by": {
     "mode": "agent",
     "model": "gemini-3.1-flash-lite"
   },
-  "summary": "Asana allows developers to register private apps via the developer console. To share apps publicly or with other workspaces, developers must complete a pre-flight checklist, provide test credentials, and submit the app for a review process that typically takes one week.",
+  "summary": "Asana allows developers to register apps via a developer console, requiring OAuth configuration and specific security practices like PKCE. Public distribution requires a formal submission process, including providing test credentials and a privacy policy, followed by a review period.",
   "difficulty": {
     "start": {
       "level": "easy",
       "reason": {
-        "text": "Registering an app involves simple steps in the developer console like naming the app and setting redirect URLs.",
+        "text": "The process involves straightforward steps in the developer console such as creating an app, naming it, and configuring OAuth redirect URLs and scopes.",
         "label": "inferred",
         "source_type": "none",
         "note": "Model judgement from the verified claims in this guide; not tested.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     "public": {
       "level": "medium",
       "reason": {
-        "text": "Public distribution requires meeting specific listing requirements, providing test credentials, and passing a formal review process.",
+        "text": "Public listing requires meeting specific documentation requirements, providing test credentials, and undergoing a formal review process.",
         "label": "inferred",
         "source_type": "none",
         "note": "Model judgement from the verified claims in this guide; not tested.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     }
   },
@@ -46,28 +46,24 @@
         "label": "unknown",
         "source_type": "none",
         "note": "Only a hands-on attempt shows how long registration takes.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     "to_approval": {
-      "display": "Initial response: within one week; Security and QA review: may take longer due to the additional complexity involved",
+      "display": "Initial response: within one week",
       "stages": [
         {
           "name": "Initial response",
           "duration_text": "within one week"
-        },
-        {
-          "name": "Security and QA review",
-          "duration_text": "may take longer due to the additional complexity involved"
         }
       ],
       "claim": {
-        "text": "The initial response time for app submissions is aimed to be within one week.",
+        "text": "The initial response time for app submissions is aimed at one week.",
         "label": "official_docs",
         "source_type": "docs",
         "source_url": "https://developers.asana.com/docs/publish-your-app",
-        "evidence_quote": "We aim to provide an initial response on app submissions within one week. However, the review timeline may vary depending on the complexity of the app.",
-        "checked_at": "2026-10-30"
+        "evidence_quote": "We aim to provide an initial response on app submissions within one week.",
+        "checked_at": "2026-10-31"
       }
     }
   },
@@ -75,57 +71,97 @@
     {
       "tier": 1,
       "name": "Private Development",
-      "allows": "The app is accessible only to the developer's own workspace.",
+      "allows": "The app is accessible only to the developer.",
       "gate": "Default",
       "prerequisites": [],
       "claims": [
         {
-          "text": "All apps start as private to the developer by default.",
+          "text": "Apps start as private to the developer by default.",
           "label": "official_docs",
           "source_type": "docs",
           "source_url": "https://developers.asana.com/docs/overview",
           "evidence_quote": "By default, all apps start out private to the developer.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       ]
     },
     {
       "tier": 2,
-      "name": "Internal Workspace Sharing",
-      "allows": "The app can be shared with specific workspaces that the developer belongs to.",
-      "gate": "Developer configuration",
+      "name": "Workspace Restricted",
+      "allows": "The app can be shared with specific workspaces where the developer is a member.",
+      "gate": "Internal sharing configuration",
       "prerequisites": [],
       "claims": [
         {
-          "text": "Apps can be shared with specific workspaces that the developer belongs to.",
+          "text": "You can share your app with specific workspaces you are a member of.",
           "label": "official_docs",
           "source_type": "docs",
           "source_url": "https://developers.asana.com/docs/share-your-app",
           "evidence_quote": "Sharing your app with specific workspaces allows you to share the app with any workspace(s) that you are a member of.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       ]
     },
     {
       "tier": 3,
-      "name": "Public Authorization",
-      "allows": "Users from any Asana workspace can authorize and use the app.",
-      "gate": "Public distribution enablement",
+      "name": "Public Distribution",
+      "allows": "The app is available to any workspace and can be authorized by any user.",
+      "gate": "Submission and review process",
       "prerequisites": [],
       "claims": [
         {
-          "text": "Apps can be shared with any workspace, allowing users from any Asana workspace to authorize the app.",
+          "text": "You can share your app with any workspace, allowing any user to authorize it.",
           "label": "official_docs",
           "source_type": "docs",
           "source_url": "https://developers.asana.com/docs/share-your-app",
           "evidence_quote": "If your app is intended to be shared with many users, select Any workspace. This will allow users from any Asana workspace to authorize the app if they are given the authorization URL.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
+        },
+        {
+          "text": "The initial response time for app submissions is aimed at one week.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.asana.com/docs/publish-your-app",
+          "evidence_quote": "We aim to provide an initial response on app submissions within one week.",
+          "checked_at": "2026-10-31"
+        },
+        {
+          "text": "Asana aims to provide an initial response on app submissions within one week.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.asana.com/docs/publish-your-app",
+          "evidence_quote": "We aim to provide an initial response on app submissions within one week. However, the review timeline may vary depending on the complexity of the app. For apps built using app components, the review process may take longer due to the additional complexity involved",
+          "checked_at": "2026-10-31"
         }
       ]
     }
   ],
   "requirements": {
     "register": [
+      {
+        "item": "Redirect URL",
+        "status": "required",
+        "claim": {
+          "text": "You must add a redirect URL to set up OAuth.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.asana.com/docs/publish-your-app",
+          "evidence_quote": "Setting up OAuth by adding a redirect URL.",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "item": "Long description",
+        "status": "required",
+        "claim": {
+          "text": "You must provide a long description of at least 250 characters.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.asana.com/docs/publish-your-app",
+          "evidence_quote": "Adding a longer description (at least 250 characters) to tell users about the features of your app.",
+          "checked_at": "2026-10-31"
+        }
+      },
       {
         "item": "Register application",
         "status": "required",
@@ -135,7 +171,7 @@
           "source_type": "docs",
           "source_url": "https://developers.asana.com/docs/oauth",
           "evidence_quote": "You must first register your application with Asana to receive a client ID and client secret. To do so, first visit the developer console and select Create new app, as shown below:",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       },
       {
@@ -147,57 +183,21 @@
           "source_type": "docs",
           "source_url": "https://developers.asana.com/docs/overview",
           "evidence_quote": "All OAuth apps are created privately by default.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       }
     ],
     "go_public": [
       {
-        "item": "You must submit your app for review if you want to make it available to users in any…",
-        "status": "optional",
+        "item": "App submission",
+        "status": "required",
         "claim": {
           "text": "You must submit your app for review if you want to make it available to users in any Asana workspace beyond your own or list it publicly.",
           "label": "official_docs",
           "source_type": "docs",
           "source_url": "https://developers.asana.com/docs/publish-your-app",
-          "evidence_quote": "Submitting your app for review is not required to obtain a token. You only need to submit your app if you intend to: Make your app available to users in any Asana workspace, beyond your own organization or development environment List your app publicly on the Asana app directory",
-          "checked_at": "2026-10-30"
-        }
-      },
-      {
-        "item": "App names must not include the word Asana to avoid confusion.",
-        "status": "required",
-        "claim": {
-          "text": "App names must not include the word Asana to avoid confusion.",
-          "label": "official_docs",
-          "source_type": "docs",
-          "source_url": "https://developers.asana.com/docs/app-listing-guidelines",
-          "evidence_quote": "To help users clearly distinguish third-party apps from those built by Asana, app names should not include the word “Asana.” This helps avoid confusion and ensures consistency across our ecosystem.",
-          "checked_at": "2026-10-30"
-        }
-      },
-      {
-        "item": "Developers must provide test account credentials for the review process.",
-        "status": "required",
-        "claim": {
-          "text": "Developers must provide test account credentials for the review process.",
-          "label": "official_docs",
-          "source_type": "docs",
-          "source_url": "https://developers.asana.com/docs/app-listing-guidelines",
-          "evidence_quote": "Provide any test account credentials necessary for your app (this is only used for the review process and will not be published publicly)",
-          "checked_at": "2026-10-30"
-        }
-      },
-      {
-        "item": "A privacy policy URL is required for the app listing.",
-        "status": "required",
-        "claim": {
-          "text": "A privacy policy URL is required for the app listing.",
-          "label": "official_docs",
-          "source_type": "docs",
-          "source_url": "https://developers.asana.com/docs/app-listing-guidelines",
-          "evidence_quote": "Include a privacy policy URL to ensure transparency about how you handle user data and comply with legal requirements.",
-          "checked_at": "2026-10-30"
+          "evidence_quote": "You only need to submit your app if you intend to: Make your app available to users in any Asana workspace, beyond your own organization or development environment List your app publicly on the Asana app directory",
+          "checked_at": "2026-10-31"
         }
       },
       {
@@ -209,7 +209,31 @@
           "source_type": "docs",
           "source_url": "https://developers.asana.com/docs/share-your-app",
           "evidence_quote": "All apps submitted for publication to the app directory must be shared to Any workspace.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "item": "Test account credentials",
+        "status": "required",
+        "claim": {
+          "text": "You must provide test account credentials for the review process.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.asana.com/docs/app-listing-guidelines",
+          "evidence_quote": "Provide any test account credentials necessary for your app (this is only used for the review process and will not be published publicly)",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "item": "Privacy policy URL",
+        "status": "required",
+        "claim": {
+          "text": "You must include a privacy policy URL for your app listing.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.asana.com/docs/app-listing-guidelines",
+          "evidence_quote": "Include a privacy policy URL to ensure transparency about how you handle user data and comply with legal requirements.",
+          "checked_at": "2026-10-31"
         }
       }
     ]
@@ -224,23 +248,11 @@
         "source_type": "docs",
         "source_url": "https://developers.asana.com/docs/rate-limits",
         "evidence_quote": "Calls to the search API are limited to 60 requests per minute.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     }
   ],
   "blockers": [
-    {
-      "issue": "Apps cannot be edited once they have been submitted for review.",
-      "fix": "See the cited page.",
-      "claim": {
-        "text": "Apps cannot be edited once they have been submitted for review.",
-        "label": "official_docs",
-        "source_type": "docs",
-        "source_url": "https://developers.asana.com/docs/publish-your-app",
-        "evidence_quote": "Once your app has been submitted on the Submit for review page, the review process will begin. At this point, the app will no longer be open for further edits.",
-        "checked_at": "2026-10-30"
-      }
-    },
     {
       "issue": "Client secret exposure",
       "fix": "See the cited page.",
@@ -250,7 +262,7 @@
         "source_type": "docs",
         "source_url": "https://developers.asana.com/docs/oauth",
         "evidence_quote": "Your client secret is a secret, and it should never be shared with anyone or added into source code that others could gain access to.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -262,67 +274,31 @@
         "source_type": "docs",
         "source_url": "https://developers.asana.com/docs/oauth",
         "evidence_quote": "OAuth flows that use a localhost, 127.0.0.1, or native URN redirect URI must use PKCE (S256). Include a code_challenge in the authorization request and the matching code_verifier in the token exchange. Requests without these parameters will be rejected.",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
       }
     },
     {
-      "issue": "Incomplete or substandard listings may result in additional review cycles and delayed…",
-      "fix": "Carefully follow all instructions and provide all required information.",
+      "issue": "Redirect URLs must be HTTPS for non-native applications.",
+      "fix": "Use an HTTPS URL for the redirect endpoint.",
       "claim": {
-        "text": "Incomplete or substandard listings may result in additional review cycles and delayed publication.",
+        "text": "Redirect URLs must be HTTPS for non-native applications.",
         "label": "official_docs",
         "source_type": "docs",
-        "source_url": "https://developers.asana.com/docs/app-listing-guidelines",
-        "evidence_quote": "Incomplete or substandard listings may result in additional review cycles, slowing down the approval process and limiting your app’s visibility to potential users.",
-        "checked_at": "2026-10-30"
+        "source_url": "https://developers.asana.com/docs/oauth",
+        "evidence_quote": "For security reasons, non-native applications must supply a \"https\" URL",
+        "checked_at": "2026-10-31"
       }
     },
     {
-      "issue": "If the state parameter does not match, your app should return a 422 error.",
-      "fix": "Verify that the state that the request is coming from matches the state that you sent earlier.",
+      "issue": "PKCE is required for localhost, 127.0.0.1, or native URN redirect URIs.",
+      "fix": "Include a code_challenge in the authorization request and the matching code_verifier in the token exchange.",
       "claim": {
-        "text": "If the state parameter does not match, your app should return a 422 error.",
+        "text": "PKCE is required for localhost, 127.0.0.1, or native URN redirect URIs.",
         "label": "official_docs",
         "source_type": "docs",
-        "source_url": "https://developers.asana.com/docs/app-component-approval-checklist",
-        "evidence_quote": "If the state does not match, your app should return a 422 error.",
-        "checked_at": "2026-10-30"
-      }
-    },
-    {
-      "issue": "If the computed signature and x-asana-request-signature do not match, your app server…",
-      "fix": "Generate a computed signature based on the request and compare it to the x-asana-request-signature from the request header.",
-      "claim": {
-        "text": "If the computed signature and x-asana-request-signature do not match, your app server should return a 400 error.",
-        "label": "official_docs",
-        "source_type": "docs",
-        "source_url": "https://developers.asana.com/docs/app-component-approval-checklist",
-        "evidence_quote": "If the computed signature and x-asana-request-signature do not match, your app server should return a 400 error.",
-        "checked_at": "2026-10-30"
-      }
-    },
-    {
-      "issue": "Your app server should only return a 200 response if the current date and time is before…",
-      "fix": "Check the expires_at query parameter value against the current date and time.",
-      "claim": {
-        "text": "Your app server should only return a 200 response if the current date and time is before the expires_at time.",
-        "label": "official_docs",
-        "source_type": "docs",
-        "source_url": "https://developers.asana.com/docs/app-component-approval-checklist",
-        "evidence_quote": "Your app server should check this value and only return a 200 response if the current date and time is before the expires_at time.",
-        "checked_at": "2026-10-30"
-      }
-    },
-    {
-      "issue": "Asana OAuth does not support making token requests from a browser for security reasons.",
-      "fix": "Use a server-side implementation to manage the OAuth grant flow.",
-      "claim": {
-        "text": "Asana OAuth does not support making token requests from a browser for security reasons.",
-        "label": "official_docs",
-        "source_type": "docs",
-        "source_url": "https://developers.asana.com/docs/getting-started-with-asana-oauth",
-        "evidence_quote": "Note: Asana OAuth currently does not support making token requests from a browser for security reasons.",
-        "checked_at": "2026-10-30"
+        "source_url": "https://developers.asana.com/docs/oauth",
+        "evidence_quote": "OAuth flows that use a localhost, 127.0.0.1, or native URN redirect URI must use PKCE (S256).",
+        "checked_at": "2026-10-31"
       }
     },
     {
@@ -334,134 +310,360 @@
         "source_type": "docs",
         "source_url": "https://developers.asana.com/docs/share-your-app",
         "evidence_quote": "Note that that changing the sharing settings from Any workspace to Specific workspace will block any new authorizations from users outside the specified workspace:",
-        "checked_at": "2026-10-30"
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "issue": "App name containing Asana",
+      "fix": "Choose a unique name that reflects your brand and the functionality of your integration.",
+      "claim": {
+        "text": "Do not include the word Asana in your app name.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.asana.com/docs/app-listing-guidelines",
+        "evidence_quote": "To help users clearly distinguish third-party apps from those built by Asana, app names should not include the word “Asana.”",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "issue": "Unauthorized use of third-party branding",
+      "fix": "Ensure all images are original, properly licensed, or used with permission.",
+      "claim": {
+        "text": "Do not use another company's logo in your app icon or visuals.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.asana.com/docs/app-listing-guidelines",
+        "evidence_quote": "Do not use another company’s official logo or branding in your app icon, screenshots, or any other visuals, unless you have explicit permission.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "issue": "If the state parameter does not match, your app should return a 422 error.",
+      "fix": "Verify that the state that the request is coming from matches the state that you sent earlier.",
+      "claim": {
+        "text": "If the state parameter does not match, your app should return a 422 error.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.asana.com/docs/app-component-approval-checklist",
+        "evidence_quote": "If the state does not match, your app should return a 422 error.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "issue": "If the computed signature and x-asana-request-signature do not match, your app server…",
+      "fix": "Generate a computed signature based on the request and compare it to the x-asana-request-signature from the request header.",
+      "claim": {
+        "text": "If the computed signature and x-asana-request-signature do not match, your app server should return a 400 error.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.asana.com/docs/app-component-approval-checklist",
+        "evidence_quote": "If the computed signature and x-asana-request-signature do not match, your app server should return a 400 error.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "issue": "Your app server should only return a 200 response if the current date and time is before…",
+      "fix": "Check the expires_at query parameter value against the current date and time.",
+      "claim": {
+        "text": "Your app server should only return a 200 response if the current date and time is before the expires_at time.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.asana.com/docs/app-component-approval-checklist",
+        "evidence_quote": "Your app server should check this value and only return a 200 response if the current date and time is before the expires_at time.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "issue": "Asana OAuth does not support making token requests from a browser for security reasons.",
+      "fix": "Use a server-side implementation to manage the OAuth grant flow.",
+      "claim": {
+        "text": "Asana OAuth does not support making token requests from a browser for security reasons.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.asana.com/docs/getting-started-with-asana-oauth",
+        "evidence_quote": "Note: Asana OAuth currently does not support making token requests from a browser for security reasons.",
+        "checked_at": "2026-10-31"
       }
     }
   ],
   "steps": [
     {
       "order": 1,
-      "text": "Navigate to the developer console to select Submit for review in the sidebar.",
+      "text": "User clicks 'Authenticate with Asana' button in the application.",
       "actor": "human",
       "claim": {
-        "text": "Navigate to the developer console to select Submit for review in the sidebar.",
+        "text": "User clicks 'Authenticate with Asana' button in the application.",
         "label": "official_docs",
         "source_type": "docs",
-        "source_url": "https://developers.asana.com/docs/publish-your-app",
-        "evidence_quote": "When managing your app in the developer console, select Submit for review in the sidebar to access the app submission form:",
-        "checked_at": "2026-10-30"
+        "source_url": "https://developers.asana.com/docs/oauth",
+        "evidence_quote": "A user arrives at your application and clicks a button that says Authenticate with Asana (or Connect with Asana, etc.)",
+        "checked_at": "2026-10-31"
       }
     },
     {
       "order": 2,
-      "text": "Complete the pre-flight checklist of app features in the developer console.",
+      "text": "User grants access on the Asana authorization page.",
       "actor": "both",
       "claim": {
-        "text": "Complete the pre-flight checklist of app features in the developer console.",
+        "text": "User grants access on the Asana authorization page.",
         "label": "official_docs",
         "source_type": "docs",
-        "source_url": "https://developers.asana.com/docs/publish-your-app",
-        "evidence_quote": "From there, you'll review an interactive \"pre-flight\" checklist of app features before submitting an app.",
-        "checked_at": "2026-10-30"
+        "source_url": "https://developers.asana.com/docs/oauth",
+        "evidence_quote": "The user is taken to the user authorization endpoint, which displays a page that asks the user if they would like to grant access to your third-party application",
+        "checked_at": "2026-10-31"
       }
     },
     {
       "order": 3,
-      "text": "Select the Publish app button in the developer console after your submission passes requirements.",
-      "actor": "human",
+      "text": "Application exchanges the authorization code for an access token.",
+      "actor": "both",
       "claim": {
-        "text": "Select the Publish app button in the developer console after your submission passes requirements.",
+        "text": "Application exchanges the authorization code for an access token.",
         "label": "official_docs",
         "source_type": "docs",
-        "source_url": "https://developers.asana.com/docs/publish-your-app",
-        "evidence_quote": "At this point, you can select the Publish app button in the developer console to share your app:",
-        "checked_at": "2026-10-30"
+        "source_url": "https://developers.asana.com/docs/oauth",
+        "evidence_quote": "The application makes a request to the token exchange endpoint to exchange that code, along with the application's client secret, for two tokens:",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 4,
+      "text": "Visit the developer console and select Create new app.",
+      "actor": "human",
+      "claim": {
+        "text": "Visit the developer console and select Create new app.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.asana.com/docs/oauth",
+        "evidence_quote": "To do so, first visit the developer console and select Create new app, as shown below:",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 5,
+      "text": "Visit the developer console and select Create new app.",
+      "actor": "human",
+      "claim": {
+        "text": "Visit the developer console and select Create new app.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.asana.com/docs/oauth",
+        "evidence_quote": "To do so, first visit the developer console and select Create new app, as shown below:",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 6,
+      "text": "Visit the developer console and select Create new app.",
+      "actor": "human",
+      "claim": {
+        "text": "Visit the developer console and select Create new app.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.asana.com/docs/oauth",
+        "evidence_quote": "first visit the developer console and select Create new app, as shown below:",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 7,
+      "text": "Supply your new application with an app name.",
+      "actor": "both",
+      "claim": {
+        "text": "Supply your new application with an app name.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.asana.com/docs/oauth",
+        "evidence_quote": "App name - The name for your application. Users will see this name when your application requests permission to access their account as well as when they review the list of apps they have authorized.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 8,
+      "text": "Supply the app name in the developer console.",
+      "actor": "both",
+      "claim": {
+        "text": "Supply the app name in the developer console.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.asana.com/docs/oauth",
+        "evidence_quote": "App name - The name for your application. Users will see this name when your application requests permission to access their account as well as when they review the list of apps they have authorized.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 9,
+      "text": "Supply your new application with a redirect URL.",
+      "actor": "agent",
+      "claim": {
+        "text": "Supply your new application with a redirect URL.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.asana.com/docs/oauth",
+        "evidence_quote": "Redirect URL - Otherwise known as the callback URL, this is where the user will be redirected upon successful or failed authentication.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 10,
+      "text": "Supply the redirect URL in the developer console.",
+      "actor": "agent",
+      "claim": {
+        "text": "Supply the redirect URL in the developer console.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.asana.com/docs/oauth",
+        "evidence_quote": "Redirect URL - Otherwise known as the callback URL, this is where the user will be redirected upon successful or failed authentication.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 11,
+      "text": "Specify which OAuth scopes your app can request.",
+      "actor": "both",
+      "claim": {
+        "text": "Specify which OAuth scopes your app can request.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.asana.com/docs/oauth",
+        "evidence_quote": "(OAuth) Permission scopes: You'll need to specify which OAuth scopes your app can request during this registration step. Only these pre-approved scopes will be accepted later during user authorization.",
+        "checked_at": "2026-10-31"
+      }
+    },
+    {
+      "order": 12,
+      "text": "Specify OAuth scopes in the developer console.",
+      "actor": "both",
+      "claim": {
+        "text": "Specify OAuth scopes in the developer console.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://developers.asana.com/docs/oauth",
+        "evidence_quote": "(OAuth) Permission scopes: You'll need to specify which OAuth scopes your app can request during this registration step. Only these pre-approved scopes will be accepted later during user authorization.",
+        "checked_at": "2026-10-31"
       }
     }
   ],
   "agent_vs_human": {
     "agent": [
       {
-        "text": "Draft the app name and description for the listing details page",
+        "text": "Supply your new application with a redirect URL.",
         "claim": {
-          "text": "Draft the app name and description for the listing details page",
-          "label": "inferred",
-          "source_type": "none",
-          "note": "Model suggestion; not verified against this provider's portal.",
-          "checked_at": "2026-10-30"
+          "text": "Supply your new application with a redirect URL.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.asana.com/docs/oauth",
+          "evidence_quote": "Redirect URL - Otherwise known as the callback URL, this is where the user will be redirected upon successful or failed authentication.",
+          "checked_at": "2026-10-31"
         }
       },
       {
-        "text": "Draft the privacy policy content for the required URL",
+        "text": "Supply the redirect URL in the developer console.",
         "claim": {
-          "text": "Draft the privacy policy content for the required URL",
+          "text": "Supply the redirect URL in the developer console.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.asana.com/docs/oauth",
+          "evidence_quote": "Redirect URL - Otherwise known as the callback URL, this is where the user will be redirected upon successful or failed authentication.",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "text": "Draft the long description of at least 250 characters for the app listing.",
+        "claim": {
+          "text": "Draft the long description of at least 250 characters for the app listing.",
           "label": "inferred",
           "source_type": "none",
           "note": "Model suggestion; not verified against this provider's portal.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "text": "Generate the privacy policy text required for the app listing.",
+        "claim": {
+          "text": "Generate the privacy policy text required for the app listing.",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-10-31"
         }
       }
     ],
     "human": [
       {
-        "text": "Navigate to the developer console to select Submit for review in the sidebar.",
+        "text": "User clicks 'Authenticate with Asana' button in the application.",
         "claim": {
-          "text": "Navigate to the developer console to select Submit for review in the sidebar.",
+          "text": "User clicks 'Authenticate with Asana' button in the application.",
           "label": "official_docs",
           "source_type": "docs",
-          "source_url": "https://developers.asana.com/docs/publish-your-app",
-          "evidence_quote": "When managing your app in the developer console, select Submit for review in the sidebar to access the app submission form:",
-          "checked_at": "2026-10-30"
+          "source_url": "https://developers.asana.com/docs/oauth",
+          "evidence_quote": "A user arrives at your application and clicks a button that says Authenticate with Asana (or Connect with Asana, etc.)",
+          "checked_at": "2026-10-31"
         }
       },
       {
-        "text": "Complete the pre-flight checklist of app features in the developer console.",
+        "text": "User grants access on the Asana authorization page.",
         "claim": {
-          "text": "Complete the pre-flight checklist of app features in the developer console.",
+          "text": "User grants access on the Asana authorization page.",
           "label": "official_docs",
           "source_type": "docs",
-          "source_url": "https://developers.asana.com/docs/publish-your-app",
-          "evidence_quote": "From there, you'll review an interactive \"pre-flight\" checklist of app features before submitting an app.",
-          "checked_at": "2026-10-30"
+          "source_url": "https://developers.asana.com/docs/oauth",
+          "evidence_quote": "The user is taken to the user authorization endpoint, which displays a page that asks the user if they would like to grant access to your third-party application",
+          "checked_at": "2026-10-31"
         }
       },
       {
-        "text": "Select the Publish app button in the developer console after your submission passes requirements.",
+        "text": "Application exchanges the authorization code for an access token.",
         "claim": {
-          "text": "Select the Publish app button in the developer console after your submission passes requirements.",
+          "text": "Application exchanges the authorization code for an access token.",
           "label": "official_docs",
           "source_type": "docs",
-          "source_url": "https://developers.asana.com/docs/publish-your-app",
-          "evidence_quote": "At this point, you can select the Publish app button in the developer console to share your app:",
-          "checked_at": "2026-10-30"
+          "source_url": "https://developers.asana.com/docs/oauth",
+          "evidence_quote": "The application makes a request to the token exchange endpoint to exchange that code, along with the application's client secret, for two tokens:",
+          "checked_at": "2026-10-31"
         }
       },
       {
-        "text": "Register the application in the developer console to obtain client credentials",
+        "text": "Visit the developer console and select Create new app.",
         "claim": {
-          "text": "Register the application in the developer console to obtain client credentials",
+          "text": "Visit the developer console and select Create new app.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://developers.asana.com/docs/oauth",
+          "evidence_quote": "To do so, first visit the developer console and select Create new app, as shown below:",
+          "checked_at": "2026-10-31"
+        }
+      },
+      {
+        "text": "Register the application in the developer console to obtain a client ID and client secret.",
+        "claim": {
+          "text": "Register the application in the developer console to obtain a client ID and client secret.",
           "label": "inferred",
           "source_type": "none",
           "note": "Model suggestion; not verified against this provider's portal.",
-          "checked_at": "2026-10-30"
-        }
-      },
-      {
-        "text": "Perform a self-QA review of the application",
-        "claim": {
-          "text": "Perform a self-QA review of the application",
-          "label": "inferred",
-          "source_type": "none",
-          "note": "Model suggestion; not verified against this provider's portal.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       }
     ]
   },
   "extras": [
     {
+      "title": "Tested live by the agent",
+      "why_it_matters": "The agent tested this guide's evidence and the provider's live behaviour before saving it. These are observations, not documentation.",
+      "claims": [
+        {
+          "text": "When this guide was saved, the agent re-fetched the 8 pages it cites and re-checked 34 quoted passages: 34 were found again, none were missing.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://developers.asana.com/docs/app-component-approval-checklist",
+          "note": "Automated test on 2026-10-31: each quote must appear in a fresh copy of the cited page. A quote that does not is removed, together with anything that rested only on it.",
+          "checked_at": "2026-10-31"
+        }
+      ]
+    },
+    {
       "title": "What the docs recommend",
-      "why_it_matters": "Stated preference",
+      "why_it_matters": "self-QA review",
       "claims": [
         {
           "text": "Perform a self-QA review before submitting your app for review.",
@@ -469,7 +671,7 @@
           "source_type": "docs",
           "source_url": "https://developers.asana.com/docs/publish-your-app",
           "evidence_quote": "Before submitting your app for review, we recommend that you perform a self-QA review by thoroughly testing your app experiences, marketing copy, authorization, and security best practices.",
-          "checked_at": "2026-10-30"
+          "checked_at": "2026-10-31"
         }
       ]
     }
@@ -521,15 +723,19 @@
         "note": "no authorization URL found in the metadata or the docs read"
       },
       {
+        "item": "Live check not completed: Token endpoint",
+        "note": "no token URL found in the metadata or the docs read"
+      },
+      {
+        "item": "Live check not completed: API host",
+        "note": "no API host (api.<provider>) was mentioned in the docs read"
+      },
+      {
         "item": "Live check not completed: https://app.asana.com/0/my-apps",
         "note": "robots.txt disallows it, so the agent did not request it"
       },
       {
         "item": "Live check not completed: https://asana.com/apps?category=all-apps",
-        "note": "it opened without a visible sign-in wall (HTTP 200); the agent cannot tell whether creating an app there needs an account"
-      },
-      {
-        "item": "Live check not completed: https://asana.com/apps",
         "note": "it opened without a visible sign-in wall (HTTP 200); the agent cannot tell whether creating an app there needs an account"
       }
     ],
@@ -561,6 +767,11 @@
         "type": "docs"
       },
       {
+        "title": "Share your app",
+        "url": "https://developers.asana.com/docs/share-your-app",
+        "type": "docs"
+      },
+      {
         "title": "App listing guidelines",
         "url": "https://developers.asana.com/docs/app-listing-guidelines",
         "type": "docs"
@@ -576,8 +787,8 @@
         "type": "docs"
       },
       {
-        "title": "Share your app",
-        "url": "https://developers.asana.com/docs/share-your-app",
+        "title": "Authentication",
+        "url": "https://developers.asana.com/docs/authentication",
         "type": "docs"
       }
     ]
