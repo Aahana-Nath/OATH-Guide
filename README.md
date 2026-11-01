@@ -53,7 +53,6 @@ checks), `--model <id>`. Check any guide's quotes against their sources with `py
 | `GEMINI_API_KEY` | Your Gemini key. Never commit `.env`. |
 | `GEMINI_MODEL` | Model to use. Blank = auto-detect a Flash model. Smaller "flash-lite" models were the most reliable under load. |
 | `GEMINI_FALLBACK_MODELS` | Comma-separated models to try when the main one is overloaded (503/429) or unavailable (404). |
-| `GCP_PROJECT_ID` | Optional: read the key from GCP Secret Manager (secret `gemini_api_key`) instead. Needs `requirements-extras.txt` and `gcloud auth application-default login`. |
 | `FIRECRAWL_API_KEY` | Optional: use [Firecrawl](https://firecrawl.dev) for web search and to render JavaScript-only docs pages (see below). `--no-firecrawl` ignores it. |
 | `FIRECRAWL_MAX_SCRAPES` | Most new pages rendered through Firecrawl per run (default 25; each costs credits). |
 | `RESEARCH_COOLDOWN_SECONDS` | Hosting only: minimum seconds between runs per IP (the Docker image sets 60). |
@@ -153,7 +152,6 @@ agent/guide_agent.py   discover · agent loop · verify · assemble (standard li
 agent/probes.py        harmless live tests against the provider (metadata, authorize, token, API, portal)
 agent/savecheck.py     test-then-save gate: re-fetch every cited page, re-check every quote, drop what fails
 agent/netguard.py      outbound-request guard (http(s) only, public addresses only, redirects re-checked)
-agent/gcp_secrets.py   optional: Gemini key from GCP Secret Manager
 guides/                schema, hand-tested GitHub and Slack guides, thirteen agent-generated guides with their traces
 nuxt-app/              the web app (Nuxt 3): sidebar, big search home, animated agents-at-work scene, saved-guides library, guide page with sections nav and research panel, API routes
 tools/                 recheck_quotes.py (independent re-check), summarize_guides.py, gemini_check.py

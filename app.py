@@ -14,7 +14,6 @@ import streamlit as st
 ROOT = Path(__file__).resolve().parent
 AGENT = ROOT / "agent" / "guide_agent.py"
 sys.path.insert(0, str(ROOT / "agent"))
-from gcp_secrets import get_gemini_api_key  # noqa: E402
 OUT = ROOT / "out"
 GUIDE_DIRS = [ROOT / "guides", OUT]
 
@@ -33,7 +32,7 @@ def load_env_key():
     if p.exists():
         for line in p.read_text(encoding="utf-8").splitlines():
             k, _, v = line.strip().partition("=")
-            if k in ("GEMINI_API_KEY", "GEMINI_MODEL", "GCP_PROJECT_ID", "GEMINI_SECRET_NAME", "GEMINI_FALLBACK_MODELS") \
+            if k in ("GEMINI_API_KEY", "GEMINI_MODEL", "GEMINI_FALLBACK_MODELS") \
                     and v and not os.environ.get(k):
                 os.environ[k] = v.strip().strip("\"'")
 
@@ -233,20 +232,15 @@ st.set_page_config(page_title="OAuth Guide Agent", page_icon="🔐", layout="wid
 load_env_key()
 
 
-@st.cache_resource(show_spinner="Fetching Gemini key from Secret Manager…")
-def fetch_key():
-    return get_gemini_api_key()
-
 st.title("🔐 OAuth Guide Agent")
 st.caption("Enter an app name or website. The agent finds the developer docs, extracts an OAuth setup guide, "
            "and verifies every quote against the fetched page.")
 
 with st.sidebar:
     st.header("Settings")
-    key = fetch_key() if os.environ.get("GCP_PROJECT_ID") else os.environ.get("GEMINI_API_KEY", "")
+    key = os.environ.get("GEMINI_API_KEY", "")
     if key:
-        st.success("Gemini key loaded from Secret Manager" if os.environ.get("GCP_PROJECT_ID") and key != os.environ.get("GEMINI_API_KEY", "")
-                   else "GEMINI_API_KEY loaded")
+        st.success("GEMINI_API_KEY loaded")
     else:
         key = st.text_input("Gemini API key", type="password")
     model = st.text_input("Model", value=os.environ.get("GEMINI_MODEL", ""), placeholder="auto-detect",
@@ -268,7 +262,7 @@ if go:
     if not target.strip():
         st.error("Enter an app name or website.")
     elif not key.strip():
-        st.error("Set GCP_PROJECT_ID (Secret Manager), GEMINI_API_KEY in .env, or enter a key in the sidebar.")
+        st.error("Set GEMINI_API_KEY in .env, or enter a key in the sidebar.")
     else:
         with st.status(f"Researching {target}…", expanded=True) as status:
             log_box = st.empty()

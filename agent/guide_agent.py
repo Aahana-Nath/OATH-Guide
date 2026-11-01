@@ -45,7 +45,6 @@ from html.parser import HTMLParser
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import firecrawl
-from gcp_secrets import get_gemini_api_key
 from netguard import host_is_public, open_url
 from probes import apply_probes, run_probes
 from savecheck import recheck_and_prune
@@ -1573,11 +1572,8 @@ def main():
     a = ap.parse_args()
     if a.no_firecrawl:
         os.environ["FIRECRAWL_DISABLE"] = "1"
-    sm_key = get_gemini_api_key()      # Secret Manager first, then GEMINI_API_KEY from the environment / .env
-    if sm_key:
-        os.environ["GEMINI_API_KEY"] = sm_key
     if not os.environ.get("GEMINI_API_KEY", "").strip():
-        sys.exit("No Gemini API key: set GCP_PROJECT_ID (Secret Manager) or GEMINI_API_KEY.")
+        sys.exit("No Gemini API key: set GEMINI_API_KEY in .env.")
     model = a.model or pick_model(os.environ["GEMINI_API_KEY"].strip())
     log("start", f"model {model}")
     try:
