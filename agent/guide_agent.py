@@ -189,7 +189,7 @@ def render_with_firecrawl(url, accept, render):
     if url not in firecrawl.STATS["urls"] and not firecrawl.budget_left():
         return None
     got = firecrawl.scrape(url, 60)
-    if not got or len(got["text"]) < 200:
+    if not got or len(got["text"]) < 600:      # same minimum as a normal page: shorter is a stub, not docs
         return None
     links = [(norm_url(u), "") for u in got["links"] if not u.startswith(("mailto:", "tel:", "javascript:", "#"))]
     return {"url": url, "title": got["title"], "text": clean_text([got["text"]]), "links": links, "thin": False,

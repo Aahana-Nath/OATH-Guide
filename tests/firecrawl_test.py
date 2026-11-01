@@ -9,7 +9,7 @@ import firecrawl
 import guide_agent as g
 
 MD = ("# Create an app\n\nOpen the **developer portal** and click [Create app](https://x.test/new). "
-      "Then copy the `client_id` and the client secret. " + "Redirect URIs must match exactly. " * 12)
+      "Then copy the `client_id` and the client secret. " + "Redirect URIs must match exactly. " * 30)
 scrapes, searches = [], []
 
 
