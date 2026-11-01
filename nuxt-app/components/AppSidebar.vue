@@ -8,8 +8,12 @@ const count = computed(() => guides.value?.length || 0)
 const quick = computed(() => {
   const seen = new Map<string, GuideEntry>()
   for (const g of [...(guides.value || [])].sort((a, b) => b.mtime - a.mtime)) if (!seen.has(g.name.toLowerCase())) seen.set(g.name.toLowerCase(), g)
-  return [...seen.values()].sort((a, b) => a.name.localeCompare(b.name)).slice(0, 8)
+  return [...seen.values()].sort((a, b) => a.name.localeCompare(b.name))
 })
+const SHOWN = 8
+const expanded = ref(false)
+const visible = computed(() => (expanded.value ? quick.value : quick.value.slice(0, SHOWN)))
+const hidden = computed(() => quick.value.length - SHOWN)
 // Router "exact" matching ignores the query string, so mark the open guide by its key instead.
 const isOpen = (g: GuideEntry) => route.path === '/guide' && route.query.g === g.key
 </script>
@@ -31,9 +35,12 @@ const isOpen = (g: GuideEntry) => route.path === '/guide' && route.query.g === g
     <template v-if="quick.length">
       <p class="side-label">Saved guides</p>
       <nav class="nav side-apps" aria-label="Saved guides">
-        <NuxtLink v-for="g in quick" :key="g.key" :to="{ path: '/guide', query: { g: g.key } }" class="nav-item app-item" :class="{ active: isOpen(g) }">
+        <NuxtLink v-for="g in visible" :key="g.key" :to="{ path: '/guide', query: { g: g.key } }" class="nav-item app-item" :class="{ active: isOpen(g) }">
           <span class="avatar sm" :style="{ background: avatarColor(g.name) }" aria-hidden="true">{{ g.name[0] }}</span> {{ g.name }}
         </NuxtLink>
+        <button v-if="hidden > 0" type="button" class="nav-item more-btn" :aria-expanded="expanded" @click="expanded = !expanded">
+          {{ expanded ? 'View less' : `View more (${hidden})` }} <span aria-hidden="true">{{ expanded ? '▴' : '▾' }}</span>
+        </button>
       </nav>
     </template>
   </aside>
