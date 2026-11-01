@@ -47,32 +47,27 @@ useHead({ title: 'OAuth Guide Agent' })
         <button class="bigbtn" type="submit" :disabled="running || !query.trim()">{{ running ? 'Researching…' : 'Research →' }}</button>
       </form>
 
-      <div class="row-chips">
+      <div class="row-chips try-row">
         <span class="hint">Try:</span>
         <button v-for="e in EXAMPLES" :key="e" class="topic" type="button" :disabled="running" @click="query = e">{{ e }}</button>
+        <details class="panel adv">
+          <summary>⚙️ Advanced settings</summary>
+          <div class="settings">
+            <label>Model <span class="hint">(blank = auto)</span>
+              <input v-model="model" class="field small" type="text" spellcheck="false" placeholder="auto-detect">
+            </label>
+            <label>Max pages <b>{{ maxPages }}</b><input v-model.number="maxPages" type="range" min="3" max="40"></label>
+            <label>Max seconds <b>{{ maxSeconds }}</b><input v-model.number="maxSeconds" type="range" min="30" max="600" step="10"></label>
+            <label>Agent steps <b>{{ maxSteps }}</b><input v-model.number="maxSteps" type="range" min="0" max="20"></label>
+            <label class="inline"><input v-model="liveProbes" type="checkbox"> Live checks <span class="hint">(harmless requests to the provider; never registers anything)</span></label>
+            <p class="note">Gemini key: {{ config?.keySource === 'none' ? 'not configured (set GEMINI_API_KEY in .env)' : `from ${config?.keySource}` }}</p>
+            <p class="note">Firecrawl: {{ config?.firecrawl ? 'on (search and JavaScript-rendered pages)' : 'off (set FIRECRAWL_API_KEY in .env to enable)' }}</p>
+          </div>
+        </details>
       </div>
     </header>
 
-    <div class="home-grid">
-      <aside class="home-left">
-        <section>
-          <details class="panel">
-            <summary>⚙️ Advanced settings</summary>
-            <div class="settings">
-              <label>Model <span class="hint">(blank = auto)</span>
-                <input v-model="model" class="field small" type="text" spellcheck="false" placeholder="auto-detect">
-              </label>
-              <label>Max pages <b>{{ maxPages }}</b><input v-model.number="maxPages" type="range" min="3" max="40"></label>
-              <label>Max seconds <b>{{ maxSeconds }}</b><input v-model.number="maxSeconds" type="range" min="30" max="600" step="10"></label>
-              <label>Agent steps <b>{{ maxSteps }}</b><input v-model.number="maxSteps" type="range" min="0" max="20"></label>
-              <label class="inline"><input v-model="liveProbes" type="checkbox"> Live checks <span class="hint">(harmless requests to the provider; never registers anything)</span></label>
-              <p class="note">Gemini key: {{ config?.keySource === 'none' ? 'not configured (set GEMINI_API_KEY in .env)' : `from ${config?.keySource}` }}</p>
-              <p class="note">Firecrawl: {{ config?.firecrawl ? 'on (search and JavaScript-rendered pages)' : 'off (set FIRECRAWL_API_KEY in .env to enable)' }}</p>
-            </div>
-          </details>
-        </section>
-      </aside>
-
+    <div class="home-main">
       <section class="home-right" aria-live="polite">
         <AgentsAtWork v-if="running" />
         <div v-else class="empty">
@@ -85,5 +80,6 @@ useHead({ title: 'OAuth Guide Agent' })
         </div>
       </section>
     </div>
+
   </div>
 </template>
