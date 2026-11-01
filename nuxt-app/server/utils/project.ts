@@ -7,7 +7,7 @@ export const AGENT = join(ROOT, 'agent', 'guide_agent.py')
 export const PYTHON = existsSync(join(ROOT, '.venv', 'bin', 'python')) ? join(ROOT, '.venv', 'bin', 'python') : 'python3'
 const GUIDE_DIRS = ['guides', 'out']
 
-// Shared by the research and reset routes: one agent run at a time, and no reset while one is running.
+// The research route runs one agent at a time.
 export const runState = { running: false }
 
 export function readEnvFile(): Record<string, string> {

@@ -100,7 +100,7 @@ useHead({ title: computed(() => (g.value ? `${g.value.provider.name} · OAuth Gu
   <div v-else class="empty" style="min-height: 420px">
     <div class="big-ico" aria-hidden="true">🔍</div>
     <h2>{{ error ? 'That guide could not be found' : 'Loading guide…' }}</h2>
-    <p v-if="error">It may have been reset. Pick another from the saved guides, or research a new app.</p>
+    <p v-if="error">It may have been removed. Pick another from the saved guides, or research a new app.</p>
     <NuxtLink to="/guides" class="btn primary">📚 Saved guides</NuxtLink>
   </div>
 </template>

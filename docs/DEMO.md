@@ -91,4 +91,3 @@ counters, an elapsed timer and a streaming terminal. When the run finishes the g
 3. Or paste any website or app name into the big search bar on **Home** and press **Research**. The right column is empty until you do.
 4. Watch the agents scene, the live counters and the terminal. A run takes about 2 to 3 minutes. Lower **Agent steps** under Advanced settings (for example 3) for a faster, shallower run.
 5. In the guide, use the sections nav to jump around, tick **Show all evidence** to open every source, and read **What was tested, and what wasn't** first.
-6. **Reset generated** (on the Saved guides page) removes only guides you generated in this session (`out/`); the 15 saved guides in `guides/` are kept.

@@ -82,12 +82,5 @@ export function useResearch() {
     return key
   }
 
-  function reset() {
-    log.value = []
-    stage.value = -1
-    error.value = ''
-    target.value = ''
-  }
-
-  return { running, log, stage, error, target, startedAt, readyKey, liveStats, start, reset }
+  return { running, log, stage, error, target, startedAt, readyKey, liveStats, start }
 }
