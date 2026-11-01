@@ -36,11 +36,5 @@ const isOpen = (g: GuideEntry) => route.path === '/guide' && route.query.g === g
         </NuxtLink>
       </nav>
     </template>
-
-    <div class="side-card">
-      <strong>Need a custom guide?</strong>
-      <span class="sub">Paste any website URL and the agents will research its OAuth setup.</span>
-      <NuxtLink to="/" class="btn primary">＋ New guide</NuxtLink>
-    </div>
   </aside>
 </template>
