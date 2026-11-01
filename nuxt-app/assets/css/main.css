@@ -210,6 +210,19 @@ ul.plain { list-style: none; padding-left: 0; }
 .rp-src a { overflow-wrap: anywhere; }
 .logbox { padding: 10px; max-height: 240px; overflow: auto; background: #04071a; border-radius: 10px; font-family: var(--font-mono); font-size: 12px; white-space: pre-wrap; overflow-wrap: anywhere; }
 
+/* the research-details panel is reference material, so it is set smaller than the guide itself */
+.gp-panel { font-size: 12px; line-height: 1.45; }
+.gp-panel .rp-card { padding: 14px; gap: 10px; }
+.gp-panel .rp-card h3 { font-size: 13px; }
+.gp-panel .sub, .gp-panel .note { font-size: 11.5px; }
+.gp-panel .hint { font-size: 11px; }
+.gp-panel .rp-stats dt { font-size: 10px; }
+.gp-panel .rp-stats dd { font-size: 19px; }
+.gp-panel .rp-steps, .gp-panel .rp-src, .gp-panel .plain { font-size: 11.5px; }
+.gp-panel .panel > summary { font-size: 12px; padding: 9px 12px; }
+.gp-panel .mono { font-size: 11px; }
+.gp-panel .q { font-size: 10.5px; }
+
 /* ---------- guide content ---------- */
 .guide { display: flex; flex-direction: column; gap: 28px; }
 .block { display: flex; flex-direction: column; gap: 14px; scroll-margin-top: 20px; }
