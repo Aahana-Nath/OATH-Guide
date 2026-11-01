@@ -54,8 +54,19 @@ checks), `--model <id>`. Check any guide's quotes against their sources with `py
 | `GEMINI_MODEL` | Model to use. Blank = auto-detect a Flash model. Smaller "flash-lite" models were the most reliable under load. |
 | `GEMINI_FALLBACK_MODELS` | Comma-separated models to try when the main one is overloaded (503/429) or unavailable (404). |
 | `GCP_PROJECT_ID` | Optional: read the key from GCP Secret Manager (secret `gemini_api_key`) instead. Needs `requirements-extras.txt` and `gcloud auth application-default login`. |
+| `FIRECRAWL_API_KEY` | Optional: use [Firecrawl](https://firecrawl.dev) for web search and to render JavaScript-only docs pages (see below). `--no-firecrawl` ignores it. |
+| `FIRECRAWL_MAX_SCRAPES` | Most new pages rendered through Firecrawl per run (default 25; each costs credits). |
 | `RESEARCH_COOLDOWN_SECONDS` | Hosting only: minimum seconds between runs per IP (the Docker image sets 60). |
 | `OAUTH_AGENT_ROOT` | Hosting only: project root if the Nuxt app is not run from `nuxt-app/`. |
+
+### Optional: Firecrawl
+
+Set `FIRECRAWL_API_KEY` and the agent uses [Firecrawl](https://firecrawl.dev) in two places, with the built-in code as the fallback for both:
+
+- **Web search** goes through Firecrawl's search API (ahead of Tavily, Brave and DuckDuckGo).
+- **Pages the built-in reader cannot use** (an empty JavaScript shell, or a refusal to a script) are re-read through Firecrawl's scrape API and converted to plain text, so quotes still match what a person sees.
+
+It is never used to get around a block: pages disallowed by `robots.txt` are skipped, as are `robots.txt`/sitemaps. If the key is invalid or the credits run out, Firecrawl switches off for the rest of the run. Each page read through it is marked `via: firecrawl` in the trace, and the save-time re-test re-reads those pages the same way. `python tests/firecrawl_test.py` tests all of this against a fake Firecrawl server.
 
 ## How it works
 
@@ -146,7 +157,7 @@ agent/gcp_secrets.py   optional: Gemini key from GCP Secret Manager
 guides/                schema, hand-tested GitHub and Slack guides, thirteen agent-generated guides with their traces
 nuxt-app/              the web app (Nuxt 3): sidebar, big search home, animated agents-at-work scene, saved-guides library, guide page with sections nav and research panel, API routes
 tools/                 recheck_quotes.py (independent re-check), summarize_guides.py, gemini_check.py
-tests/                 unit_test.py, probe_test.py (+ serve.py fake OAuth server)
+tests/                 unit_test.py, probe_test.py (+ serve.py fake OAuth server), firecrawl_test.py (fake Firecrawl API)
 docs/                  DEMO.md, VERIFICATION.md, screenshots
 app.py, web/           the secondary Streamlit UI and static viewer
 ```
@@ -156,5 +167,6 @@ app.py, web/           the secondary Streamlit UI and static viewer
 ```bash
 python tests/unit_test.py                       # safety guard, accuracy fixes (no network)
 python tests/serve.py &  python tests/probe_test.py   # live probes against a fake OAuth server
+python tests/firecrawl_test.py                  # Firecrawl search/render/fallback against a fake Firecrawl API
 python guides/validate.py guides/github.json    # a guide against the schema
 ```

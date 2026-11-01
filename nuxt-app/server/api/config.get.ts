@@ -3,6 +3,7 @@ export default defineEventHandler(() => {
   const env = readEnvFile()
   return {
     model: env.GEMINI_MODEL || '',
-    keySource: env.GCP_PROJECT_ID ? 'Secret Manager' : env.GEMINI_API_KEY ? '.env' : 'none'
+    keySource: env.GCP_PROJECT_ID ? 'Secret Manager' : env.GEMINI_API_KEY ? '.env' : 'none',
+    firecrawl: !!(env.FIRECRAWL_API_KEY || process.env.FIRECRAWL_API_KEY)
   }
 })

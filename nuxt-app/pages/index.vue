@@ -68,6 +68,7 @@ useHead({ title: 'OAuth Guide Agent' })
               <label>Agent steps <b>{{ maxSteps }}</b><input v-model.number="maxSteps" type="range" min="0" max="20"></label>
               <label class="inline"><input v-model="liveProbes" type="checkbox"> Live checks <span class="hint">(harmless requests to the provider; never registers anything)</span></label>
               <p class="note">Gemini key: {{ config?.keySource === 'none' ? 'not configured (set GEMINI_API_KEY in .env)' : `from ${config?.keySource}` }}</p>
+              <p class="note">Firecrawl: {{ config?.firecrawl ? 'on (search and JavaScript-rendered pages)' : 'off (set FIRECRAWL_API_KEY in .env to enable)' }}</p>
             </div>
           </details>
         </section>

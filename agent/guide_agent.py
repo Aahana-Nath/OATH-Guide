@@ -44,6 +44,7 @@ from datetime import date
 from html.parser import HTMLParser
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import firecrawl
 from gcp_secrets import get_gemini_api_key
 from netguard import host_is_public, open_url
 from probes import apply_probes, run_probes
@@ -177,9 +178,29 @@ def norm_url(u):
     return u.rstrip("/") if urllib.parse.urlparse(u).path not in ("", "/") else u.rstrip("/")
 
 
-def fetch(url, timeout=12, accept=None):
+def render_with_firecrawl(url, accept, render):
+    """Page dict read through Firecrawl (JavaScript rendered), or None. Used only for pages the built-in reader could not get
+    (empty JS shell, or refused to a script) and only where robots.txt allows: Firecrawl is never used to get around a block.
+    Budget: FIRECRAWL_MAX_SCRAPES new pages per run; a page already read through Firecrawl can be re-read (the save-time re-test)."""
+    if not render or accept == "text/markdown" or not firecrawl.enabled():
+        return None
+    p = urllib.parse.urlparse(url)
+    if p.path.lower().endswith((".txt", ".xml", ".json")) or not host_is_public(p.hostname or "") or not allowed_by_robots(url):
+        return None
+    if url not in firecrawl.STATS["urls"] and not firecrawl.budget_left():
+        return None
+    got = firecrawl.scrape(url, 60)
+    if not got or len(got["text"]) < 200:
+        return None
+    links = [(norm_url(u), "") for u in got["links"] if not u.startswith(("mailto:", "tel:", "javascript:", "#"))]
+    return {"url": url, "title": got["title"], "text": clean_text([got["text"]]), "links": links, "thin": False,
+            "ctype": "text/markdown", "via": "firecrawl"}
+
+
+def fetch(url, timeout=12, accept=None, render=True):
     """Return a page dict, or None if blocked, missing, binary or unreachable.
-    `accept` asks for one rendition by name (e.g. "text/html" or "text/markdown"); some docs sites serve different text for each."""
+    `accept` asks for one rendition by name (e.g. "text/html" or "text/markdown"); some docs sites serve different text for each.
+    `render=False` never uses Firecrawl (for existence checks that should not cost credits)."""
     url = norm_url(url)
     ckey = (url, accept) if accept else url
     if ckey in _cache:
@@ -210,6 +231,11 @@ def fetch(url, timeout=12, accept=None):
                     page = {"url": final, "title": title, "text": text, "links": links, "thin": thin, "ctype": ctype}
     except Exception:
         page = None
+    if page is None or page["thin"]:
+        rendered = render_with_firecrawl(url, accept, render)
+        if rendered:
+            log("firecrawl", f"rendered {url} ({len(rendered['text'])} chars)")
+            page = rendered
     _cache[ckey] = page
     return page
 
@@ -373,7 +399,7 @@ def resolve_bare_name(raw):
         return raw
     for tld in ("com", "io", "app", "dev", "co"):
         cand = f"{raw.strip().lower().replace(' ', '')}.{tld}"
-        if fetch(f"https://{cand}", timeout=6):
+        if fetch(f"https://{cand}", timeout=6, render=False):
             log("discover", f"'{raw}' looks like {cand}")
             return cand
     return raw
@@ -387,7 +413,10 @@ def foreign_locale(u):
 
 
 def web_search(query, n=8):
-    """Search the web. Uses TAVILY_API_KEY or BRAVE_API_KEY if set, else DuckDuckGo's HTML page (no key). Returns URLs."""
+    """Search the web. Uses FIRECRAWL_API_KEY, else TAVILY_API_KEY or BRAVE_API_KEY if set, else DuckDuckGo's HTML page (no key). Returns URLs."""
+    found = firecrawl.search(query, n)
+    if found:
+        return found
     try:
         if os.environ.get("TAVILY_API_KEY"):
             req = urllib.request.Request("https://api.tavily.com/search", method="POST",
@@ -1441,6 +1470,9 @@ def agent_first_empty(pages):
 def run_agent(raw_input, model, max_pages=20, max_seconds=300, max_steps=10, agent_first=True, probes=True, savecheck=True):
     deadline = time.time() + max_seconds
     RUN_ERRORS.clear()
+    firecrawl.reset()
+    if firecrawl.enabled():
+        log("start", "Firecrawl enabled: web search and JavaScript-rendered pages go through it")
     raw_input = resolve_bare_name(raw_input)
     t = parse_target(raw_input)
     log("start", f"{t['name']} ({t['origin']})")
@@ -1490,7 +1522,10 @@ def run_agent(raw_input, model, max_pages=20, max_seconds=300, max_steps=10, age
     if savecheck:       # test-then-save: nothing is kept that cannot be re-found at its cited source
         senv = types.SimpleNamespace(fetch=fetch, cache=_cache, norm_url=norm_url, norm=norm, quote_ok=quote_ok, log=log)
         guide, save_res = recheck_and_prune(guide, senv, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "guides", "guide.schema.json"), TODAY)
-    trace = {"input": raw_input, "pages": [{"url": p["url"], "chars": len(p["text"]), "thin": p["thin"]} for p in pages],
+    trace = {"input": raw_input, "pages": [{"url": p["url"], "chars": len(p["text"]), "thin": p["thin"], **({"via": p["via"]} if p.get("via") else {})} for p in pages],
+             "firecrawl": ({"searches": firecrawl.STATS["searches"], "pages_rendered": len(firecrawl.STATS["urls"]),
+                            "failed": firecrawl.STATS["failed"], "stopped": firecrawl.STATS["stopped"]}
+                           if (firecrawl.STATS["searches"] or firecrawl.STATS["scrapes"] or firecrawl.STATS["stopped"]) else None),
              "steps": steps, "probes": probe_res, "savecheck": save_res,
              "findings": [{"category": f["category"], "text": f["text"], "quote": f["quote"], "verified": f in good} for f in findings]}
     return guide, trace
@@ -1532,9 +1567,12 @@ def main():
     ap.add_argument("--max-steps", type=int, default=25, help="agent-loop steps after the first pass (0 = first pass only)")
     ap.add_argument("--no-savecheck", action="store_true", help="skip the final re-test of every quoted claim before saving")
     ap.add_argument("--no-probes", action="store_true", help="skip the harmless live checks against the provider")
+    ap.add_argument("--no-firecrawl", action="store_true", help="ignore FIRECRAWL_API_KEY: use the built-in reader and search only")
     ap.add_argument("--trace", help="write pages read and every finding (verified or not) here")
     ap.add_argument("--schema", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "guides", "guide.schema.json"))
     a = ap.parse_args()
+    if a.no_firecrawl:
+        os.environ["FIRECRAWL_DISABLE"] = "1"
     sm_key = get_gemini_api_key()      # Secret Manager first, then GEMINI_API_KEY from the environment / .env
     if sm_key:
         os.environ["GEMINI_API_KEY"] = sm_key
