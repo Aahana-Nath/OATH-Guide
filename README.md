@@ -158,12 +158,23 @@ docker build -t oauth-guide-agent .
 docker run -p 3000:3000 -e GEMINI_API_KEY=your-key -e GEMINI_MODEL=gemini-3.1-flash-lite oauth-guide-agent
 ```
 
-Any container host works (Render, Fly.io, Railway, Cloud Run). Set `GEMINI_API_KEY` as a secret environment variable, not in the image. Without Docker:
+Any container host works (Render, Fly.io, Railway, Cloud Run). Set `GEMINI_API_KEY` (and `FIRECRAWL_API_KEY`) as secret environment variables, not in the image. Without Docker:
 
 ```bash
 cd nuxt-app && npm ci && npm run build
 OAUTH_AGENT_ROOT=.. NITRO_PORT=3000 RESEARCH_COOLDOWN_SECONDS=60 node .output/server/index.mjs
 ```
+
+### Credentials on a host (Vercel, Docker, anything)
+
+Keys are read from real environment variables first, and from a local `.env` only if a variable is not set. `.env` is git-ignored and never
+pushed. On Vercel, add `GEMINI_API_KEY`, `FIRECRAWL_API_KEY` (and optionally `GEMINI_MODEL`, `RESEARCH_COOLDOWN_SECONDS`) under
+*Project → Settings → Environment Variables*; the Settings panel then reports the key source as "environment variable".
+
+**Caveat for Vercel specifically.** Live research starts a Python process that runs for 2 to 4 minutes and writes its result to disk. That fits a
+container host. Serverless functions have execution-time limits, a read-only file system (apart from `/tmp`) and may not ship Python, and the
+app reads `agent/` and `guides/` from outside `nuxt-app/`. Use a container host for the live-generation experience; Vercel suits at most the
+read-only saved-guides library. This has not been tried on Vercel.
 
 ## Layout
 
