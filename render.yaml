@@ -1,0 +1,16 @@
+# Render Blueprint: New > Blueprint, pick this repository. Secrets are entered in the Render dashboard, never stored here.
+services:
+  - type: web
+    name: oauth-guide-agent
+    runtime: docker
+    plan: free            # free instances sleep after 15 minutes idle; the first request then takes about a minute
+    healthCheckPath: /api/config
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: FIRECRAWL_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-3.1-flash-lite
+      - key: RESEARCH_COOLDOWN_SECONDS
+        value: "60"

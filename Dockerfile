@@ -16,8 +16,9 @@ COPY guides/ guides/
 COPY --from=web /app/nuxt-app/.output nuxt-app/.output
 RUN mkdir -p out && chown -R node:node /app
 USER node
-ENV OAUTH_AGENT_ROOT=/app NITRO_HOST=0.0.0.0 NITRO_PORT=3000 RESEARCH_COOLDOWN_SECONDS=60
-# GEMINI_API_KEY (and optionally GEMINI_MODEL) are supplied by the host as environment variables, never baked in.
+# The server listens on $PORT when the host sets one (Render does), otherwise 3000.
+ENV OAUTH_AGENT_ROOT=/app NITRO_HOST=0.0.0.0 RESEARCH_COOLDOWN_SECONDS=60
+# GEMINI_API_KEY and FIRECRAWL_API_KEY (and optionally GEMINI_MODEL) are supplied by the host as environment variables, never baked in.
 WORKDIR /app/nuxt-app
 EXPOSE 3000
 CMD ["node", ".output/server/index.mjs"]
