@@ -15,7 +15,6 @@ watch(() => config.value?.model, (m) => { if (m && !model.value) model.value = m
 watch(() => route.query.q, (q) => { if (q) query.value = String(q) })
 
 const EXAMPLES = ['Slack', 'Spotify', 'Calendly', 'Dropbox', 'linear.app']
-const recent = computed(() => [...(guides.value || [])].sort((a, b) => b.mtime - a.mtime).slice(0, 4))
 
 async function go() {
   const t = query.value.trim()
@@ -71,28 +70,6 @@ useHead({ title: 'OAuth Guide Agent' })
               <p class="note">Firecrawl: {{ config?.firecrawl ? 'on (search and JavaScript-rendered pages)' : 'off (set FIRECRAWL_API_KEY in .env to enable)' }}</p>
             </div>
           </details>
-        </section>
-
-        <section v-if="recent.length">
-          <p class="eyebrow">Recently saved</p>
-          <div class="recent">
-            <NuxtLink v-for="g in recent" :key="g.key" :to="{ path: '/guide', query: { g: g.key } }">
-              <span class="avatar sm" :style="{ background: avatarColor(g.name) }" aria-hidden="true">{{ g.name[0] }}</span>
-              <span>{{ g.name }}</span>
-              <span class="lvl" :class="g.public" style="margin-left: auto">Public: {{ LEVELS[g.public] }}</span>
-            </NuxtLink>
-          </div>
-          <NuxtLink to="/guides" class="hint">See all {{ guides?.length }} saved guides →</NuxtLink>
-        </section>
-
-        <section>
-          <p class="eyebrow">How it works</p>
-          <ol class="plain" style="padding-left: 18px">
-            <li>Scout finds the developer docs.</li>
-            <li>Reader follows links and quotes what it finds.</li>
-            <li>Verifier checks every quote against the page, tries the provider's endpoints, and re-tests everything before the guide is saved.</li>
-            <li>Judge and Writer turn it into a guide where every claim carries a label and a source.</li>
-          </ol>
         </section>
       </aside>
 
