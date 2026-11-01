@@ -1,1 +1,1 @@
-export default defineEventHandler(() => listGuides())
+export default defineEventHandler(async () => listGuides())

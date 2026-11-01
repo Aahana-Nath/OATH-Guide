@@ -13,6 +13,9 @@ const clamp = (v: unknown, lo: number, hi: number, d: number) => {
 }
 
 export default defineEventHandler(async (event) => {
+  if (process.env.VERCEL) {
+    throw createError({ statusCode: 501, statusMessage: 'Live research needs a host that can run the Python agent for a few minutes (see the README, Hosting). The saved guides work here.' })
+  }
   const body = await readBody(event)
   const target = String(body?.target || '').trim()
   const model = String(body?.model || '').trim()

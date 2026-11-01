@@ -5,7 +5,10 @@ import { join, resolve } from 'node:path'
 export const ROOT = process.env.OAUTH_AGENT_ROOT ? resolve(process.env.OAUTH_AGENT_ROOT) : resolve(process.cwd(), '..')
 export const AGENT = join(ROOT, 'agent', 'guide_agent.py')
 export const PYTHON = existsSync(join(ROOT, '.venv', 'bin', 'python')) ? join(ROOT, '.venv', 'bin', 'python') : 'python3'
+// Saved guides (guides/) are bundled into the server build as assets, so they ship with any deployment, including ones that only
+// upload nuxt-app/. Guides generated while the app runs are written to out/ on disk and read from there.
 const GUIDE_DIRS = ['guides', 'out']
+const bundled = () => useStorage('assets:guides')
 
 // The research route runs one agent at a time.
 export const runState = { running: false }
@@ -48,6 +51,22 @@ function readJson(path: string) {
   }
 }
 
+async function listNames(dir: string): Promise<string[]> {
+  if (dir === 'guides') return (await bundled().getKeys()).map((k) => k.replace(/^.*:/, ''))
+  const full = join(ROOT, dir)
+  return existsSync(full) ? readdirSync(full) : []
+}
+
+async function readFrom(dir: string, file: string) {
+  if (dir !== 'guides') return readJson(join(ROOT, dir, file))
+  const raw = await bundled().getItem(file)
+  if (raw == null) return null
+  if (typeof raw === 'string') {
+    try { return JSON.parse(raw) } catch { return null }
+  }
+  return raw as any
+}
+
 // Count claims (objects with a label, a date and text) and how many are "tested".
 function countClaims(node: any, acc = { total: 0, tested: 0 }) {
   if (Array.isArray(node)) node.forEach((n) => countClaims(n, acc))
@@ -60,21 +79,18 @@ function countClaims(node: any, acc = { total: 0, tested: 0 }) {
   return acc
 }
 
-// Every guide JSON on disk (trace and schema files excluded), newest first within a folder.
-export function scanGuides(): GuideEntry[] {
+// Every guide JSON (trace and schema files excluded).
+export async function scanGuides(): Promise<GuideEntry[]> {
   const found: GuideEntry[] = []
   for (const dir of GUIDE_DIRS) {
-    const full = join(ROOT, dir)
-    if (!existsSync(full)) continue
-    for (const f of readdirSync(full)) {
+    for (const f of await listNames(dir)) {
       if (!f.endsWith('.json') || f.endsWith('.trace.json') || f.endsWith('.schema.json')) continue
-      const path = join(full, f)
-      const g = readJson(path)
+      const g = await readFrom(dir, f)
       if (!g || !g.provider || !g.difficulty) continue
       const stem = f.replace(/\.json$/, '')
       const { provider, evidence, ...body } = g
       const c = countClaims(body)
-      const sc = readJson(join(full, `${stem}.trace.json`))?.savecheck
+      const sc = (await readFrom(dir, `${stem}.trace.json`))?.savecheck
       found.push({
         key: `${dir}/${stem}`,
         dir,
@@ -91,7 +107,8 @@ export function scanGuides(): GuideEntry[] {
         tested: c.tested,
         claims: c.total,
         retested: sc ? { ok: sc.ok, checked: sc.checked } : null,
-        mtime: statSync(path).mtimeMs
+        // generated guides use the file time; bundled ones have none, so use the date they were generated
+        mtime: dir === 'guides' ? Date.parse(g.generated_at) || 0 : statSync(join(ROOT, dir, f)).mtimeMs
       })
     }
   }
@@ -99,9 +116,9 @@ export function scanGuides(): GuideEntry[] {
 }
 
 // Saved-guide list: one entry per provider and source (hand-written vs agent), newest run wins.
-export function listGuides(): GuideEntry[] {
+export async function listGuides(): Promise<GuideEntry[]> {
   const best = new Map<string, GuideEntry>()
-  for (const g of scanGuides()) {
+  for (const g of await scanGuides()) {
     const id = `${g.name.toLowerCase()}|${g.mode === 'agent' ? 'agent' : 'manual'}`
     const cur = best.get(id)
     if (!cur || g.mtime > cur.mtime) best.set(id, g)
@@ -109,13 +126,13 @@ export function listGuides(): GuideEntry[] {
   return [...best.values()].sort((a, b) => a.name.localeCompare(b.name) || a.mode.localeCompare(b.mode))
 }
 
-export function loadGuide(key: string) {
-  const entry = scanGuides().find((g) => g.key === key) // whitelist: only files we listed, so no path traversal
+export async function loadGuide(key: string) {
+  const entry = (await scanGuides()).find((g) => g.key === key) // whitelist: only files we listed, so no path traversal
   if (!entry) return null
-  const base = join(ROOT, entry.dir, entry.stem)
+  const file = (name: string) => `${entry.stem}${name}.json`
   return {
     entry,
-    guide: readJson(`${base}.json`),
-    trace: existsSync(`${base}.trace.json`) ? readJson(`${base}.trace.json`) : null
+    guide: await readFrom(entry.dir, file('')),
+    trace: await readFrom(entry.dir, file('.trace'))
   }
 }

@@ -1,5 +1,6 @@
 FROM node:22-slim AS web
 WORKDIR /app/nuxt-app
+COPY guides/ /app/guides/
 COPY nuxt-app/package*.json ./
 RUN npm ci --no-audit --no-fund
 COPY nuxt-app/ ./

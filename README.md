@@ -171,10 +171,12 @@ Keys are read from real environment variables first, and from a local `.env` onl
 pushed. On Vercel, add `GEMINI_API_KEY`, `FIRECRAWL_API_KEY` (and optionally `GEMINI_MODEL`, `RESEARCH_COOLDOWN_SECONDS`) under
 *Project → Settings → Environment Variables*; the Settings panel then reports the key source as "environment variable".
 
-**Caveat for Vercel specifically.** Live research starts a Python process that runs for 2 to 4 minutes and writes its result to disk. That fits a
-container host. Serverless functions have execution-time limits, a read-only file system (apart from `/tmp`) and may not ship Python, and the
-app reads `agent/` and `guides/` from outside `nuxt-app/`. Use a container host for the live-generation experience; Vercel suits at most the
-read-only saved-guides library. This has not been tried on Vercel.
+**Vercel.** The saved guides are bundled into the server build, so the library works on a deployment that uploads only `nuxt-app/` (Root Directory
+`nuxt-app`). The build reads `../guides`, so leave *Settings → General → "Include source files outside of the Root Directory in the Build Step"*
+on; if `guides/` cannot be found the build fails with a message instead of publishing an empty library. Live research does **not** run on
+Vercel: it starts a Python process that runs for 2 to 4 minutes and writes to disk, which serverless functions do not allow, so the
+Research button returns a clear message there. Use a container host (the Dockerfile) for live generation. Tested: a production build run in an
+empty folder with no environment serves all 16 guides, their traces and the guide pages, and rejects path tricks. Not tried on Vercel itself.
 
 ## Layout
 
