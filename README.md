@@ -65,8 +65,6 @@ python agent/guide_agent.py linear.app --out out/linear.json --trace out/linear.
 Options: `--max-pages 20`, `--max-seconds 300`, `--max-steps 10` (agent-loop steps; `0` = first pass only), `--no-probes` (skip live
 checks), `--model <id>`. Check any guide's quotes against their sources with `python tools/recheck_quotes.py guides/*-agent.json`.
 
-**Also included:** a static viewer (`python web/build.py web/template.html web/guides.html guides/github.json guides/slack.json`).
-
 ### Configuration
 
 | Variable | Purpose |
@@ -176,10 +174,9 @@ agent/savecheck.py     test-then-save gate: re-fetch every cited page, re-check 
 agent/netguard.py      outbound-request guard (http(s) only, public addresses only, redirects re-checked)
 guides/                schema, hand-tested GitHub and Slack guides, fourteen agent-generated guides with their traces
 nuxt-app/              the web app (Nuxt 3): sidebar, big search home, animated agents-at-work scene, saved-guides library, guide page with sections nav and research panel, API routes
-tools/                 recheck_quotes.py (independent re-check), summarize_guides.py, gemini_check.py
+tools/                 recheck_quotes.py (independent re-check), summarize_guides.py (the comparison table in docs/DEMO.md)
 tests/                 unit_test.py, probe_test.py (+ serve.py fake OAuth server), firecrawl_test.py (fake Firecrawl API)
 docs/                  DEMO.md, VERIFICATION.md, screenshots
-web/                   a static single-file viewer (secondary)
 ```
 
 ## Tests
@@ -188,5 +185,4 @@ web/                   a static single-file viewer (secondary)
 python tests/unit_test.py                       # safety guard, accuracy fixes (no network)
 python tests/serve.py &  python tests/probe_test.py   # live probes against a fake OAuth server
 python tests/firecrawl_test.py                  # Firecrawl search/render/fallback against a fake Firecrawl API
-python guides/validate.py guides/github.json    # a guide against the schema
 ```
