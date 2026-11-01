@@ -65,8 +65,7 @@ python agent/guide_agent.py linear.app --out out/linear.json --trace out/linear.
 Options: `--max-pages 20`, `--max-seconds 300`, `--max-steps 10` (agent-loop steps; `0` = first pass only), `--no-probes` (skip live
 checks), `--model <id>`. Check any guide's quotes against their sources with `python tools/recheck_quotes.py guides/*-agent.json`.
 
-**Also included:** a Streamlit UI (`pip install -r requirements-extras.txt && streamlit run app.py`) and a static viewer
-(`python web/build.py web/template.html web/guides.html guides/github.json guides/slack.json`). Both are secondary; the Nuxt app is the main experience.
+**Also included:** a static viewer (`python web/build.py web/template.html web/guides.html guides/github.json guides/slack.json`).
 
 ### Configuration
 
@@ -180,7 +179,7 @@ nuxt-app/              the web app (Nuxt 3): sidebar, big search home, animated 
 tools/                 recheck_quotes.py (independent re-check), summarize_guides.py, gemini_check.py
 tests/                 unit_test.py, probe_test.py (+ serve.py fake OAuth server), firecrawl_test.py (fake Firecrawl API)
 docs/                  DEMO.md, VERIFICATION.md, screenshots
-app.py, web/           the secondary Streamlit UI and static viewer
+web/                   a static single-file viewer (secondary)
 ```
 
 ## Tests
