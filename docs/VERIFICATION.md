@@ -19,8 +19,10 @@ Run layer 2 yourself: `python tools/recheck_quotes.py guides/*-agent.json`.
 
 ## Layer 2 result
 
-**472 of 472 documentation quotes were re-found at their cited source** across all thirteen agent-researched guides (GitHub, Slack,
-Spotify, Shopify, Notion, Google, Figma, Asana, Calendly, Dropbox, Linear, Zoom, Atlassian). Zero were fabricated, zero were missing.
+**504 of 504 documentation quotes were re-found at their cited source** across all fourteen agent-researched guides (GitHub, Slack,
+Spotify, Shopify, Notion, Google, Figma, Asana, Calendly, Dropbox, Linear, Zoom, Atlassian, Stripe). Zero were fabricated.
+
+**Drift found by the re-check.** On the first re-check, three Notion quotes from `developers.notion.com/guides/get-started/overview` were no longer on the page: it had changed in the two days since the guide was saved. The guide was regenerated and its 38 quotes all re-found. Documentation guides go stale; the guide's "generated" date and the re-check tool (`tools/recheck_quotes.py`) are how a reader or a maintainer finds out.
 Every guide also passed its own save-time gate (the "Tested before saving" card), with no claims removed.
 
 **A caution about the checking tool itself.** An earlier pass reported 18 Shopify misses. They were not in the guide: shopify.dev

@@ -2,23 +2,28 @@
   "input": "asana.com",
   "pages": [
     {
+      "url": "https://developers.asana.com/docs/oauth",
+      "chars": 25667,
+      "thin": false
+    },
+    {
+      "url": "https://forum.asana.com/t/api-authorization-in-python/82500",
+      "chars": 3348,
+      "thin": false
+    },
+    {
+      "url": "https://developers.asana.com/docs/oauth.md",
+      "chars": 36180,
+      "thin": false
+    },
+    {
       "url": "https://developers.asana.com/docs/publish-your-app",
       "chars": 8544,
       "thin": false
     },
     {
-      "url": "https://developers.asana.com/docs/app-component-approval-checklist.md",
-      "chars": 4538,
-      "thin": false
-    },
-    {
-      "url": "https://developers.asana.com/docs/oauth",
-      "chars": 25666,
-      "thin": false
-    },
-    {
-      "url": "https://developers.asana.com/docs/overview",
-      "chars": 5931,
+      "url": "https://developers.asana.com/docs/authentication",
+      "chars": 4717,
       "thin": false
     },
     {
@@ -27,101 +32,77 @@
       "thin": false
     },
     {
-      "url": "https://developers.asana.com/docs/share-your-app",
-      "chars": 5084,
-      "thin": false
-    },
-    {
       "url": "https://developers.asana.com/docs/app-listing-guidelines",
       "chars": 9649,
       "thin": false
     },
     {
-      "url": "https://developers.asana.com/docs/app-component-approval-checklist",
-      "chars": 3275,
-      "thin": false
-    },
-    {
-      "url": "https://developers.asana.com/docs/getting-started-with-asana-oauth",
-      "chars": 2244,
-      "thin": false
-    },
-    {
-      "url": "https://developers.asana.com/docs/authentication",
-      "chars": 4717,
+      "url": "https://developers.asana.com/docs/share-your-app",
+      "chars": 5084,
       "thin": false
     }
   ],
+  "firecrawl": {
+    "searches": 4,
+    "pages_rendered": 0,
+    "failed": 6,
+    "stopped": ""
+  },
   "steps": [
     {
       "step": 1,
       "action": "fetch_page",
-      "arg": "https://developers.asana.com/docs/rate-limits",
-      "thought": "I need to find more steps for app registration, public requirements, limits, access tiers, and blockers. I will start by fetching the rate limits page to address the limit requirement.",
-      "result": "auto-read saved 3 verified finding(s).\nPAGE 5\nURL: https://developers.asana.com/docs/rate-limits\nTITLE: Rate limits\nTEXT:\nFor AI agents: the docs index is at https://developers.asana.com/llms.txt. Append .md to any documentation page URL to get its markdown version.\n\nTo protect the stability of the "
+      "arg": "https://developers.asana.com/docs/authentication",
+      "thought": "I need to gather more information to complete the checklist. I will start by fetching the 'Authentication' page to get more details on OAuth and then look into 'Rate limits' and 'App listing guideline",
+      "result": "auto-read saved 5 verified finding(s).\nPAGE 5\nURL: https://developers.asana.com/docs/authentication\nTITLE: Authentication\nTEXT:\nFor AI agents: the docs index is at https://developers.asana.com/llms.txt. Append .md to any documentation page URL to get its markdown version.\n\nAsana’s API has several op"
     },
     {
       "step": 2,
       "action": "fetch_page",
       "arg": "https://developers.asana.com/docs/oauth",
-      "thought": "I have read the rate limits page and recorded the findings. Now I need to start gathering information for the other checklist items, starting with the OAuth registration process.",
-      "result": "PAGE 3\nURL: https://developers.asana.com/docs/oauth\nTITLE: OAuth\nTEXT:\nFor AI agents: the docs index is at https://developers.asana.com/llms.txt. Append .md to any documentation page URL to get its markdown version.\n\nAt its core, OAuth (\"Open Authorization\") is a mechanism for applications to access"
+      "thought": "I need to gather more details about OAuth, specifically the endpoints, grant types, and registration steps. I will start by fetching the OAuth documentation page.",
+      "result": "PAGE 1\nURL: https://developers.asana.com/docs/oauth\nTITLE: OAuth\nTEXT:\nFor AI agents: the docs index is at https://developers.asana.com/llms.txt. Append .md to any documentation page URL to get its markdown version.\n\nAt its core, OAuth (\"Open Authorization\") is a mechanism for applications to access"
     },
     {
       "step": 3,
       "action": "record_finding",
-      "arg": "9 finding(s)",
-      "thought": "I have read the OAuth documentation and can now record several steps and requirements. I need to find more information on public app requirements, review stages, and access tiers to complete the check",
-      "result": "8 finding(s) verified and saved. Not saved: quote not found verbatim on page 3, or a number in the claim is not in the quote: Access token lifetime. To retry, copy the quote exactly from the page text."
+      "arg": "12 finding(s)",
+      "thought": "I have read the main OAuth documentation (Page 1) and have enough information to record several findings regarding OAuth details, steps, and blockers. I will now record these findings.",
+      "result": "12 finding(s) verified and saved."
     },
     {
       "step": 4,
       "action": "fetch_page",
-      "arg": "https://developers.asana.com/docs/oauth",
-      "thought": "I need to find the exact quote for the access token lifetime on the OAuth page to satisfy the limit requirement, and I need to continue gathering steps and public requirements.",
-      "result": "PAGE 3\nURL: https://developers.asana.com/docs/oauth\nTITLE: OAuth\nTEXT:\nFor AI agents: the docs index is at https://developers.asana.com/llms.txt. Append .md to any documentation page URL to get its markdown version.\n\nAt its core, OAuth (\"Open Authorization\") is a mechanism for applications to access"
+      "arg": "https://developers.asana.com/docs/rate-limits",
+      "thought": "I need to gather more information on requirements for registration, public access, review stages, limits, and access tiers to complete the checklist. I will start by fetching the rate limits page and ",
+      "result": "auto-read saved 4 verified finding(s).\nPAGE 6\nURL: https://developers.asana.com/docs/rate-limits\nTITLE: Rate limits\nTEXT:\nFor AI agents: the docs index is at https://developers.asana.com/llms.txt. Append .md to any documentation page URL to get its markdown version.\n\nTo protect the stability of the "
     },
     {
       "step": 5,
-      "action": "record_finding",
-      "arg": "8 finding(s)",
-      "thought": "I have read the OAuth documentation and can now extract the registration steps and other missing information. I will record the findings from page 3.",
-      "result": "2 finding(s) verified and saved. Not saved: already recorded: Supply the application with an App name.; already recorded: Supply the application with a Redirect URL.; already recorded: Specify OAuth scopes for the app.; already recorded: User clicks Authenticate with Asana button in the application."
+      "action": "fetch_page",
+      "arg": "https://developers.asana.com/docs/app-listing-guidelines",
+      "thought": "I have gathered significant information about OAuth, rate limits, and general authentication. I need to address the remaining checklist items: requirement_register, requirement_public, review_stage, a",
+      "result": "auto-read saved 6 verified finding(s).\nPAGE 7\nURL: https://developers.asana.com/docs/app-listing-guidelines\nTITLE: App listing guidelines\nTEXT:\nFor AI agents: the docs index is at https://developers.asana.com/llms.txt. Append .md to any documentation page URL to get its markdown version.\n\nWhen submi"
     },
     {
       "step": 6,
-      "action": "fetch_page",
-      "arg": "https://developers.asana.com/docs/manage-distribution",
-      "thought": "I need to find more steps for the registration process, specifically regarding the app creation and configuration flow, and I need to find more information on public requirements and access tiers. I w",
-      "result": "auto-read saved 4 verified finding(s).\nPAGE 6\nURL: https://developers.asana.com/docs/share-your-app\nTITLE: Share your app\nTEXT:\nFor AI agents: the docs index is at https://developers.asana.com/llms.txt. Append .md to any documentation page URL to get its markdown version.\n\nAfter you create your app,"
+      "action": "finish",
+      "arg": "refused",
+      "thought": "I have gathered sufficient information to fulfill the checklist requirements. I have documented OAuth details, registration steps, public requirements, blockers, and rate limits. I have enough informa",
+      "result": "Not finished: the checklist still has missing items: requirement_register, review_stage, limit, access_tier. Search or fetch pages for them. Call finish again only if they are not documented anywhere you can reach."
     },
     {
       "step": 7,
       "action": "fetch_page",
-      "arg": "https://developers.asana.com/docs/app-listing-guidelines",
-      "thought": "I have gathered information about sharing apps, app listing details, and distribution settings. I need to find more steps for registration and details on access tiers or public requirements. I will fe",
-      "result": "auto-read saved 7 verified finding(s).\nPAGE 7\nURL: https://developers.asana.com/docs/app-listing-guidelines\nTITLE: App listing guidelines\nTEXT:\nFor AI agents: the docs index is at https://developers.asana.com/llms.txt. Append .md to any documentation page URL to get its markdown version.\n\nWhen submi"
+      "arg": "https://developers.asana.com/docs/manage-distribution",
+      "thought": "I need to find information on requirement_register, review_stage, limit, and access_tier. I will fetch 'manage-distribution' to see if it covers access tiers and review stages, and 'app-component-appr",
+      "result": "auto-read saved 4 verified finding(s).\nPAGE 8\nURL: https://developers.asana.com/docs/share-your-app\nTITLE: Share your app\nTEXT:\nFor AI agents: the docs index is at https://developers.asana.com/llms.txt. Append .md to any documentation page URL to get its markdown version.\n\nAfter you create your app,"
     },
     {
       "step": 8,
-      "action": "fetch_page",
-      "arg": "https://developers.asana.com/docs/app-component-approval-checklist",
-      "thought": "I have gathered information about app listing requirements and common blockers. I need to find more steps for app registration and information about review stages and access tiers. I will start by fet",
-      "result": "auto-read saved 3 verified finding(s).\nPAGE 8\nURL: https://developers.asana.com/docs/app-component-approval-checklist\nTITLE: App component approval checklist\nTEXT:\nFor AI agents: the docs index is at https://developers.asana.com/llms.txt. Append .md to any documentation page URL to get its markdown "
-    },
-    {
-      "step": 9,
-      "action": "fetch_page",
-      "arg": "https://developers.asana.com/docs/getting-started-with-asana-oauth",
-      "thought": "I need to find more steps for the registration process and information about access tiers. I have already read the OAuth page, but I should check if there are more specific steps documented there or i",
-      "result": "auto-read saved 3 verified finding(s).\nPAGE 9\nURL: https://developers.asana.com/docs/getting-started-with-asana-oauth\nTITLE: OAuth Code Samples / Libraries\nTEXT:\nFor AI agents: the docs index is at https://developers.asana.com/llms.txt. Append .md to any documentation page URL to get its markdown ve"
-    },
-    {
-      "step": 10,
-      "action": "fetch_page",
-      "arg": "https://developers.asana.com/docs/authentication",
-      "thought": "I need to find more steps for the registration process and information about access tiers and review stages. I will fetch the authentication page to see if it provides more details on the OAuth flow a",
-      "result": "auto-read saved 3 verified finding(s).\nPAGE 10\nURL: https://developers.asana.com/docs/authentication\nTITLE: Authentication\nTEXT:\nFor AI agents: the docs index is at https://developers.asana.com/llms.txt. Append .md to any documentation page URL to get its markdown version.\n\nAsana’s API has several o"
+      "action": "finish",
+      "thought": "I have gathered sufficient information to cover the checklist. I have information on OAuth flow, setup details, registration steps, public requirements, review stages, limits, access tiers, and blocke",
+      "result": ""
     }
   ],
   "probes": {
@@ -129,7 +110,7 @@
     "skipped": [
       {
         "what": "OAuth server metadata",
-        "why": "none published at asana.com, developers.asana.com (checked /.well-known/oauth-authorization-server, /.well-known/openid-configuration)"
+        "why": "none published at asana.com, developers.asana.com, forum.asana.com (checked /.well-known/oauth-authorization-server, /.well-known/openid-configuration)"
       },
       {
         "what": "Authorize endpoint",
@@ -156,89 +137,47 @@
         "why": "it opened without a visible sign-in wall (HTTP 200); the agent cannot tell whether creating an app there needs an account"
       }
     ],
-    "requests": 6,
+    "requests": 8,
     "login_wall": null
   },
   "savecheck": {
-    "checked": 34,
-    "pages": 8,
-    "ok": 34,
+    "checked": 35,
+    "pages": 5,
+    "ok": 35,
     "failed": [],
     "removed": [],
     "kept_unpruned": false
   },
   "findings": [
     {
-      "category": "requirement_public",
-      "text": "You must submit your app for review if you want to make it available to users in any Asana workspace beyond your own or list it publicly.",
-      "quote": "You only need to submit your app if you intend to: Make your app available to users in any Asana workspace, beyond your own organization or development environment List your app publicly on the Asana app directory",
-      "verified": true
-    },
-    {
-      "category": "requirement_register",
-      "text": "You must add a redirect URL to set up OAuth.",
-      "quote": "Setting up OAuth by adding a redirect URL.",
-      "verified": true
-    },
-    {
-      "category": "requirement_register",
-      "text": "You must provide a long description of at least 250 characters.",
-      "quote": "Adding a longer description (at least 250 characters) to tell users about the features of your app.",
-      "verified": true
-    },
-    {
-      "category": "review_stage",
-      "text": "The initial response time for app submissions is aimed at one week.",
-      "quote": "We aim to provide an initial response on app submissions within one week.",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Select Submit for review in the developer console sidebar to access the submission form.",
-      "quote": "When managing your app in the developer console, select Submit for review in the sidebar to access the app submission form:",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Select the Publish app button in the developer console after your submission passes requirements.",
-      "quote": "At this point, you can select the Publish app button in the developer console to share your app:",
-      "verified": true
-    },
-    {
-      "category": "recommendation",
-      "text": "Perform a self-QA review before submitting your app for review.",
-      "quote": "Before submitting your app for review, we recommend that you perform a self-QA review by thoroughly testing your app experiences, marketing copy, authorization, and security best practices.",
-      "verified": true
-    },
-    {
-      "category": "blocker",
-      "text": "If the state parameter does not match the one sent earlier, your app must return a 422 error.",
-      "quote": "If the state does not match, your app should return a 422 error.",
-      "verified": false
-    },
-    {
-      "category": "blocker",
-      "text": "If the computed request signature does not match the x-asana-request-signature header, your app must return a 400 error.",
-      "quote": "If the computed signature and x-asana-request-signature do not match, your app server should return a 400 error.",
-      "verified": false
-    },
-    {
-      "category": "requirement_public",
-      "text": "Apps must handle the user clicking Deny on the grant permission page by returning a specific error HTML page.",
-      "quote": "When the user clicks on the \"Deny\" button on the grant permission page, your app should return the following:",
-      "verified": false
-    },
-    {
-      "category": "extra",
-      "text": "Apps must validate the expires_at query parameter and only return a 200 response if the current time is before the expiration time.",
-      "quote": "Your app server should check this value and only return a 200 response if the current date and time is before the expires_at time.",
-      "verified": false
-    },
-    {
       "category": "requirement_register",
       "text": "You must register your application with Asana to receive a client ID and client secret.",
       "quote": "You must first register your application with Asana to receive a client ID and client secret. To do so, first visit the developer console and select Create new app, as shown below:",
       "verified": true
+    },
+    {
+      "category": "oauth_detail",
+      "text": "Asana supports the authorization code grant flow.",
+      "quote": "Asana supports the authorization code grant flow",
+      "verified": true
+    },
+    {
+      "category": "oauth_detail",
+      "text": "The user authorization endpoint is https://app.asana.com/-/oauth_authorize.",
+      "quote": "The endpoint for user authorization is GET https://app.asana.com/-/oauth_authorize",
+      "verified": true
+    },
+    {
+      "category": "oauth_detail",
+      "text": "The token exchange endpoint is https://app.asana.com/-/oauth_token.",
+      "quote": "The endpoint for token exchange is POST https://app.asana.com/-/oauth_token",
+      "verified": true
+    },
+    {
+      "category": "oauth_detail",
+      "text": "Access tokens are valid for one hour.",
+      "quote": "An access token (i.e., a bearer token, which lasts an hour)",
+      "verified": false
     },
     {
       "category": "step",
@@ -265,63 +204,261 @@
       "verified": true
     },
     {
-      "category": "limit",
-      "text": "Access tokens are valid for one hour.",
-      "quote": "An access token (i.e., a bearer token, which lasts an hour)",
-      "verified": false
-    },
-    {
       "category": "blocker",
-      "text": "Do not share your client secret or include it in source code.",
-      "quote": "Your client secret is a secret, and it should never be shared with anyone or added into source code that others could gain access to.",
+      "text": "Non-native applications must use https for redirect URLs.",
+      "quote": "For security reasons, non-native applications must supply a \"https\" URL (more on this below).",
       "verified": true
     },
     {
       "category": "blocker",
-      "text": "Requests without PKCE parameters will be rejected for localhost, 127.0.0.1, or native URN redirect URIs.",
+      "text": "Requests to the authorization endpoint without PKCE will be rejected if using localhost, 127.0.0.1, or native URN redirect URIs.",
       "quote": "OAuth flows that use a localhost, 127.0.0.1, or native URN redirect URI must use PKCE (S256). Include a code_challenge in the authorization request and the matching code_verifier in the token exchange. Requests without these parameters will be rejected.",
       "verified": true
     },
     {
       "category": "recommendation",
-      "text": "Asana recommends using a library to handle OAuth details.",
+      "text": "We recommend using a library to handle the details of OAuth.",
       "quote": "We recommend using a library (available in your language of choice) to handle the details of OAuth. Along with expediting development time, using a library can help mitigate the risk of security vulnerabilities due to inexperience or oversight.",
       "verified": true
     },
     {
-      "category": "recommendation",
-      "text": "Using scopes is strongly recommended.",
-      "quote": "Using scopes is strongly recommended, however, scopes are not yet available for every Asana API endpoint.",
-      "verified": true
+      "category": "oauth_detail",
+      "text": "The Asana access token expires every hour.",
+      "quote": "But the bearer code need to be refreshed once a hour, and I need to run this code all day long.",
+      "verified": false
     },
     {
       "category": "recommendation",
-      "text": "Asana recommends using OAuth for apps intended for any user to discover.",
-      "quote": "If you are building an app for any user to discover, we recommend creating an app and using OAuth.",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Create your token or app in the developer console.",
-      "quote": "Create your token or app in the developer console.",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Set your distribution settings in the Developer Console.",
-      "quote": "When your app is ready to use, we recommend checking your distribution settings. In the Developer Console > Manage distribution.",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Submit your app for review in the Developer Console.",
-      "quote": "Set your distribution to “any workspace”, then follow the instructions on the Developer Console > Submit for Review page.",
+      "text": "Personal Access Tokens are recommended for accessing your own account.",
+      "quote": "But if you’re just accessing your one account, you should be able to use a Personal Access Token instead - much simpler.",
       "verified": true
     },
     {
       "category": "requirement_register",
-      "text": "All OAuth apps are created privately by default.",
-      "quote": "All OAuth apps are created privately by default.",
+      "text": "You must register your application with Asana to receive a client ID and client secret.",
+      "quote": "You must first register your application with Asana to receive a client ID and client secret. To do so, first visit the developer console and select Create new app",
+      "verified": false
+    },
+    {
+      "category": "oauth_detail",
+      "text": "Asana supports the authorization code grant flow.",
+      "quote": "Asana supports the authorization code grant flow",
+      "verified": false
+    },
+    {
+      "category": "oauth_detail",
+      "text": "The user authorization endpoint is https://app.asana.com/-/oauth_authorize.",
+      "quote": "The endpoint for user authorization is GET https://app.asana.com/-/oauth_authorize",
+      "verified": false
+    },
+    {
+      "category": "oauth_detail",
+      "text": "The token exchange endpoint is https://app.asana.com/-/oauth_token.",
+      "quote": "The endpoint for token exchange is POST https://app.asana.com/-/oauth_token",
+      "verified": false
+    },
+    {
+      "category": "oauth_detail",
+      "text": "Access tokens last for one hour.",
+      "quote": "An access token (i.e., a bearer token, which lasts an hour)",
+      "verified": false
+    },
+    {
+      "category": "step",
+      "text": "Visit the developer console and select Create new app.",
+      "quote": "first visit the [developer console](https://app.asana.com/0/my-apps) and select **Create new app**",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Supply the app name, redirect URL, and permission scopes.",
+      "quote": "To build a proper OAuth flow, you must supply your new application with three key details: 1. App name 2. Redirect URL 3. (OAuth) Permission scopes",
+      "verified": false
+    },
+    {
+      "category": "step",
+      "text": "Direct the user to the authorization endpoint to grant access.",
+      "quote": "A user arrives at your application and clicks a button that says Authenticate with Asana (or Connect with Asana, etc.)",
+      "verified": false
+    },
+    {
+      "category": "step",
+      "text": "Exchange the authorization code for an access token.",
+      "quote": "The application makes a request to the token exchange endpoint to exchange that code, along with the application's client secret, for two tokens",
+      "verified": false
+    },
+    {
+      "category": "blocker",
+      "text": "Non-native applications must use an https redirect URL.",
+      "quote": "For security reasons, non-native applications must supply a \"https\" URL",
+      "verified": false
+    },
+    {
+      "category": "blocker",
+      "text": "Requesting a scope not in the registered list causes a forbidden_scopes error.",
+      "quote": "If you request a scope that is not in your app's approved (i.e., registered) list, the user will see a forbidden_scopes error on the authorization page.",
+      "verified": false
+    },
+    {
+      "category": "blocker",
+      "text": "The client secret must never be exposed in client-side code.",
+      "quote": "The browser should not see your client_secret (i.e., the client_secret should never be exposed in client-side code).",
+      "verified": false
+    },
+    {
+      "category": "oauth_detail",
+      "text": "Native or command line applications should use the special redirect URL urn:ietf:wg:oauth:2.0:oob.",
+      "quote": "Native or command line applications should use the special redirect URL urn:ietf:wg:oauth:2.0:oob.",
+      "verified": false
+    },
+    {
+      "category": "extra",
+      "text": "The state parameter is required to prevent CSRF attacks.",
+      "quote": "The state parameter is necessary to prevent CSRF attacks. As such, you must check that the state is the same in this response as it was in the request.",
+      "verified": false
+    },
+    {
+      "category": "recommendation",
+      "text": "Asana strongly recommends submitting your app to be published in the Asana App Directory.",
+      "quote": "When you've built an application that you wish to share with the Asana community, we strongly recommend that you submit your app to be published in the Asana App Directory.",
+      "verified": true
+    },
+    {
+      "category": "requirement_public",
+      "text": "You must submit your app for review to make it available to users in any Asana workspace beyond your own or to list it publicly.",
+      "quote": "Submitting your app for review is not required to obtain a token. You only need to submit your app if you intend to: Make your app available to users in any Asana workspace, beyond your own organization or development environment List your app publicly on the Asana app directory",
+      "verified": true
+    },
+    {
+      "category": "review_stage",
+      "text": "Asana aims to provide an initial response on app submissions within one week.",
+      "quote": "We aim to provide an initial response on app submissions within one week. However, the review timeline may vary depending on the complexity of the app.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Select Submit for review in the developer console sidebar to access the submission form.",
+      "quote": "When managing your app in the developer console, select Submit for review in the sidebar to access the app submission form:",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Select the Publish app button in the developer console once your app passes requirements.",
+      "quote": "If your app submission passes requirements, you'll receive an email notification that your app is ready to publish. At this point, you can select the Publish app button in the developer console to share your app:",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "Apps cannot be edited once they have been submitted for review.",
+      "quote": "Once your app has been submitted on the Submit for review page, the review process will begin. At this point, the app will no longer be open for further edits.",
+      "verified": true
+    },
+    {
+      "category": "extra",
+      "text": "Apps built with app components undergo an additional security and QA review.",
+      "quote": "Note that if your app uses app components your submission will go through a security review and QA process before it’s listed in the in-product app gallery.",
+      "verified": true
+    },
+    {
+      "category": "setup_type",
+      "text": "Personal access tokens are the simplest way to authenticate for scripts or apps that do not need to support multiple users.",
+      "quote": "A personal access token (PAT) is the quickest and simplest way to authenticate in the API. PATs are long-lived tokens allowing programmatic authentication to the API and should be stored securely.",
+      "verified": true
+    },
+    {
+      "category": "setup_type",
+      "text": "Service Accounts are an Enterprise feature for org-wide access, created by super admins.",
+      "quote": "Service Accounts are an Enterprise tier feature and can only be created by Asana super admins (see more about admin roles at Asana).",
+      "verified": true
+    },
+    {
+      "category": "setup_type",
+      "text": "OAuth is the best choice if multiple users need to sign in to your app.",
+      "quote": "OAuth is an open-standard authentication protocol that allows you to approve one application interacting with another on your behalf without providing your username and password. This is the best choice if multiple users need to sign in to your app.",
+      "verified": true
+    },
+    {
+      "category": "setup_type",
+      "text": "OpenID Connect allows users to log into your app using their Asana account.",
+      "quote": "If you want to allow users to log into your app using their Asana account, the OpenID Connect protocol is a great way to have your apps users authenticate.",
+      "verified": true
+    },
+    {
+      "category": "recommendation",
+      "text": "OAuth is recommended if your app needs to support multiple users signing in.",
+      "quote": "You will likely want to use OAuth if your app needs to support multiple users signing in to use the app.",
+      "verified": true
+    },
+    {
+      "category": "oauth_detail",
+      "text": "Asana supports the authorization code grant flow",
+      "quote": "Asana supports the authorization code grant flow",
+      "verified": true
+    },
+    {
+      "category": "oauth_detail",
+      "text": "The endpoint for user authorization is GET https://app.asana.com/-/oauth_authorize",
+      "quote": "The endpoint for user authorization is GET https://app.asana.com/-/oauth_authorize",
+      "verified": true
+    },
+    {
+      "category": "oauth_detail",
+      "text": "The endpoint for token exchange is POST https://app.asana.com/-/oauth_token",
+      "quote": "The endpoint for token exchange is POST https://app.asana.com/-/oauth_token",
+      "verified": true
+    },
+    {
+      "category": "oauth_detail",
+      "text": "PKCE is required for localhost redirect URLs",
+      "quote": "PKCE is required for localhost redirect URLs",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Visit the developer console and select Create new app",
+      "quote": "To do so, first visit the developer console and select Create new app, as shown below:",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Supply app name, redirect URL, and permission scopes",
+      "quote": "To build a proper OAuth flow, you must supply your new application with three key details: App name... Redirect URL... (OAuth) Permission scopes",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "User clicks Authenticate with Asana button",
+      "quote": "A user arrives at your application and clicks a button that says Authenticate with Asana (or Connect with Asana, etc.)",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "User grants access on the authorization page",
+      "quote": "The user is taken to the user authorization endpoint, which displays a page that asks the user if they would like to grant access to your third-party application",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Application exchanges code for access and refresh tokens",
+      "quote": "The application makes a request to the token exchange endpoint to exchange that code, along with the application's client secret, for two tokens",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "If you request a scope that is not in your app's approved list, the user will see a forbidden_scopes error",
+      "quote": "If you request a scope that is not in your app's approved (i.e., registered) list, the user will see a forbidden_scopes error on the authorization page.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "If either the client_id or redirect_uri do not match, the user will simply see a plain-text error",
+      "quote": "If either the client_id or redirect_uri do not match, the user will simply see a plain-text error.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "Requests without PKCE parameters will be rejected for localhost redirect URLs",
+      "quote": "OAuth flows that use a localhost, 127.0.0.1, or native URN redirect URI must use PKCE (S256). Include a code_challenge in the authorization request and the matching code_verifier in the token exchange. Requests without these parameters will be rejected.",
       "verified": true
     },
     {
@@ -338,13 +475,13 @@
     },
     {
       "category": "limit",
-      "text": "Calls to the search API are limited to 60 requests per minute.",
+      "text": "Search API calls are limited to 60 requests per minute.",
       "quote": "Calls to the search API are limited to 60 requests per minute.",
       "verified": true
     },
     {
       "category": "limit",
-      "text": "The duplication, instantiation, and export endpoints are limited to 5 concurrent jobs per user.",
+      "text": "Duplication, instantiation, and export endpoints are limited to 5 concurrent jobs per user.",
       "quote": "The duplication, instantiation, and export endpoints are limited to 5 concurrent jobs per user.",
       "verified": true
     },
@@ -361,99 +498,9 @@
       "verified": true
     },
     {
-      "category": "step",
-      "text": "Visit the developer console and select Create new app.",
-      "quote": "To do so, first visit the developer console and select Create new app, as shown below:",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Supply the app name in the developer console.",
-      "quote": "App name - The name for your application. Users will see this name when your application requests permission to access their account as well as when they review the list of apps they have authorized.",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Supply the redirect URL in the developer console.",
-      "quote": "Redirect URL - Otherwise known as the callback URL, this is where the user will be redirected upon successful or failed authentication.",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Specify OAuth scopes in the developer console.",
-      "quote": "(OAuth) Permission scopes: You'll need to specify which OAuth scopes your app can request during this registration step. Only these pre-approved scopes will be accepted later during user authorization.",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "User clicks 'Authenticate with Asana' button in the application.",
-      "quote": "A user arrives at your application and clicks a button that says Authenticate with Asana (or Connect with Asana, etc.)",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "User grants access on the Asana authorization page.",
-      "quote": "The user is taken to the user authorization endpoint, which displays a page that asks the user if they would like to grant access to your third-party application",
-      "verified": true
-    },
-    {
-      "category": "limit",
-      "text": "Access token lifetime",
-      "quote": "An access token (i.e., a bearer token, which lasts an hour)",
-      "verified": false
-    },
-    {
-      "category": "blocker",
-      "text": "Redirect URLs must be HTTPS for non-native applications.",
-      "quote": "For security reasons, non-native applications must supply a \"https\" URL",
-      "verified": true
-    },
-    {
-      "category": "blocker",
-      "text": "PKCE is required for localhost, 127.0.0.1, or native URN redirect URIs.",
-      "quote": "OAuth flows that use a localhost, 127.0.0.1, or native URN redirect URI must use PKCE (S256).",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Visit the developer console and select Create new app.",
-      "quote": "first visit the developer console and select Create new app, as shown below:",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Application exchanges the authorization code for an access token.",
-      "quote": "The application makes a request to the token exchange endpoint to exchange that code, along with the application's client secret, for two tokens:",
-      "verified": true
-    },
-    {
-      "category": "limit",
-      "text": "Access token lifetime",
-      "quote": "An access token (i.e., a bearer token, which lasts an hour)",
-      "verified": false
-    },
-    {
-      "category": "requirement_public",
-      "text": "Apps submitted for publication to the app directory must be shared to Any workspace.",
-      "quote": "All apps submitted for publication to the app directory must be shared to Any workspace.",
-      "verified": true
-    },
-    {
-      "category": "blocker",
-      "text": "Changing sharing settings from Any workspace to Specific workspace blocks new authorizations from users outside the specified workspace.",
-      "quote": "Note that that changing the sharing settings from Any workspace to Specific workspace will block any new authorizations from users outside the specified workspace:",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Visit the Manage distribution tab in the developer console to share your app.",
-      "quote": "When you are ready to allow others to use your app in a workspace, visit the Manage distribution tab for your app in the developer console.",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Fill out information about your app in the App listing details page.",
-      "quote": "Fill out information about your app in the App listing details page inside the developer console.",
+      "category": "recommendation",
+      "text": "For shared or multi-user apps, Asana prefers OAuth over a single Personal Access Token or Service Account.",
+      "quote": "For shared or multi-user apps, prefer OAuth over a single PAT or Service Account",
       "verified": true
     },
     {
@@ -463,100 +510,88 @@
       "verified": true
     },
     {
-      "category": "requirement_public",
-      "text": "You must include a privacy policy URL for your app listing.",
-      "quote": "Include a privacy policy URL to ensure transparency about how you handle user data and comply with legal requirements.",
-      "verified": true
-    },
-    {
       "category": "blocker",
-      "text": "Do not include the word Asana in your app name.",
+      "text": "App names must not include the word Asana.",
       "quote": "To help users clearly distinguish third-party apps from those built by Asana, app names should not include the word “Asana.”",
       "verified": true
     },
     {
-      "category": "blocker",
-      "text": "Do not use another company's logo in your app icon or visuals.",
-      "quote": "Do not use another company’s official logo or branding in your app icon, screenshots, or any other visuals, unless you have explicit permission.",
+      "category": "requirement_public",
+      "text": "You must provide a privacy policy URL.",
+      "quote": "Include a privacy policy URL to ensure transparency about how you handle user data and comply with legal requirements.",
       "verified": true
     },
     {
-      "category": "step",
-      "text": "Install the app from the Asana App Directory.",
-      "quote": "Install TaskFlow from the Asana App Directory by clicking the \"Add to Asana\" button",
+      "category": "requirement_public",
+      "text": "You must provide a support page URL or email.",
+      "quote": "Include a support page URL or email for users who need help troubleshooting the app.",
       "verified": true
     },
     {
-      "category": "step",
-      "text": "Log in to your app account.",
-      "quote": "Log in to your TaskFlow account using your credentials.",
+      "category": "requirement_public",
+      "text": "You must provide an app landing or login page URL.",
+      "quote": "Include an app landing page (or login page) URL so users can directly access your app.",
       "verified": true
     },
     {
-      "category": "step",
-      "text": "Grant the app access to your Asana workspace.",
-      "quote": "Grant TaskFlow access to your Asana workspace.",
+      "category": "requirement_public",
+      "text": "You must provide a company page URL.",
+      "quote": "Include the company page URL so users can learn more about your company and product.",
       "verified": true
     },
     {
-      "category": "blocker",
-      "text": "If the state parameter does not match, your app should return a 422 error.",
-      "quote": "If the state does not match, your app should return a 422 error.",
-      "verified": true
-    },
-    {
-      "category": "blocker",
-      "text": "If the computed signature and x-asana-request-signature do not match, your app server should return a 400 error.",
-      "quote": "If the computed signature and x-asana-request-signature do not match, your app server should return a 400 error.",
+      "category": "requirement_public",
+      "text": "Apps submitted for publication to the app directory must be shared to Any workspace.",
+      "quote": "All apps submitted for publication to the app directory must be shared to Any workspace.",
       "verified": true
     },
     {
       "category": "blocker",
-      "text": "Your app server should only return a 200 response if the current date and time is before the expires_at time.",
-      "quote": "Your app server should check this value and only return a 200 response if the current date and time is before the expires_at time.",
-      "verified": true
-    },
-    {
-      "category": "blocker",
-      "text": "Asana OAuth does not support making token requests from a browser for security reasons.",
-      "quote": "Note: Asana OAuth currently does not support making token requests from a browser for security reasons.",
+      "text": "Changing sharing settings from Any workspace to Specific workspace will block new authorizations from users outside the specified workspace.",
+      "quote": "Note that that changing the sharing settings from Any workspace to Specific workspace will block any new authorizations from users outside the specified workspace:",
       "verified": true
     },
     {
       "category": "step",
-      "text": "Set the app's redirect URL in the developer console.",
-      "quote": "In the developer console, set your app's redirect URL to:\n\nRedirect URI\n\nhttps://oauth.pstmn.io/v1/callback",
+      "text": "Visit the Manage distribution tab for your app in the developer console to share your app.",
+      "quote": "When you are ready to allow others to use your app in a workspace, visit the Manage distribution tab for your app in the developer console.",
       "verified": true
     },
     {
       "category": "step",
-      "text": "Configure workspace access in the developer console.",
-      "quote": "Under Manage Distribution on the left sidebar of the developer console, make sure that the Asana workspace for your user can access your app under Specific workspaces or choose Any workspace.",
+      "text": "Fill out information about your app in the App listing details page inside the developer console.",
+      "quote": "Fill out information about your app in the App listing details page inside the developer console.",
       "verified": true
     },
     {
       "category": "setup_type",
-      "text": "OAuth is the best choice if multiple users need to sign in to your app.",
-      "quote": "OAuth is an open-standard authentication protocol that allows you to approve one application interacting with another on your behalf without providing your username and password. This is the best choice if multiple users need to sign in to your app.",
-      "verified": true
-    },
-    {
-      "category": "recommendation",
-      "text": "Use OAuth if your app needs to support multiple users signing in to use the app.",
-      "quote": "You will likely want to use OAuth if your app needs to support multiple users signing in to use the app.",
-      "verified": true
-    },
-    {
-      "category": "recommendation",
-      "text": "Using a PAT is a good way to get started quickly with the API regardless of which auth type you end up using in production.",
-      "quote": "Using a PAT is a good way to get started quickly with the API regardless of which auth type you end up using in production.",
-      "verified": true
-    },
-    {
-      "category": "blocker",
-      "text": "Asana OAuth does not support making token requests from a browser.",
-      "quote": "Note: Asana OAuth currently does not support making token requests from a browser for security reasons.",
+      "text": "Asana supports the authorization code grant flow for OAuth.",
+      "quote": "Asana supports the authorization code grant flow",
       "verified": false
+    },
+    {
+      "category": "setup_type",
+      "text": "Applications can be created from the developer console.",
+      "quote": "Applications can be created from the developer console (i.e., \"My apps\")",
+      "verified": true
+    },
+    {
+      "category": "creation_path",
+      "text": "Developers can create a new app by selecting Create new app in the developer console.",
+      "quote": "To do so, first visit the developer console and select Create new app, as shown below:",
+      "verified": false
+    },
+    {
+      "category": "recommendation",
+      "text": "Asana recommends using an OAuth library to handle the details of the OAuth flow.",
+      "quote": "We recommend using a library (available in your language of choice) to handle the details of OAuth.",
+      "verified": true
+    },
+    {
+      "category": "recommendation",
+      "text": "Using scopes is strongly recommended to follow the principle of least privilege.",
+      "quote": "Using scopes is strongly recommended, however, scopes are not yet available for every Asana API endpoint.",
+      "verified": true
     },
     {
       "category": "review_stage",
@@ -566,62 +601,86 @@
     },
     {
       "category": "access_tier",
-      "text": "Apps start as private to the developer by default.",
-      "quote": "By default, all apps start out private to the developer.",
-      "verified": true
-    },
-    {
-      "category": "access_tier",
-      "text": "You can share your app with specific workspaces you are a member of.",
+      "text": "Apps can be shared with a specific workspace that you belong to.",
       "quote": "Sharing your app with specific workspaces allows you to share the app with any workspace(s) that you are a member of.",
       "verified": true
     },
     {
       "category": "access_tier",
-      "text": "You can share your app with any workspace, allowing any user to authorize it.",
+      "text": "Apps can be shared with any workspace (public).",
       "quote": "If your app is intended to be shared with many users, select Any workspace. This will allow users from any Asana workspace to authorize the app if they are given the authorization URL.",
       "verified": true
     },
     {
       "category": "access_tier",
-      "text": "Apps must be shared to Any workspace to be published in the App Directory.",
+      "text": "Apps submitted for publication to the app directory must be shared to Any workspace.",
       "quote": "All apps submitted for publication to the app directory must be shared to Any workspace.",
       "verified": false
     },
     {
-      "category": "limit",
-      "text": "Standard rate limit for free domains is 150 requests per minute.",
-      "quote": "Free 150",
+      "category": "access_tier",
+      "text": "Apps published to the directory are discoverable by any Asana user.",
+      "quote": "Apps published to the directory are discoverable by any Asana user.",
+      "verified": true
+    },
+    {
+      "category": "requirement_register",
+      "text": "You must register your application with Asana to receive a client ID and client secret.",
+      "quote": "You must first register your application with Asana to receive a client ID and client secret. To do so, first visit the developer console and select Create new app, as shown below:",
+      "verified": false
+    },
+    {
+      "category": "requirement_register",
+      "text": "You must supply an app name during registration.",
+      "quote": "App name - The name for your application. Users will see this name when your application requests permission to access their account as well as when they review the list of apps they have authorized.",
+      "verified": false
+    },
+    {
+      "category": "requirement_register",
+      "text": "You must supply a redirect URL during registration.",
+      "quote": "Redirect URL - Otherwise known as the callback URL, this is where the user will be redirected upon successful or failed authentication.",
+      "verified": false
+    },
+    {
+      "category": "requirement_register",
+      "text": "You must specify OAuth scopes during registration.",
+      "quote": "(OAuth) Permission scopes: You'll need to specify which OAuth scopes your app can request during this registration step. Only these pre-approved scopes will be accepted later during user authorization.",
       "verified": false
     },
     {
       "category": "limit",
-      "text": "Standard rate limit for paid domains is 1,500 requests per minute.",
-      "quote": "Paid 1,500",
-      "verified": false
+      "text": "Standard volume limit for free domains is 150 requests per minute.",
+      "quote": "429s once you cross ~150 (Free) or ~1,500 (Paid) requests in a minute on one token",
+      "verified": true
     },
     {
       "category": "limit",
-      "text": "Search API calls are limited to 60 requests per minute.",
+      "text": "Standard volume limit for paid domains is 1,500 requests per minute.",
+      "quote": "429s once you cross ~150 (Free) or ~1,500 (Paid) requests in a minute on one token",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "Search API requests are limited to 60 per minute.",
       "quote": "Calls to the search API are limited to 60 requests per minute.",
       "verified": false
     },
     {
       "category": "limit",
-      "text": "Duplication, instantiation, and export endpoints are limited to 5 concurrent jobs per user.",
+      "text": "Concurrent duplication, instantiation, and export jobs are limited to 5 per user.",
       "quote": "The duplication, instantiation, and export endpoints are limited to 5 concurrent jobs per user.",
       "verified": false
     },
     {
       "category": "limit",
-      "text": "Maximum concurrent GET requests is 50.",
-      "quote": "GET 50",
-      "verified": false
+      "text": "Maximum concurrent GET requests are limited to 50.",
+      "quote": "Maximum concurrent requests\n\nGET\n\n50",
+      "verified": true
     },
     {
       "category": "limit",
-      "text": "Maximum concurrent POST, PUT, PATCH, and DELETE requests is 15.",
-      "quote": "POST, PUT, PATCH, DELETE 15",
+      "text": "Maximum concurrent POST, PUT, PATCH, and DELETE requests are limited to 15.",
+      "quote": "POST, PUT, PATCH, DELETE\n\n15",
       "verified": false
     }
   ]

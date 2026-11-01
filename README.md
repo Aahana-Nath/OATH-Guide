@@ -11,9 +11,31 @@ claims, an exact quote that code has checked against the fetched page.
 
 | | |
 |---|---|
-| **Demo: thirteen real apps** and a live walkthrough | [docs/DEMO.md](docs/DEMO.md) |
+| **Demo: fourteen real apps** and a live walkthrough | [docs/DEMO.md](docs/DEMO.md) |
 | **Verification: what was checked, corrected, and could not be verified** | [docs/VERIFICATION.md](docs/VERIFICATION.md) |
-| **Saved guides** (15, open in the app's *Saved guides* section) | [`guides/`](guides) |
+| **Saved guides** (16, open in the app's *Saved guides* section) | [`guides/`](guides) |
+
+## The problem this addresses
+
+An agent builder wants their users to connect an app (Slack, Notion, Linear…). Each connection is a token the user grants to an
+**OAuth app that the builder registers with the provider**: a record in the provider's developer portal with a client ID and secret,
+redirect URIs and scopes. The user sees that app's name on the consent screen, and the provider applies its rate limits to it.
+Some providers also review the app before anyone outside the owner's own workspace can use it.
+
+Platforms that handle connections for you can supply that OAuth app, so you can start without registering one. Composio's
+[managed OAuth apps](https://docs.composio.dev/toolkits/managed-auth) catalogue lists where it does, and its
+[managed vs custom auth](https://docs.composio.dev/docs/authentication/custom-app-vs-managed-app) page says when you still need your own:
+your name on the consent screen, scopes beyond the defaults, dedicated rate limits, a custom or regional instance, or enterprise requirements.
+**That is the path this project covers**: registering your own provider OAuth app and getting it ready for other people to use. It is where the
+unpredictable parts are (a sign-in wall, a review queue of days or weeks, a requirement you find out about late) and where developers
+currently piece docs together and email the provider.
+
+**What was decided, and why**
+
+- **Guide the custom-app path, not the connection library.** The developer's question is "how long, how hard, what blocks me, who does what", not how to call an SDK.
+- **Evidence over fluency.** A model writes the guide, but every documentation claim must carry an exact quote that code finds on the cited page, and the agent labels what it tested, what the docs say and what it only inferred.
+- **The agent does what it safely can.** It reads the docs, runs harmless live checks against the provider (see below) and stops at the sign-in wall. It never registers, installs or submits anything, because that needs your account and creates real state.
+- **A working slice, not 100 guides.** The agent runs on any app, and a set of varied real apps is saved as a library. Scaling to 100 means running the same agent over a list of apps; the cost is time and model calls, not new code.
 
 ## Quick start
 
@@ -112,7 +134,7 @@ stage chips, live counters and the pixelated working screen.
 
 ## Verification in one paragraph
 
-In the latest full pass, **472 of 472** documentation quotes across the thirteen agent-researched guides were re-found at their sources on a fresh fetch, none fabricated, and each guide also passed its own save-time test. A manual sample against independent sources **confirmed** limits and waits for
+In the latest full pass, **504 of 504** documentation quotes across the fourteen agent-researched guides were re-found at their sources on a fresh fetch, none fabricated, and each guide also passed its own save-time test. (That pass also caught drift: three Notion quotes that were found when the guide was saved were gone two days later because Notion had changed the page, so Notion was re-researched.) A manual sample against independent sources **confirmed** limits and waits for
 Notion, Calendly, Google and Slack, reproduced the live-test observations with `curl`, and **found real mistakes**: Spotify's hardest gate was missing, GitHub's steps included
 seven unrelated Copilot steps, steps from pages like Dropbox's and Linear's OAuth docs were silently discarded, some "approval waits" were not waits, and three live observations were misleading or false. All were fixed or
 flagged. Details, including what could not be verified, are in [docs/VERIFICATION.md](docs/VERIFICATION.md).
@@ -153,7 +175,7 @@ agent/guide_agent.py   discover · agent loop · verify · assemble (standard li
 agent/probes.py        harmless live tests against the provider (metadata, authorize, token, API, portal)
 agent/savecheck.py     test-then-save gate: re-fetch every cited page, re-check every quote, drop what fails
 agent/netguard.py      outbound-request guard (http(s) only, public addresses only, redirects re-checked)
-guides/                schema, hand-tested GitHub and Slack guides, thirteen agent-generated guides with their traces
+guides/                schema, hand-tested GitHub and Slack guides, fourteen agent-generated guides with their traces
 nuxt-app/              the web app (Nuxt 3): sidebar, big search home, animated agents-at-work scene, saved-guides library, guide page with sections nav and research panel, API routes
 tools/                 recheck_quotes.py (independent re-check), summarize_guides.py, gemini_check.py
 tests/                 unit_test.py, probe_test.py (+ serve.py fake OAuth server), firecrawl_test.py (fake Firecrawl API)

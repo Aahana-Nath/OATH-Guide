@@ -1,0 +1,853 @@
+{
+  "schema_version": "1.0",
+  "provider": {
+    "name": "Stripe",
+    "website": "https://stripe.com",
+    "docs_urls": [
+      "https://docs.stripe.com/stripe-apps/pkce-oauth-flow",
+      "https://docs.stripe.com/connect/oauth-reference",
+      "https://docs.stripe.com/stripe-apps/api-authentication/oauth",
+      "https://docs.stripe.com/stripe-apps/publish-app"
+    ]
+  },
+  "generated_at": "2026-11-01",
+  "generated_by": {
+    "mode": "agent",
+    "model": "gemini-3.1-flash-lite"
+  },
+  "summary": "Stripe Apps require OAuth 2.0 with PKCE support using S256. Developers use the CLI to create, configure, and upload apps. Public distribution requires an account activation, adherence to strict manifest guidelines, and a formal review process that takes approximately four business days.",
+  "difficulty": {
+    "start": {
+      "level": "medium",
+      "reason": {
+        "text": "The process involves using the Stripe CLI to create an app, configuring the manifest with specific OAuth settings, and registering redirect URLs.",
+        "label": "inferred",
+        "source_type": "none",
+        "note": "Model judgement from the verified claims in this guide; not tested.",
+        "checked_at": "2026-11-01"
+      }
+    },
+    "public": {
+      "level": "hard",
+      "reason": {
+        "text": "Public distribution requires account activation, passing a formal review process, and adhering to strict naming and security constraints.",
+        "label": "inferred",
+        "source_type": "none",
+        "note": "Model judgement from the verified claims in this guide; not tested.",
+        "checked_at": "2026-11-01"
+      }
+    }
+  },
+  "time": {
+    "to_start": {
+      "display": "Unknown",
+      "claim": {
+        "text": "Setup time was not stated in the pages read.",
+        "label": "unknown",
+        "source_type": "none",
+        "note": "Only a hands-on attempt shows how long registration takes.",
+        "checked_at": "2026-11-01"
+      }
+    },
+    "to_approval": {
+      "display": "App review: 4 business days",
+      "stages": [
+        {
+          "name": "App review",
+          "duration_text": "4 business days"
+        }
+      ],
+      "claim": {
+        "text": "The app review process takes 4 business days.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.stripe.com/stripe-apps/publish-app",
+        "evidence_quote": "Submit your app for review (then wait 4 business days)",
+        "checked_at": "2026-11-01"
+      }
+    }
+  },
+  "access_ladder": [
+    {
+      "tier": 1,
+      "name": "Development",
+      "allows": "You can share your app only with team members of your Stripe account.",
+      "gate": "Default",
+      "prerequisites": [],
+      "claims": [
+        {
+          "text": "You can share your app only with team members of your Stripe account.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.stripe.com/stripe-apps/distribution-options",
+          "evidence_quote": "For example, you might develop an app that sends sale data into your own custom accounting system. Or you might build an app that connects paid orders with your fulfilment system. For these and other situations, you can make the application only available to team members of your Stripe account.",
+          "checked_at": "2026-11-01"
+        }
+      ]
+    },
+    {
+      "tier": 2,
+      "name": "Marketplace",
+      "allows": "You can make your app publicly available on the Stripe App Marketplace.",
+      "gate": "Completion of a 4-day review process",
+      "prerequisites": [],
+      "claims": [
+        {
+          "text": "You can make your app publicly available on the Stripe App Marketplace.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.stripe.com/stripe-apps/distribution-options",
+          "evidence_quote": "The Stripe App Marketplace is how you share your application with the Stripe user community.",
+          "checked_at": "2026-11-01"
+        },
+        {
+          "text": "The app review process takes 4 business days.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.stripe.com/stripe-apps/publish-app",
+          "evidence_quote": "Submit your app for review (then wait 4 business days)",
+          "checked_at": "2026-11-01"
+        },
+        {
+          "text": "Apps published on the App Marketplace must go through a review process.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.stripe.com/stripe-apps/distribution-options",
+          "evidence_quote": "Stripe reviews all apps to make sure they comply with the published requirements before listing them in the marketplace.",
+          "checked_at": "2026-11-01"
+        }
+      ]
+    }
+  ],
+  "requirements": {
+    "register": [
+      {
+        "item": "A signed-in account on dashboard.stripe.com",
+        "status": "required",
+        "claim": {
+          "text": "Opening https://dashboard.stripe.com/apps without an account ended on a sign-in page (dashboard.stripe.com/login).",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://dashboard.stripe.com/apps",
+          "note": "Automated probe by the agent on 2026-11-01: GET https://dashboard.stripe.com/apps without an account (redirects followed). Creating the app needs your own account, so the agent stopped here and left it to you.",
+          "checked_at": "2026-11-01",
+          "evidence_quote": "Stripe Login | Sign in to the Stripe Dashboard Incompatible browser You need a modern browser to use the Stripe Dashboard. Please switch to a compatible browser"
+        }
+      },
+      {
+        "item": "OAuth provider app (only in some cases)",
+        "status": "optional",
+        "claim": {
+          "text": "You must create an app with your OAuth provider before connecting it to your Stripe App.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.stripe.com/stripe-apps/pkce-oauth-flow",
+          "evidence_quote": "If you haven’t already, create an app with your OAuth provider to connect and use with your Stripe App.",
+          "checked_at": "2026-11-01"
+        }
+      },
+      {
+        "item": "account activation",
+        "status": "required",
+        "claim": {
+          "text": "You must activate your Stripe account to publish an app.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.stripe.com/stripe-apps/publish-app",
+          "evidence_quote": "You must activate your account.",
+          "checked_at": "2026-11-01"
+        }
+      },
+      {
+        "item": "Sandbox support",
+        "status": "required",
+        "claim": {
+          "text": "The app manifest must specify if the app supports installation in a sandbox environment.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.stripe.com/stripe-apps/review-requirements",
+          "evidence_quote": "Your app manifest must specify whether your app supports installation in a sandbox environment. If set to false, your app won’t be available for installation in sandboxes.",
+          "checked_at": "2026-11-01"
+        }
+      }
+    ],
+    "go_public": [
+      {
+        "item": "Secret storage",
+        "status": "required",
+        "claim": {
+          "text": "You must store secret materials for UI extensions using the Secret Store API.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.stripe.com/stripe-apps/review-requirements",
+          "evidence_quote": "You must properly store secret materials required by UI extensions using the Secret Store API",
+          "checked_at": "2026-11-01"
+        }
+      },
+      {
+        "item": "Stripe App Marketplace listing",
+        "status": "required",
+        "claim": {
+          "text": "Apps must meet review guidelines to be available in the Stripe App Marketplace.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://support.stripe.com/questions/how-do-i-submit-an-app-for-review-and-what-does-the-review-entail",
+          "evidence_quote": "Once you’ve completed your submission, we’ll review your app to make sure it meets all of the review guidelines. If approved, you’ll be free to make your app available in the Stripe App Marketplace.",
+          "checked_at": "2026-11-01"
+        }
+      },
+      {
+        "item": "App Marketplace listing",
+        "status": "required",
+        "claim": {
+          "text": "To list an app on the Stripe App Marketplace, you must build the app and submit it for review.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.stripe.com/partners/apps",
+          "evidence_quote": "App partners build an app and then submit it for app review to list it on the Stripe App Marketplace.",
+          "checked_at": "2026-11-01"
+        }
+      },
+      {
+        "item": "Stripe Partner status",
+        "status": "required",
+        "claim": {
+          "text": "To become a Stripe Partner, you must meet app requirements and pass the Stripe Apps review.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.stripe.com/partners/apps",
+          "evidence_quote": "Meet app requirements and pass Stripe Apps review.",
+          "checked_at": "2026-11-01"
+        }
+      }
+    ]
+  },
+  "limits": [
+    {
+      "item": "Global API rate limit (Live)",
+      "value": "100 requests per second",
+      "claim": {
+        "text": "The global API rate limit for live mode is 100 requests per second.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.stripe.com/rate-limits",
+        "evidence_quote": "Global API rate limit\n\nLive mode: 100 requests per second",
+        "checked_at": "2026-11-01"
+      }
+    },
+    {
+      "item": "Global API rate limit (Sandbox)",
+      "value": "25 requests per second",
+      "claim": {
+        "text": "The global API rate limit for sandbox mode is 25 requests per second.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.stripe.com/rate-limits",
+        "evidence_quote": "Global API rate limit\n\nLive mode: 100 requests per second\n\nSandbox: 25 requests per second",
+        "checked_at": "2026-11-01"
+      }
+    },
+    {
+      "item": "Individual API endpoints",
+      "value": "25 requests per second",
+      "claim": {
+        "text": "Individual API endpoints have a rate limit of 25 requests per second.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.stripe.com/rate-limits",
+        "evidence_quote": "Individual API endpoints (unless otherwise noted)\n\n25 requests per second",
+        "checked_at": "2026-11-01"
+      }
+    },
+    {
+      "item": "Connect account creation (Live)",
+      "value": "30 accounts per second",
+      "claim": {
+        "text": "Accounts can create 30 accounts per second in live mode.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.stripe.com/rate-limits",
+        "evidence_quote": "Connect accounts, including both:\n\nAccounts v2\n\nAccounts v1\n\nLive mode: Create 30 accounts per second",
+        "checked_at": "2026-11-01"
+      }
+    },
+    {
+      "item": "Connect account creation (Sandbox)",
+      "value": "5 accounts per second",
+      "claim": {
+        "text": "Accounts can create 5 accounts per second in sandbox mode.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.stripe.com/rate-limits",
+        "evidence_quote": "Connect accounts, including both:\n\nAccounts v2\n\nAccounts v1\n\nLive mode: Create 30 accounts per second\n\nSandbox: Create 5 accounts per second",
+        "checked_at": "2026-11-01"
+      }
+    }
+  ],
+  "blockers": [
+    {
+      "issue": "Consuming an authorization code more than once revokes the account connection.",
+      "fix": "See the cited page.",
+      "claim": {
+        "text": "Consuming an authorization code more than once revokes the account connection.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.stripe.com/connect/oauth-reference",
+        "evidence_quote": "Per OAuth v2, this endpoint isn’t idempotent. Consuming an authorization code more than once revokes the account connection.",
+        "checked_at": "2026-11-01"
+      }
+    },
+    {
+      "issue": "invalid redirect URIs",
+      "fix": "Remove localhost or dummy URLs before uploading your app.",
+      "claim": {
+        "text": "The app manifest must not contain localhost or dummy URLs for redirect URIs.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.stripe.com/stripe-apps/publish-app",
+        "evidence_quote": "The app manifest field allowed_redirect_uris must not contain localhost or dummy URLs. These entries pose a significant security risk and can enable unauthorised redirects.",
+        "checked_at": "2026-11-01"
+      }
+    },
+    {
+      "issue": "MFA on test accounts",
+      "fix": "Disable MFA or provide instructions to bypass it.",
+      "claim": {
+        "text": "Test credentials provided for review must not require multi-factor authentication.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.stripe.com/stripe-apps/publish-app",
+        "evidence_quote": "Disable multi-factor authentication or provide instructions for reviewers to pass it.",
+        "checked_at": "2026-11-01"
+      }
+    },
+    {
+      "issue": "Do not include custom cryptographic functions in your app code.",
+      "fix": "Always use cryptographic functions provided by standard libraries or well-established open source libraries that have been properly vetted.",
+      "claim": {
+        "text": "Do not include custom cryptographic functions in your app code.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.stripe.com/stripe-apps/review-requirements",
+        "evidence_quote": "Your app code must comply with all applicable export control laws. Specifically, don’t include any custom cryptographic functions in your app. Custom cryptography is subject to the International Traffic in Arms Regulations (ITAR), and exporting such code outside the United States can result in severe penalties.",
+        "checked_at": "2026-11-01"
+      }
+    },
+    {
+      "issue": "Do not publish the same app under different names or categories.",
+      "fix": "Submit new versions of an app from the same account as the previous version.",
+      "claim": {
+        "text": "Do not publish the same app under different names or categories.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.stripe.com/stripe-apps/review-requirements",
+        "evidence_quote": "Don’t publish the same app under different names or categories. Submit new versions of an app from the same account as the previous version.",
+        "checked_at": "2026-11-01"
+      }
+    },
+    {
+      "issue": "You cannot set a public distribution for another app if you already have a public app in…",
+      "fix": "Change the distribution type from private to public only if there are no other public apps within the same Stripe account.",
+      "claim": {
+        "text": "You cannot set a public distribution for another app if you already have a public app in the same account.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.stripe.com/stripe-apps/distribution-options",
+        "evidence_quote": "After you upload an app with a public distribution, you can’t set a public distribution for another app within the same Stripe account.",
+        "checked_at": "2026-11-01"
+      }
+    },
+    {
+      "issue": "Publicly distributed apps cannot contain specific restricted words in their names.",
+      "fix": "Remove the banned words from your app name in the manifest and upload a new version.",
+      "claim": {
+        "text": "Publicly distributed apps cannot contain specific restricted words in their names.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.stripe.com/stripe-apps/distribution-options",
+        "evidence_quote": "Beginning in September 2024, Stripe apps with a public distribution type can’t contain the words “Stripe”, “app”, “free” or “paid” in their names.",
+        "checked_at": "2026-11-01"
+      }
+    },
+    {
+      "issue": "Requesting a large limit increase",
+      "fix": "Contact Stripe Support at least 6 weeks in advance.",
+      "claim": {
+        "text": "If you request a large limit increase, you must contact Stripe Support at least 6 weeks in advance.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.stripe.com/rate-limits",
+        "evidence_quote": "If you request a large increase, contact Stripe Support at least 6 weeks in advance.",
+        "checked_at": "2026-11-01"
+      }
+    },
+    {
+      "issue": "Making changes after submitting an app for review will restart the review process.",
+      "fix": "Ensure all information is accurate before submitting the app for approval.",
+      "claim": {
+        "text": "Making changes after submitting an app for review will restart the review process.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://support.stripe.com/questions/how-do-i-submit-an-app-for-review-and-what-does-the-review-entail",
+        "evidence_quote": "If you make changes after submitting your app, we'll need to restart the review process.",
+        "checked_at": "2026-11-01"
+      }
+    }
+  ],
+  "steps": [
+    {
+      "order": 1,
+      "text": "Set the stripe_api_access_type to oauth in the app manifest.",
+      "actor": "both",
+      "claim": {
+        "text": "Set the stripe_api_access_type to oauth in the app manifest.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.stripe.com/stripe-apps/api-authentication/oauth",
+        "evidence_quote": "Set stripe_api_access_type to oauth.",
+        "checked_at": "2026-11-01"
+      }
+    },
+    {
+      "order": 2,
+      "text": "Set the distribution_type to public in the app manifest.",
+      "actor": "both",
+      "claim": {
+        "text": "Set the distribution_type to public in the app manifest.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.stripe.com/stripe-apps/api-authentication/oauth",
+        "evidence_quote": "Set distribution_type to public.",
+        "checked_at": "2026-11-01"
+      }
+    },
+    {
+      "order": 3,
+      "text": "Define allowed redirect URIs in the app manifest.",
+      "actor": "human",
+      "claim": {
+        "text": "Define allowed redirect URIs in the app manifest.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.stripe.com/stripe-apps/api-authentication/oauth",
+        "evidence_quote": "Set your allowed_redirect_uris. These are the URLs that users are redirected to after installing your app using OAuth.",
+        "checked_at": "2026-11-01"
+      }
+    },
+    {
+      "order": 4,
+      "text": "Upload the app to Stripe using the CLI.",
+      "actor": "agent",
+      "claim": {
+        "text": "Upload the app to Stripe using the CLI.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.stripe.com/stripe-apps/api-authentication/oauth",
+        "evidence_quote": "Upload your app to Stripe.\n\nCommand Line\n\nstripe apps upload",
+        "checked_at": "2026-11-01"
+      }
+    }
+  ],
+  "agent_vs_human": {
+    "agent": [
+      {
+        "text": "Look up the provider's live OAuth endpoints and check how they answer an unregistered client (done during this run).",
+        "claim": {
+          "text": "The authorize endpoint answered an unregistered test client with a redirect (HTTP 302) to connect.stripe.com/oauth/v2/authorize.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://connect.stripe.com/oauth/authorize",
+          "note": "Automated probe by the agent on 2026-11-01: GET https://connect.stripe.com/oauth/authorize with a made-up client_id (oauth-guide-agent-probe), no login, redirects not followed.",
+          "checked_at": "2026-11-01",
+          "evidence_quote": "HTTP 302 Location: connect.stripe.com/oauth/v2/authorize"
+        }
+      },
+      {
+        "text": "Upload the app to Stripe using the CLI.",
+        "claim": {
+          "text": "Upload the app to Stripe using the CLI.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.stripe.com/stripe-apps/api-authentication/oauth",
+          "evidence_quote": "Upload your app to Stripe.\n\nCommand Line\n\nstripe apps upload",
+          "checked_at": "2026-11-01"
+        }
+      },
+      {
+        "text": "Generate the app manifest file with required fields like distribution_type and stripe_api_access_type",
+        "claim": {
+          "text": "Generate the app manifest file with required fields like distribution_type and stripe_api_access_type",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-11-01"
+        }
+      },
+      {
+        "text": "Draft the app description and documentation for the marketplace listing",
+        "claim": {
+          "text": "Draft the app description and documentation for the marketplace listing",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-11-01"
+        }
+      }
+    ],
+    "human": [
+      {
+        "text": "Sign in to dashboard.stripe.com and register the app. The agent was stopped by a sign-in page at dashboard.stripe.com/login.",
+        "claim": {
+          "text": "Opening https://dashboard.stripe.com/apps without an account ended on a sign-in page (dashboard.stripe.com/login).",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://dashboard.stripe.com/apps",
+          "note": "Automated probe by the agent on 2026-11-01: GET https://dashboard.stripe.com/apps without an account (redirects followed). Creating the app needs your own account, so the agent stopped here and left it to you.",
+          "checked_at": "2026-11-01",
+          "evidence_quote": "Stripe Login | Sign in to the Stripe Dashboard Incompatible browser You need a modern browser to use the Stripe Dashboard. Please switch to a compatible browser"
+        }
+      },
+      {
+        "text": "Set the stripe_api_access_type to oauth in the app manifest.",
+        "claim": {
+          "text": "Set the stripe_api_access_type to oauth in the app manifest.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.stripe.com/stripe-apps/api-authentication/oauth",
+          "evidence_quote": "Set stripe_api_access_type to oauth.",
+          "checked_at": "2026-11-01"
+        }
+      },
+      {
+        "text": "Set the distribution_type to public in the app manifest.",
+        "claim": {
+          "text": "Set the distribution_type to public in the app manifest.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.stripe.com/stripe-apps/api-authentication/oauth",
+          "evidence_quote": "Set distribution_type to public.",
+          "checked_at": "2026-11-01"
+        }
+      },
+      {
+        "text": "Define allowed redirect URIs in the app manifest.",
+        "claim": {
+          "text": "Define allowed redirect URIs in the app manifest.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.stripe.com/stripe-apps/api-authentication/oauth",
+          "evidence_quote": "Set your allowed_redirect_uris. These are the URLs that users are redirected to after installing your app using OAuth.",
+          "checked_at": "2026-11-01"
+        }
+      },
+      {
+        "text": "Create and activate a Stripe account",
+        "claim": {
+          "text": "Create and activate a Stripe account",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-11-01"
+        }
+      },
+      {
+        "text": "Use the Stripe CLI to upload the app and grant permissions",
+        "claim": {
+          "text": "Use the Stripe CLI to upload the app and grant permissions",
+          "label": "inferred",
+          "source_type": "none",
+          "note": "Model suggestion; not verified against this provider's portal.",
+          "checked_at": "2026-11-01"
+        }
+      }
+    ]
+  },
+  "extras": [
+    {
+      "title": "Tested live by the agent",
+      "why_it_matters": "The agent made harmless requests to the provider (no login, no registration; one deliberately invalid token request) and recorded what came back. These are observations, not documentation.",
+      "claims": [
+        {
+          "text": "When this guide was saved, the agent re-fetched the 9 pages it cites and re-checked 38 quoted passages: 38 were found again, none were missing.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://docs.stripe.com/connect/oauth-reference",
+          "note": "Automated test on 2026-11-01: each quote must appear in a fresh copy of the cited page. A quote that does not is removed, together with anything that rested only on it.",
+          "checked_at": "2026-11-01"
+        },
+        {
+          "text": "The authorize endpoint answered an unregistered test client with a redirect (HTTP 302) to connect.stripe.com/oauth/v2/authorize.",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://connect.stripe.com/oauth/authorize",
+          "note": "Automated probe by the agent on 2026-11-01: GET https://connect.stripe.com/oauth/authorize with a made-up client_id (oauth-guide-agent-probe), no login, redirects not followed.",
+          "checked_at": "2026-11-01",
+          "evidence_quote": "HTTP 302 Location: connect.stripe.com/oauth/v2/authorize"
+        },
+        {
+          "text": "The token endpoint rejected an invalid test request with HTTP 401: \"invalid_client: No authentication was provided. Send your secret API key using the Authorization header, or as a client_secret POST parameter.\".",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://connect.stripe.com/oauth/token",
+          "note": "Automated probe by the agent on 2026-11-01: POST https://connect.stripe.com/oauth/token with a made-up authorization code and client (nothing is created or changed). So it validates the client and code before issuing anything. It asks for client authentication via the WWW-Authenticate header.",
+          "checked_at": "2026-11-01",
+          "evidence_quote": "invalid_client: No authentication was provided. Send your secret API key using the Authorization header, or as a client_secret POST parameter. | WWW-Authenticate: Bearer realm=\"Stripe\""
+        },
+        {
+          "text": "Opening https://dashboard.stripe.com/apps without an account ended on a sign-in page (dashboard.stripe.com/login).",
+          "label": "tested",
+          "source_type": "agent_probe",
+          "source_url": "https://dashboard.stripe.com/apps",
+          "note": "Automated probe by the agent on 2026-11-01: GET https://dashboard.stripe.com/apps without an account (redirects followed). Creating the app needs your own account, so the agent stopped here and left it to you.",
+          "checked_at": "2026-11-01",
+          "evidence_quote": "Stripe Login | Sign in to the Stripe Dashboard Incompatible browser You need a modern browser to use the Stripe Dashboard. Please switch to a compatible browser"
+        }
+      ]
+    },
+    {
+      "title": "What the docs recommend",
+      "why_it_matters": "Stated preference",
+      "claims": [
+        {
+          "text": "Stripe recommends adding a settings view to allow users to configure settings or link to documentation.",
+          "label": "official_docs",
+          "source_type": "docs",
+          "source_url": "https://docs.stripe.com/stripe-apps/api-authentication/oauth",
+          "evidence_quote": "(Optional) Add UI extensions to your app. We recommend adding a settings view to allow your users to configure settings or to link to your app’s documentation.",
+          "checked_at": "2026-11-01"
+        }
+      ]
+    }
+  ],
+  "evidence": {
+    "not_verified": [
+      {
+        "item": "Registering, installing and submitting an app",
+        "note": "Not attempted. These steps need your account and create real state, so the agent stopped at the sign-in wall. Only the live checks under 'Tested live by the agent' were run."
+      },
+      {
+        "item": "Dropped model claim: Upload the app using the Stripe CLI.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Dropped model claim: Stripe provides a specific URL format for OAuth authorization.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Dropped model claim: Stripe deprecated the Connect Stripe authentication method in favor of OAuth 2.0.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Dropped model claim: Set the distribution type for your app using the Stripe CLI.",
+        "note": "The quote the model gave was not found verbatim in the fetched page, so the claim was discarded."
+      },
+      {
+        "item": "Live check not completed: OAuth server metadata",
+        "note": "none published at stripe.com, docs.stripe.com, support.stripe.com (checked /.well-known/oauth-authorization-server, /.well-known/openid-configuration)"
+      },
+      {
+        "item": "Live check not completed: https://api.stripe.com/",
+        "note": "robots.txt disallows it, so the agent did not request it"
+      },
+      {
+        "item": "Live check not completed: https://dashboard.stripe.com/${",
+        "note": "returned HTTP 400"
+      }
+    ],
+    "conflicts": [],
+    "sources": [
+      {
+        "title": "Add authorisation flows | Stripe Documentation",
+        "url": "https://docs.stripe.com/stripe-apps/pkce-oauth-flow",
+        "type": "docs"
+      },
+      {
+        "title": "Connect OAuth reference | Stripe Documentation",
+        "url": "https://docs.stripe.com/connect/oauth-reference",
+        "type": "docs"
+      },
+      {
+        "title": "OAuth 2.0 | Stripe Documentation",
+        "url": "https://docs.stripe.com/stripe-apps/api-authentication/oauth",
+        "type": "docs"
+      },
+      {
+        "title": "How to publish an app to the Stripe App Marketplace | Stripe Documentation",
+        "url": "https://docs.stripe.com/stripe-apps/publish-app",
+        "type": "docs"
+      },
+      {
+        "title": "Stripe Apps quality requirements | Stripe Documentation",
+        "url": "https://docs.stripe.com/stripe-apps/review-requirements",
+        "type": "docs"
+      },
+      {
+        "title": "Distribution options | Stripe Documentation",
+        "url": "https://docs.stripe.com/stripe-apps/distribution-options",
+        "type": "docs"
+      },
+      {
+        "title": "Rate limits | Stripe Documentation",
+        "url": "https://docs.stripe.com/rate-limits",
+        "type": "docs"
+      },
+      {
+        "title": "How do I submit an app for review, and what does the review entail? : Stripe: Help & Support",
+        "url": "https://support.stripe.com/questions/how-do-i-submit-an-app-for-review-and-what-does-the-review-entail",
+        "type": "docs"
+      },
+      {
+        "title": "Apps partners | Stripe Documentation",
+        "url": "https://docs.stripe.com/partners/apps",
+        "type": "docs"
+      }
+    ]
+  },
+  "oauth_setup": [
+    {
+      "key": "grant_types",
+      "item": "Grant types",
+      "value": "code",
+      "claim": {
+        "text": "The response type for the authorization request is always code.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.stripe.com/stripe-apps/pkce-oauth-flow",
+        "evidence_quote": "response_type\n\nThis is always code. The PKCE flow uses code as the value to request an authorization code from the OAuth provider.",
+        "checked_at": "2026-11-01"
+      }
+    },
+    {
+      "key": "grant_types",
+      "item": "Grant types",
+      "value": "authorization_code",
+      "claim": {
+        "text": "The grant type for retrieving an access token is always authorization_code.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.stripe.com/stripe-apps/pkce-oauth-flow",
+        "evidence_quote": "grant_type\n\nThis is always authorization_code.",
+        "checked_at": "2026-11-01"
+      }
+    },
+    {
+      "key": "authorize_url",
+      "item": "Authorization URL",
+      "value": "https://connect.stripe.com/oauth/authorize",
+      "claim": {
+        "text": "The authorization endpoint is https://connect.stripe.com/oauth/authorize.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.stripe.com/connect/oauth-reference",
+        "evidence_quote": "GET https://connect.stripe.com/oauth/authorize",
+        "checked_at": "2026-11-01"
+      }
+    },
+    {
+      "key": "token_url",
+      "item": "Token URL",
+      "value": "https://connect.stripe.com/oauth/token",
+      "claim": {
+        "text": "The token endpoint is https://connect.stripe.com/oauth/token.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.stripe.com/connect/oauth-reference",
+        "evidence_quote": "POST https://connect.stripe.com/oauth/token",
+        "checked_at": "2026-11-01"
+      }
+    },
+    {
+      "key": "redirect_uri",
+      "item": "Redirect URIs",
+      "value": "Redirect URIs must exactly match one of the configured values and live mode must use HTTPS.",
+      "claim": {
+        "text": "Redirect URIs must exactly match one of the configured values and live mode must use HTTPS.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.stripe.com/connect/oauth-reference",
+        "evidence_quote": "If provided, this must exactly match one of the comma-separated redirect_uri values in your application settings. To protect yourself from certain forms of man-in-the-middle attacks, the live mode redirect_uri must use a secure HTTPS connection.",
+        "checked_at": "2026-11-01"
+      }
+    },
+    {
+      "key": "pkce",
+      "item": "PKCE",
+      "value": "Stripe Apps require the OAuth provider to support PKCE.",
+      "claim": {
+        "text": "Stripe Apps require the OAuth provider to support PKCE.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.stripe.com/stripe-apps/pkce-oauth-flow",
+        "evidence_quote": "Ensure that your OAuth provider supports the Proof Key for Code Exchange (PKCE) flow.",
+        "checked_at": "2026-11-01"
+      }
+    },
+    {
+      "key": "token_lifetime",
+      "item": "Token and code lifetimes",
+      "value": "5 minutes",
+      "claim": {
+        "text": "The authorization code expires in 5 minutes.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.stripe.com/connect/oauth-reference",
+        "evidence_quote": "An authorization code you can use in the next call to get an access token for your user. This can only be used once and expires in 5 minutes.",
+        "checked_at": "2026-11-01"
+      }
+    },
+    {
+      "key": "token_lifetime",
+      "item": "Token and code lifetimes",
+      "value": "1 hour",
+      "claim": {
+        "text": "Access tokens expire in 1 hour.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.stripe.com/stripe-apps/api-authentication/oauth",
+        "evidence_quote": "Access tokens expire in 1 hour, and refresh tokens expire after 1 year.",
+        "checked_at": "2026-11-01"
+      }
+    },
+    {
+      "key": "token_lifetime",
+      "item": "Token and code lifetimes",
+      "value": "1 year",
+      "claim": {
+        "text": "Refresh tokens expire in 1 year.",
+        "label": "official_docs",
+        "source_type": "docs",
+        "source_url": "https://docs.stripe.com/stripe-apps/api-authentication/oauth",
+        "evidence_quote": "Access tokens expire in 1 hour, and refresh tokens expire after 1 year.",
+        "checked_at": "2026-11-01"
+      }
+    },
+    {
+      "key": "authorize_url",
+      "item": "Authorization URL (tested live)",
+      "value": "The authorize endpoint answered an unregistered test client with a redirect (HTTP 302) to connect.stripe.com/oauth/v2/authorize.",
+      "claim": {
+        "text": "The authorize endpoint answered an unregistered test client with a redirect (HTTP 302) to connect.stripe.com/oauth/v2/authorize.",
+        "label": "tested",
+        "source_type": "agent_probe",
+        "source_url": "https://connect.stripe.com/oauth/authorize",
+        "note": "Automated probe by the agent on 2026-11-01: GET https://connect.stripe.com/oauth/authorize with a made-up client_id (oauth-guide-agent-probe), no login, redirects not followed.",
+        "checked_at": "2026-11-01",
+        "evidence_quote": "HTTP 302 Location: connect.stripe.com/oauth/v2/authorize"
+      }
+    },
+    {
+      "key": "token_url",
+      "item": "Token URL (tested live)",
+      "value": "The token endpoint rejected an invalid test request with HTTP 401: \"invalid_client: No authentication was provided. Send your secret API key using the Authorization header, or as a client_secret POST ",
+      "claim": {
+        "text": "The token endpoint rejected an invalid test request with HTTP 401: \"invalid_client: No authentication was provided. Send your secret API key using the Authorization header, or as a client_secret POST parameter.\".",
+        "label": "tested",
+        "source_type": "agent_probe",
+        "source_url": "https://connect.stripe.com/oauth/token",
+        "note": "Automated probe by the agent on 2026-11-01: POST https://connect.stripe.com/oauth/token with a made-up authorization code and client (nothing is created or changed). So it validates the client and code before issuing anything. It asks for client authentication via the WWW-Authenticate header.",
+        "checked_at": "2026-11-01",
+        "evidence_quote": "invalid_client: No authentication was provided. Send your secret API key using the Authorization header, or as a client_secret POST parameter. | WWW-Authenticate: Bearer realm=\"Stripe\""
+      }
+    }
+  ]
+}

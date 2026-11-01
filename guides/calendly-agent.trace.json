@@ -7,23 +7,18 @@
       "thin": false
     },
     {
-      "url": "https://developer.calendly.com/docs/authentication/scopes.md",
-      "chars": 12935,
+      "url": "https://developer.calendly.com/api-docs/calendly-o-auth/o-auth/post-oauth-refresh-token.md",
+      "chars": 26428,
       "thin": false
     },
     {
-      "url": "https://developer.calendly.com/docs/authentication/how-to-authenticate-with-personal-access-tokens.md",
-      "chars": 2844,
+      "url": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app",
+      "chars": 3969,
       "thin": false
     },
     {
-      "url": "https://developer.calendly.com/api-docs/overview/rate-limits.md",
-      "chars": 2909,
-      "thin": false
-    },
-    {
-      "url": "https://developer.calendly.com/docs",
-      "chars": 1676,
+      "url": "https://developer.calendly.com/api-docs/calendly-o-auth/o-auth/get-oauth-authorize.md",
+      "chars": 6021,
       "thin": false
     },
     {
@@ -32,79 +27,114 @@
       "thin": false
     },
     {
-      "url": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app",
-      "chars": 3969,
+      "url": "https://developer.calendly.com/docs/getting-started/overview",
+      "chars": 1676,
+      "thin": false
+    },
+    {
+      "url": "https://developer.calendly.com/docs/authentication/scopes",
+      "chars": 6838,
+      "thin": false
+    },
+    {
+      "url": "https://calendly.com/legal/developer-policy",
+      "chars": 4023,
+      "thin": false
+    },
+    {
+      "url": "https://developer.calendly.com/docs/getting-started/introduction",
+      "chars": 2048,
       "thin": false
     }
   ],
+  "firecrawl": {
+    "searches": 6,
+    "pages_rendered": 0,
+    "failed": 11,
+    "stopped": ""
+  },
   "steps": [
     {
       "step": 1,
-      "action": "web_search",
-      "arg": "site:developer.calendly.com \"app registration\" \"public\" \"review\" \"access tier\"",
-      "thought": "I need to find information regarding app registration requirements, public distribution requirements, review stages, and access tiers for Calendly. I will search for these topics on the developer port",
-      "result": "No results (search unavailable or empty). Try fetch_page on a known docs URL."
+      "action": "fetch_page",
+      "arg": "https://developer.calendly.com/docs/getting-started/frequently-asked-questions",
+      "thought": "I need to find information about registration requirements, public app requirements, review stages, and access tiers for Calendly OAuth apps. I will start by checking the FAQ and getting started pages",
+      "result": "auto-read saved 1 verified finding(s).\nPAGE 5\nURL: https://developer.calendly.com/docs/getting-started/frequently-asked-questions\nTITLE: Frequently Asked Questions | Calendly | Developer Documentation\nTEXT:\nFor AI agents: a documentation index is available at the root level at /llms.txt. Append /llm"
     },
     {
       "step": 2,
-      "action": "list_links",
-      "arg": "1",
-      "thought": "I need to find information about app registration requirements, public app requirements, review stages, and access tiers for Calendly. I will list the links from the main documentation page to find re",
-      "result": "Links on page 1:\n(none)"
+      "action": "fetch_page",
+      "arg": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app",
+      "thought": "I need to find information about OAuth app registration requirements, public requirements, review stages, and access tiers. I will start by fetching the 'Creating an OAuth app' page to see if it conta",
+      "result": "PAGE 3\nURL: https://developer.calendly.com/docs/authentication/creating-an-oauth-app\nTITLE: Creating an OAuth app | Calendly | Developer Documentation\nTEXT:\nFor AI agents: a documentation index is available at the root level at /llms.txt. Append /llms.txt to any URL for a page-level index, or .md fo"
     },
     {
       "step": 3,
-      "action": "web_search",
-      "arg": "site:developer.calendly.com \"app review\" OR \"public app\" OR \"access tier\"",
-      "thought": "I need to find information about app registration requirements, public app requirements, review stages, and access tiers for Calendly. Since the previous search and link list didn't yield new pages, I",
-      "result": "No results (search unavailable or empty). Try fetch_page on a known docs URL."
+      "action": "record_finding",
+      "arg": "12 finding(s)",
+      "thought": "I have gathered significant information about the OAuth app registration process, including steps, PKCE requirements, and redirect URI rules. I need to check if there are specific requirements for pub",
+      "result": "11 finding(s) verified and saved. Not saved: quote not found verbatim on page 3, or a number in the claim is not in the quote: Select Create.. To retry, copy the quote exactly from the page text."
     },
     {
       "step": 4,
-      "action": "list_links",
-      "arg": "1",
-      "thought": "I need to find information about app registration requirements, public app requirements, review stages, and access tiers for Calendly. Since search is not returning results, I will list links from the",
-      "result": "Links on page 1:\n(none)"
+      "action": "fetch_page",
+      "arg": "https://developer.calendly.com/docs/getting-started/overview",
+      "thought": "I need to find information about registration requirements, public requirements, review stages, and access tiers. I will start by exploring the 'Getting started' and 'Authentication' sections to see i",
+      "result": "auto-read saved 0 verified finding(s).\nPAGE 6\nURL: https://developer.calendly.com/docs/getting-started/overview\nTITLE: Build with Calendly | Calendly | Developer Documentation\nTEXT:\nFor AI agents: a documentation index is available at the root level at /llms.txt. Append /llms.txt to any URL for a pa"
     },
     {
       "step": 5,
-      "action": "list_links",
-      "arg": "1",
-      "thought": "I need to find information about app review, public access, and registration requirements for Calendly. Since the previous search was unsuccessful, I will try to list links from the main documentation",
-      "result": "Links on page 1:\n(none)"
+      "action": "fetch_page",
+      "arg": "https://developer.calendly.com/docs/getting-started/frequently-asked-questions",
+      "thought": "I need to find information about requirements for registering an app, public requirements, review stages, and access tiers. I will check the FAQ page again or look for other documentation pages that m",
+      "result": "PAGE 5\nURL: https://developer.calendly.com/docs/getting-started/frequently-asked-questions\nTITLE: Frequently Asked Questions | Calendly | Developer Documentation\nTEXT:\nFor AI agents: a documentation index is available at the root level at /llms.txt. Append /llms.txt to any URL for a page-level index"
     },
     {
       "step": 6,
       "action": "fetch_page",
-      "arg": "https://developer.calendly.com/docs",
-      "thought": "I have exhausted the links on the main authentication page and need to find information regarding app review, public access, and registration requirements. Since the search tool is not returning resul",
-      "result": "auto-read saved 0 verified finding(s).\nPAGE 5\nURL: https://developer.calendly.com/docs\nTITLE: Build with Calendly | Calendly | Developer Documentation\nTEXT:\nFor AI agents: a documentation index is available at the root level at /llms.txt. Append /llms.txt to any URL for a page-level index, or .md fo"
+      "arg": "https://developer.calendly.com/docs/authentication/scopes",
+      "thought": "I have gathered information about OAuth app creation, limits, and blockers. I need to find information about registration requirements, public requirements, review stages, and access tiers. I will sta",
+      "result": "auto-read saved 5 verified finding(s).\nPAGE 7\nURL: https://developer.calendly.com/docs/authentication/scopes\nTITLE: Authorization Scopes | Calendly | Developer Documentation\nTEXT:\nFor AI agents: a documentation index is available at the root level at /llms.txt. Append /llms.txt to any URL for a page"
     },
     {
       "step": 7,
-      "action": "fetch_page",
-      "arg": "https://developer.calendly.com/docs/getting-started/frequently-asked-questions",
-      "thought": "I need to find information about app review, public access, and registration requirements. I will check the FAQ page to see if it covers these topics.",
-      "result": "auto-read saved 1 verified finding(s).\nPAGE 6\nURL: https://developer.calendly.com/docs/getting-started/frequently-asked-questions\nTITLE: Frequently Asked Questions | Calendly | Developer Documentation\nTEXT:\nFor AI agents: a documentation index is available at the root level at /llms.txt. Append /llm"
+      "action": "web_search",
+      "arg": "Calendly developer app review requirements",
+      "thought": "I have gathered significant information about OAuth scopes and the authorization URL. I need to check if there is any information regarding app registration requirements, public listing requirements, ",
+      "result": "Search results:\n- https://developer.calendly.com\n- https://calendly.com/legal/developer-policy\n- https://community.calendly.com/developer-community-60\n- https://developers.google.com/workspace/marketplace/about-app-review (not the provider's domain; cannot be fetched)\n- https://developer.apple.com/d"
     },
     {
       "step": 8,
       "action": "fetch_page",
-      "arg": "https://developer.calendly.com/docs/authentication/creating-an-oauth-app",
-      "thought": "I have gathered information about token revocation and subscription requirements. I need to find information about app registration, public app requirements, and access tiers. I will fetch the 'Creati",
-      "result": "auto-read saved 11 verified finding(s).\nPAGE 7\nURL: https://developer.calendly.com/docs/authentication/creating-an-oauth-app\nTITLE: Creating an OAuth app | Calendly | Developer Documentation\nTEXT:\nFor AI agents: a documentation index is available at the root level at /llms.txt. Append /llms.txt to a"
+      "arg": "https://calendly.com/legal/developer-policy",
+      "thought": "I need to find information about app registration requirements, public app requirements, review stages, and access tiers. I will check the developer policy page to see if it contains information about",
+      "result": "auto-read saved 4 verified finding(s).\nPAGE 8\nURL: https://calendly.com/legal/developer-policy\nTITLE: Developer Policy — Security, Data Use & Integration Guidelines | Calendly\nTEXT:\nMy Account\n\nLog InGet started for free\n\nGet started for freeTalk to sales\n\nDeveloper Policy\n\nOur goal is to have a gre"
     },
     {
       "step": 9,
-      "action": "list_links",
-      "arg": "5",
-      "thought": "I have gathered significant information about OAuth app creation, steps, limits, and blockers from page 7. I still need to investigate public app requirements, review stages, and access tiers. I will ",
-      "result": "Links on page 5:\n- https://developer.calendly.com/docs/authentication/scopes - Scopes\n- https://developer.calendly.com/docs/authentication/scopes - Scopes\n- https://developer.calendly.com/docs/authentication/creating-an-oauth-app - Creating an OAuth app (read)\n- https://developer.calendly.com/docs/a"
+      "action": "finish",
+      "arg": "refused",
+      "thought": "I have gathered information about developer policies, security, and data usage. I still need to find specific information regarding the app registration requirements, public app requirements, review s",
+      "result": "Not finished: the checklist still has missing items: requirement_register, requirement_public, review_stage, access_tier. Search or fetch pages for them. Call finish again only if they are not documented anywhere you can reach."
     },
     {
       "step": 10,
+      "action": "web_search",
+      "arg": "site:developer.calendly.com \"review\" OR \"approval\" OR \"public\" OR \"requirements\"",
+      "thought": "I need to find information regarding app registration requirements, public app requirements, review stages, and access tiers. I will search for these topics within the developer documentation.",
+      "result": "Search results:\n- https://developer.calendly.com/docs/getting-started/introduction\n- https://developer.calendly.com/release-notes/2023/9/20\n- https://developer.calendly.com/docs/api-guides/how-to-get-scheduling-page-links-for-team-members-across-the-organization\n- https://developer.calendly.com/cale"
+    },
+    {
+      "step": 11,
+      "action": "fetch_page",
+      "arg": "https://developer.calendly.com/docs/getting-started/introduction",
+      "thought": "I need to find information regarding app review requirements, public access, and registration requirements. I will check the 'Introduction' page to see if it contains information about the developer p",
+      "result": "auto-read saved 3 verified finding(s).\nPAGE 9\nURL: https://developer.calendly.com/docs/getting-started/introduction\nTITLE: Introduction to the API | Calendly | Developer Documentation\nTEXT:\nFor AI agents: a documentation index is available at the root level at /llms.txt. Append /llms.txt to any URL "
+    },
+    {
+      "step": 12,
       "action": "finish",
-      "thought": "I have exhausted the available documentation pages regarding OAuth app registration, limits, and authentication. The documentation does not provide information on public app review processes, specific",
+      "thought": "I have reviewed the available documentation. The developer policy and getting started pages do not provide specific details on 'review stages' or 'public app requirements' beyond general developer pol",
       "result": ""
     }
   ],
@@ -177,9 +207,9 @@
     "login_wall": null
   },
   "savecheck": {
-    "checked": 30,
-    "pages": 6,
-    "ok": 30,
+    "checked": 35,
+    "pages": 7,
+    "ok": 35,
     "failed": [],
     "removed": [],
     "kept_unpruned": false
@@ -193,7 +223,7 @@
     },
     {
       "category": "step",
-      "text": "Open the Developer tools page.",
+      "text": "Open the Developer tools page from the Profile menu.",
       "quote": "2. Open [Developer tools](https://calendly.com/app/developer). In Calendly, open the **Profile menu** and select **Developer**.",
       "verified": true
     },
@@ -218,152 +248,86 @@
     {
       "category": "step",
       "text": "Select at least one scope for the app.",
-      "quote": "6. Select the scopes that your app needs. Select at least one scope. Learn more about [scopes](/docs/authentication/scopes).",
+      "quote": "6. Select the scopes that your app needs. Select at least one scope.",
       "verified": true
     },
     {
       "category": "step",
-      "text": "Select Create to finish app creation.",
+      "text": "Select Create to finish app registration.",
       "quote": "7. Select **Create**.",
       "verified": true
     },
     {
-      "category": "limit",
-      "text": "Production apps must use https redirect URIs.",
-      "quote": "Production  | `https` URIs only",
+      "category": "oauth_detail",
+      "text": "The authorization endpoint is auth.calendly.com/oauth/authorize.",
+      "quote": "https://auth.calendly.com/oauth/authorize?client_id=CLIENT_ID",
       "verified": true
     },
     {
-      "category": "recommendation",
-      "text": "Calendly recommends starting with a Sandbox app for development.",
-      "quote": "We recommend that you start with a Sandbox app for development. Create a second app for Production when you are ready to use real customer data.",
+      "category": "oauth_detail",
+      "text": "The token endpoint is auth.calendly.com/oauth/token.",
+      "quote": "https://auth.calendly.com/oauth/token",
       "verified": true
     },
     {
-      "category": "blocker",
-      "text": "Authorization requests fail if they do not include a code challenge.",
+      "category": "oauth_detail",
+      "text": "PKCE is required for every OAuth app using the S256 method.",
       "quote": "Every OAuth app must use Proof Key for Code Exchange (PKCE) with the `S256` method. If the authorization request does not include a code challenge, the request fails.",
       "verified": true
     },
     {
+      "category": "oauth_detail",
+      "text": "Only one redirect URI is allowed per app.",
+      "quote": "Enter exactly one URI.",
+      "verified": true
+    },
+    {
       "category": "blocker",
-      "text": "Client secrets and webhook keys cannot be viewed after the initial creation screen.",
+      "text": "You cannot view the client secret or webhook signing key after leaving the creation screen.",
       "quote": "Copy all three values and store them securely before you leave this screen. You cannot view the client secret or the webhook signing key again. At this time, you also cannot view the client ID again in Developer tools.",
       "verified": true
     },
     {
-      "category": "step",
-      "text": "When your app initiates an OAuth flow, it should request the minimum set of scopes needed for your use cases.",
-      "quote": "When your app initiates an OAuth flow, it should request the minimum set of scopes needed for your use cases. Overly broad scopes can lead to unnecessary user friction at install time. Review your integration's features and map them to the scopes in the catalog above.",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "List scopes separated by spaces in the authorization URL.",
-      "quote": "List scopes separated by spaces. Only include the scopes your app needs.",
+      "category": "recommendation",
+      "text": "Start with a Sandbox app for development.",
+      "quote": "We recommend that you start with a Sandbox app for development. Create a second app for Production when you are ready to use real customer data.",
       "verified": true
     },
     {
       "category": "extra",
-      "text": "A write scope implicitly includes the corresponding read scope within the same domain.",
-      "quote": "A :write scope implicitly includes the corresponding :read scope within the same domain.",
+      "text": "Deleting an app is permanent.",
+      "quote": "3. Select **Delete** to confirm. You cannot undo this action.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "Access tokens expire after 2 hours.",
+      "quote": "Access Tokens expire after 2 hours.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "Refresh tokens do not expire until they are used.",
+      "quote": "Refresh Tokens don't expire until they are used.",
+      "verified": true
+    },
+    {
+      "category": "limit",
+      "text": "Only 8 oauth tokens per user can be requested within a span of 1 minute.",
+      "quote": "Only 8 oauth tokens per user can be requested within a span of 1 minute",
+      "verified": true
+    },
+    {
+      "category": "oauth_detail",
+      "text": "The authorization endpoint for tokens is https://auth.calendly.com/oauth/token.",
+      "quote": "POST https://auth.calendly.com/oauth/token",
+      "verified": true
+    },
+    {
+      "category": "oauth_detail",
+      "text": "The client secret is sent using the Basic HTTP Authorization header for server-side apps.",
+      "quote": "If your app runs on a server, also pass client_id and client_secret with the Basic HTTP Authorization header.",
       "verified": false
-    },
-    {
-      "category": "extra",
-      "text": "For newly created OAuth apps, no API access is granted until scopes are explicitly requested and approved.",
-      "quote": "For newly created OAuth apps and new Personal Access Tokens, no API access is granted until scopes are explicitly requested and approved.",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Open the Personal access tokens tab in Developer tools.",
-      "quote": "1. Open the [Personal access tokens](https://calendly.com/app/developer?tab=personal_access_tokens) tab in Developer tools. In Calendly, open the **Profile menu**, select **Developer**, and then select **Personal access tokens**.",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Select Create personal access token.",
-      "quote": "2. Select **Create personal access token**.",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Enter a name for your token and select Next.",
-      "quote": "3. Enter a name for your token, and then select **Next**.",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Select the scopes that your application needs.",
-      "quote": "4. Select the scopes that your application needs. Select at least one scope.",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Select Create.",
-      "quote": "5. Select **Create**.",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Enter the verification code sent to your email.",
-      "quote": "6. Enter the verification code that Calendly sends to your email.",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Copy your token and store it securely.",
-      "quote": "7. Copy your token and store it securely.",
-      "verified": true
-    },
-    {
-      "category": "limit",
-      "text": "You can have a maximum of 10 personal access tokens.",
-      "quote": "You can have up to 10 personal access tokens.",
-      "verified": true
-    },
-    {
-      "category": "blocker",
-      "text": "Do not share your personal access token with public sources.",
-      "quote": "Do not share your personal access token with public sources.",
-      "verified": true
-    },
-    {
-      "category": "blocker",
-      "text": "Do not reuse a token across applications.",
-      "quote": "Do not reuse a token across applications.",
-      "verified": true
-    },
-    {
-      "category": "limit",
-      "text": "Paid plans are limited to 500 requests per user per minute.",
-      "quote": "Paid Plans   | 500 requests per user per minute",
-      "verified": true
-    },
-    {
-      "category": "limit",
-      "text": "Free plans are limited to 50 requests per user per minute.",
-      "quote": "Free Plan    | 50 requests per user per minute",
-      "verified": true
-    },
-    {
-      "category": "limit",
-      "text": "Users are limited to requesting 8 OAuth tokens per minute.",
-      "quote": "Only 8 OAuth tokens per user can be requested within a span of 1 minute.",
-      "verified": true
-    },
-    {
-      "category": "blocker",
-      "text": "Exceeding rate limits results in a 429 Too Many Requests response.",
-      "quote": "If you exceed your allowed rate limit, the Calendly API will respond with:\n\n```json\nHTTP/2 429 Too Many Requests",
-      "verified": true
-    },
-    {
-      "category": "limit",
-      "text": "Single-use scheduling links that have not been used to book an event expire after 90 days.",
-      "quote": "Single use scheduling links (that haven’t been used to book an event) expire after 90 days.",
-      "verified": true
     },
     {
       "category": "step",
@@ -373,13 +337,13 @@
     },
     {
       "category": "step",
-      "text": "Open the Developer tools section in your profile menu.",
+      "text": "Open the Developer tools section from the Profile menu.",
       "quote": "Open Developer tools. In Calendly, open the Profile menu and select Developer.",
       "verified": true
     },
     {
       "category": "step",
-      "text": "Select the option to create a new OAuth app.",
+      "text": "Select Create OAuth app on the OAuth apps tab.",
       "quote": "On the OAuth apps tab, select Create OAuth app.",
       "verified": true
     },
@@ -391,39 +355,15 @@
     },
     {
       "category": "step",
-      "text": "Select the required scopes for your application.",
-      "quote": "Select the scopes that your app needs. Select at least one scope. Learn more about scopes.",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Finalize the creation of the app.",
-      "quote": "Select Create.",
-      "verified": false
-    },
-    {
-      "category": "requirement_register",
-      "text": "You must provide an app name using only letters, numbers, hyphens, and spaces.",
-      "quote": "App name: use letters, numbers, hyphens, and spaces only.",
-      "verified": true
-    },
-    {
-      "category": "requirement_register",
-      "text": "You must provide exactly one redirect URI.",
-      "quote": "Redirect URI: the URL where Calendly sends users after they authorize your app. Enter exactly one URI.",
-      "verified": true
-    },
-    {
-      "category": "requirement_register",
-      "text": "You must select at least one scope for the app.",
+      "text": "Select at least one scope for the app.",
       "quote": "Select the scopes that your app needs. Select at least one scope.",
       "verified": true
     },
     {
-      "category": "limit",
-      "text": "Production apps are restricted to HTTPS redirect URIs only.",
-      "quote": "Production\n\nhttps URIs only",
-      "verified": true
+      "category": "step",
+      "text": "Click Create to finish registering the app.",
+      "quote": "Select Create.",
+      "verified": false
     },
     {
       "category": "recommendation",
@@ -432,87 +372,297 @@
       "verified": false
     },
     {
-      "category": "blocker",
-      "text": "The authorization request will fail if it does not include a PKCE code challenge.",
-      "quote": "Every OAuth app must use Proof Key for Code Exchange (PKCE) with the S256 method. If the authorization request does not include a code challenge, the request fails.",
+      "category": "oauth_detail",
+      "text": "You must provide exactly one redirect URI.",
+      "quote": "Redirect URI: the URL where Calendly sends users after they authorize your app. Enter exactly one URI.",
       "verified": true
     },
     {
-      "category": "extra",
-      "text": "Client secrets and webhook signing keys cannot be viewed after the initial creation screen.",
+      "category": "oauth_detail",
+      "text": "Sandbox apps allow https URIs and http URIs on localhost.",
+      "quote": "Sandbox\n\nhttps URIs, and http URIs on localhost. Example: http://localhost:1234/callback",
+      "verified": true
+    },
+    {
+      "category": "oauth_detail",
+      "text": "Production apps only allow https URIs.",
+      "quote": "Production\n\nhttps URIs only",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "The client secret and webhook signing key are only shown once.",
       "quote": "Copy all three values and store them securely before you leave this screen. You cannot view the client secret or the webhook signing key again.",
       "verified": true
     },
     {
+      "category": "oauth_detail",
+      "text": "PKCE with the S256 method is required for all OAuth apps.",
+      "quote": "Every OAuth app must use Proof Key for Code Exchange (PKCE) with the S256 method.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "Authorization requests fail if they do not include a code challenge.",
+      "quote": "If the authorization request does not include a code challenge, the request fails.",
+      "verified": true
+    },
+    {
+      "category": "oauth_detail",
+      "text": "The authorization endpoint is https://auth.calendly.com/oauth/authorize.",
+      "quote": "https://auth.calendly.com/oauth/authorize?client_id=CLIENT_ID",
+      "verified": false
+    },
+    {
+      "category": "oauth_detail",
+      "text": "The token endpoint is https://auth.calendly.com/oauth/token.",
+      "quote": "Send a POST request to Get Access Token at https://auth.calendly.com/oauth/token.",
+      "verified": true
+    },
+    {
+      "category": "oauth_detail",
+      "text": "Server-side apps must use HTTP Basic authentication with the client secret.",
+      "quote": "If your app runs on a server, also send your client secret. Use HTTP Basic authentication with your client ID as the username and your client secret as the password.",
+      "verified": true
+    },
+    {
+      "category": "oauth_detail",
+      "text": "The authorization endpoint is https://auth.calendly.com/oauth/authorize.",
+      "quote": "GET https://auth.calendly.com/oauth/authorize",
+      "verified": true
+    },
+    {
+      "category": "oauth_detail",
+      "text": "PKCE is required for every OAuth app using the S256 method.",
+      "quote": "Every OAuth app must use PKCE conforming to RFC 7636, with the S256 method. If the request does not include a code_challenge, it fails.",
+      "verified": false
+    },
+    {
+      "category": "blocker",
+      "text": "The authorization request will fail if the code_challenge is missing.",
+      "quote": "If the request does not include a code_challenge, it fails.",
+      "verified": false
+    },
+    {
+      "category": "step",
+      "text": "Redirect the user to the Calendly authorization page with the required parameters.",
+      "quote": "Redirect the user to Calendly's authorization page with the client_id, redirect_uri, and the code_challenge generated in the step above (see example below). Note that this url must be requested using a web browser.",
+      "verified": false
+    },
+    {
+      "category": "limit",
+      "text": "Single-use scheduling links expire after 90 days if they have not been used to book an event.",
+      "quote": "Single use scheduling links (that haven’t been used to book an event) expire after 90 days.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Log in to Calendly, or sign up for a Calendly account.",
+      "quote": "Log in to Calendly, or sign up for a Calendly account.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Open Developer tools. In Calendly, open the Profile menu and select Developer.",
+      "quote": "Open Developer tools. In Calendly, open the Profile menu and select Developer.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "On the OAuth apps tab, select Create OAuth app.",
+      "quote": "On the OAuth apps tab, select Create OAuth app.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Enter the app details: App name, Redirect URI, and Environment type.",
+      "quote": "Enter the app details:\n\nApp name: use letters, numbers, hyphens, and spaces only.\n\nRedirect URI: the URL where Calendly sends users after they authorize your app. Enter exactly one URI.\n\nEnvironment type: select Sandbox for development and testing, or Production when your app is ready for real users.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Select the scopes that your app needs.",
+      "quote": "Select the scopes that your app needs. Select at least one scope.",
+      "verified": true
+    },
+    {
+      "category": "step",
+      "text": "Select Create.",
+      "quote": "Select Create.",
+      "verified": false
+    },
+    {
+      "category": "oauth_detail",
+      "text": "PKCE is required for all OAuth apps using the S256 method.",
+      "quote": "Every OAuth app must use Proof Key for Code Exchange (PKCE) with the S256 method. If the authorization request does not include a code challenge, the request fails.",
+      "verified": true
+    },
+    {
+      "category": "oauth_detail",
+      "text": "The authorization endpoint is https://auth.calendly.com/oauth/authorize.",
+      "quote": "https://auth.calendly.com/oauth/authorize?client_id=CLIENT_ID",
+      "verified": true
+    },
+    {
+      "category": "oauth_detail",
+      "text": "The token endpoint is https://auth.calendly.com/oauth/token.",
+      "quote": "Send a POST request to Get Access Token at https://auth.calendly.com/oauth/token.",
+      "verified": true
+    },
+    {
+      "category": "oauth_detail",
+      "text": "Client secret is shown only once upon creation.",
+      "quote": "Copy all three values and store them securely before you leave this screen. You cannot view the client secret or the webhook signing key again.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "Deleting an OAuth app cannot be undone.",
+      "quote": "Select Delete to confirm. You cannot undo this action.",
+      "verified": true
+    },
+    {
       "category": "recommendation",
-      "text": "Calendly recommends starting with a Sandbox app for development and creating a separate app for Production when ready for real customer data.",
+      "text": "Start with a Sandbox app for development.",
+      "quote": "We recommend that you start with a Sandbox app for development. Create a second app for Production when you are ready to use real customer data.",
+      "verified": true
+    },
+    {
+      "category": "oauth_detail",
+      "text": "The authorization endpoint URL is https://auth.calendly.com/oauth/authorize.",
+      "quote": "https://auth.calendly.com/oauth/authorize",
+      "verified": true
+    },
+    {
+      "category": "oauth_detail",
+      "text": "Scopes are requested by listing them separated by spaces in the authorization URL.",
+      "quote": "List scopes separated by spaces. Only include the scopes your app needs.",
+      "verified": true
+    },
+    {
+      "category": "oauth_detail",
+      "text": "A :write scope implicitly includes the corresponding :read scope within the same domain.",
+      "quote": "A :write scope implicitly includes the corresponding :read scope within the same domain.",
+      "verified": true
+    },
+    {
+      "category": "recommendation",
+      "text": "The documentation recommends requesting the minimum set of scopes needed for your use cases.",
+      "quote": "When your app initiates an OAuth flow, it should request the minimum set of scopes needed for your use cases.",
+      "verified": true
+    },
+    {
+      "category": "extra",
+      "text": "Newly created OAuth apps have no API access until scopes are explicitly requested and approved.",
+      "quote": "For newly created OAuth apps and new Personal Access Tokens, no API access is granted until scopes are explicitly requested and approved.",
+      "verified": true
+    },
+    {
+      "category": "blocker",
+      "text": "Developers are prohibited from attempting to cloak or conceal their identity or the identity of their applications when requesting authorization to use the API.",
+      "quote": "Attempt to cloak or conceal your identity or the identity of your applications when requesting authorization to use the API.",
+      "verified": true
+    },
+    {
+      "category": "extra",
+      "text": "Developers must have an industry standard privacy policy that describes data usage.",
+      "quote": "All Developers must have an industry standard privacy policy in place that accurately describes the specifics of data usage and meets applicable legal and consent requirements.",
+      "verified": true
+    },
+    {
+      "category": "extra",
+      "text": "Applications must include instructions on how to connect Calendly and customer support information.",
+      "quote": "Application must be complemented with instructions on how to connect Calendly and customer support information",
+      "verified": true
+    },
+    {
+      "category": "extra",
+      "text": "Developers must notify Calendly immediately if a data breach occurs.",
+      "quote": "If data is breached, exposed, exploited, or otherwise compromised through your application or company, you must inform all affected users and Calendly immediately at support+developer@calendly.com",
+      "verified": true
+    },
+    {
+      "category": "setup_type",
+      "text": "Choose personal access tokens for internal applications used only by your team.",
+      "quote": "If you’re integrating an internal application that only your team will use, authenticate with personal access tokens.",
+      "verified": true
+    },
+    {
+      "category": "setup_type",
+      "text": "Choose OAuth for public applications used by many Calendly users.",
+      "quote": "If you’re integrating a public application that many Calendly users will use, authenticate with OAuth.",
+      "verified": true
+    },
+    {
+      "category": "requirement_register",
+      "text": "Access to the API is determined by your subscription and user role.",
+      "quote": "Access to the Calendly API is determined by your subscription and user role in Calendly",
+      "verified": true
+    },
+    {
+      "category": "setup_type",
+      "text": "Use personal access tokens for internal applications used only by your team.",
+      "quote": "If you’re integrating an internal application that only your team will use, authenticate with personal access tokens.",
+      "verified": false
+    },
+    {
+      "category": "setup_type",
+      "text": "Use OAuth for public applications that many Calendly users will use.",
+      "quote": "If you’re integrating a public application that many Calendly users will use, authenticate with OAuth.",
+      "verified": false
+    },
+    {
+      "category": "recommendation",
+      "text": "Choose between personal access tokens and OAuth based on who is using the application.",
+      "quote": "The Calendly API v2 uses personal access tokens and OAuth 2.1 to authenticate requests. Choose either depending on who’s using the application you’re integrating with Calendly.",
+      "verified": true
+    },
+    {
+      "category": "creation_path",
+      "text": "You can create an OAuth app to integrate with Calendly for public applications.",
+      "quote": "Creating an OAuth app",
+      "verified": false
+    },
+    {
+      "category": "access_tier",
+      "text": "Developers should start with a Sandbox app for development and create a separate Production app when ready for real customer data.",
       "quote": "We recommend that you start with a Sandbox app for development. Create a second app for Production when you are ready to use real customer data.",
       "verified": false
     },
     {
-      "category": "step",
-      "text": "Log in to Calendly or sign up for an account.",
-      "quote": "1. Log in to Calendly, or sign up for a Calendly account.",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Open the Developer tools page from the Profile menu.",
-      "quote": "2. Open [Developer tools](https://calendly.com/app/developer). In Calendly, open the **Profile menu** and select **Developer**.",
-      "verified": false
-    },
-    {
-      "category": "step",
-      "text": "Select Create OAuth app on the OAuth apps tab.",
-      "quote": "3. On the **OAuth apps** tab, select **Create OAuth app**.",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Enter the app name, redirect URI, and environment type.",
-      "quote": "4. Enter the app details:\n   * **App name**: use letters, numbers, hyphens, and spaces only.\n   * **Redirect URI**: the URL where Calendly sends users after they authorize your app. Enter exactly one URI.\n   * **Environment type**: select **Sandbox** for development and testing, or **Production** when your app is ready for real users.",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Select Next to proceed.",
-      "quote": "5. Select **Next**.",
-      "verified": false
-    },
-    {
-      "category": "step",
-      "text": "Select at least one scope for the app.",
-      "quote": "6. Select the scopes that your app needs. Select at least one scope. Learn more about [scopes](/docs/authentication/scopes).",
-      "verified": true
-    },
-    {
-      "category": "step",
-      "text": "Select Create to finish registering the app.",
-      "quote": "7. Select **Create**.",
-      "verified": false
-    },
-    {
-      "category": "access_tier",
-      "text": "Personal access tokens are for internal or private applications.",
-      "quote": "Use a personal access token to authenticate an internal or private application with the Calendly API v2.",
-      "verified": true
-    },
-    {
-      "category": "access_tier",
-      "text": "OAuth apps are for public applications that other Calendly users connect to.",
-      "quote": "To authenticate a public application that other Calendly users connect to, see Creating an OAuth app",
-      "verified": false
-    },
-    {
       "category": "requirement_public",
-      "text": "Production apps must use https URIs for redirects.",
-      "quote": "Production  | https URIs only",
+      "text": "If you are integrating a public application that many Calendly users will use, authenticate with OAuth.",
+      "quote": "If you’re integrating a public application that many Calendly users will use, authenticate with OAuth.",
       "verified": false
     },
     {
-      "category": "requirement_public",
-      "text": "Production apps must use https URIs for redirects.",
-      "quote": "Production\n\nhttps URIs only",
+      "category": "requirement_register",
+      "text": "You must have a Calendly account to create an OAuth app.",
+      "quote": "Log in to Calendly, or sign up for a Calendly account.",
+      "verified": false
+    },
+    {
+      "category": "requirement_register",
+      "text": "You must provide an app name using only letters, numbers, hyphens, and spaces.",
+      "quote": "App name: use letters, numbers, hyphens, and spaces only.",
+      "verified": false
+    },
+    {
+      "category": "requirement_register",
+      "text": "You must provide exactly one redirect URI.",
+      "quote": "Redirect URI: the URL where Calendly sends users after they authorize your app. Enter exactly one URI.",
+      "verified": false
+    },
+    {
+      "category": "requirement_register",
+      "text": "You must select an environment type for your app.",
+      "quote": "Environment type: select Sandbox for development and testing, or Production when your app is ready for real users.",
+      "verified": false
+    },
+    {
+      "category": "requirement_register",
+      "text": "You must select at least one scope for your app.",
+      "quote": "Select the scopes that your app needs. Select at least one scope.",
       "verified": false
     }
   ]

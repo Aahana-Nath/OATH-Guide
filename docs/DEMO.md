@@ -1,10 +1,10 @@
-# Demo: thirteen real apps, tested before saving
+# Demo: fourteen real apps, tested before saving
 
 Every app we researched is saved in [`guides/`](../guides) as `<app>-agent.json` with its full research trace (pages read, agent
 steps, live tests, every quote kept or dropped). Each one went through the **complete pipeline**: discovery, the research loop,
 quote verification, **live tests against the provider**, and a **test-then-save gate** that re-fetched every cited page and
 re-checked every quoted claim before the guide was written. All validate against the schema and open in the web app's **Saved guides**.
-GitHub and Slack also have a hand-tested guide each, researched by a person who actually registered an app. That makes **15 saved guides**.
+GitHub and Slack also have a hand-tested guide each, researched by a person who actually registered an app. That makes **16 saved guides**. Five of the agent guides (Stripe, Notion, Calendly, Asana, Atlassian) also have the **OAuth setup** section (authorization and token URLs, grant types, redirect rules, PKCE, token lifetimes); the other nine were saved before it existed and show it empty until they are researched again.
 
 A run takes roughly **2 to 2.5 minutes** from the command line (the gate adds about 20 seconds); unfamiliar apps run live in the UI take about 3 minutes.
 
@@ -69,6 +69,7 @@ rejects an unknown `client_id`; Atlassian's API sends `x-ratelimit-limit: 400`; 
 | **Dropbox** | OAuth 2.0 with PKCE and an App Console. The docs name no review wait. |
 | **Linear** | A short, clean OAuth doc: create an application, redirect, handle the callback. Small surface, so a small guide. |
 | **Atlassian** | Marketplace-style distribution: private development, shared distribution, then a Marketplace listing. The docs read name no review wait. |
+| **Stripe** | Two OAuth routes: Stripe Apps (PKCE required, a 4-business-day app review) and Connect OAuth (authorize and token URLs, 5-minute codes, exact-match redirect URIs). The OAuth setup section carries the Connect endpoints and both live-tested endpoints; the steps follow the Stripe Apps route. |
 
 ## Screenshots
 
@@ -87,7 +88,7 @@ counters, an elapsed timer and a streaming terminal. When the run finishes the g
 ## Try it live
 
 1. Start the app (see the [README](../README.md)): `npm run dev` in `nuxt-app/`, then open http://localhost:3000.
-2. The **Saved guides** section (sidebar, or the library page with search and filters) lists all 15 guides. Each card shows how many quotes were re-tested when it was saved. Open any to see a finished result with its sections nav and **Research details** panel (including a **Tested before saving** card).
+2. The **Saved guides** section (sidebar, or the library page with search and filters) lists all 16 guides. Each card shows how many quotes were re-tested when it was saved. Open any to see a finished result with its sections nav and **Research details** panel (including a **Tested before saving** card).
 3. Or paste any website or app name into the big search bar on **Home** and press **Research**. The right column is empty until you do.
 4. Watch the agents scene, the live counters and the terminal. A run takes about 2 to 3 minutes. Lower **Agent steps** under Advanced settings (for example 3) for a faster, shallower run.
 5. In the guide, use the sections nav to jump around, tick **Show all evidence** to open every source, and read **What was tested, and what wasn't** first.
