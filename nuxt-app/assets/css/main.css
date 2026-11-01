@@ -298,3 +298,6 @@ div.list { gap: 10px; }
 .testbox.none { border-left-color: var(--unknown-solid); }
 
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; animation: none !important; transition: none !important; } }
+
+/* OAuth setup rows: label, the value itself, then its source */
+.oauth-rows .oval { margin: 4px 0 6px; padding: 6px 10px; background: rgba(255,255,255,.04); border-radius: 8px; overflow-wrap: anywhere; word-break: break-word; }

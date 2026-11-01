@@ -95,4 +95,35 @@ check("oauth_flow is listed as missing first", ex.missing()[0] == "oauth_flow")
 ex.pages.append(flow)
 check("oauth_flow clears once such a page is read", "oauth_flow" not in ex.missing())
 
+# --- the OAuth setup section: keys, grounded values, schema, and the save-time test
+for item, key in (("authorize_url", "authorize_url"), ("Authorization endpoint", "authorize_url"), ("token endpoint", "token_url"), ("Redirect URI rules", "redirect_uri"),
+                  ("PKCE", "pkce"), ("Access token lifetime", "token_lifetime"), ("client secret", "client_credentials"), ("something odd", "other"), (None, "other")):
+    check(f"oauth_key({item!r}) is {key}", g.oauth_key(item) == key)
+q = "Send users to https://x.test/oauth/authorize. The code expires in 10 minutes."
+check("a URL that is in the quote is kept", g.value_in_quote("https://x.test/oauth/authorize", q))
+check("a URL that is not in the quote is refused", not g.value_in_quote("https://x.test/oauth/token", q))
+check("a number that is not in the quote is refused", not g.value_in_quote("5 minutes", q))
+check("a number that is in the quote is kept", g.value_in_quote("10 minutes", q))
+check("a paraphrased word value is refused", not g.value_in_quote("short lived", q))
+
+claims = [c for c in (n["claim"] for n in base["limits"] + base["blockers"]) if c["label"] == "official_docs"][:2]
+rows_guide = copy.deepcopy(base)
+rows_guide["oauth_setup"] = [{"key": "authorize_url", "item": "Authorization URL", "value": "https://x.test/a", "claim": claims[0]},
+                             {"key": "pkce", "item": "PKCE", "value": "required", "claim": claims[1]}]
+check("a guide with an OAuth setup section validates", g.validate(rows_guide, schema))
+bad = copy.deepcopy(rows_guide)
+bad["oauth_setup"][0]["key"] = "made_up"
+check("an unknown OAuth key is rejected by the schema", not g.validate(bad, schema))
+keys2 = set()
+savecheck._collect({k: v for k, v in rows_guide.items() if k not in ("provider", "evidence")}, keys2)
+gone2 = {(claims[1]["source_url"], claims[1]["evidence_quote"])}
+texts2 = {}
+for u, qt in keys2:
+    if (u, qt) not in gone2:
+        texts2[u] = texts2.get(u, "") + " " + qt
+env2 = types.SimpleNamespace(cache={}, norm_url=g.norm_url, norm=g.norm, quote_ok=g.quote_ok, log=lambda *a: None,
+                             fetch=lambda url, accept=None: {"text": texts2[url]} if url in texts2 else None)
+out3, _ = savecheck.recheck_and_prune(copy.deepcopy(rows_guide), env2, schema, "2026-01-01")
+check("the save-time test removes an OAuth row whose quote is gone", [r["key"] for r in out3.get("oauth_setup", [])] == ["authorize_url"])
+
 print(f"{passed} unit checks passed")

@@ -116,7 +116,7 @@ def recheck_and_prune(guide, env, schema_path, today):
             removed.append("the approval timeline")
         elif isinstance(ta.get("total_estimate"), dict) and _is_claim(ta["total_estimate"]) and _key(ta["total_estimate"]) in failed:
             del ta["total_estimate"]
-        before = {k: len(out.get(k) or []) for k in ("steps", "limits", "blockers", "extras", "access_ladder")}
+        before = {k: len(out.get(k) or []) for k in ("steps", "limits", "blockers", "extras", "access_ladder", "oauth_setup")}
         rest = {k: v for k, v in out.items() if k not in ("provider", "evidence", "setup_types", "creation_paths")}
         pruned = _prune(rest, failed)
         out.update(pruned)

@@ -388,6 +388,14 @@ def apply_probes(guide, res, today):
         done = next((c for o, c in zip(obs, claims) if o["kind"] in ("metadata", "authorize")), claims[0])
         guide["agent_vs_human"]["agent"].insert(0, {
             "text": "Look up the provider's live OAuth endpoints and check how they answer an unregistered client (done during this run).", "claim": done})
+    rows = []
+    for o, c in zip(obs, claims):
+        if o["kind"] in ("authorize", "token"):
+            key = "authorize_url" if o["kind"] == "authorize" else "token_url"
+            rows.append({"key": key, "item": ("Authorization URL" if key == "authorize_url" else "Token URL") + " (tested live)",
+                         "value": o["text"][:200], "claim": c})
+    if rows:
+        guide["oauth_setup"] = (guide.get("oauth_setup") or []) + rows
     wall = res.get("login_wall")
     if wall:
         wc = next(c for o, c in zip(obs, claims) if o["kind"] == "portal")

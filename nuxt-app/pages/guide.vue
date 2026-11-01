@@ -22,6 +22,7 @@ const coverage = computed(() => {
   return [
     { name: 'Difficulty', ok: x.difficulty.start.level !== 'unknown' || x.difficulty.public.level !== 'unknown' },
     { name: 'Time & approval wait', ok: x.time.to_approval.display !== 'Not found' || x.time.to_start.display !== 'Unknown' },
+    { name: 'OAuth setup', ok: (x.oauth_setup || []).length > 0 },
     { name: 'Requirements', ok: x.requirements.register.length + x.requirements.go_public.length > 0 },
     { name: 'Blockers', ok: x.blockers.length > 0 },
     { name: 'Agent vs human', ok: x.agent_vs_human.agent.length + x.agent_vs_human.human.length > 0 },

@@ -77,7 +77,7 @@ def explains_oauth(page):
             and sum(1 for m in OAUTH_MARKERS if m in t) >= OAUTH_NEEDED)
 
 
-MIN_COUNTS = {"step": 6, "requirement_register": 3, "requirement_public": 4, "review_stage": 2,
+MIN_COUNTS = {"oauth_detail": 4, "step": 6, "requirement_register": 3, "requirement_public": 4, "review_stage": 2,
               "limit": 4, "access_tier": 2, "blocker": 3}
 # topics a complete guide needs; the crawl keeps going until each has pages
 TOPICS = {
@@ -370,7 +370,7 @@ def gemini_json(prompt, schema, model, retries=6):
 URL_SCHEMA = {"type": "OBJECT", "properties": {"urls": {"type": "ARRAY", "items": {"type": "STRING"}}}, "required": ["urls"]}
 
 CATEGORIES = ["requirement_register", "requirement_public", "limit", "blocker", "review_stage",
-              "access_tier", "setup_type", "creation_path", "recommendation", "step", "extra"]
+              "access_tier", "setup_type", "creation_path", "recommendation", "step", "extra", "oauth_detail"]
 FINDINGS_SCHEMA = {"type": "OBJECT", "properties": {"findings": {"type": "ARRAY", "items": {"type": "OBJECT", "properties": {
     "category": {"type": "STRING", "enum": CATEGORIES},
     "item": {"type": "STRING"}, "value": {"type": "STRING"},
@@ -695,6 +695,11 @@ Categories:
 - creation_path: one distinct way to create or start the app that the docs describe (e.g. blank app, from a manifest, starter template, AI agent template, CLI project). Only ways to CREATE a new app, not ways to deploy, update or manage one. One finding per way (item = the way's name, value = what you get or what the wizard does, fix = when to use it)
 - recommendation: ONLY if the docs explicitly say which option to use or prefer among several (words like recommend, prefer, usually best). item = the recommended option's name exactly as it is named elsewhere, text = what the docs say, fix = when a different option is better. Never invent a preference
 - step: one instruction the developer performs to create, configure, install or publish the app, in the order the page gives them. INCLUDE the first steps (open the apps page, click Create an app, choose the creation option, name the app, pick a workspace), choosing scopes, setting redirect URLs and installing. Skip headings, contents lists, enterprise/identity-provider flows and optional features (events, webhooks, slash commands) unless the page presents them as part of creating the app. Include the very first step (creating or naming the app) and the install/authorize steps; one finding per step, in order.
+- oauth_detail: one fact about how the OAuth connection itself works, as a developer needs it to connect. item MUST be exactly one of:
+  grant_types (which OAuth flows or grant types are supported), authorize_url (the authorization endpoint), token_url (the token endpoint),
+  client_credentials (where the client ID and secret come from, or that the secret is shown once), redirect_uri (rules for redirect URIs: exact match, https, localhost, how many),
+  pkce (whether PKCE is supported or required), scopes (how scopes are requested, or what the main scopes are), token_lifetime (how long an access token, refresh token or authorization code lives; rotation),
+  client_auth (how the client secret is sent: Basic header or request body). value = the exact URL, duration or short value copied from the page; leave it empty if the page gives none. One finding per fact.
 - extra: any other fact a developer needs that fits nowhere above (item = title, value = why it matters)
 Return JSON."""
 
@@ -752,6 +757,15 @@ def fill_gaps(pages, good, model):
         if alt:
             log("extract", f"no creation paths yet; retrying on pages {[i + 1 for i in alt]}")
             extra += extract(pages, model, only=["creation_path"], indices=alt)
+            time.sleep(3)
+    if counts.get("oauth_detail", 0) < MIN_COUNTS["oauth_detail"]:
+        def oauth_weight(i):
+            tx = pages[i]["text"].lower()
+            return -(sum(1 for m in OAUTH_MARKERS if m in tx) + min(tx.count("oauth"), 20))
+        ranked = sorted((i for i, pg in enumerate(pages) if not pg["thin"]), key=oauth_weight)[:3]
+        if ranked:
+            log("extract", f"second pass for 'oauth_detail' on pages {[i + 1 for i in ranked]}")
+            extra += extract(pages, model, only=["oauth_detail"], indices=ranked)
             time.sleep(3)
     for cat, topic in GAPS.items():
         if counts.get(cat, 0) >= MIN_COUNTS.get(cat, 1):
@@ -835,6 +849,7 @@ def verify(findings, pages):
 # quote check as the first pass, so the model cannot add a claim the page does not contain.
 
 CHECKLIST = [
+    ("oauth_detail", "OAuth setup facts: authorize_url, token_url, grant_types, client_credentials, redirect_uri, pkce, scopes, token_lifetime, client_auth"),
     ("step", "registration steps, in order"),
     ("requirement_register", "what is needed to register the app"),
     ("requirement_public", "what is needed before other people can use the app or it can be listed"),
@@ -1121,6 +1136,35 @@ def c_docs(f):
             "evidence_quote": f["quote"].strip(), "checked_at": TODAY}
 
 
+OAUTH_ORDER = ["grant_types", "authorize_url", "token_url", "client_credentials", "redirect_uri", "pkce", "scopes", "token_lifetime", "client_auth", "other"]
+OAUTH_LABEL = {"grant_types": "Grant types", "authorize_url": "Authorization URL", "token_url": "Token URL", "client_credentials": "Client ID and secret",
+               "redirect_uri": "Redirect URIs", "pkce": "PKCE", "scopes": "Scopes", "token_lifetime": "Token and code lifetimes",
+               "client_auth": "Sending the client secret", "other": "Other OAuth detail"}
+OAUTH_MAX = {"scopes": 3, "redirect_uri": 3, "token_lifetime": 3, "grant_types": 2, "client_credentials": 2, "other": 2}
+OAUTH_ALIASES = [("authorize_url", r"authori[sz](e|ation)\s*(url|endpoint|uri)"), ("token_url", r"token\s*(url|endpoint|uri)"),
+                 ("client_auth", r"client[ _]?auth|basic|secret (is )?sent"), ("client_credentials", r"client[ _]?(id|secret|cred)"),
+                 ("redirect_uri", r"redirect|callback"), ("pkce", r"pkce|code[ _]challenge"), ("scopes", r"scope"),
+                 ("token_lifetime", r"lifetime|expir|refresh|ttl"), ("grant_types", r"grant|flow")]
+
+
+def oauth_key(item):
+    k = re.sub(r"[^a-z_ ]", "", (item or "").lower()).strip().replace(" ", "_")
+    if k in OAUTH_LABEL:
+        return k
+    for key, rx in OAUTH_ALIASES:
+        if re.search(rx, (item or "").lower()):
+            return key
+    return "other"
+
+
+def value_in_quote(val, quote):
+    """A shown value must come from the quote: every URL and every number in it has to appear there."""
+    q = (quote or "").lower()
+    v = val.lower()
+    return all(u.rstrip(".,;)") in q for u in re.findall(r"https?://\S+", v)) and all(n in q for n in re.findall(r"\d+", v))\
+        and (bool(re.findall(r"https?://|\d", v)) or v in q)
+
+
 def c_unknown(text, note):
     return {"text": text, "label": "unknown", "source_type": "none", "note": note, "checked_at": TODAY}
 
@@ -1285,6 +1329,22 @@ def assemble(t, pages, good, dropped, judgement, model, seeds):
         return out[:14]
 
     LIM_GOOD, LIM_BAD = LIM_GOOD_RE, LIM_BAD_RE
+
+    def oauth_rows():
+        rows, used = [], {}
+        for g in by("oauth_detail"):
+            key = oauth_key(g.get("item"))
+            if used.get(key, 0) >= OAUTH_MAX.get(key, 1):
+                continue
+            val = (g.get("value") or "").strip()
+            if not val or not value_in_quote(val, g["quote"]):
+                val = g["text"].strip()      # a value the quote does not contain is never shown as the value
+            if (key, norm(val)) in {(r["key"], norm(r["value"])) for r in rows}:
+                continue                     # the same fact on several pages
+            used[key] = used.get(key, 0) + 1
+            rows.append({"key": key, "item": OAUTH_LABEL[key], "value": val[:200], "claim": c_docs(g)})
+        rows.sort(key=lambda r: OAUTH_ORDER.index(r["key"]))
+        return rows[:14]
 
     def lim_score(g):
         blob = (g.get("item") or "") + " " + g["text"] + " " + g["_page"]["url"]
@@ -1487,6 +1547,9 @@ def assemble(t, pages, good, dropped, judgement, model, seeds):
         "evidence": {"not_verified": not_verified, "conflicts": [],
                      "sources": list({p["url"]: {"title": p["title"] or p["url"], "url": p["url"], "type": "docs"} for p in pages if not p["thin"]}.values())},
     }
+    oauth_setup = oauth_rows()
+    if oauth_setup:
+        guide["oauth_setup"] = oauth_setup
     if len(paths) >= 2:
         guide["creation_paths"] = paths
     if setup_types_obj:

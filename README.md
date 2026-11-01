@@ -87,7 +87,7 @@ It is never used to get around a block: pages disallowed by `robots.txt` are ski
       │         unregistered client or invalid code, how the API answers with no token, and whether the
       │         developer portal sits behind a sign-in wall (no login, no registration)
       ▼
- judge + assemble ── difficulty, waits, tiers, requirements, limits, blockers, hand-offs → guide JSON
+ judge + assemble ── difficulty, waits, tiers, OAuth setup, requirements, limits, blockers, hand-offs → guide JSON
       │
       ▼
  test-then-save gate ── every cited page is fetched again and every quote re-checked; failures are removed
@@ -123,6 +123,7 @@ flagged. Details, including what could not be verified, are in [docs/VERIFICATIO
 - **"Time to get started" is Unknown** in every agent guide; only a hands-on attempt shows it.
 - **Difficulty ratings and the "what an agent can do" lists are model judgement** (labelled *Inferred*). They depend on coverage: Spotify moved from medium to hard once the missing gate was found.
 - **Coverage varies.** If a provider's docs are JavaScript-rendered, thin, blocked for crawlers by `robots.txt`, or spread across many pages, the guide has gaps and says "Not found". Some guides have few steps (Notion, Google: 1). Zoom's main docs host returned only stubs, so its guide was researched from `developers.zoom.us` directly.
+- **OAuth setup section.** Each guide has a section for the OAuth connection itself: authorization and token URLs, grant types, client ID and secret, redirect URI rules, PKCE, scopes and token lifetimes. Rows are quoted from the docs and re-checked when the guide is saved; a URL or figure is shown as the value only if it appears in the quote. The agent cannot finish until it has read a page that explains the flow, and the live probes add tested rows for the authorize and token endpoints. Guides saved before this section existed show it empty until they are researched again. If a provider has several OAuth routes (Stripe Apps and Connect, for example), the agent may cover only some; check which the rows cite.
 - **Runs are not deterministic.** Two runs of the same app can list different limits or blockers.
 - **Live tests are modest and vary by provider.** At most 14 requests; they honour `robots.txt` (Slack's blocks the OAuth path, so that check is skipped) and need no account, so many providers expose little to test. Several guides (Asana, Google, Linear, Shopify, Spotify, Zoom) have only the save-gate result as a tested claim. Everything the guide states beyond that is documentation (re-checked against its source when saved) or labelled *Inferred*.
 - **Provider-specific traps.** Metadata can describe a different product (Figma's is for its MCP server); probes caveat this, but cannot always tell.

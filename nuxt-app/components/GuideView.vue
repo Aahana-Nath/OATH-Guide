@@ -82,9 +82,30 @@ const typeName = (id: string) => st.value?.types.find((t: any) => t.id === id)?.
       </div>
     </section>
 
+    <!-- OAuth setup: the connection itself -->
+    <section id="sec-oauth" class="block">
+      <h2 class="h2">2 · OAuth setup</h2>
+      <p class="sub">How the OAuth connection itself works: the endpoints to call, what to register, and the rules your app has to follow. Every row carries its source and quote.</p>
+      <div class="card pad-lg">
+        <ul v-if="g.oauth_setup?.length" class="list oauth-rows">
+          <li v-for="(o, i) in g.oauth_setup" :key="i">
+            <div class="rowtop">
+              <strong>{{ o.item }}</strong>
+              <span v-if="o.claim.label === 'tested'" class="chip status required">Tested live</span>
+            </div>
+            <p v-if="o.value.trim() !== o.claim.text.trim()" class="oval" :class="{ mono: ['authorize_url', 'token_url'].includes(o.key) && o.claim.label !== 'tested' }">{{ o.value }}</p>
+            <Fact :text="o.claim.text" :claim="o.claim" />
+          </li>
+        </ul>
+        <p v-else class="note">
+          This guide has no OAuth setup details. The pages the agent read did not explain the OAuth flow, or the guide was saved before this section existed. Research the app again to fill it in.
+        </p>
+      </div>
+    </section>
+
     <!-- 2 -->
     <section id="sec-2" class="block">
-      <h2 class="h2">2 · The path from private to public</h2>
+      <h2 class="h2">3 · The path from private to public</h2>
       <p class="sub">Each stage opens up more users and adds a gate. Registering is only the first one.</p>
       <ol class="path">
         <template v-for="(t, i) in g.access_ladder" :key="t.tier">
@@ -106,7 +127,7 @@ const typeName = (id: string) => st.value?.types.find((t: any) => t.id === id)?.
 
     <!-- 3 -->
     <section id="sec-3" class="block">
-      <h2 class="h2">3 · Steps</h2>
+      <h2 class="h2">4 · Steps</h2>
 
       <div v-if="st" class="card pad-lg">
         <h3 class="h3">Pick a setup type</h3>
@@ -187,7 +208,7 @@ const typeName = (id: string) => st.value?.types.find((t: any) => t.id === id)?.
 
     <!-- 4 -->
     <section id="sec-4" class="block">
-      <h2 class="h2">4 · What you need</h2>
+      <h2 class="h2">5 · What you need</h2>
       <div class="two">
         <div v-for="[title, list] in [['To register', g.requirements.register], ['To go public', g.requirements.go_public]]" :key="title as string" class="card pad-lg">
           <h3 class="h3">{{ title }}</h3>
@@ -218,7 +239,7 @@ const typeName = (id: string) => st.value?.types.find((t: any) => t.id === id)?.
 
     <!-- 5 -->
     <section id="sec-5" class="block">
-      <h2 class="h2">5 · What can trip you up</h2>
+      <h2 class="h2">6 · What can trip you up</h2>
       <div class="card pad-lg">
         <ul v-if="g.blockers.length" class="list">
           <li v-for="(b, i) in g.blockers" :key="i">
@@ -251,7 +272,7 @@ const typeName = (id: string) => st.value?.types.find((t: any) => t.id === id)?.
 
     <!-- 6 -->
     <section id="sec-6" class="block">
-      <h2 class="h2">6 · Who does what</h2>
+      <h2 class="h2">7 · Who does what</h2>
       <div class="two">
         <div v-for="[title, list] in [['An agent can do', g.agent_vs_human.agent], ['You have to do', g.agent_vs_human.human]]" :key="title as string" class="card pad-lg">
           <h3 class="h3">{{ title }}</h3>
@@ -265,7 +286,7 @@ const typeName = (id: string) => st.value?.types.find((t: any) => t.id === id)?.
 
     <!-- 7 -->
     <section id="sec-7" class="block">
-      <h2 class="h2">7 · How far to trust this guide</h2>
+      <h2 class="h2">8 · How far to trust this guide</h2>
       <div class="card pad-lg">
         <div class="meter" role="img" :aria-label="`${claims.length} claims`">
           <span v-for="(n, k) in counts" :key="k" :class="k" :style="{ width: `${(n / total) * 100}%` }" :title="`${LABELS[k]}: ${n}`" />

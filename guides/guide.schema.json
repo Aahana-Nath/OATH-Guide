@@ -601,6 +601,45 @@
           }
         }
       }
+    },
+    "oauth_setup": {
+      "description": "How the OAuth connection itself works: endpoints, grant types, client credentials, redirect rules, PKCE, scopes, token lifetimes. Optional: omitted when no page read explains it.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "key",
+          "item",
+          "value",
+          "claim"
+        ],
+        "properties": {
+          "key": {
+            "enum": [
+              "grant_types",
+              "authorize_url",
+              "token_url",
+              "client_credentials",
+              "redirect_uri",
+              "pkce",
+              "scopes",
+              "token_lifetime",
+              "client_auth",
+              "other"
+            ]
+          },
+          "item": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "claim": {
+            "$ref": "#/$defs/claim"
+          }
+        }
+      }
     }
   },
   "$defs": {

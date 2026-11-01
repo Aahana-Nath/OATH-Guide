@@ -21,7 +21,7 @@ export interface GuideEntry {
 
 // Display helpers shared by the sidebar, library and guide pages
 export const GUIDE_SECTIONS: [string, string, string][] = [
-  ['sec-1', '📊', 'Difficulty & time'], ['sec-2', '🪜', 'Path to public'], ['sec-3', '🛠', 'Steps'], ['sec-4', '📋', 'What you need'],
+  ['sec-1', '📊', 'Difficulty & time'], ['sec-oauth', '🔐', 'OAuth setup'], ['sec-2', '🪜', 'Path to public'], ['sec-3', '🛠', 'Steps'], ['sec-4', '📋', 'What you need'],
   ['sec-5', '⚠️', 'Risks'], ['sec-6', '🤝', 'Who does what'], ['sec-7', '🔎', 'Trust & sources']
 ]
 const AVATAR_COLORS = ['#e11d48', '#7c3aed', '#2563eb', '#0891b2', '#059669', '#d97706', '#db2777', '#4f46e5']
@@ -42,7 +42,7 @@ export const ACTOR: Record<string, string> = { human: 'You', agent: 'Agent', bot
 export const SOURCE_KIND: Record<string, string> = { docs: 'Docs', portal: 'Portal', manual_test: 'Manual test' }
 
 export const SECTION_NAMES: Record<string, string> = {
-  difficulty: 'Difficulty', time: 'Time', setup_types: 'Setup types', creation_paths: 'Creation paths',
+  difficulty: 'Difficulty', time: 'Time', oauth_setup: 'OAuth setup', setup_types: 'Setup types', creation_paths: 'Creation paths',
   access_ladder: 'Access ladder', requirements: 'Requirements', limits: 'Limits', blockers: 'Blockers',
   steps: 'Steps', agent_vs_human: 'Agent vs you', extras: 'Also worth knowing'
 }
