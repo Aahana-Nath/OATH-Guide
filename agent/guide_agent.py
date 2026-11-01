@@ -61,9 +61,22 @@ DOCHOST = re.compile(r"^(docs|developers?|dev|api|platform|apidocs)\.", re.I)
 LIM_GOOD_RE = re.compile(r"oauth|token|authori[sz]|code|expire|rate limit|per minute|per hour|per second|redirect|secret|rotat", re.I)
 LIM_BAD_RE = re.compile(r"review|feedback|submission|workspaces?\b|deliver|character|description|image|video|words?\b|shortcut|slash command|unfurl|kilobyte|display_name|manifest|\bname length|megabyte|mb\b", re.I)
 STEP_ALLOW = re.compile(r"quickstart|getting-started|get-started|creating|create|install|register|manifest|app-settings|distribution|publish|submit|setup|set-up|build|oauth|authenticat|authoriz", re.I)
-REG_PAGE = re.compile(r"quickstart|getting-started|creating|create|manifest|app-settings|register|install", re.I)
+REG_PAGE = re.compile(r"quickstart|getting-started|creating|create|manifest|app-settings|register|install|oauth|authoriz", re.I)
 STEP_DENY = re.compile(r"verifying|enterprise|events|webhook|signing|rate-limit|tokens|scopes|reference|agent|mcp|admins", re.I)
 # a section counts as covered only when it has at least this many verified claims
+# OAuth is the main subject: a guide must rest on at least one page that explains the OAuth flow itself
+OAUTH_MARKERS = ("oauth", "client_id", "client id", "client secret", "redirect_uri", "redirect uri", "authorization code",
+                 "access token", "access_token", "authorize endpoint", "token endpoint", "/authorize", "/token")
+OAUTH_NEEDED = 6          # distinct markers on one page, and the word OAuth itself at least OAUTH_MENTIONS times
+OAUTH_MENTIONS = 8
+
+
+def explains_oauth(page):
+    t = (page.get("text") or "").lower()
+    return (not page.get("thin") and t.count("oauth") >= OAUTH_MENTIONS
+            and sum(1 for m in OAUTH_MARKERS if m in t) >= OAUTH_NEEDED)
+
+
 MIN_COUNTS = {"step": 6, "requirement_register": 3, "requirement_public": 4, "review_stage": 2,
               "limit": 4, "access_tier": 2, "blocker": 3}
 # topics a complete guide needs; the crawl keeps going until each has pages
@@ -525,7 +538,7 @@ def discover(t, model, deadline):
 
     if not local and time.time() < deadline:
         found_any = 0
-        for q in (f"{t['name']} developer docs create OAuth app", f"{t['name']} app marketplace submit app review approval requirements",
+        for q in (f"{t['name']} developer docs create OAuth app", f"{t['name']} OAuth 2.0 authorization code flow client_id redirect_uri access token", f"{t['name']} app marketplace submit app review approval requirements",
                   f"{t['name']} API rate limits scopes app permissions"):
             for u in web_search(q):
                 host = urllib.parse.urlparse(u).netloc.lower()
@@ -558,17 +571,32 @@ def discover(t, model, deadline):
             s = score(pg["title"] + " " + pg["url"] + " " + pg["text"][:3000]) + (3 if cands[u] == "homepage link" else 0)
             s += 6 if (DOCHOST.search(pu.netloc) or re.match(r"^/(docs|developers?|api)\b", pu.path)) else 0
             s -= 10 if NOISE.search(pu.path) else 0
+            s += (6 if "oauth" in pu.path.lower() else 0) + (8 if explains_oauth(pg) else 0)     # OAuth is the main subject
             found.append((s, pg, cands[u]))
     found.sort(key=lambda x: -x[0])
-    seeds, seen = [], set()
-    for s, pg, why in found:
-        if pg["url"] in seen or s < 1:
-            continue
+    seeds, seen, sections = [], set(), set()
+
+    def take(s, pg, why):
         seen.add(pg["url"])
         seeds.append(pg)
         log("discover", f"seed [{s}] {pg['url']} ({why})")
+
+    def section(pg):       # first path segment: /connect and /stripe-apps are different parts of one docs site
+        u = urllib.parse.urlparse(pg["url"])
+        return (u.netloc, u.path.strip("/").split("/")[0])
+
+    # OAuth is the main subject, and a provider may have several OAuth paths: take the best OAuth page of each docs section first
+    for s, pg, why in found:
+        if len(seeds) >= 2:
+            break
+        if s >= 1 and pg["url"] not in seen and explains_oauth(pg) and section(pg) not in sections:
+            sections.add(section(pg))
+            take(s, pg, why + ", OAuth page")
+    for s, pg, why in found:
         if len(seeds) >= 4:
             break
+        if s >= 1 and pg["url"] not in seen:
+            take(s, pg, why)
     return seeds
 
 
@@ -834,6 +862,11 @@ Actions:
   character for character from that page, no ellipsis) and its page_id. Code rejects any quote it cannot find on the page.
 - finish: stop, when the checklist is covered or the missing items are not documented anywhere you can reach.
 Rules:
+- OAuth is the main subject. If the provider has several kinds of app or integration (marketplace apps, platform plugins, OAuth for
+  acting on other users' accounts), cover the one that uses OAuth first and search for it by name ("<provider> OAuth authorization code")
+  before reading about listings or marketplaces. If the provider offers more than one OAuth route (for example OAuth for apps that act
+  for other accounts, and a separate marketplace or plugin app type), read the page that introduces each, record one setup_type finding
+  per route (quote the sentence that names it), and record the steps for the OAuth route too.
 - Prefer actions that fill a missing checklist item. Fetching a page you already read shows its full text again at no cost:
   use that to re-read a page before recording findings the first pass missed. Do not repeat the same action twice.
 - Record findings as soon as you have read a page that contains them. Do not record what is already recorded.
@@ -888,9 +921,13 @@ class Explorer:
             return bool(REG_PAGE.search(u)) and not STEP_DENY.search(u) and urllib.parse.urlparse(u).path.strip("/") != ""
         return {cat: sum(1 for g in self.good if counts(g, cat)) for cat, _ in CHECKLIST}
 
+    def oauth_covered(self):
+        return any(explains_oauth(p) for p in self.pages)
+
     def missing(self):
         cov = self.coverage()
-        return [cat for cat, _ in CHECKLIST if cov[cat] < MIN_COUNTS.get(cat, 1)]
+        out = [cat for cat, _ in CHECKLIST if cov[cat] < MIN_COUNTS.get(cat, 1)]
+        return (["oauth_flow"] if not self.oauth_covered() else []) + out
 
     # -- tools
     def web_search(self, query):
@@ -1001,6 +1038,8 @@ class Explorer:
     def prompt(self, n, max_steps, history, last):
         cov = self.coverage()
         check = "\n".join(f"[{'x' if cov[c] >= MIN_COUNTS.get(c, 1) else ' '}] {c}: {d} ({cov[c]} verified, want {MIN_COUNTS.get(c, 1)}+)" for c, d in CHECKLIST)
+        check = (f"[{'x' if self.oauth_covered() else ' '}] oauth_flow: a page that explains the OAuth flow itself "
+                 "(client ID and secret, redirect URI, authorize and token endpoints, scopes). Read one before anything else.\n" + check)
         pages = "\n".join(f"{i}. {p['url']} - {p['title'][:60]}" for i, p in enumerate(self.readable, 1)) or "(none yet)"
         thin = [p["url"] for p in self.pages if p["thin"]]
         return (f"{AGENT_RULES}\nProvider: {self.t['name']} ({self.t['origin']}). Allowed domains: {', '.join(sorted(self.roots))}\n\n"
@@ -1019,7 +1058,7 @@ def explore(t, pages, readable, good, dropped, model, deadline, max_steps, agent
             ex._read = getattr(ex, "_read", set()) | {pg["url"]}
             log("agent", f"reading seed page {pg['url']}: {ex.auto_read(pg)}")
     steps, history = [], []
-    nudged = False
+    refusals = 0          # finish is refused once for gaps, up to three times while no page explains the OAuth flow
     last = ("Nothing yet. A first automatic pass already read the pages above and saved what it could verify. "
             "Fill what is still missing.") if not agent_first else (
             "You start with only a few seed pages. Decide yourself where to look: search the web, fetch the provider's docs pages, "
@@ -1038,11 +1077,11 @@ def explore(t, pages, readable, good, dropped, model, deadline, max_steps, agent
             break
         action = act.get("action") if isinstance(act, dict) else None
         thought = (act.get("thought") or "")[:200] if isinstance(act, dict) else ""
-        if action == "finish" and ex.missing() and not nudged and n < max_steps:
-            nudged = True
+        if action == "finish" and ex.missing() and n < max_steps and refusals < (3 if not ex.oauth_covered() else 1):
+            refusals += 1
             last = ("Not finished: the checklist still has missing items: " + ", ".join(ex.missing()) +
                     ". Search or fetch pages for them. Call finish again only if they are not documented anywhere you can reach.")
-            log("agent", f"finish refused once, still missing: {', '.join(ex.missing())}")
+            log("agent", f"finish refused, still missing: {', '.join(ex.missing())}")
             history.append(f"{n}. finish -> refused, checklist incomplete")
             steps.append({"step": n, "action": "finish", "arg": "refused", "thought": thought, "result": last[:300]})
             continue

@@ -84,4 +84,15 @@ env_ok = types.SimpleNamespace(cache={}, norm_url=g.norm_url, norm=g.norm, quote
 out2, res2 = savecheck.recheck_and_prune(copy.deepcopy(base), env_ok, schema, "2026-01-01")
 check("a fully verified guide loses nothing", not res2["failed"] and len(out2["steps"]) == len(base["steps"]))
 
+# --- OAuth is the main subject: the agent may not finish without a page that explains the flow
+apps = {"url": "https://x.test/a", "title": "", "links": [], "text": "Publish your app to the Marketplace. Review takes days. Upload with the CLI and set the manifest.", "thin": False}
+flow = {"url": "https://x.test/b", "title": "", "links": [], "text": "OAuth setup. Register the app to get a client_id and client secret for OAuth. Set the redirect_uri for OAuth. Send users to /authorize, then exchange the authorization code at the token endpoint for an access_token. " + "OAuth is required. " * 8, "thin": False}
+check("a marketplace-only page does not explain OAuth", not g.explains_oauth(apps))
+check("a page with the OAuth flow does", g.explains_oauth(flow))
+check("a thin page never counts", not g.explains_oauth({**flow, "thin": True}))
+ex = g.Explorer({"name": "X", "origin": "https://x.test", "root": "x.test", "host": "x.test"}, [apps], [apps], [], [])
+check("oauth_flow is listed as missing first", ex.missing()[0] == "oauth_flow")
+ex.pages.append(flow)
+check("oauth_flow clears once such a page is read", "oauth_flow" not in ex.missing())
+
 print(f"{passed} unit checks passed")
